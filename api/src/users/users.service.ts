@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { data } from './data.json';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UsersService {
-    getAll()
-    {return data;}
+    constructor(@InjectRepository(UserRepository) private userRepository: UserRepository) 
+    {}
+    
+
 }
