@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import Button from 'react-bootstrap/esm/Button';
-import ListGroup from 'react-bootstrap/esm/ListGroup';
 
 import { useStoreActions, useStoreState } from '../hooks/store.hooks';
 
@@ -21,20 +20,10 @@ function App() {
         {
           users.map((user: any) => {
             return (
-              <Card className="mr-3 mb-3 w-25" key={`user-${user._id}`}>
+              <Card className="mr-3 mb-3 w-25" key={`user-${user.id}`}>
                 <Card.Body>
-                  <Card.Title>{user.name}</Card.Title>
-                  <Card.Text>{user.gender}</Card.Text>
+                  <Card.Title>{user.username}</Card.Title>
                   <Card.Text>{user.email}</Card.Text>
-                  <h6>Friends:</h6>
-                  <ListGroup>
-                    {user.friends.map((friend: any) => {
-                      return (
-                        <ListGroup.Item key={`friend-${friend.id}`}>{friend.name}</ListGroup.Item>
-                      )
-                    })}
-                  </ListGroup>
-
                   <Button variant="primary" className="mt-3">Detail</Button>
                 </Card.Body>
               </Card>
