@@ -6,6 +6,7 @@ import {
 
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import Profile from '../pages/Profile';
 
 import './styles/index.scss'
 
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
     </Router>
