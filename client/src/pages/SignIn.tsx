@@ -6,36 +6,34 @@ import { Link } from "react-router-dom";
 
 function SignIn() {
   return (
-    <div className="d-flex justify-content-center align-items-center h-100 bg-midnight">
-      <Card bg="light" text="dark" className="w-50">
-        <Card.Body>
-          <h2 className="text-center">Sign In</h2>
-          <hr/>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <div className="d-flex justify-content-between">
+    <Card bg="light" text="dark" className="w-50">
+      <Card.Body>
+        <h2 className="text-center">Sign In</h2>
+        <hr />
+        <Form>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Check me out" />
+          </Form.Group>
+          <div className="d-flex justify-content-between">
             <Link to="signup">Create an account</Link>
             <Button variant="primary" type="submit" className="float-right">
               Submit
             </Button>
-            </div>
-          </Form>
-        </Card.Body>
-      </Card>
-    </div>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }
 
