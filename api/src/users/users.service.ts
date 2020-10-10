@@ -2,6 +2,7 @@ import { ConflictException, Injectable, InternalServerErrorException, NotFoundEx
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserRepository } from './user.repository';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -18,6 +19,8 @@ export class UsersService {
 
     async createUser(user: CreateUserDto) {
         const newUser = this.userRepository.create(user);
+        newUser.salt = await bcrypt.genSalt();
+        newUser.password = await this.hashPassword(newUser.password, newUser.salt);
         
         try
         {
@@ -32,4 +35,8 @@ export class UsersService {
               }
         } 
     }
+
+    private async hashPassword(password: string, salt: string): Promise<string> {
+        return bcrypt.hash(password, salt);
+      }
 }
