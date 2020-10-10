@@ -1,6 +1,7 @@
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserRepository } from './user.repository';
@@ -9,7 +10,9 @@ import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.ex
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(UserRepository) private userRepository: UserRepository) 
+    constructor(@InjectRepository(UserRepository) 
+    private userRepository: UserRepository,
+    private jwtService: JwtService,) 
     {}
     
     async getAllUsers()
@@ -44,12 +47,13 @@ export class UsersService {
       }
 
       async signIn(authCredentialsDto: AuthCredentialsDto){
-        const username = await this.validateUserPassword(authCredentialsDto);
+        const payload = await this.validateUserPassword(authCredentialsDto);
     
-        if (!username) {
+        if (!payload) {
           throw new UnauthorizedException('Invalid credentials');
         }
-       return {username};
+        const accessToken = await this.jwtService.sign(payload);
+       return {accessToken};
     
       }
 
@@ -58,7 +62,7 @@ export class UsersService {
         const user = await this.userRepository.findOne({ username });
     
         if (user && await user.validatePassword(password)) {
-          return user.username;
+          return {username : user.username, email : user.email};
         } else {
           return null;
         }
