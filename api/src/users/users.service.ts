@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserRepository } from './user.repository';
@@ -17,7 +17,19 @@ export class UsersService {
     }
 
     async createUser(user: CreateUserDto) {
-        const newUser = await this.userRepository.create(user);
-        await this.userRepository.save(newUser);
+        const newUser = this.userRepository.create(user);
+        
+        try
+        {
+            await this.userRepository.save(newUser);
+        }
+        catch(error)
+        {
+            if (error.code === '23505') { // duplicate username
+                throw new ConflictException('Username already exists');
+              } else {
+                throw new InternalServerErrorException();
+              }
+        } 
     }
 }
