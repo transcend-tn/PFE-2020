@@ -5,14 +5,21 @@ import Card from "react-bootstrap/esm/Card";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
+
+import { useStoreActions } from "../hooks/store.hooks";
+import { SignUpPayload } from "../interfaces/signup.interface";
 
 function SignUp() {
+  const history = useHistory();
+  const signUp = useStoreActions((actions) => actions.user.signUp);
+
   const formik = useFormik({
     initialValues: {
-      username: "wassim",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      username: "johndo",
+      email: "johndoe@localhost.com",
+      password: "mm",
+      confirmPassword: "mm",
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -23,13 +30,15 @@ function SignUp() {
         .email("Invalid email address")
         .required("This field is required !"),
       password: Yup.string().required("Password is required"),
-      confirmPassword: Yup.string().required("Confirm password is required").oneOf(
-        [Yup.ref("password")],
-        "Passwords must match"
-      ),
+      confirmPassword: Yup.string()
+        .required("Confirm password is required")
+        .oneOf([Yup.ref("password")], "Passwords must match"),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: SignUpPayload) => {
+      signUp(values).then(
+        () => {history.push('signin')},
+        () => {console.log("error !!!");}
+      );
     },
   });
 

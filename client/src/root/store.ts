@@ -4,11 +4,11 @@ import { injectionsModel } from "../models/injections.model";
 import { userModel, UserModel } from "../models/user.model";
 
 export interface StoreModel {
-  users: UserModel;
+  user: UserModel;
 }
 
 const storeModel = {
-  users: userModel,
+  user: userModel,
 };
 
 const store = createStore(storeModel, { injections: injectionsModel });

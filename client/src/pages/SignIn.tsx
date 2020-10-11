@@ -2,24 +2,31 @@ import React from "react";
 import Form from "react-bootstrap/esm/Form";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useStoreActions } from "../hooks/store.hooks";
+import { SignInPayload } from "../interfaces/signIn.interface";
 
 function SignIn() {
+  const history = useHistory();
+  const signIn = useStoreActions((actions) => actions.user.signIn);
+  
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      username: "johndoe",
+      password: "mm",
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
+      username: Yup.string()
         .required("This field is required !"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: SignInPayload) => {
+      signIn(values).then(
+        () => {history.push('profile')},
+        () => {console.log("error !!!");}
+      );
     },
   });
 
@@ -29,19 +36,19 @@ function SignIn() {
         <h2 className="text-center">Sign In</h2>
         <hr />
         <form onSubmit={formik.handleSubmit}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+          <Form.Group controlId="formBasicUsername">
+            <Form.Label>Username</Form.Label>
             <Form.Control
-              name="email"
-              type="email"
-              placeholder="Enter email"
+              name="username"
+              type="text"
+              placeholder="Enter username"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.email}
+              value={formik.values.username}
             />
-            {formik.touched.email && formik.errors.email ? (
+            {formik.touched.username && formik.errors.username ? (
               <Form.Text className="text-danger">
-                {formik.errors.email}
+                {formik.errors.username}
               </Form.Text>
             ) : null}
           </Form.Group>
