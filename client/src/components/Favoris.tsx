@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Media from 'react-bootstrap/esm/Media';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import { MdStar } from "react-icons/md";
-import FormCheck from 'react-bootstrap/esm/FormCheck';
+import { FaStar } from "react-icons/fa";
 
 
+function Favoris(props: any) {
+  
 
-function Favoris() {
+    const [color, setColor] = useState('#f5bf42');
+
+    function toggleStar(){
+        setColor(color==='#f5bf42'?'gray':'#f5bf42')
+    }
     
     return (
         <Container>
@@ -16,18 +21,14 @@ function Favoris() {
                 <Col xs={12} md={8}>
                     <Media>
                         <Media.Body>
-                            <h5 className="text-primary"> Document </h5>
-                            <p className="text-secondary"> Edited 20hr ago </p>
+                            <h5 className="text-primary"> {props.document} </h5>
+                            <p className="text-secondary"> {props.timeEdit} </p>
                         </Media.Body>
                     </Media>
                 </Col>
                 <Col xs={6} md={4}>
-                    
-                    <FormCheck 
-                        type="checkbox" 
-                        icon={<MdStar color="#EFD807" />}
-                        checkedIcon={<MdStar color="#808080" />}
-                        name="checkedH" />         
+                 <FaStar color={color} onClick={toggleStar}/>
+  
                 </Col>
             </Row>    
         </Container>                  
