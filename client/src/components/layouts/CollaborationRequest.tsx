@@ -11,14 +11,17 @@ import Button from 'react-bootstrap/esm/Button';
 
 function CollaborationRequest() {
 
-  function clickHandler1(){
+  const username = 'John Doe';
+  const document = 'doc 1';
 
-    console.log('John Doe a été ajouté au document(1) en tant que collaborateur')
+  function HandlerAccepter(){
+
+    console.log(`${username} " a été ajouté au "${document}" en tant que collaborateur"`)
   }
 
-  function clickHandler2(){
+  function HandlerRefuse(){
 
-    console.log('la demande de John Doe a été refusée')
+    console.log(`la demande de "${username}" a été refusée"`)
   }
 
    
@@ -35,17 +38,17 @@ function CollaborationRequest() {
     alt=""
   />
   <Media.Body>
-    <h5>John Doe</h5>
+    <h5>{username}</h5>
     <p>
-     Document
+    {document}
     </p>
   </Media.Body>
 </Media>
     <Col>
   
 <div className="d-flex flex-row-reverse bd-highlight">
-<div className="p-2 bd-highlight"> <Button variant="danger" type="submit"onClick ={clickHandler2}>Refuser</Button></div>
-<div className="p-2 bd-highlight"> <Button variant="success" type="submit" onClick ={clickHandler1}>Accepter</Button></div>
+<div className="p-2 bd-highlight"> <Button variant="danger" type="submit"onClick ={HandlerRefuse}>Refuser</Button></div>
+<div className="p-2 bd-highlight"> <Button variant="success" type="submit" onClick ={HandlerAccepter}>Accepter</Button></div>
   
  
 </div></Col>
