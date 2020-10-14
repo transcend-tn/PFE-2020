@@ -6,25 +6,17 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/esm/Button';
 
 
+function CollaborationRequest(props: any) {
 
+ function HandlerAccepter(){
 
-
-function CollaborationRequest() {
-
-  const username = 'John Doe';
-  const document = 'doc 1';
-
-  function HandlerAccepter(){
-
-    console.log(`${username} " a été ajouté au "${document}" en tant que collaborateur"`)
+    console.log(`${props.username} " a été ajouté au "${props.document}" en tant que collaborateur"`)
   }
 
   function HandlerRefuse(){
 
-    console.log(`la demande de "${username}" a été refusée"`)
+    console.log(`la demande de "${props.username}" a été refusée"`)
   }
-
-   
     return (
 
  <Container>
@@ -38,9 +30,9 @@ function CollaborationRequest() {
     alt=""
   />
   <Media.Body>
-    <h5>{username}</h5>
+    <h5>{props.username}</h5>
     <p>
-    {document}
+    {props.document}
     </p>
   </Media.Body>
 </Media>
@@ -50,7 +42,6 @@ function CollaborationRequest() {
 <div className="p-2 bd-highlight"> <Button variant="danger" type="submit"onClick ={HandlerRefuse}>Refuser</Button></div>
 <div className="p-2 bd-highlight"> <Button variant="success" type="submit" onClick ={HandlerAccepter}>Accepter</Button></div>
   
- 
 </div></Col>
   </Row>
 </Container>
