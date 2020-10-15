@@ -1,38 +1,28 @@
 import React, { useState } from 'react';
 import Media from 'react-bootstrap/esm/Media';
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
 import { FaStar } from "react-icons/fa";
 
-
 function Favoris(props: any) {
-  
+    const [color, setColor] = useState(props.star?"#f5bf42":"gray");
 
-    const [color, setColor] = useState('#f5bf42');
-
-    function toggleStar(){
-        setColor(color==='#f5bf42'?'gray':'#f5bf42')
+    function toggleColor(){
+        setColor(props.star?"gray":"#f5bf42")
     }
-    
+
     return (
-        <Container>
-            <Row>
-                <Col xs={12} md={8}>
-                    <Media>
-                        <Media.Body>
-                            <h5 className="text-primary"> {props.document} </h5>
-                            <p className="text-secondary"> {props.timeEdit} </p>
-                        </Media.Body>
-                    </Media>
-                </Col>
-                <Col xs={6} md={4}>
-                 <FaStar color={color} onClick={toggleStar}/>
-  
-                </Col>
-            </Row>    
-        </Container>                  
-           
+        <div className="d-flex bd-highlight">
+            <div className="p-2 w-100 bd-highlight">
+                <Media>
+                    <Media.Body>
+                        <h5 className="text-primary"> {props.document} </h5>
+                        <p className="text-secondary"> {props.timeEdit} </p>
+                    </Media.Body>
+                </Media>
+            </div>
+            <div className="p-2 flex-shrink-1 bd-highlight">
+                <FaStar color={color} onClick={toggleColor}/>
+            </div>
+        </div>          
     );
 }
 
