@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/esm/Button';
+import Image from 'react-bootstrap/esm/Image';
 
 
 function CollaborationRequest(props: any) {
@@ -22,13 +23,7 @@ function CollaborationRequest(props: any) {
  <Container>
   <Row>
   <Media>
-  <img
-    width={64}
-    height={64}
-    className="mr-3"
-    src="holder.js/64x64"
-    alt=""
-  />
+  <Image src="" rounded width={68} height={68} />
   <Media.Body>
     <h5>{props.username}</h5>
     <p>
