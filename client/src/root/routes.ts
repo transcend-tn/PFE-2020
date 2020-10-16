@@ -6,6 +6,7 @@ import withCenter from "../components/layouts/withCenter";
 import withMain from "../components/layouts/withMain";
 import Requests from "../pages/Requests";
 import FavorisPage from "../pages/FavorisPage";
+import ForgetPassword from "../components/ForgetPassword";
 
 export interface Route {
   path: string;
@@ -20,10 +21,6 @@ const routes: Route[] = [
   {
     path: "/signup",
     Component: withCenter(SignUp),
-  },
-  {
-    path: "/requests",
-    Component: withMain(Requests),
   },
   {
     path: "/profile",
