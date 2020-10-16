@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
-import Media from 'react-bootstrap/esm/Media';
+import React, { useState } from "react";
+import Media from "react-bootstrap/esm/Media";
 import { FaStar } from "react-icons/fa";
 
-function Favoris(props: any) {
-    const [color, setColor] = useState(props.star?"#f5bf42":"gray");
+export interface FavorisProps {
+  star?: boolean;
+  timeEdit: string;
+  document: string;
+}
 
-    function toggleColor(){
-        setColor(props.star?"gray":"#f5bf42")
-    }
+const favOn = "#f5bf42";
+const favOff = "#808080";
 
-    return (
-        <div className="d-flex bd-highlight">
-            <div className="p-2 w-100 bd-highlight">
-                <Media>
-                    <Media.Body>
-                        <h5 className="text-primary"> {props.document} </h5>
-                        <p className="text-secondary"> {props.timeEdit} </p>
-                    </Media.Body>
-                </Media>
-            </div>
-            <div className="p-2 flex-shrink-1 bd-highlight">
-                <FaStar color={color} onClick={toggleColor}/>
-            </div>
-        </div>          
-    );
+function Favoris(props: FavorisProps) {
+  const [color, setColor] = useState(props.star ? favOn : favOff);
+
+  function toggleColor() {
+    setColor(color === favOn ? favOff : favOn);
+  }
+
+  return (
+    <Media>
+      <Media.Body className="d-flex justify-content-between align-items-center">
+        <div className="description">
+          <h5 className="text-primary"> {props.document} </h5>
+          <p className="text-secondary"> {props.timeEdit} </p>
+        </div>
+        <div className="action">
+          <FaStar color={color} onClick={toggleColor} style={{ fontSize: 30 }} />
+        </div>
+      </Media.Body>
+    </Media>
+  );
 }
 
 export default Favoris;

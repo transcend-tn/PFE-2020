@@ -5,6 +5,7 @@ import SignUp from "../pages/SignUp";
 import withCenter from "../components/layouts/withCenter";
 import withMain from "../components/layouts/withMain";
 import Requests from "../pages/Requests";
+import FavorisPage from "../pages/FavorisPage";
 
 export interface Route {
   path: string;
@@ -27,6 +28,10 @@ const routes: Route[] = [
   {
     path: "/profile",
     Component: withMain(Profile),
+  },
+  {
+    path: "/favoris",
+    Component: withMain(FavorisPage),
   },
 ];
 
