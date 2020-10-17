@@ -4,6 +4,7 @@ import SignUp from "../pages/SignUp";
 
 import withCenter from "../components/layouts/withCenter";
 import withMain from "../components/layouts/withMain";
+import Welcome from "../components/Welcome";
 
 export interface Route {
   path: string;
@@ -23,6 +24,15 @@ const routes: Route[] = [
     path: "/profile",
     Component: withMain(Profile),
   },
+  {
+    path: "/signin",
+    Component: withCenter(SignIn),
+  },
+{
+  path: "/welcome",
+  Component: withMain(Welcome),
+},
+
 ];
 
 export default routes;
