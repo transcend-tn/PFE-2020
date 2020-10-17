@@ -30,6 +30,14 @@ const routes: Route[] = [
     path: "/favoris",
     Component: withMain(FavorisPage),
   },
+  {
+    path: "/requests",
+    Component: withMain(Requests),
+  },
+  {
+    path: "/forget-password",
+    Component: withMain(ForgetPassword),
+  },
 ];
 
 export default routes;
