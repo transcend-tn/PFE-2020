@@ -25,7 +25,7 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.6",
-    "@types/yup": "^0.29.8"
+    "@types/yup": "^0.29.8",
+    "cross-env": "^7.0.2"
   }
 }
