@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "pfe-2020",
+  "workspaces": [
+    "api",
+    "client"
+  ],
+  "scripts": {
+    "api": "yarn workspace api start:dev",
+    "client": "yarn workspace client start",
+    "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\" "
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
