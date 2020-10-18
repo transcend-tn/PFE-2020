@@ -1,14 +1,15 @@
-import ProfilePage from "../pages/ProfilePage";
-import SignInPage from "../pages/SignInPage";
-import SignUpPage from "../pages/SignUpPage";
-
 import withCenter from "../components/layouts/withCenter";
 import withMain from "../components/layouts/withMain";
-import ProfileCard from "../components/ProfileCard";
-import Welcome from "../components/Welcome";
-import RequestsPage from "../pages/RequestsPage";
+
 import FavorisPage from "../pages/FavorisPage";
 import ForgetPassword from "../pages/ForgetPasswordPage";
+import RequestsPage from "../pages/RequestsPage";
+import SignInPage from "../pages/SignInPage";
+import SignUpPage from "../pages/SignUpPage";
+import Welcome from "../components/Welcome";
+import EditProfilePage from "../pages/EditProfilePage";
+import DocumentsPage from "../pages/DocumentsPage";
+import NewDocumentPage from "../pages/NewDocumentsPage";
 
 export interface Route {
   path: string;
@@ -37,8 +38,20 @@ const routes: Route[] = [
     Component: withMain(RequestsPage),
   },
   {
+    path: "/documents",
+    Component: withMain(DocumentsPage),
+  },
+  {
+    path: "/new-document",
+    Component: withMain(NewDocumentPage),
+  },
+  {
     path: "/forget-password",
     Component: withCenter(ForgetPassword),
+  },
+  {
+    path: "/edit-profile",
+    Component: withMain(EditProfilePage),
   },
 ];
 

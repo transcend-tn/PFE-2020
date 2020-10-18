@@ -41,7 +41,7 @@ function ProfileCard(props: ProfileCardInterface) {
           </div>
 
           <div className="text-center mt-4">
-            <Link to="editprofile">
+            <Link to="edit-profile">
               <Button variant="light" type="submit">
                 Editer le Profil
               </Button>
