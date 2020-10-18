@@ -11,6 +11,7 @@ export interface ProfileCardInterface {
   username:string;
   followers:number;
   following:number;
+  img?:string;
 }
 function ProfileCard(props:ProfileCardInterface){
   return(
@@ -21,7 +22,7 @@ function ProfileCard(props:ProfileCardInterface){
      <Row className="justify-content-md-center" >
     <Col xs lg="5"  > 
     <Image  width={171} height={180} 
-    src="https://picsum.photos/200" roundedCircle />
+    src={props.img?props.img:"https://th.bing.com/th/id/OIP.Fds5qcIkperhCvPjKkjsKwHaHa?"} roundedCircle />
       </Col> </Row>
       
 
@@ -44,8 +45,8 @@ function ProfileCard(props:ProfileCardInterface){
   <Row className="justify-content-md-center mt-4">
   <Col xs lg="1" >
   </Col> 
-  <Link to="editprofile"></Link>
-  <Button variant="light" type="submit">Editer le Profil</Button>
+  <Link to="editprofile">
+  <Button variant="light" type="submit">Editer le Profil</Button> </Link>
   </Row>
 </Card.Body>
 </Card>
