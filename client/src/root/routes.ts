@@ -4,6 +4,7 @@ import SignUp from "../pages/SignUp";
 
 import withCenter from "../components/layouts/withCenter";
 import withMain from "../components/layouts/withMain";
+import ProfileCard from '../components/ProfileCard';
 
 export interface Route {
   path: string;
@@ -23,6 +24,13 @@ const routes: Route[] = [
     path: "/profile",
     Component: withMain(Profile),
   },
+  {
+    path: "/profilecard",
+    Component: withMain(ProfileCard),
+  },
+
+
+
 ];
 
 export default routes;
