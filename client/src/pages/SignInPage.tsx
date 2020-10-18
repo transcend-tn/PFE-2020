@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { useStoreActions } from "../hooks/store.hooks";
 import { SignInPayload } from "../interfaces/signIn.interface";
 
-function SignIn() {
+function SignInPage() {
   const history = useHistory();
   const signIn = useStoreActions((actions) => actions.user.signIn);
   
@@ -84,4 +84,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInPage;

@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 
-function ForgetPassword() {
+function ForgetPasswordPage() {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -56,4 +56,4 @@ function ForgetPassword() {
   );
 }
 
-export default ForgetPassword;
+export default ForgetPasswordPage;

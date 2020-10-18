@@ -1,14 +1,14 @@
-import Profile from "../pages/Profile";
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
+import ProfilePage from "../pages/ProfilePage";
+import SignInPage from "../pages/SignInPage";
+import SignUpPage from "../pages/SignUpPage";
 
 import withCenter from "../components/layouts/withCenter";
 import withMain from "../components/layouts/withMain";
 import ProfileCard from "../components/ProfileCard";
 import Welcome from "../components/Welcome";
-import Requests from "../pages/Requests";
+import RequestsPage from "../pages/RequestsPage";
 import FavorisPage from "../pages/FavorisPage";
-import ForgetPassword from "../components/ForgetPassword";
+import ForgetPassword from "../pages/ForgetPasswordPage";
 
 export interface Route {
   path: string;
@@ -22,19 +22,11 @@ const routes: Route[] = [
   },
   {
     path: "/signin",
-    Component: withCenter(SignIn),
+    Component: withCenter(SignInPage),
   },
   {
     path: "/signup",
-    Component: withCenter(SignUp),
-  },
-  {
-    path: "/profile",
-    Component: withMain(Profile),
-  },
-  {
-    path: "/profilecard",
-    Component: ProfileCard,
+    Component: withCenter(SignUpPage),
   },
   {
     path: "/favoris",
@@ -42,7 +34,7 @@ const routes: Route[] = [
   },
   {
     path: "/requests",
-    Component: withMain(Requests),
+    Component: withMain(RequestsPage),
   },
   {
     path: "/forget-password",
