@@ -26,9 +26,8 @@ const routes: Route[] = [
   },
   {
     path: "/profilecard",
-    Component: withMain(ProfileCard),
+    Component: ProfileCard,
   },
-
 
 
 ];

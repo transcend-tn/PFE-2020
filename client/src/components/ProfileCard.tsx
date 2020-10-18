@@ -7,9 +7,13 @@ import Row from "react-bootstrap/esm/Row";
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/esm/Card';
 
-
-function ProfileCard(){
-return(
+export interface ProfileCardInterface {
+  username:string;
+  followers:number;
+  following:number;
+}
+function ProfileCard(props:ProfileCardInterface){
+  return(
 
 <Container>
 <Card style={{ width: '30rem' , margin: '10rem' }}>
@@ -17,14 +21,14 @@ return(
      <Row className="justify-content-md-center" >
     <Col xs lg="5"  > 
     <Image  width={171} height={180} 
-    src="https://th.bing.com/th/id/OIP.Fds5qcIkperhCvPjKkjsKwHaHa?" roundedCircle />
+    src="https://picsum.photos/200" roundedCircle />
       </Col> </Row>
       
 
-      <h2 className="text-center">User</h2>
+<h2 className="text-center">{props.username}</h2>
     
     <Row className="d-flex justify-content-around">
-    <Col  xs lg="4">Abonnés</Col>
+    <Col  xs lg="4">Abonné</Col>
      
     
     <Col   xs lg="4"> Abonnement</Col>
@@ -32,9 +36,9 @@ return(
     </Row>
    
         <Row>
-      <Col className="d-flex justify-content-around" xs lg="4"><strong>7</strong></Col>
+  <Col className="d-flex justify-content-around" xs lg="4"><strong>{props.followers}</strong></Col>
 
-      <Col className="d-flex justify-content-around" xs lg="8"><strong>15</strong></Col>
+  <Col className="d-flex justify-content-around" xs lg="8"><strong>{props.following}</strong></Col>
       </Row>
  
   <Row className="justify-content-md-center mt-4">
