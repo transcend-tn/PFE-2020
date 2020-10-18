@@ -69,7 +69,11 @@ function SignIn() {
             ) : null}
           </Form.Group>
           <div className="d-flex justify-content-between">
-            <Link to="signup">Create an account</Link>
+            <span>
+              <Link to="signup">Create an account</Link>
+              <br/>
+              <Link to="forget-password">Mot de passe oublié ?</Link>
+            </span>
             <Button variant="primary" type="submit" className="float-right">
               Submit
             </Button>
