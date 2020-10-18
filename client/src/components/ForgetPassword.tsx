@@ -4,22 +4,22 @@ import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 function ForgetPassword() {
-
-    const formik = useFormik({
-        initialValues: {
-          email: "",
-        },
-        validationSchema: Yup.object({
-          email: Yup.string()
-            .email("Invalid email address")
-            .required("This field is required !"),
-        }),
-        onSubmit: () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("This field is required !"),
+    }),
+    onSubmit: () => {
       console.log(formik.values.email);
-        },
-      });
+    },
+  });
 
   return (
     <Card bg="light" text="dark" className="w-50">
@@ -36,16 +36,20 @@ function ForgetPassword() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-            />     
-              {formik.touched.email && formik.errors.email ? (
+            />
+            {formik.touched.email && formik.errors.email ? (
               <Form.Text className="text-danger">
                 {formik.errors.email}
               </Form.Text>
-            ) : null}    
+            ) : null}
           </Form.Group>
-            <Button type="submit" variant="primary" size="lg" block>
+          <Button type="submit" variant="primary" size="lg" block>
             Envoyer
-            </Button>
+          </Button>
+          <div className="d-flex justify-content-between mt-3">
+            <Link to="signup">S'inscrire</Link>
+            <Link to="signin">Se connecter</Link>
+          </div>
         </form>
       </Card.Body>
     </Card>

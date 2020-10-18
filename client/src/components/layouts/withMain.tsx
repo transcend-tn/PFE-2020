@@ -9,7 +9,7 @@ import { GrAdd } from "react-icons/gr";
 const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Navbar.Brand href="#home">Brand</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
