@@ -13,7 +13,7 @@ function RequestsPage() {
       </Col>
       <Col>
         <div>
-          <h2 className="mb-3">Les Demandes</h2>
+          <h2 className="mb-3">Mes Demandes</h2>
           <>
            {REQUESTS.map(value => {
              return (
