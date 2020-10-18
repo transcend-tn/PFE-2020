@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import { useStoreActions } from "../hooks/store.hooks";
 import { SignUpPayload } from "../interfaces/signup.interface";
 
-function SignUp() {
+function SignUpPage() {
   const history = useHistory();
   const signUp = useStoreActions((actions) => actions.user.signUp);
 
@@ -128,4 +128,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;

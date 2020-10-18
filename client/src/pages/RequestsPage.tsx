@@ -5,7 +5,7 @@ import ProfileCard from "../components/ProfileCard";
 
 const REQUESTS: number[] = [1, 2];
 
-function Requests() {
+function RequestsPage() {
   return (
     <Row>
       <Col>
@@ -27,4 +27,4 @@ function Requests() {
   );
 }
 
-export default Requests;
+export default RequestsPage;

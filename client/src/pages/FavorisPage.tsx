@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import Favoris from "../components/Favoris";
+import Favoris from "../components/FavorisCard";
 import ProfileCard from "../components/ProfileCard";
 
 const FAVORIS: number[] = [1, 2];
