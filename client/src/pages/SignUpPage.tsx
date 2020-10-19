@@ -1,14 +1,14 @@
-import React from "react";
-import Form from "react-bootstrap/esm/Form";
-import Button from "react-bootstrap/esm/Button";
-import Card from "react-bootstrap/esm/Card";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
+import Card from 'react-bootstrap/esm/Card';
+import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
 
-import { useStoreActions } from "../hooks/store.hooks";
-import { SignUpPayload } from "../interfaces/signup.interface";
+import { useStoreActions } from '../hooks/store.hooks';
+import { SignUpPayload } from '../interfaces/signup.interface';
 
 function SignUpPage() {
   const history = useHistory();
@@ -16,28 +16,30 @@ function SignUpPage() {
 
   const formik = useFormik({
     initialValues: {
-      username: "johndo",
-      email: "johndoe@localhost.com",
-      password: "mm",
-      confirmPassword: "mm",
+      username: 'johndo',
+      email: 'johndoe@localhost.com',
+      password: 'mm',
+      confirmPassword: 'mm',
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(3, "Must be 3 characters or more")
-        .max(15, "Must be 15 characters or less")
-        .required("This field is required !"),
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("This field is required !"),
-      password: Yup.string().required("Password is required"),
+        .min(3, 'Must be 3 characters or more')
+        .max(15, 'Must be 15 characters or less')
+        .required('This field is required !'),
+      email: Yup.string().email('Invalid email address').required('This field is required !'),
+      password: Yup.string().required('Password is required'),
       confirmPassword: Yup.string()
-        .required("Confirm password is required")
-        .oneOf([Yup.ref("password")], "Passwords must match"),
+        .required('Confirm password is required')
+        .oneOf([Yup.ref('password')], 'Passwords must match'),
     }),
     onSubmit: (values: SignUpPayload) => {
       signUp(values).then(
-        () => {history.push('signin')},
-        () => {console.log("error !!!");}
+        () => {
+          history.push('signin');
+        },
+        () => {
+          console.log('error !!!');
+        },
       );
     },
   });
@@ -59,9 +61,7 @@ function SignUpPage() {
               value={formik.values.username}
             />
             {formik.touched.username && formik.errors.username ? (
-              <Form.Text className="text-danger">
-                {formik.errors.username}
-              </Form.Text>
+              <Form.Text className="text-danger">{formik.errors.username}</Form.Text>
             ) : null}
           </Form.Group>
 
@@ -76,9 +76,7 @@ function SignUpPage() {
               value={formik.values.email}
             />
             {formik.touched.email && formik.errors.email ? (
-              <Form.Text className="text-danger">
-                {formik.errors.email}
-              </Form.Text>
+              <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
             ) : null}
           </Form.Group>
 
@@ -93,9 +91,7 @@ function SignUpPage() {
               value={formik.values.password}
             />
             {formik.touched.password && formik.errors.password ? (
-              <Form.Text className="text-danger">
-                {formik.errors.password}
-              </Form.Text>
+              <Form.Text className="text-danger">{formik.errors.password}</Form.Text>
             ) : null}
           </Form.Group>
 
@@ -110,9 +106,7 @@ function SignUpPage() {
               value={formik.values.confirmPassword}
             />
             {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-              <Form.Text className="text-danger">
-                {formik.errors.confirmPassword}
-              </Form.Text>
+              <Form.Text className="text-danger">{formik.errors.confirmPassword}</Form.Text>
             ) : null}
           </Form.Group>
 

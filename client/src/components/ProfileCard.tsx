@@ -1,9 +1,9 @@
-import React from "react";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
-import Card from "react-bootstrap/esm/Card";
+import React from 'react';
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/esm/Card';
 
 export interface ProfileCardInterface {
   username: string;
@@ -20,11 +20,7 @@ function ProfileCard(props: ProfileCardInterface) {
             <Image
               width={171}
               height={180}
-              src={
-                props.img
-                  ? props.img
-                  : "https://th.bing.com/th/id/OIP.Fds5qcIkperhCvPjKkjsKwHaHa?"
-              }
+              src={props.img ? props.img : 'https://th.bing.com/th/id/OIP.Fds5qcIkperhCvPjKkjsKwHaHa?'}
               roundedCircle
             />
           </div>

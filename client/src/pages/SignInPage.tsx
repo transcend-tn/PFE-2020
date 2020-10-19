@@ -1,31 +1,34 @@
-import React from "react";
-import Form from "react-bootstrap/esm/Form";
-import Button from "react-bootstrap/esm/Button";
-import Card from "react-bootstrap/esm/Card";
-import { Link, useHistory } from "react-router-dom";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useStoreActions } from "../hooks/store.hooks";
-import { SignInPayload } from "../interfaces/signIn.interface";
+import React from 'react';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
+import Card from 'react-bootstrap/esm/Card';
+import { Link, useHistory } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useStoreActions } from '../hooks/store.hooks';
+import { SignInPayload } from '../interfaces/signIn.interface';
 
 function SignInPage() {
   const history = useHistory();
   const signIn = useStoreActions((actions) => actions.user.signIn);
-  
+
   const formik = useFormik({
     initialValues: {
-      username: "johndoe",
-      password: "mm",
+      username: 'johndoe',
+      password: 'mm',
     },
     validationSchema: Yup.object({
-      username: Yup.string()
-        .required("This field is required !"),
-      password: Yup.string().required("Password is required"),
+      username: Yup.string().required('This field is required !'),
+      password: Yup.string().required('Password is required'),
     }),
     onSubmit: (values: SignInPayload) => {
       signIn(values).then(
-        () => {history.push('profile')},
-        () => {console.log("error !!!");}
+        () => {
+          history.push('profile');
+        },
+        () => {
+          console.log('error !!!');
+        },
       );
     },
   });
@@ -47,9 +50,7 @@ function SignInPage() {
               value={formik.values.username}
             />
             {formik.touched.username && formik.errors.username ? (
-              <Form.Text className="text-danger">
-                {formik.errors.username}
-              </Form.Text>
+              <Form.Text className="text-danger">{formik.errors.username}</Form.Text>
             ) : null}
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -63,15 +64,13 @@ function SignInPage() {
               value={formik.values.password}
             />
             {formik.touched.password && formik.errors.password ? (
-              <Form.Text className="text-danger">
-                {formik.errors.password}
-              </Form.Text>
+              <Form.Text className="text-danger">{formik.errors.password}</Form.Text>
             ) : null}
           </Form.Group>
           <div className="d-flex justify-content-between">
             <span>
               <Link to="signup">Create an account</Link>
-              <br/>
+              <br />
               <Link to="forget-password">Mot de passe oublié ?</Link>
             </span>
             <Button variant="primary" type="submit" className="float-right">

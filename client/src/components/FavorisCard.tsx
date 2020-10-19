@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Media from "react-bootstrap/esm/Media";
-import { FaStar } from "react-icons/fa";
+import React, { useState } from 'react';
+import Media from 'react-bootstrap/esm/Media';
+import { FaStar } from 'react-icons/fa';
 
 export interface FavorisCardProps {
   star?: boolean;
@@ -8,8 +8,8 @@ export interface FavorisCardProps {
   document: string;
 }
 
-const favOn = "#f5bf42";
-const favOff = "#808080";
+const favOn = '#f5bf42';
+const favOff = '#808080';
 
 function FavorisCard(props: FavorisCardProps) {
   const [color, setColor] = useState(props.star ? favOn : favOff);

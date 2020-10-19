@@ -1,20 +1,18 @@
-import React from "react";
-import Form from "react-bootstrap/esm/Form";
-import Button from "react-bootstrap/esm/Button";
-import Card from "react-bootstrap/esm/Card";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
+import Card from 'react-bootstrap/esm/Card';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 function ForgetPasswordPage() {
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email: '',
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("This field is required !"),
+      email: Yup.string().email('Invalid email address').required('This field is required !'),
     }),
     onSubmit: () => {
       console.log(formik.values.email);
@@ -38,9 +36,7 @@ function ForgetPasswordPage() {
               value={formik.values.email}
             />
             {formik.touched.email && formik.errors.email ? (
-              <Form.Text className="text-danger">
-                {formik.errors.email}
-              </Form.Text>
+              <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
             ) : null}
           </Form.Group>
           <Button type="submit" variant="primary" size="lg" block>
