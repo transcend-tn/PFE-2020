@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import routes from "./routes";
+import routes from './routes';
 
-import "./styles/index.scss";
+import './styles/index.scss';
 
 function App() {
   return (

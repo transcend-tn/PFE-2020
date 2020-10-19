@@ -1,12 +1,7 @@
-import React from "react";
-
+import React from 'react';
 
 function NewDocumentPage() {
-  return (
-    <div>
-      Edit profile page
-    </div>
-  );
+  return <div>Edit profile page</div>;
 }
 
 export default NewDocumentPage;

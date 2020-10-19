@@ -1,12 +1,7 @@
-import React from "react";
-import Jumbotron from "react-bootstrap/esm/Jumbotron";
-import Media from "react-bootstrap/esm/Media";
-import {
-  RiTeamLine,
-  RiThumbUpLine,
-  RiHistoryLine,
-  RiEarthFill,
-} from "react-icons/ri";
+import React from 'react';
+import Jumbotron from 'react-bootstrap/esm/Jumbotron';
+import Media from 'react-bootstrap/esm/Media';
+import { RiTeamLine, RiThumbUpLine, RiHistoryLine, RiEarthFill } from 'react-icons/ri';
 
 function Welcome() {
   return (
