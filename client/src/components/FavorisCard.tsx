@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Card from 'react-bootstrap/esm/Card';
 import Media from 'react-bootstrap/esm/Media';
 import { FaStar } from 'react-icons/fa';
 
@@ -19,17 +20,19 @@ function FavorisCard(props: FavorisCardProps) {
   }
 
   return (
-    <Media>
-      <Media.Body className="d-flex justify-content-between align-items-center">
-        <div className="description">
-          <h5 className="text-primary"> {props.document} </h5>
-          <p className="text-secondary"> {props.timeEdit} </p>
-        </div>
-        <div className="action">
-          <FaStar color={color} onClick={toggleColor} style={{ fontSize: 30 }} />
-        </div>
-      </Media.Body>
-    </Media>
+    <Card className="mb-2" style={{ width: '30rem' }}>
+      <Media>
+        <Media.Body className="d-flex justify-content-between align-items-center">
+          <div className="ml-3 mt-2 mb-2 mr-2">
+            <h6 className="mb-0"> {props.document} </h6>
+            <p className="mb-0 font-weight-light"> {props.timeEdit} </p>
+          </div>
+          <div className="action mr-3">
+            <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
+          </div>
+        </Media.Body>
+      </Media>
+    </Card>
   );
 }
 

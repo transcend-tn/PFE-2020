@@ -4,9 +4,6 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [
-    UsersModule, 
-    TypeOrmModule.forRoot(typeOrmConfig)
-  ],
+  imports: [UsersModule, TypeOrmModule.forRoot(typeOrmConfig)],
 })
 export class AppModule {}

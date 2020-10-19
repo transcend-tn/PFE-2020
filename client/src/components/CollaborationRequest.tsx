@@ -2,6 +2,9 @@ import React from 'react';
 import Media from 'react-bootstrap/esm/Media';
 import Button from 'react-bootstrap/esm/Button';
 import Image from 'react-bootstrap/esm/Image';
+import ButtonToolbar from 'react-bootstrap/esm/ButtonToolbar';
+import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
+import Card from 'react-bootstrap/esm/Card';
 
 export interface CollaborationRequestProps {
   /** username prop documentation */
@@ -19,23 +22,37 @@ function CollaborationRequest(props: CollaborationRequestProps) {
     console.log(`la demande de "${props.username}" a été refusée"`);
   }
   return (
-    <Media>
-      <Image src="https://picsum.photos/200" rounded width={68} height={68} className="mr-2" />
-      <Media.Body className="d-flex justify-content-between align-items-center">
-        <div className="description">
-          <h5>{props.username}</h5>
-          <p>{props.document}</p>
-        </div>
-        <div className="actions">
-          <Button variant="danger" type="submit" onClick={HandlerRefuse}>
-            Refuser
-          </Button>
-          <Button variant="success" type="submit" onClick={HandlerAccepter}>
-            Accepter
-          </Button>
-        </div>
-      </Media.Body>
-    </Media>
+    <Card className="mb-2" style={{ width: '30rem' }}>
+      <Media>
+        <Media.Body className="d-flex justify-content-between align-items-center">
+          <div className="description d-flex justify-content-between align-items-center">
+            <Image
+              src="https://picsum.photos/200"
+              roundedCircle
+              width={50}
+              height={50}
+              className="ml-2 mt-2 mb-2 mr-2"
+            />
+            <div>
+              <h6 className="mb-0">{props.username}</h6>
+              <p className="mb-0 font-weight-light">{props.document}</p>
+            </div>
+          </div>
+          <ButtonToolbar aria-label="Actions">
+            <ButtonGroup className="btn-group btn-group-sm mr-2" aria-label="accept">
+              <Button variant="success" type="submit" onClick={HandlerAccepter}>
+                Accepter
+              </Button>
+            </ButtonGroup>
+            <ButtonGroup className="btn-group btn-group-sm mr-3" aria-label="refuse">
+              <Button variant="danger" type="submit" onClick={HandlerRefuse}>
+                Refuser
+              </Button>
+            </ButtonGroup>
+          </ButtonToolbar>
+        </Media.Body>
+      </Media>
+    </Card>
   );
 }
 

@@ -2,15 +2,27 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/esm/Jumbotron';
 import Media from 'react-bootstrap/esm/Media';
 import { RiTeamLine, RiThumbUpLine, RiHistoryLine, RiEarthFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 function Welcome() {
   return (
     <>
-      <Jumbotron>
-        <div className="text-primary text-center">
-          <h4>Un espace dédié à vos projets collaboratifs !</h4>
-          <h4>Collaborez, Partagez et Modifiez un même document</h4>
+      <Jumbotron className="jumbotron text-center" style={{ backgroundColor: '#fff' }}>
+        <div className="container" style={{ maxWidth: '40rem' }}>
+          <h1 className="jumbotron-heading">PFE 2020</h1>
+          <p className="lead text-muted">
+            Un espace dédié à vos projets collaboratifs ! Collaborez, Partagez et Modifiez un même document
+          </p>
         </div>
+
+        <p>
+          <Link to="signin" className="btn btn-primary mr-2">
+            Connexion
+          </Link>
+          <Link to="signup" className="btn btn-secondary">
+            Créer un Compte
+          </Link>
+        </p>
       </Jumbotron>
       <div className="d-flex flex-wrap justify-content-around  mt-5">
         <Media className="m-2 p-2 flex-fill">
