@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/esm/Card";
 
-export interface ProfileCard {
+export interface ProfileCardInterface {
   username: string;
   followers: number;
   following: number;
