@@ -10,8 +10,7 @@
     "client": "yarn workspace client start",
     "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\" ",
     "format": "yarn workspace client format",
-    "format:all": "yarn workspace client format:all",
-    "preinstall": "npx use-yarn && npx check-node-version --package package.json"
+    "format:all": "yarn workspace client format:all"
   },
   "engineStrict": true,
   "engines": {
