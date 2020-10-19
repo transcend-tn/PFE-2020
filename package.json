@@ -8,7 +8,9 @@
   "scripts": {
     "api": "yarn workspace api start:dev",
     "client": "yarn workspace client start",
-    "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\" "
+    "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\" ",
+    "format": "yarn workspace client format",
+    "format:all": "yarn workspace client format:all"
   },
   "dependencies": {
     "@commitlint/cli": "11.0.0",
