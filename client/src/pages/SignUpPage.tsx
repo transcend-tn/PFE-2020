@@ -16,8 +16,8 @@ function SignUpPage() {
 
   const formik = useFormik({
     initialValues: {
-      username: 'johndo',
-      email: 'johndoe@localhost.com',
+      username: 'johndoe',
+      email: 'johndoee@localhost.com',
       password: 'mm',
       confirmPassword: 'mm',
     },

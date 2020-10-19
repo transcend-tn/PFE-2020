@@ -24,7 +24,7 @@ function SignInPage() {
     onSubmit: (values: SignInPayload) => {
       signIn(values).then(
         () => {
-          history.push('profile');
+          history.push('/');
         },
         () => {
           console.log('error !!!');
