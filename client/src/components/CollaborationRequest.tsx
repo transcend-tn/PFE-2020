@@ -53,7 +53,7 @@ function CollaborationRequest(props: CollaborationRequestProps) {
             </ButtonGroup>
           </ButtonToolbar>
         </Media.Body>
-      </Media>{" "}
+      </Media>
     </Card>
   );
 }
