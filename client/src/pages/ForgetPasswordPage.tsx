@@ -20,9 +20,9 @@ function ForgetPasswordPage() {
   });
 
   return (
-    <Card bg="light" text="dark" className="w-50">
+    <Card bg="#fff" text="dark" className="w-50" style={{ maxWidth: '30rem' }}>
       <Card.Body>
-        <h2 className="text-center">Recuperation Mot de Passe</h2>
+        <h4 className="text-center">Recuperation Mot de Passe</h4>
         <hr />
         <form onSubmit={formik.handleSubmit}>
           <Form.Group controlId="formBasicUsername">
@@ -42,9 +42,9 @@ function ForgetPasswordPage() {
           <Button type="submit" variant="primary" size="lg" block>
             Envoyer
           </Button>
-          <div className="d-flex justify-content-between mt-3">
-            <Link to="signup">S'inscrire</Link>
-            <Link to="signin">Se connecter</Link>
+          <div className="d-flex justify-content-around mt-3">
+            <Link to="signin">Connexion</Link>
+            <Link to="signup">Inscription</Link>
           </div>
         </form>
       </Card.Body>

@@ -1,9 +1,9 @@
-import { Action, action, thunk } from "easy-peasy";
-import { Thunk } from "easy-peasy";
-import { SignInPayload } from "../interfaces/signIn.interface";
-import { SignUpPayload } from "../interfaces/signup.interface";
+import { Action, action, thunk } from 'easy-peasy';
+import { Thunk } from 'easy-peasy';
+import { SignInPayload } from '../interfaces/signIn.interface';
+import { SignUpPayload } from '../interfaces/signup.interface';
 
-import { InjectionsModel } from "./injections.model";
+import { InjectionsModel } from './injections.model';
 
 export interface UserModel {
   item: any;
@@ -16,12 +16,12 @@ export interface UserModel {
 
 export const userModel: UserModel = {
   item: undefined,
-  token: localStorage.getItem("accessToken") || "",
+  token: localStorage.getItem('accessToken') || '',
   addUser: action((state, payload) => {
     state.item = payload;
   }),
   addToken: action((state, payload) => {
-    localStorage.setItem("accessToken", JSON.stringify(payload));
+    localStorage.setItem('accessToken', JSON.stringify(payload));
     state.token = payload;
   }),
   signUp: thunk(async (actions, payload, { injections }) => {

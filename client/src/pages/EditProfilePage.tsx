@@ -1,7 +1,7 @@
 import React from 'react';
 
 function EditProfilePage() {
-  return <div>Edit profile page</div>;
+  return <h5 className="mb-3">Edit Profile</h5>;
 }
 
 export default EditProfilePage;

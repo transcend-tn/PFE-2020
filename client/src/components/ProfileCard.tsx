@@ -18,27 +18,35 @@ function ProfileCard(props: ProfileCardInterface) {
         <Card.Body>
           <div className="text-center">
             <Image
-              width={171}
-              height={180}
-              src={props.img ? props.img : 'https://th.bing.com/th/id/OIP.Fds5qcIkperhCvPjKkjsKwHaHa?'}
+              style={{ border: '1px solid #222' }}
+              width={100}
+              height={100}
+              src={
+                props.img
+                  ? props.img
+                  : 'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png'
+              }
               roundedCircle
             />
           </div>
-          <h2 className="text-center mt-2">{props.username}</h2>
-          <div className="d-flex justify-content-around">
-            <div>
-              <div>Abonné</div>
-              <strong>{props.followers}</strong>
+          <h5 className="text-center mt-3 mb-3">{props.username}</h5>
+          <div className="d-flex justify-content-center mt-4">
+            <div className="followers text-center mr-2">
+              {/*               conversion FR romplacer followers par abonné(s)
+              et following par abonnement(s) */}
+              <h6 className="text-muted">Followers</h6>
+              <h6>{props.followers}</h6>
             </div>
-            <div>
-              <div>Abonnement</div>
-              <strong>{props.following}</strong>
+
+            <div className="text-center ml-2">
+              <h6 className="text-muted">Following</h6>
+              <h6>{props.following}</h6>
             </div>
           </div>
 
           <div className="text-center mt-4">
             <Link to="edit-profile">
-              <Button variant="light" type="submit">
+              <Button className="btn-sm" variant="light" type="submit">
                 Editer le Profil
               </Button>
             </Link>

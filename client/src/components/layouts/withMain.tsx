@@ -3,41 +3,42 @@ import Nav from 'react-bootstrap/esm/Nav';
 import Navbar from 'react-bootstrap/esm/Navbar';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 import Container from 'react-bootstrap/esm/Container';
+import { BiAddToQueue } from 'react-icons/bi';
+import { CgProfile } from 'react-icons/cg';
+import { RiHome2Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import { VscNewFile } from 'react-icons/vsc';
 
 const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+      <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: '#2f2f2f' }} variant="dark">
         <Link to="/">
-          <Navbar.Brand>Brand</Navbar.Brand>
+          <RiHome2Line color="#ffffff" size={30} />
         </Link>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto mr-5">
-            <Link to="new-document">
-              <Nav.Item className="nav-link">
-                <VscNewFile color="#ffffff" size={30} />
-              </Nav.Item>
-            </Link>
-            <Link to="requests">
-              <Nav.Item className="nav-link">Mes Demandes</Nav.Item>
-            </Link>
-            <Link to="favoris">
-              <Nav.Item className="nav-link">Mes Favoris</Nav.Item>
-            </Link>
-            <Link to="documents">
-              <Nav.Item className="nav-link">Mes Documents</Nav.Item>
-            </Link>
-            <NavDropdown title="Username" id="collasible-nav-dropdown">
-              <li className="dropdown-item" key="profile">
-                <Link to="/">Profile</Link>
-              </li>
+            <Nav.Link as={Link} to="new-document">
+              <BiAddToQueue color="#ffffff" size={30} />
+            </Nav.Link>
+            <Nav.Link as={Link} to="requests">
+              Collaborations
+            </Nav.Link>
+            <Nav.Link as={Link} to="favoris">
+              Mes Favoris
+            </Nav.Link>
+            <Nav.Link as={Link} to="documents">
+              Mes Documents
+            </Nav.Link>
+            <NavDropdown title={<CgProfile color="#ffffff" size={20} />} id="collasible-nav-dropdown">
+              <NavDropdown.Item as={Link} to="#">
+                Profile
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <li className="dropdown-item" key="logout">
-                <Link to="signup">Logout</Link>
-              </li>
+              <NavDropdown.Item as={Link} to="/">
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

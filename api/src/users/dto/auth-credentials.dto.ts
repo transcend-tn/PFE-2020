@@ -1,6 +1,4 @@
-
-export class AuthCredentialsDto
-{
-    username: string;
-    password: string;
+export class AuthCredentialsDto {
+  username: string;
+  password: string;
 }

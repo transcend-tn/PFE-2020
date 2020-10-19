@@ -45,7 +45,7 @@ function SignUpPage() {
   });
 
   return (
-    <Card bg="light" text="dark" className="w-50">
+    <Card bg="#fff" text="dark" className="w-50" style={{ maxWidth: '30rem' }}>
       <Card.Body>
         <h2 className="text-center">Sign Up</h2>
         <hr />

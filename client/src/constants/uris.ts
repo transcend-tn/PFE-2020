@@ -1,4 +1,4 @@
-import { PORT, BASE_URL, PROTOCOL } from "./config";
+import { PORT, BASE_URL, PROTOCOL } from './config';
 
 export const BASE_URI = `${PROTOCOL}://${BASE_URL}:${PORT}`;
 
