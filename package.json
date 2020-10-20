@@ -8,7 +8,8 @@
   "scripts": {
     "api": "yarn workspace api start:dev",
     "client": "yarn workspace client start",
-    "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\" ",
+    "server": "yarn workspace api server",
+    "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\"  \"yarn server\" ",
     "format": "yarn workspace client format",
     "format:all": "yarn workspace client format:all"
   },
