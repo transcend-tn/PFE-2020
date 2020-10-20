@@ -4,19 +4,18 @@ import Button from 'react-bootstrap/esm/Button';
 import Card from 'react-bootstrap/esm/Card';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
 import { ChangePassPayload } from '../interfaces/ChangePassword.interface';
 
 function ChangePasswordForm() {
-
   const formik = useFormik({
     initialValues: {
-      
-      oldPassword:'',
-      newPassword:'',
+      oldPassword: '',
+      newPassword: '',
       confirmPassword: '',
     },
     validationSchema: Yup.object({
-        oldPassword: Yup.string().required('Old Password is required'),
+      oldPassword: Yup.string().required('Old Password is required'),
 
       newPassword: Yup.string().required('New Password is required'),
       confirmPassword: Yup.string()
@@ -24,16 +23,15 @@ function ChangePasswordForm() {
         .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
     }),
     onSubmit: (values: ChangePassPayload) => {
-      console.log(values)
+      console.log(values);
     },
   });
 
   return (
-    <Card bg="#fff" text="dark" className="w-50" style={{ maxWidth: '30rem' }}>
+    <Card bg="#fff" text="dark" className="w-50">
       <Card.Body>
-        
         <form onSubmit={formik.handleSubmit}>
-        <Form.Group controlId="formBasicOldPassword">
+          <Form.Group controlId="formBasicOldPassword">
             <Form.Label>Mot de passe actuel</Form.Label>
             <Form.Control
               name="oldPassword"
@@ -78,12 +76,9 @@ function ChangePasswordForm() {
             ) : null}
           </Form.Group>
 
-          <div className="d-flex justify-content-between">
-            
-            <Button variant="primary" type="submit" className="float-right">
-              Enregistrer les modifications
-            </Button>
-          </div>
+          <Button variant="primary" type="submit">
+            Enregistrer les modifications
+          </Button>
         </form>
       </Card.Body>
     </Card>

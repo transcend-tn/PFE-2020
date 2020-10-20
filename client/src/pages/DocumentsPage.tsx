@@ -3,12 +3,14 @@ import { Row, Col } from 'react-bootstrap';
 import Favoris from '../components/FavorisCard';
 import ProfileCard from '../components/ProfileCard';
 import Card from 'react-bootstrap/esm/Card';
+import ChangePasswordForm from '../components/ChangePasswordForm';
 
 const DOCS: number[] = [1, 2];
 
 function DocumentsPage() {
   return (
     <Row>
+      <ChangePasswordForm />
       <Col>
         <ProfileCard followers={15} username="Username" following={23} />
       </Col>
