@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-function NewDocumentPage() {
-  return <h5 className="mb-3">Create New Document</h5>;
-}
+const NewDocumentsPage = () => {
+  return <Editor />;
+};
 
-export default NewDocumentPage;
+export default NewDocumentsPage;
