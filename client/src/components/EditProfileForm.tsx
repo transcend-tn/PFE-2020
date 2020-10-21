@@ -1,7 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/esm/Form';
 import Button from 'react-bootstrap/esm/Button';
-import Card from 'react-bootstrap/esm/Card';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -25,63 +24,59 @@ function EditProfileForm() {
   });
 
   return (
-    <Card bg="#fff" text="dark">
-      <Card.Body>
-        <form onSubmit={formik.handleSubmit}>
-          <Form.Row>
-            <Form.Group controlId="formBasicUsername">
-              <Form.Label>Nom</Form.Label>
-              <Form.Control
-                name="name"
-                type="text"
-                placeholder="Enter name"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.name}
-              />
-              {formik.touched.name && formik.errors.name ? (
-                <Form.Text className="text-danger">{formik.errors.name}</Form.Text>
-              ) : null}
-            </Form.Group>
-            <Form.Group controlId="formBasicUsername" className="ml-3">
-              <Form.Label>Prénom</Form.Label>
-              <Form.Control
-                name="familyname"
-                type="text"
-                placeholder="Enter familyname"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.familyname}
-              />
-              {formik.touched.familyname && formik.errors.familyname ? (
-                <Form.Text className="text-danger">{formik.errors.familyname}</Form.Text>
-              ) : null}
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>E-mail</Form.Label>
-              <Form.Control
-                name="email"
-                type="email"
-                placeholder="Enter email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-              {formik.touched.email && formik.errors.email ? (
-                <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
-              ) : null}
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Button variant="primary" type="submit" className="btn-sm">
-              Enregistrer les modifications
-            </Button>
-          </Form.Row>
-        </form>
-      </Card.Body>
-    </Card>
+    <form onSubmit={formik.handleSubmit} className="mt-5">
+      <Form.Row>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Nom</Form.Label>
+          <Form.Control
+            name="name"
+            type="text"
+            placeholder="Enter name"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
+          />
+          {formik.touched.name && formik.errors.name ? (
+            <Form.Text className="text-danger">{formik.errors.name}</Form.Text>
+          ) : null}
+        </Form.Group>
+        <Form.Group controlId="formBasicUsername" className="ml-3">
+          <Form.Label>Prénom</Form.Label>
+          <Form.Control
+            name="familyname"
+            type="text"
+            placeholder="Enter familyname"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.familyname}
+          />
+          {formik.touched.familyname && formik.errors.familyname ? (
+            <Form.Text className="text-danger">{formik.errors.familyname}</Form.Text>
+          ) : null}
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>E-mail</Form.Label>
+          <Form.Control
+            name="email"
+            type="email"
+            placeholder="Enter email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
+          ) : null}
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Button variant="primary" type="submit" className="btn-sm">
+          Enregistrer les modifications
+        </Button>
+      </Form.Row>
+    </form>
   );
 }
 
