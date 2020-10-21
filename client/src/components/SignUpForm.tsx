@@ -1,8 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/esm/Form';
-import Button from 'react-bootstrap/esm/Button';
 import Card from 'react-bootstrap/esm/Card';
-import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useStoreActions } from '../hooks/store.hooks';
 import { SignUpPayload } from '../interfaces/signup.interface';
 
-function SignUpPage() {
+function SignUpForm() {
   const history = useHistory();
   const signUp = useStoreActions((actions) => actions.user.signUp);
 
@@ -45,10 +43,8 @@ function SignUpPage() {
   });
 
   return (
-    <Card bg="#fff" text="dark" className="w-50" style={{ maxWidth: '30rem' }}>
+    <Card bg="#fff" text="dark">
       <Card.Body>
-        <h2 className="text-center">Sign Up</h2>
-        <hr />
         <form onSubmit={formik.handleSubmit}>
           <Form.Group controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
@@ -109,17 +105,10 @@ function SignUpPage() {
               <Form.Text className="text-danger">{formik.errors.confirmPassword}</Form.Text>
             ) : null}
           </Form.Group>
-
-          <div className="d-flex justify-content-between">
-            <Link to="signin">You already have an account ?</Link>
-            <Button variant="primary" type="submit" className="float-right">
-              Submit
-            </Button>
-          </div>
         </form>
       </Card.Body>
     </Card>
   );
 }
 
-export default SignUpPage;
+export default SignUpForm;

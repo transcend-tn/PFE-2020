@@ -22,17 +22,11 @@ function CollaborationRequest(props: CollaborationRequestProps) {
     console.log(`la demande de "${props.username}" a été refusée"`);
   }
   return (
-    <Card className="mb-2" style={{ width: '30rem' }}>
+    <Card className="mb-2">
       <Media>
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div className="description d-flex justify-content-between align-items-center">
-            <Image
-              src="https://picsum.photos/200"
-              roundedCircle
-              width={50}
-              height={50}
-              className="ml-2 mt-2 mb-2 mr-2"
-            />
+            <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="m-2" />
             <div>
               <h6 className="mb-0">{props.username}</h6>
               <p className="mb-0 font-weight-light">{props.document}</p>

@@ -20,7 +20,7 @@ function FavorisCard(props: FavorisCardProps) {
   }
 
   return (
-    <Card className="mb-2" style={{ width: '30rem' }}>
+    <Card className="mb-2">
       <Media>
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div className="ml-3 mt-2 mb-2 mr-2">
