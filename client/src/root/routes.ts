@@ -1,14 +1,10 @@
 import withCenter from '../components/layouts/withCenter';
 import withMain from '../components/layouts/withMain';
 
-import FavorisPage from '../pages/FavorisPage';
+import ProfilePage from '../pages/ProfilePage';
 import ForgetPassword from '../pages/ForgetPasswordPage';
-import RequestsPage from '../pages/RequestsPage';
-import SignInPage from '../pages/SignInPage';
-import SignUpPage from '../pages/SignUpPage';
 import Welcome from '../components/Welcome';
 import EditProfilePage from '../pages/EditProfilePage';
-import DocumentsPage from '../pages/DocumentsPage';
 import NewDocumentPage from '../pages/NewDocumentsPage';
 import EditDocumentPage from '../pages/EditDocumentPage';
 import PropositionModificationPage from '../pages/PropositionModificationPage';
@@ -21,27 +17,11 @@ export interface Route {
 const routes: Route[] = [
   {
     path: '/',
-    Component: withMain(Welcome),
+    Component: withCenter(Welcome),
   },
   {
-    path: '/signin',
-    Component: withCenter(SignInPage),
-  },
-  {
-    path: '/signup',
-    Component: withCenter(SignUpPage),
-  },
-  {
-    path: '/favoris',
-    Component: withMain(FavorisPage),
-  },
-  {
-    path: '/requests',
-    Component: withMain(RequestsPage),
-  },
-  {
-    path: '/documents',
-    Component: withMain(DocumentsPage),
+    path: '/profile',
+    Component: withMain(ProfilePage),
   },
   {
     path: '/new-document',

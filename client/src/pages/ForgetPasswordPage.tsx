@@ -20,7 +20,7 @@ function ForgetPasswordPage() {
   });
 
   return (
-    <Card bg="#fff" text="dark" className="w-50" style={{ maxWidth: '30rem' }}>
+    <Card bg="#fff" text="dark" className="w-50">
       <Card.Body>
         <h4 className="text-center">Recuperation Mot de Passe</h4>
         <hr />
@@ -43,8 +43,7 @@ function ForgetPasswordPage() {
             Envoyer
           </Button>
           <div className="d-flex justify-content-around mt-3">
-            <Link to="signin">Connexion</Link>
-            <Link to="signup">Inscription</Link>
+            <Link to="/">Accueil</Link>
           </div>
         </form>
       </Card.Body>

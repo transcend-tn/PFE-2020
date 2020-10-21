@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { useStoreActions } from '../hooks/store.hooks';
 import { SignInPayload } from '../interfaces/signIn.interface';
 
-function SignInPage() {
+function SignInForm() {
   const history = useHistory();
   const signIn = useStoreActions((actions) => actions.user.signIn);
 
@@ -24,7 +24,7 @@ function SignInPage() {
     onSubmit: (values: SignInPayload) => {
       signIn(values).then(
         () => {
-          history.push('/');
+          history.push('/profile');
         },
         () => {
           console.log('error !!!');
@@ -34,10 +34,8 @@ function SignInPage() {
   });
 
   return (
-    <Card bg="#fff" text="dark" className="w-50" style={{ maxWidth: '30rem' }}>
+    <Card bg="#fff" text="dark">
       <Card.Body>
-        <h2 className="text-center">Sign In</h2>
-        <hr />
         <form onSubmit={formik.handleSubmit}>
           <Form.Group controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
@@ -68,11 +66,7 @@ function SignInPage() {
             ) : null}
           </Form.Group>
           <div className="d-flex justify-content-between">
-            <span>
-              <Link to="signup">Create an account</Link>
-              <br />
-              <Link to="forget-password">Mot de passe oublié ?</Link>
-            </span>
+            <Link to="forget-password">Mot de passe oublié ?</Link>
             <Button variant="primary" type="submit" className="float-right">
               Submit
             </Button>
@@ -83,4 +77,4 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default SignInForm;

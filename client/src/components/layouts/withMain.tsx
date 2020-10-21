@@ -12,9 +12,9 @@ const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => (
     <>
       <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: '#2f2f2f' }} variant="dark">
-        <Link to="/">
-          <RiHome2Line color="#ffffff" size={30} />
-        </Link>
+        <Nav.Link as={Link} to="profile">
+          <RiHome2Line className="mr-2" color="#ffffff" size={30} />
+        </Nav.Link>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -22,17 +22,8 @@ const withMain = <P extends object>(Component: React.ComponentType) => {
             <Nav.Link as={Link} to="new-document">
               <BiAddToQueue color="#ffffff" size={30} />
             </Nav.Link>
-            <Nav.Link as={Link} to="requests">
-              Collaborations
-            </Nav.Link>
-            <Nav.Link as={Link} to="favoris">
-              Mes Favoris
-            </Nav.Link>
-            <Nav.Link as={Link} to="documents">
-              Mes Documents
-            </Nav.Link>
-            <NavDropdown title={<CgProfile color="#ffffff" size={20} />} id="collasible-nav-dropdown">
-              <NavDropdown.Item as={Link} to="#">
+            <NavDropdown title={<CgProfile color="#ffffff" size={30} />} id="collasible-nav-dropdown">
+              <NavDropdown.Item as={Link} to="profile">
                 Profile
               </NavDropdown.Item>
               <NavDropdown.Divider />
