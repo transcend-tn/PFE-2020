@@ -23,27 +23,22 @@ function DeleteAccountCard(props: DeleteAccountCardInterface) {
   return (
     <Container>
       <Card>
-        <Card.Body>
-          <div className="text-center">
-            <Image
-              style={{ border: '1px solid #222' }}
-              width={100}
-              height={100}
-              src={
-                props.img
-                  ? props.img
-                  : 'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png'
-              }
-              roundedCircle
-            />
-          </div>
-          <h5 className="text-center mt-3 mb-3">{props.username}</h5>
-
-          <div className="text-center mt-4">
-            <Button className="btn-sm" type="submit" variant="danger" onClick={handleShow}>
-              Supprimer le compte
-            </Button>
-          </div>
+        <Card.Body className="text-center">
+          <Image
+            style={{ border: '1px solid #222' }}
+            width={100}
+            height={100}
+            src={
+              props.img
+                ? props.img
+                : 'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png'
+            }
+            roundedCircle
+          />
+          <h5 className="mt-3 mb-3">{props.username}</h5>
+          <Button className="btn-sm" type="submit" variant="danger" onClick={handleShow}>
+            Supprimer le compte
+          </Button>
         </Card.Body>
       </Card>
       <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
