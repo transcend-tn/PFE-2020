@@ -1,6 +1,7 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Tab, Tabs } from 'react-bootstrap';
 import Card from 'react-bootstrap/esm/Card';
+import ChangePasswordForm from '../components/ChangePasswordForm';
 import DeleteAccountCard from '../components/DeleteAccountCard';
 import EditProfileForm from '../components/EditProfileForm';
 
@@ -13,8 +14,14 @@ function EditProfilePage() {
       <Col sm={8}>
         <Card>
           <Card.Body>
-            <h5 className="mb-5">Modifier vos coordonnées</h5>
-            <EditProfileForm />
+            <Tabs defaultActiveKey="edit-profile" id="uncontrolled-tab">
+              <Tab eventKey="edit-profile" title="Modifier vos coordonnées">
+                <EditProfileForm />
+              </Tab>
+              <Tab eventKey="change-password" title="Chnager mot de passe">
+                <ChangePasswordForm />
+              </Tab>
+            </Tabs>
           </Card.Body>
         </Card>
       </Col>
