@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Card from 'react-bootstrap/esm/Card';
-import MessageCard from '../components/MessageCard';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -56,11 +55,6 @@ class NewDocumentPage extends Component {
   render() {
     return (
       <Card>
-        <MessageCard
-          username="marwen"
-          commentaire="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem ex ullam neque maiores, ut tempora soluta qui alias quidem quam pariatur odio asperiores accusamus debitis placeat, quia eligendi nihil at?"
-          time="now"
-        />
         <div className="m-4">
           <Button variant="primary" onClick={this.onSubmitContent}>
             Enregistrer
