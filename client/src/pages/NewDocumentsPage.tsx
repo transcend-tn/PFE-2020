@@ -54,23 +54,21 @@ class NewDocumentPage extends Component {
 
   render() {
     return (
-      <div>
-        <Card>
-          <div className="m-4">
-            <Button variant="primary" onClick={this.onSubmitContent}>
-              Enregistrer
-            </Button>
-          </div>
-          <Editor
-            wrapperClassName="m-4"
-            editorClassName="ml-4 mb-4"
-            toolbar={{
-              options: EDITOR_OPTIONS,
-            }}
-            onContentStateChange={this.onContentStateChange}
-          />
-        </Card>
-      </div>
+      <Card>
+        <div className="m-4">
+          <Button variant="primary" onClick={this.onSubmitContent}>
+            Enregistrer
+          </Button>
+        </div>
+        <Editor
+          wrapperClassName="m-4"
+          editorClassName="ml-4 mb-4"
+          toolbar={{
+            options: EDITOR_OPTIONS,
+          }}
+          onContentStateChange={this.onContentStateChange}
+        />
+      </Card>
     );
   }
 }
