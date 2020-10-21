@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UsersService } from './users.service';
@@ -8,6 +9,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
+  @UseGuards(AuthGuard())
   getAllUsers() {
     return this.usersService.getAllUsers();
   }
