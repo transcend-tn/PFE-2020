@@ -5,6 +5,18 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Card from 'react-bootstrap/esm/Card';
 
+const EDITOR_OPTIONS = [
+  'history',
+  'inline',
+  'blockType',
+  'fontSize',
+  'colorPicker',
+  'textAlign',
+  'list',
+  'link',
+  'emoji',
+];
+
 const content = {
   entityMap: {},
   blocks: [
@@ -35,40 +47,29 @@ class NewDocumentPage extends Component {
     });
   };
 
-  render() {
+  onSubmitContent = () => {
     const { contentState }: any = this.state;
+    console.log('contentState: ', contentState);
+  };
+
+  render() {
     return (
       <div>
         <Card>
+          <div className="m-4">
+            <Button variant="primary" onClick={this.onSubmitContent}>
+              Enregistrer
+            </Button>
+          </div>
           <Editor
-            wrapperClassName="mt-4 ml-4 mr-4 mb-4"
+            wrapperClassName="m-4"
             editorClassName="ml-4 mb-4"
-            editorStyle={{ maxHeight: '310px' }}
             toolbar={{
-              options: [
-                'history',
-                'inline',
-                'blockType',
-                'fontSize',
-                'colorPicker',
-                'textAlign',
-                'list',
-                'link',
-                'emoji',
-              ],
+              options: EDITOR_OPTIONS,
             }}
             onContentStateChange={this.onContentStateChange}
           />
         </Card>
-        <div className="d-flex flex-row-reverse" style={{ width: 'auto' }}>
-          <Button
-            className="d-flex flex-row-reverse mt-4"
-            variant="secondary"
-            onClick={() => console.log(contentState.blocks)}
-          >
-            Post
-          </Button>
-        </div>
       </div>
     );
   }
