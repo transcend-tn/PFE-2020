@@ -6,15 +6,15 @@ import ButtonToolbar from 'react-bootstrap/esm/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
 
 export interface VoteProps {
-  oui: number;
-  non: number;
+  yes: number;
+  no: number;
 }
 
 function Vote(props: VoteProps) {
-  function HandlerOui() {
+  function confirmHandler() {
     console.log('Vous avez acceptez la demande de modification');
   }
-  function HandlerNon() {
+  function denyHandler() {
     console.log('Vous avez refusez la demande de modification');
   }
 
@@ -23,18 +23,18 @@ function Vote(props: VoteProps) {
       <Card.Body>
         <h4 className="text-center">Votez</h4>
         <h5 className="mb-3">Oui</h5>
-        <ProgressBar variant="success" now={props.oui} label={`${props.oui}%`} />
+        <ProgressBar variant="success" now={props.yes} label={`${props.yes}%`} />
         <h5 className="mb-3">Non</h5>
-        <ProgressBar variant="danger" now={props.non} label={`${props.non}%`} />
+        <ProgressBar variant="danger" now={props.no} label={`${props.no}%`} />
 
-        <ButtonToolbar aria-label="Actions" className="d-flex justify-content-center">
-          <ButtonGroup className="btn-group btn-group-sm mr-2 mt-3" aria-label="accept">
-            <Button variant="success" type="submit" onClick={HandlerOui}>
+        <ButtonToolbar aria-label="Actions" className="mt-3 justify-content-center">
+          <ButtonGroup size="sm" className="mr-3" aria-label="accept">
+            <Button variant="success" type="submit" onClick={confirmHandler}>
               Oui
             </Button>
           </ButtonGroup>
-          <ButtonGroup className="btn-group btn-group-sm mr-3 mt-3" aria-label="refuse">
-            <Button variant="danger" type="submit" onClick={HandlerNon}>
+          <ButtonGroup size="sm" aria-label="refuse">
+            <Button variant="danger" type="submit" onClick={denyHandler}>
               Non
             </Button>
           </ButtonGroup>
