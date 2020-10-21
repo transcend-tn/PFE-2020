@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Media from 'react-bootstrap/esm/Media';
 import Button from 'react-bootstrap/esm/Button';
 import { BsClock } from 'react-icons/bs';
-import { Card } from 'react-bootstrap';
 import { MdContentCopy } from 'react-icons/md';
 
 export interface HistoryCardProps {
@@ -12,27 +11,28 @@ export interface HistoryCardProps {
 }
 
 function HistoryCard(props: HistoryCardProps) {
+  const onCopyHistory = () => {
+    console.log('onCopyHistory');
+  };
+
   return (
-    <Card className="mb-2" style={{ width: '30rem' }}>
-      <Media>
-        <Media.Body className="d-flex justify-content-between align-items-center">
-          <div className="ml-3 mt-2 mb-2 mr-2">
-            <h6 className="mb-0"> {props.document} </h6>
-            <div className="d-flex flex-row">
-              <p className="mb-0 font-weight-light"> {props.username} </p>
-              <BsClock className="ml-2 mt-2" size={12} color="#9E9E93" />
-              <p className="mb-0 font-weight-light ml-2 mt-1" style={{ fontSize: 12, color: '#9E9E93' }}>
-                {' '}
-                {props.timeEdit}{' '}
-              </p>
-            </div>
+    <Media className="border">
+      <Media.Body className="d-flex justify-content-between align-items-center p-2">
+        <div>
+          <span> {props.document} </span>
+          <div className="d-flex flex-row flex-center font-weight-light">
+            <span className="mr-2"> {props.username} </span>
+            <span className="text-secondary">
+              <BsClock size={12} color="#9E9E93" className="mr-1" />
+              {props.timeEdit}
+            </span>
           </div>
-          <div className="action mr-3">
-            <MdContentCopy color="#33A2FF" onClick={console.log(props.document)} />
-          </div>
-        </Media.Body>
-      </Media>
-    </Card>
+        </div>
+        <Button variant="link">
+          <MdContentCopy color="#33A2FF" onClick={onCopyHistory} />
+        </Button>
+      </Media.Body>
+    </Media>
   );
 }
 
