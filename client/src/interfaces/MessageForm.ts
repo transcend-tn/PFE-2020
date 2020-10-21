@@ -1,3 +1,3 @@
-export interface MessageF {
-  Texte: string;
+export interface MessageFormCreate {
+  comment: string;
 }

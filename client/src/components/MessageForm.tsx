@@ -4,17 +4,17 @@ import Form from 'react-bootstrap/esm/Form';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { MessageF } from '../interfaces/MessageForm';
+import { MessageFormCreate } from '../interfaces/MessageForm';
 
 function MessageForm() {
   const formik = useFormik({
     initialValues: {
-      Texte: '',
+      comment: '',
     },
     validationSchema: Yup.object({
-      Texte: Yup.string(),
+      comment: Yup.string(),
     }),
-    onSubmit: (values: MessageF) => {
+    onSubmit: (values: MessageFormCreate) => {
       console.log(values);
     },
   });
@@ -22,7 +22,14 @@ function MessageForm() {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Form.Group controlId="exampleForm.ControlTextarea1">
-        <Form.Control as="textarea" rows={3} />
+        <Form.Control
+          name="comment"
+          as="textarea"
+          rows={3}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.comment}
+        />
       </Form.Group>
       <Button variant="primary" type="submit">
         Commenter
