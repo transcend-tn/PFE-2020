@@ -29,38 +29,34 @@ function EditProfileForm() {
       <Card.Body>
         <form onSubmit={formik.handleSubmit}>
           <Form.Row>
-            <col>
-              <Form.Group controlId="formBasicUsername">
-                <Form.Label>Nom</Form.Label>
-                <Form.Control
-                  name="name"
-                  type="text"
-                  placeholder="Enter name"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.name}
-                />
-                {formik.touched.name && formik.errors.name ? (
-                  <Form.Text className="text-danger">{formik.errors.name}</Form.Text>
-                ) : null}
-              </Form.Group>
-            </col>
-            <col>
-              <Form.Group controlId="formBasicUsername">
-                <Form.Label>Prénom</Form.Label>
-                <Form.Control
-                  name="familyname"
-                  type="text"
-                  placeholder="Enter familyname"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.familyname}
-                />
-                {formik.touched.familyname && formik.errors.familyname ? (
-                  <Form.Text className="text-danger">{formik.errors.familyname}</Form.Text>
-                ) : null}
-              </Form.Group>
-            </col>
+            <Form.Group controlId="formBasicUsername">
+              <Form.Label>Nom</Form.Label>
+              <Form.Control
+                name="name"
+                type="text"
+                placeholder="Enter name"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
+              />
+              {formik.touched.name && formik.errors.name ? (
+                <Form.Text className="text-danger">{formik.errors.name}</Form.Text>
+              ) : null}
+            </Form.Group>
+            <Form.Group controlId="formBasicUsername">
+              <Form.Label>Prénom</Form.Label>
+              <Form.Control
+                name="familyname"
+                type="text"
+                placeholder="Enter familyname"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.familyname}
+              />
+              {formik.touched.familyname && formik.errors.familyname ? (
+                <Form.Text className="text-danger">{formik.errors.familyname}</Form.Text>
+              ) : null}
+            </Form.Group>
           </Form.Row>
           <Form.Row>
             <Form.Group controlId="formBasicEmail">
