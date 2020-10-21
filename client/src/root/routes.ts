@@ -10,6 +10,7 @@ import Welcome from '../components/Welcome';
 import EditProfilePage from '../pages/EditProfilePage';
 import DocumentsPage from '../pages/DocumentsPage';
 import NewDocumentPage from '../pages/NewDocumentsPage';
+import EditDocumentPage from '../pages/EditDocumentPage';
 
 export interface Route {
   path: string;
@@ -52,6 +53,10 @@ const routes: Route[] = [
   {
     path: '/edit-profile',
     Component: withMain(EditProfilePage),
+  },
+  {
+    path: '/edit-document',
+    Component: withMain(EditDocumentPage),
   },
 ];
 
