@@ -2,6 +2,7 @@ import React from 'react';
 import Media from 'react-bootstrap/esm/Media';
 import Image from 'react-bootstrap/esm/Image';
 import Card from 'react-bootstrap/esm/Card';
+import { BsClock } from 'react-icons/bs';
 
 export interface MessageCardProps {
   username: string;
@@ -11,22 +12,19 @@ export interface MessageCardProps {
 
 function MessageCard(props: MessageCardProps) {
   return (
-    <Card className="mb-2" style={{ width: '30rem' }}>
+    <Card className="p-1">
       <Media>
-        <Media.Body className="d-flex justify-content-between align-items-center">
-          <div className="description d-flex justify-content-between align-items-start">
-            <Image
-              src="https://picsum.photos/200"
-              roundedCircle
-              width={50}
-              height={50}
-              className="ml-2 mt-2 mb-2 mr-2"
-            />
-            <div className="mt-2">
-              <h6 className="mb-0">{props.username}</h6>
-              <p className="mb-0 font-weight-light">{props.time}</p>
-              <p className="ml-2">{props.commentaire}</p>
+        <Media.Body className="d-flex p-2">
+          <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="mr-4" />
+          <div className="d-flex flex-column">
+            <div className="font-weight-light text-secondary">
+              <span className="mr-2"> {props.username} </span>
+              <span className="text-secondary">
+                <BsClock size={12} color="#9E9E93" className="mr-1" />
+                {props.time}
+              </span>
             </div>
+            <p>{props.commentaire}</p>
           </div>
         </Media.Body>
       </Media>
