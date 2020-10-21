@@ -11,6 +11,7 @@ import EditProfilePage from '../pages/EditProfilePage';
 import DocumentsPage from '../pages/DocumentsPage';
 import NewDocumentPage from '../pages/NewDocumentsPage';
 import EditDocumentPage from '../pages/EditDocumentPage';
+import PropositionModificationPage from '../pages/PropositionModificationPage';
 
 export interface Route {
   path: string;
@@ -57,6 +58,10 @@ const routes: Route[] = [
   {
     path: '/edit-document',
     Component: withMain(EditDocumentPage),
+  },
+  {
+    path: '/proposition-modification',
+    Component: withMain(PropositionModificationPage),
   },
 ];
 
