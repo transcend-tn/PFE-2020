@@ -25,7 +25,7 @@ function EditProfileForm() {
   });
 
   return (
-    <Card bg="#fff" text="dark" className="w-50">
+    <Card bg="#fff" text="dark">
       <Card.Body>
         <form onSubmit={formik.handleSubmit}>
           <Form.Row>
@@ -43,7 +43,7 @@ function EditProfileForm() {
                 <Form.Text className="text-danger">{formik.errors.name}</Form.Text>
               ) : null}
             </Form.Group>
-            <Form.Group controlId="formBasicUsername">
+            <Form.Group controlId="formBasicUsername" className="ml-3">
               <Form.Label>Prénom</Form.Label>
               <Form.Control
                 name="familyname"
@@ -75,7 +75,7 @@ function EditProfileForm() {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="btn-sm">
               Enregistrer les modifications
             </Button>
           </Form.Row>
