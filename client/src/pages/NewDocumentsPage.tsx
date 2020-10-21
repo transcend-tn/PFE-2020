@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Card from 'react-bootstrap/esm/Card';
-import HistoryCard from '../components/HistoryCard';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -56,7 +55,6 @@ class NewDocumentPage extends Component {
   render() {
     return (
       <Card>
-        <HistoryCard username="marwen" document="doc 2" timeEdit="now" />
         <div className="m-4">
           <Button variant="primary" onClick={this.onSubmitContent}>
             Enregistrer
