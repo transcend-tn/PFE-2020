@@ -2,11 +2,10 @@ import React from 'react';
 import Form from 'react-bootstrap/esm/Form';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { useStoreActions } from '../hooks/store.hooks';
 import { SignUpPayload } from '../interfaces/signup.interface';
-import Button from 'react-bootstrap/esm/Button';
 
 function SignUpForm() {
   const history = useHistory();
