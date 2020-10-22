@@ -17,7 +17,7 @@ function Welcome() {
     handleClose();
   }
   return (
-    <div className="w-75">
+    <div style={{ maxWidth: 800 }}>
       <Row>
         <Col sm={6}>
           <h1 className="text-primary display-4">PFE 2020</h1>
