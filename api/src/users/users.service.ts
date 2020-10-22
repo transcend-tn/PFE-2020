@@ -33,6 +33,7 @@ export class UsersService {
     const newUser = this.userRepository.create(user);
     newUser.salt = await bcrypt.genSalt();
     newUser.password = await this.hashPassword(newUser.password, newUser.salt);
+    newUser.img = 'user.png';
 
     try {
       await this.userRepository.save(newUser);
