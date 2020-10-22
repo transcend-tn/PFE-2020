@@ -21,7 +21,7 @@ function DeleteAccountCard(props: DeleteAccountCardInterface) {
   }
 
   return (
-    <Container>
+    <>
       <Card>
         <Card.Body className="text-center">
           <Image
@@ -55,7 +55,7 @@ function DeleteAccountCard(props: DeleteAccountCardInterface) {
           </Button>
         </Modal.Footer>
       </Modal>
-    </Container>
+    </>
   );
 }
 
