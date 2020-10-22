@@ -1,39 +1,37 @@
-import React from "react";
-import Media from "react-bootstrap/esm/Media";
-import Button from "react-bootstrap/esm/Button";
-import Image from "react-bootstrap/esm/Image";
+import React from 'react';
+import Media from 'react-bootstrap/esm/Media';
+import Button from 'react-bootstrap/esm/Button';
+import Image from 'react-bootstrap/esm/Image';
+import Card from 'react-bootstrap/esm/Card';
 
 export interface MemberCardInterface {
   username: string;
   img?: string;
 }
 
-const IMG_DEFAULT = "https://picsum.photos/id/1/5616/3744.jpg"
+const IMG_DEFAULT = 'user.png';
 
 function MemberCard(props: MemberCardInterface) {
-  function HandlerSupprimer() {
+  function HandlerLeave() {
     console.log(`${props.username} "a été supprimer"`);
   }
   return (
-    <Media>
-      <Image
-        src={props.img || IMG_DEFAULT}  
-        width={68}
-        height={68}
-        className="mr-2"
-        rounded
-      />
-      <Media.Body className="d-flex justify-content-between align-items-center">
-        <div className="aperçu">
-          <h5>{props.username}</h5>
-        </div>
-        <div className="acte">
-          <Button variant="info" type="submit" onClick={HandlerSupprimer}>
-            Supprimer
+    <Card className="mb-2">
+      <Media>
+        <Media.Body className="d-flex justify-content-between align-items-center">
+          <div className="description d-flex justify-content-between align-items-center">
+            <Image src={props.img ? props.img : IMG_DEFAULT} roundedCircle width={50} height={50} className="m-2" />
+            <div>
+              <h6 className="mb-0">{props.username}</h6>
+              <p className="mb-0 font-weight-light">Member</p>
+            </div>
+          </div>
+          <Button variant="danger" type="submit" onClick={HandlerLeave}>
+            Leave
           </Button>
-        </div>
-      </Media.Body>
-    </Media>
+        </Media.Body>
+      </Media>
+    </Card>
   );
 }
 
