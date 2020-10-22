@@ -18,7 +18,7 @@ function Welcome() {
   }
   return (
     <div style={{ maxWidth: 800 }}>
-      <Row>
+      <Row className="pb-3">
         <Col sm={6}>
           <h1 className="text-primary display-4">PFE 2020</h1>
           <p className="lead">
