@@ -8,7 +8,11 @@ import * as Yup from 'yup';
 import { useStoreActions } from '../hooks/store.hooks';
 import { SignInPayload } from '../interfaces/signIn.interface';
 
-function SignInForm() {
+export interface SignInFormProps {
+  handleShowModal: () => void;
+}
+
+function SignInForm(props: SignInFormProps) {
   const history = useHistory();
   const signIn = useStoreActions((actions) => actions.user.signIn);
 
@@ -34,11 +38,10 @@ function SignInForm() {
   });
 
   return (
-    <Card bg="#fff" text="dark">
+    <Card bg="#fff" text="dark" className="shadow">
       <Card.Body>
         <form onSubmit={formik.handleSubmit}>
           <Form.Group controlId="formBasicUsername">
-            <Form.Label>Username</Form.Label>
             <Form.Control
               name="username"
               type="text"
@@ -52,7 +55,6 @@ function SignInForm() {
             ) : null}
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
             <Form.Control
               name="password"
               type="password"
@@ -65,11 +67,19 @@ function SignInForm() {
               <Form.Text className="text-danger">{formik.errors.password}</Form.Text>
             ) : null}
           </Form.Group>
-          <div className="d-flex justify-content-between">
-            <Link to="forget-password">Mot de passe oublié ?</Link>
-            <Button variant="primary" type="submit" className="float-right">
-              Submit
+          <div>
+            <Button variant="primary" type="submit" size="lg" block>
+              Connexion
             </Button>
+            <div className="text-center mt-3">
+              <Link to="forget-password">Mot de passe oublié ?</Link>
+            </div>
+            <hr />
+            <div className="text-center">
+              <Button variant="success" type="button" onClick={props.handleShowModal}>
+                Inscription
+              </Button>
+            </div>
           </div>
         </form>
       </Card.Body>

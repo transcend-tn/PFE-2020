@@ -11,6 +11,7 @@ export interface HistoryCardProps {
 }
 
 function HistoryCard(props: HistoryCardProps) {
+  const { document, username, time } = props;
   const onCopyHistory = () => {
     console.log('onCopyHistory');
   };
@@ -19,12 +20,12 @@ function HistoryCard(props: HistoryCardProps) {
     <Media className="border">
       <Media.Body className="d-flex justify-content-between align-items-center p-2">
         <div>
-          <span> {props.document} </span>
+          <span> {document} </span>
           <div className="d-flex flex-row flex-center font-weight-light">
-            <span className="mr-2"> {props.username} </span>
+            <span className="mr-2"> {username} </span>
             <span className="text-secondary">
               <BsClock size={12} color="#9E9E93" className="mr-1" />
-              {props.time}
+              {time}
             </span>
           </div>
         </div>
