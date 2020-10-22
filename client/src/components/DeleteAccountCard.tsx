@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/esm/Card';
 import Modal from 'react-bootstrap/esm/Modal';
 
