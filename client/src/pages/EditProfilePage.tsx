@@ -8,10 +8,10 @@ import EditProfileForm from '../components/EditProfileForm';
 function EditProfilePage() {
   return (
     <Row>
-      <Col sm={4}>
+      <Col lg={6} className="mb-3">
         <DeleteAccountCard username="@Username" />
       </Col>
-      <Col sm={8}>
+      <Col lg={6}>
         <Card>
           <Card.Body>
             <Tabs defaultActiveKey="edit-profile" id="uncontrolled-tab">

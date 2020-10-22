@@ -5,7 +5,7 @@ import ProfilePage from '../pages/ProfilePage';
 import ForgetPassword from '../pages/ForgetPasswordPage';
 import Welcome from '../components/Welcome';
 import EditProfilePage from '../pages/EditProfilePage';
-import NewDocumentPage from '../pages/NewDocumentsPage';
+import NewDocumentPage from '../pages/NewDocumentPage';
 import EditDocumentPage from '../pages/EditDocumentPage';
 import PropositionModificationPage from '../pages/PropositionModificationPage';
 

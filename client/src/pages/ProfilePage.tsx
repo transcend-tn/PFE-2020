@@ -11,10 +11,10 @@ const DOCS: number[] = [1, 2];
 function ProfilePage() {
   return (
     <Row>
-      <Col>
+      <Col lg="6" className="mb-3">
         <ProfileCard followers={15} username="Username" following={23} />
       </Col>
-      <Col>
+      <Col lg="6">
         <div className="card p-3">
           <Tabs defaultActiveKey="documents" id="uncontrolled-tab">
             <Tab eventKey="documents" title="Mes documents" className="mt-5">

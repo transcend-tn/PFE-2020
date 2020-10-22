@@ -21,15 +21,13 @@ function FavorisCard(props: FavorisCardProps) {
 
   return (
     <Card className="mb-2">
-      <Media>
+      <Media className="p-2 align-items-stretch">
         <Media.Body className="d-flex justify-content-between align-items-center">
-          <div className="ml-3 mt-2 mb-2 mr-2">
+          <div>
             <h6 className="mb-0"> {props.document} </h6>
             <p className="mb-0 font-weight-light"> {props.timeEdit} </p>
           </div>
-          <div className="action mr-3">
             <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
-          </div>
         </Media.Body>
       </Media>
     </Card>

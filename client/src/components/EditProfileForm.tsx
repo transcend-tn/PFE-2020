@@ -25,7 +25,6 @@ function EditProfileForm() {
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">
-      <Form.Row>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Nom</Form.Label>
           <Form.Control
@@ -40,7 +39,7 @@ function EditProfileForm() {
             <Form.Text className="text-danger">{formik.errors.name}</Form.Text>
           ) : null}
         </Form.Group>
-        <Form.Group controlId="formBasicUsername" className="ml-3">
+        <Form.Group controlId="formBasicUsername">
           <Form.Label>Prénom</Form.Label>
           <Form.Control
             name="familyname"
@@ -54,28 +53,23 @@ function EditProfileForm() {
             <Form.Text className="text-danger">{formik.errors.familyname}</Form.Text>
           ) : null}
         </Form.Group>
-      </Form.Row>
-      <Form.Row>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>E-mail</Form.Label>
-          <Form.Control
-            name="email"
-            type="email"
-            placeholder="Enter email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
-          ) : null}
-        </Form.Group>
-      </Form.Row>
-      <Form.Row>
-        <Button variant="primary" type="submit" className="btn-sm">
-          Enregistrer les modifications
-        </Button>
-      </Form.Row>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>E-mail</Form.Label>
+        <Form.Control
+          name="email"
+          type="email"
+          placeholder="Enter email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
+        ) : null}
+      </Form.Group>
+      <Button variant="primary" type="submit" className="btn-sm">
+        Enregistrer les modifications
+      </Button>
     </form>
   );
 }

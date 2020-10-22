@@ -23,27 +23,21 @@ function CollaborationRequest(props: CollaborationRequestProps) {
   }
   return (
     <Card className="mb-2">
-      <Media>
+      <Media className="p-2 align-items-stretch">
+        <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="mr-2" />
         <Media.Body className="d-flex justify-content-between align-items-center">
-          <div className="description d-flex justify-content-between align-items-center">
-            <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="m-2" />
-            <div>
-              <h6 className="mb-0">{props.username}</h6>
-              <p className="mb-0 font-weight-light">{props.document}</p>
-            </div>
+          <div>
+            <h6 className="mb-0">{props.username}</h6>
+            <p className="mb-0 font-weight-light">{props.document}</p>
           </div>
-          <ButtonToolbar aria-label="Actions">
-            <ButtonGroup className="btn-group btn-group-sm mr-2" aria-label="accept">
-              <Button variant="success" type="submit" onClick={HandlerAccepter}>
-                Accepter
-              </Button>
-            </ButtonGroup>
-            <ButtonGroup className="btn-group btn-group-sm mr-3" aria-label="refuse">
-              <Button variant="danger" type="submit" onClick={HandlerRefuse}>
-                Refuser
-              </Button>
-            </ButtonGroup>
-          </ButtonToolbar>
+          <ButtonGroup size="sm" aria-label="refuse">
+            <Button variant="success" type="submit" onClick={HandlerAccepter} className="mr-2">
+              Accepter
+            </Button>
+            <Button variant="danger" type="submit" onClick={HandlerRefuse}>
+              Refuser
+            </Button>
+          </ButtonGroup>
         </Media.Body>
       </Media>
     </Card>
