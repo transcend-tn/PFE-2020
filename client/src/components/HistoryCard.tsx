@@ -5,9 +5,9 @@ import { BsClock } from 'react-icons/bs';
 import { MdContentCopy } from 'react-icons/md';
 
 export interface HistoryCardProps {
-  username: string;
-  timeEdit: string;
   document: string;
+  username: string;
+  time: string;
 }
 
 function HistoryCard(props: HistoryCardProps) {
@@ -24,7 +24,7 @@ function HistoryCard(props: HistoryCardProps) {
             <span className="mr-2"> {props.username} </span>
             <span className="text-secondary">
               <BsClock size={12} color="#9E9E93" className="mr-1" />
-              {props.timeEdit}
+              {props.time}
             </span>
           </div>
         </div>
