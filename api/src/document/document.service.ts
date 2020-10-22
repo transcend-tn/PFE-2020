@@ -42,7 +42,7 @@ export class DocumentService {
 
   async getDocumentByOwner(owner: string) {
     const docs = await this.documentModel.find({ owner: owner }).exec();
-    return await docs.map(doc => ({
+    return docs.map(doc => ({
       id: doc.id,
       body: doc.body,
       owner: doc.owner,
@@ -50,14 +50,14 @@ export class DocumentService {
   }
 
   async updateDocument(id: string, update: documentDTO) {
-    const doc = this.getDocumentById(id);
+    const doc = await this.getDocumentById(id);
     if (update.title) {
-      (await doc).title = update.title;
+      doc.title = update.title;
     }
     if (update.body) {
-      (await doc).body = update.body;
+      doc.body = update.body;
     }
-    (await doc).save();
+    doc.save();
   }
 
   async deleteDocument(id: string) {
