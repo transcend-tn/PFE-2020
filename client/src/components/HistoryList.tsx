@@ -22,17 +22,15 @@ const DATA: any = [
 
 function HistoryList() {
   return (
-    <>
-      <ListGroup variant="flush">
-        {DATA.map((msg: any) => {
-          return (
-            <ListGroup.Item>
-              <HistoryCard document={msg.document} username={msg.username} time={msg.time} />
-            </ListGroup.Item>
-          );
-        })}
-      </ListGroup>
-    </>
+    <ListGroup variant="flush">
+      {DATA.map((msg: any) => {
+        return (
+          <ListGroup.Item>
+            <HistoryCard document={msg.document} username={msg.username} time={msg.time} />
+          </ListGroup.Item>
+        );
+      })}
+    </ListGroup>
   );
 }
 
