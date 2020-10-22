@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/esm/Card';
 
