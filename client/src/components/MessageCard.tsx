@@ -5,17 +5,18 @@ import Card from 'react-bootstrap/esm/Card';
 import { BsClock } from 'react-icons/bs';
 
 export interface MessageCardProps {
+  img?: string;
   username: string;
   time: string;
-  commentaire: string;
+  body: string;
 }
 
 function MessageCard(props: MessageCardProps) {
   return (
-    <Card className="p-1">
+    <Card className="p-1 mb-2">
       <Media>
         <Media.Body className="d-flex p-2">
-          <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="mr-4" />
+          <Image src={props.img ? props.img : 'user.png'} roundedCircle width={50} height={50} className="mr-4" />
           <div className="d-flex flex-column">
             <div className="font-weight-light text-secondary">
               <span className="mr-2"> {props.username} </span>
@@ -24,7 +25,7 @@ function MessageCard(props: MessageCardProps) {
                 {props.time}
               </span>
             </div>
-            <p>{props.commentaire}</p>
+            <p>{props.body}</p>
           </div>
         </Media.Body>
       </Media>
