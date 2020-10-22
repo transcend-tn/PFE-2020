@@ -1,25 +1,26 @@
 import React from 'react';
 import Media from 'react-bootstrap/esm/Media';
-import { Link } from 'react-router-dom';
+import { BsClock } from 'react-icons/bs';
 
 export interface PropositionCardProps {
-  titre: string;
+  title: string;
   username: string;
-  timeEdit: string;
+  time: string;
 }
 
 function PropositionCard(props: PropositionCardProps) {
   return (
-    <Media className="border mt-2">
-      <Media.Body className="p-2">
-        <Link to="proposition-modification">
-          <span className="lead"> {props.titre} </span>
-        </Link>
-        <div className="d-flex flex-row mt-2">
-          <Link to="favoris">
-            <span className="mr-2 text-secondary"> {props.username} </span>
-          </Link>
-          <span className="text-secondary">{props.timeEdit}</span>
+    <Media className="border">
+      <Media.Body className="d-flex justify-content-between align-items-center p-2">
+        <div>
+          <span> {props.title} </span>
+          <div className="d-flex flex-row flex-center font-weight-light">
+            <span className="mr-2"> {props.username} </span>
+            <span className="text-secondary">
+              <BsClock size={12} color="#9E9E93" className="mr-1" />
+              {props.time}
+            </span>
+          </div>
         </div>
       </Media.Body>
     </Media>
