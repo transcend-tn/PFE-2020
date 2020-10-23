@@ -8,6 +8,7 @@ import EditProfilePage from '../pages/EditProfilePage';
 import NewDocumentPage from '../pages/NewDocumentPage';
 import EditDocumentPage from '../pages/EditDocumentPage';
 import PropositionModificationPage from '../pages/PropositionModificationPage';
+import PropositionDetailsPage from '../pages/PropositionDetailsPage';
 
 export interface Route {
   path: string;
@@ -42,6 +43,10 @@ const routes: Route[] = [
   {
     path: '/proposition-modification',
     Component: withMain(PropositionModificationPage),
+  },
+  {
+    path: '/proposition-details',
+    Component: withMain(PropositionDetailsPage),
   },
 ];
 
