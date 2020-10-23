@@ -1,0 +1,15 @@
+{
+  "name": "@tr/common",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "main:src": "src/index.ts",
+  "scripts": {
+    "build": "tsc --project ./tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

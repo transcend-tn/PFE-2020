@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Col, Row, Button, Modal } from 'react-bootstrap';
+import { Col, Row, Modal } from 'react-bootstrap';
 import Media from 'react-bootstrap/esm/Media';
 import { RiTeamLine, RiThumbUpLine, RiHistoryLine, RiEarthFill } from 'react-icons/ri';
 import SignInForm from './SignInForm';
@@ -9,13 +9,8 @@ import SignUpForm from './SignUpForm';
 function Welcome() {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const toggleModal = () => setShow(!show);
 
-  function HandlerSupprimer() {
-    console.log('Votre compte à été supprimé');
-    handleClose();
-  }
   return (
     <div style={{ maxWidth: 800 }}>
       <Row className="pb-3">
@@ -26,7 +21,7 @@ function Welcome() {
           </p>
         </Col>
         <Col sm={6}>
-          <SignInForm handleShowModal={handleShow} />
+          <SignInForm handleShowModal={toggleModal} />
         </Col>
       </Row>
       <Row className="mt-5">
@@ -67,18 +62,13 @@ function Welcome() {
           </Media>
         </Col>
       </Row>
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+      <Modal show={show} onHide={toggleModal} backdrop="static" keyboard={false}>
         <Modal.Header closeButton>
           <Modal.Title>Inscription </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <SignUpForm />
         </Modal.Body>
-        <Modal.Footer className="justify-content-center border-0">
-          <Button variant="success" onClick={HandlerSupprimer}>
-            Confirmer
-          </Button>
-        </Modal.Footer>
       </Modal>
     </div>
   );
