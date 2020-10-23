@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "incremental": true,
+    "outDir": "dist",
+    "rootDir": "src",
+  },
+  "include": [
+    "src"
+  ]
+}

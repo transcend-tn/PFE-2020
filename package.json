@@ -1,17 +1,24 @@
 {
+  "name": "@tr/root",
   "private": true,
-  "name": "pfe-2020",
-  "workspaces": [
-    "api",
-    "client"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "packages/**/webpack-dev-server",
+      "**/babel-loader",
+      "**/babel-jest"
+    ]
+  },
   "scripts": {
-    "api": "yarn workspace api start:dev",
-    "client": "yarn workspace client start",
-    "server": "yarn workspace api server",
-    "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\"  \"yarn server\" ",
-    "format": "yarn workspace client format",
-    "format:all": "yarn workspace client format:all"
+    "api": "yarn workspace @tr/api start:dev",
+    "client": "yarn workspace @tr/client start",
+    "server": "yarn workspace @tr/api server",
+    "common": "yarn workspace @tr/common build",
+    "start": "concurrently --kill-others-on-fail \"yarn common\"  \"yarn api\"  \"yarn client\"  \"yarn server\" ",
+    "format": "yarn workspace @tr/client format",
+    "format:all": "yarn workspace @tr/client format:all"
   },
   "engineStrict": true,
   "engines": {
