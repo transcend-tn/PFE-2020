@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@tr/common": "1.0.0",
     "@types/react-draft-wysiwyg": "^1.13.0",
     "axios": "0.20.0",
     "bootstrap": "4.5.2",
