@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useStoreActions } from '../hooks/store.hooks';
 import { SignUpPayload } from '../interfaces/signup.interface';
+import { Button } from 'react-bootstrap';
 
 function SignUpForm() {
   const history = useHistory();
@@ -102,6 +103,11 @@ function SignUpForm() {
           <Form.Text className="text-danger">{formik.errors.confirmPassword}</Form.Text>
         ) : null}
       </Form.Group>
+      <div className="text-center mt-3">
+        <Button variant="success" type="submit">
+          Confirmer
+        </Button>
+      </div>
     </form>
   );
 }
