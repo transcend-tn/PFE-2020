@@ -1,0 +1,6 @@
+{
+    "*.{ts,tsx,scss,md}": [
+        "yarn format",
+        "git add"
+    ]
+}

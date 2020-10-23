@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "pfe-2020",
+  "workspaces": [
+    "api",
+    "client"
+  ],
+  "scripts": {
+    "api": "yarn workspace api start:dev",
+    "client": "yarn workspace client start",
+    "server": "yarn workspace api server",
+    "start": "concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\"  \"yarn server\" ",
+    "format": "yarn workspace client format",
+    "format:all": "yarn workspace client format:all"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=10.22.1",
+    "npm": "^6.14.1",
+    "yarn": "^1.21.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "11.0.0",
+    "@commitlint/config-conventional": "11.0.0",
+    "commitizen": "4.2.1",
+    "concurrently": "5.3.0",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "4.3.0"
+  }
+}

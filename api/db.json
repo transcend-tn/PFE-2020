@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "id": "2",
+      "body": "content 2",
+      "poqstId": "1"
+    },
+    {
+      "id": "3",
+      "body": "content 3",
+      "poqstId": "1"
+    }
+  ],
+  "profile": {
+    "name": "marwen"
+  }
+}
