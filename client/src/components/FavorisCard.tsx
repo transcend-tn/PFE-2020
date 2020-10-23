@@ -25,7 +25,7 @@ function FavorisCard(props: FavorisCardProps) {
       <Media className="p-2 align-items-stretch">
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
-            <Link to="document">
+            <Link to="document" style={{ color: '#000000' }}>
               <h6 className="mb-0"> {props.document} </h6>
             </Link>
             <p className="mb-0 font-weight-light"> {props.timeEdit} </p>

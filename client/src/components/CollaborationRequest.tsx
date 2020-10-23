@@ -27,10 +27,10 @@ function CollaborationRequest(props: CollaborationRequestProps) {
         <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="mr-2" />
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
-            <Link to="profile">
+            <Link to="profile" style={{ color: '#000000' }}>
               <h6 className="mb-0">{props.username}</h6>
             </Link>
-            <Link to="document">
+            <Link to="document" style={{ color: '#000000' }}>
               <p className="mb-0 font-weight-light">{props.document}</p>
             </Link>
           </div>
