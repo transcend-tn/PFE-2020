@@ -1,9 +1,8 @@
+import { useFormik } from 'formik';
 import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
 import { MessageFormCreate } from '../interfaces/MessageForm';
 
 function MessageForm() {
@@ -25,15 +24,18 @@ function MessageForm() {
         <Form.Control
           name="comment"
           as="textarea"
-          rows={3}
+          rows={1}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.comment}
+          style={{ height: '100px', resize: 'none' }}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Commenter
-      </Button>
+      <div className="text-right mb-3">
+        <Button variant="success" size="sm" type="submit">
+          Commenter
+        </Button>
+      </div>
     </form>
   );
 }

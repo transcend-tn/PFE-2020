@@ -1,5 +1,4 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/esm/ListGroup';
 import HistoryCard from './HistoryCard';
 
 const DATA: any = [
@@ -22,15 +21,11 @@ const DATA: any = [
 
 function HistoryList() {
   return (
-    <ListGroup variant="flush">
+    <div style={{ maxWidth: 500 }}>
       {DATA.map((msg: any) => {
-        return (
-          <ListGroup.Item>
-            <HistoryCard document={msg.document} username={msg.username} time={msg.time} />
-          </ListGroup.Item>
-        );
+        return <HistoryCard document={msg.document} username={msg.username} time={msg.time} />;
       })}
-    </ListGroup>
+    </div>
   );
 }
 

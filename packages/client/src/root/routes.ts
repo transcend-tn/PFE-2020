@@ -1,12 +1,12 @@
 import withCenter from '../components/layouts/withCenter';
 import withMain from '../components/layouts/withMain';
-
-import ProfilePage from '../pages/ProfilePage';
-import ForgetPassword from '../pages/ForgetPasswordPage';
 import Welcome from '../components/Welcome';
-import EditProfilePage from '../pages/EditProfilePage';
-import NewDocumentPage from '../pages/NewDocumentPage';
+import DocumentPage from '../pages/DocumentPage';
 import EditDocumentPage from '../pages/EditDocumentPage';
+import EditProfilePage from '../pages/EditProfilePage';
+import ForgetPassword from '../pages/ForgetPasswordPage';
+import NewDocumentPage from '../pages/NewDocumentPage';
+import ProfilePage from '../pages/ProfilePage';
 import PropositionModificationPage from '../pages/PropositionModificationPage';
 
 export interface Route {
@@ -22,6 +22,10 @@ const routes: Route[] = [
   {
     path: '/profile',
     Component: withMain(ProfilePage),
+  },
+  {
+    path: '/document',
+    Component: withMain(DocumentPage),
   },
   {
     path: '/new-document',
