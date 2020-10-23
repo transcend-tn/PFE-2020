@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Image from 'react-bootstrap/esm/Image';
 import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
 import Card from 'react-bootstrap/esm/Card';
+import { Link } from 'react-router-dom';
 
 export interface CollaborationRequestProps {
   /** username prop documentation */
@@ -26,8 +27,12 @@ function CollaborationRequest(props: CollaborationRequestProps) {
         <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="mr-2" />
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
-            <h6 className="mb-0">{props.username}</h6>
-            <p className="mb-0 font-weight-light">{props.document}</p>
+            <Link to="profile" style={{ color: '#000000' }}>
+              <h6 className="mb-0">{props.username}</h6>
+            </Link>
+            <Link to="document" style={{ color: '#000000' }}>
+              <p className="mb-0 font-weight-light">{props.document}</p>
+            </Link>
           </div>
           <ButtonGroup size="sm" aria-label="refuse">
             <Button variant="success" type="submit" onClick={HandlerAccepter} className="mr-2">
