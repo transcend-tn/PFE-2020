@@ -8,7 +8,7 @@ function PropositionModificationPage() {
     <div>
       <h5 className="mb-3">Proposition de Modification</h5>
       {REQUESTS.map((value) => {
-        return <PropositionCard timeEdit="now" username="marwen" titre="title 2" key={`request-${value}`} />;
+        return <PropositionCard time="now" username="marwen" title="title 2" key={`request-${value}`} />;
       })}
     </div>
   );
