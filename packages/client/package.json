@@ -61,7 +61,6 @@
     "node-sass": "4.14.1",
     "prettier": "2.1.2",
     "prettier-eslint-cli": "5.0.0",
-    "react-scripts": "3.4.3",
-    "typescript": "~3.7.2"
+    "react-scripts": "3.4.3"
   }
 }
