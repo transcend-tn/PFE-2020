@@ -45,7 +45,7 @@ function DeleteAccountCard(props: DeleteAccountCardInterface) {
           <Modal.Title>Attention !</Modal.Title>
         </Modal.Header>
         <Modal.Body>Votre compte sera désactiver pendant 30 jours avant d'être supprimer définitivement</Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="border-0">
           <Button variant="secondary" onClick={handleClose}>
             Annuler
           </Button>
