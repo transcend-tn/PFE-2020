@@ -3,13 +3,13 @@ import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
-import { EditProf } from '../interfaces/EditProfileForm.interface';
+import { UserEdit } from '@tr/common';
 
 function EditProfileForm() {
   const formik = useFormik({
     initialValues: {
-      name: '',
-      familyname: '',
+      fname: '',
+      lname: '',
       email: '',
     },
     validationSchema: Yup.object({
@@ -17,7 +17,7 @@ function EditProfileForm() {
       familyname: Yup.string().required('first name  is required !!'),
       email: Yup.string().email('Invalid email address').required('This field is required !'),
     }),
-    onSubmit: (values: EditProf) => {
+    onSubmit: (values: UserEdit) => {
       console.log(values);
     },
   });
@@ -32,10 +32,10 @@ function EditProfileForm() {
           placeholder="Enter name"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.name}
+          value={formik.values.fname}
         />
-        {formik.touched.name && formik.errors.name ? (
-          <Form.Text className="text-danger">{formik.errors.name}</Form.Text>
+        {formik.touched.fname && formik.errors.fname ? (
+          <Form.Text className="text-danger">{formik.errors.fname}</Form.Text>
         ) : null}
       </Form.Group>
       <Form.Group controlId="formBasicUsername">
@@ -46,10 +46,10 @@ function EditProfileForm() {
           placeholder="Enter familyname"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.familyname}
+          value={formik.values.lname}
         />
-        {formik.touched.familyname && formik.errors.familyname ? (
-          <Form.Text className="text-danger">{formik.errors.familyname}</Form.Text>
+        {formik.touched.lname && formik.errors.lname ? (
+          <Form.Text className="text-danger">{formik.errors.lname}</Form.Text>
         ) : null}
       </Form.Group>
       <Form.Group controlId="formBasicEmail">
