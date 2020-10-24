@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import Media from 'react-bootstrap/esm/Media';
 import { FaStar } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export interface FavorisCardProps {
   star?: boolean;
@@ -24,7 +25,9 @@ function FavorisCard(props: FavorisCardProps) {
       <Media className="p-2 align-items-stretch">
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
-            <h6 className="mb-0"> {props.document} </h6>
+            <Link to="document" style={{ color: '#000000' }}>
+              <h6 className="mb-0"> {props.document} </h6>
+            </Link>
             <p className="mb-0 font-weight-light"> {props.timeEdit} </p>
           </div>
           <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
