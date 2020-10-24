@@ -27,7 +27,7 @@ function FavorisCard(props: FavorisCardProps) {
             <h6 className="mb-0"> {props.document} </h6>
             <p className="mb-0 font-weight-light"> {props.timeEdit} </p>
           </div>
-            <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
+          <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
         </Media.Body>
       </Media>
     </Card>

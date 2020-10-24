@@ -1,6 +1,4 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/esm/ListGroup';
-import HistoryCard from './HistoryCard';
 import PropositionCard from './PropositionCard';
 
 const DATA: any = [
@@ -24,15 +22,9 @@ const DATA: any = [
 function PropositionList() {
   return (
     <>
-      <ListGroup variant="flush">
-        {DATA.map((msg: any) => {
-          return (
-            <ListGroup.Item>
-              <PropositionCard title={msg.title} username={msg.username} time={msg.time} />
-            </ListGroup.Item>
-          );
-        })}
-      </ListGroup>
+      {DATA.map((msg: any) => {
+        return <PropositionCard title={msg.title} username={msg.username} time={msg.time} />;
+      })}
     </>
   );
 }

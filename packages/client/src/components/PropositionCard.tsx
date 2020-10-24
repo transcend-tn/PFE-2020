@@ -10,8 +10,9 @@ export interface PropositionCardProps {
 
 function PropositionCard(props: PropositionCardProps) {
   return (
-    <Media className="border">
-      <Media.Body className="p-2">
+    <div style={{ maxWidth: 500 }}>
+      <Media className="border mb-2 max-width-300">
+        <Media.Body className="p-2">
           <span> {props.title} </span>
           <div className="d-flex flex-row font-weight-light">
             <span className="mr-2"> {props.username} </span>
@@ -20,8 +21,9 @@ function PropositionCard(props: PropositionCardProps) {
               {props.time}
             </span>
           </div>
-      </Media.Body>
-    </Media>
+        </Media.Body>
+      </Media>
+    </div>
   );
 }
 
