@@ -3,7 +3,7 @@ import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
-import { MessageFormCreate } from '../interfaces/MessageForm';
+import { CommentCreate } from '@tr/common';
 
 function MessageForm() {
   const formik = useFormik({
@@ -13,7 +13,7 @@ function MessageForm() {
     validationSchema: Yup.object({
       comment: Yup.string(),
     }),
-    onSubmit: (values: MessageFormCreate) => {
+    onSubmit: (values: CommentCreate) => {
       console.log(values);
     },
   });

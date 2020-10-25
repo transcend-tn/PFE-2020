@@ -1,10 +1,9 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
-import { CreateUserDto } from './dto/createUser.dto';
+import { UserCreate, UserLogin } from '@tr/common';
 import { GetUser } from './get-user.decorator';
-import { UsersService } from './users.service';
 import { User } from './user.entity';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
@@ -23,12 +22,12 @@ export class UsersController {
   }
 
   @Post()
-  createUser(@Body() user: CreateUserDto) {
+  createUser(@Body() user: UserCreate) {
     return this.usersService.createUser(user);
   }
 
   @Post('/signin')
-  signIn(@Body() authCredentialsDto: AuthCredentialsDto) {
+  signIn(@Body() authCredentialsDto: UserLogin) {
     return this.usersService.signIn(authCredentialsDto);
   }
 }

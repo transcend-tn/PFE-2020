@@ -1,7 +1,6 @@
 import { Action, action, thunk } from 'easy-peasy';
 import { Thunk } from 'easy-peasy';
-import { SignInPayload } from '../interfaces/signIn.interface';
-import { SignUpPayload } from '../interfaces/signup.interface';
+import { UserLogin, UserCreate } from '@tr/common';
 
 import { InjectionsModel } from './injections.model';
 
@@ -10,8 +9,8 @@ export interface UserModel {
   token: string;
   addUser: Action<UserModel, any>;
   addToken: Action<UserModel, any>;
-  signUp: Thunk<UserModel, SignUpPayload, InjectionsModel, {}, Promise<void>>;
-  signIn: Thunk<UserModel, SignInPayload, InjectionsModel, {}, Promise<string>>;
+  signUp: Thunk<UserModel, UserCreate, InjectionsModel, {}, Promise<void>>;
+  signIn: Thunk<UserModel, UserLogin, InjectionsModel, {}, Promise<string>>;
 }
 
 export const userModel: UserModel = {

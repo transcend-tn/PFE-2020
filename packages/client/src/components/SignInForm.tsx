@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useStoreActions } from '../hooks/store.hooks';
-import { SignInPayload } from '../interfaces/signIn.interface';
+import { UserLogin } from '@tr/common';
 
 export interface SignInFormProps {
   handleShowModal: () => void;
@@ -25,7 +25,7 @@ function SignInForm(props: SignInFormProps) {
       username: Yup.string().required('This field is required !'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: (values: SignInPayload) => {
+    onSubmit: (values: UserLogin) => {
       signIn(values).then(
         () => {
           history.push('/profile');

@@ -5,8 +5,8 @@ import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 
 import { useStoreActions } from '../hooks/store.hooks';
-import { SignUpPayload } from '../interfaces/signup.interface';
 import { Button } from 'react-bootstrap';
+import { UserCreate } from '@tr/common';
 
 function SignUpForm() {
   const history = useHistory();
@@ -30,7 +30,7 @@ function SignUpForm() {
         .required('Confirm password is required')
         .oneOf([Yup.ref('password')], 'Passwords must match'),
     }),
-    onSubmit: (values: SignUpPayload) => {
+    onSubmit: (values: UserCreate) => {
       signUp(values).then(
         () => {
           history.push('signin');

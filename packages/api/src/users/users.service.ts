@@ -4,14 +4,12 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt/dist/jwt.service';
-
-import { CreateUserDto } from './dto/createUser.dto';
-import { UserRepository } from './user.repository';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
+import { JwtService } from '@nestjs/jwt/dist/jwt.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserCreate, UserLogin } from '@tr/common';
+import * as bcrypt from 'bcrypt';
+import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UsersService {
@@ -29,7 +27,7 @@ export class UsersService {
     return users;
   }
 
-  async createUser(user: CreateUserDto) {
+  async createUser(user: UserCreate) {
     const newUser = this.userRepository.create(user);
     newUser.salt = await bcrypt.genSalt();
     newUser.password = await this.hashPassword(newUser.password, newUser.salt);
@@ -51,7 +49,7 @@ export class UsersService {
     return bcrypt.hash(password, salt);
   }
 
-  async signIn(authCredentialsDto: AuthCredentialsDto) {
+  async signIn(authCredentialsDto: UserLogin) {
     const payload = await this.validateUserPassword(authCredentialsDto);
 
     if (!payload) {
@@ -61,7 +59,7 @@ export class UsersService {
     return { accessToken };
   }
 
-  async validateUserPassword(authCredentialsDto: AuthCredentialsDto) {
+  async validateUserPassword(authCredentialsDto: UserLogin) {
     const { username, password } = authCredentialsDto;
     const user = await this.userRepository.findOne({ username });
 

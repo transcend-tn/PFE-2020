@@ -1,1 +1,3 @@
-export * from "./createUser.dto";
+export * from "./user.interface";
+export * from "./document.interface";
+export * from "./comment.interface";

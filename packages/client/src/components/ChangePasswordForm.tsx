@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/esm/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { ChangePassPayload } from '../interfaces/ChangePassword.interface';
+import { UserChangePassword } from '@tr/common';
 
 function ChangePasswordForm() {
   const formik = useFormik({
@@ -21,7 +21,7 @@ function ChangePasswordForm() {
         .required('Confirm password is required')
         .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
     }),
-    onSubmit: (values: ChangePassPayload) => {
+    onSubmit: (values: UserChangePassword) => {
       console.log(values);
     },
   });

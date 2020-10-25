@@ -3,7 +3,7 @@ import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Document } from './docuemnt.model';
-import { documentDTO } from './dto/document.dto';
+import { DocumentCreate } from '@tr/common';
 
 @Injectable()
 export class DocumentService {
@@ -11,7 +11,7 @@ export class DocumentService {
     @InjectModel('Document') private readonly documentModel: Model<Document>,
   ) {}
 
-  async createDocument(doc: documentDTO) {
+  async createDocument(doc: DocumentCreate) {
     const newDocument = new this.documentModel(doc);
     return await newDocument.save();
   }
@@ -49,7 +49,7 @@ export class DocumentService {
     }));
   }
 
-  async updateDocument(id: string, update: documentDTO) {
+  async updateDocument(id: string, update: DocumentCreate) {
     const doc = await this.getDocumentById(id);
     if (update.title) {
       doc.title = update.title;

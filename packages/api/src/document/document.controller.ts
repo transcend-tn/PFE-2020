@@ -8,14 +8,14 @@ import {
   Delete,
 } from '@nestjs/common';
 import { DocumentService } from './document.service';
-import { documentDTO } from './dto/document.dto';
+import { DocumentCreate } from '@tr/common';
 
 @Controller('document')
 export class DocumentController {
   constructor(private documentService: DocumentService) {}
 
   @Post()
-  async createDocument(@Body() document: documentDTO) {
+  async createDocument(@Body() document: DocumentCreate) {
     const doc = await this.documentService.createDocument(document);
     return doc;
   }
@@ -39,7 +39,7 @@ export class DocumentController {
   }
 
   @Patch(':id')
-  async updateDocument(@Param('id') id: string, @Body() doc: documentDTO) {
+  async updateDocument(@Param('id') id: string, @Body() doc: DocumentCreate) {
     await this.documentService.updateDocument(id, doc);
     return null;
   }
