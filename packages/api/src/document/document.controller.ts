@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { DocumentCreate } from '@tr/common';
@@ -46,7 +47,7 @@ export class DocumentController {
     return docs;
   }
 
-  @Patch(':id')
+  @Put(':id')
   async updateDocument(
     @GetUser() user: User,
     @Param('id') id: string,
