@@ -29,6 +29,8 @@ export class UsersService {
 
   async createUser(user: UserCreate) {
     const newUser = this.userRepository.create(user);
+    newUser.fname = '';
+    newUser.lname = '';
     newUser.salt = await bcrypt.genSalt();
     newUser.password = await this.hashPassword(newUser.password, newUser.salt);
     newUser.img = 'user.png';
@@ -68,5 +70,20 @@ export class UsersService {
     } else {
       return null;
     }
+  }
+
+  async getUserById(id: string) {
+    const user = await this.userRepository.findOne(id);
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return {
+      id: user.id,
+      img: user.img,
+      fname: user.fname,
+      lname: user.lname,
+      username: user.username,
+      email: user.email,
+    };
   }
 }
