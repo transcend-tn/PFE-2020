@@ -57,7 +57,9 @@ export class DocumentService {
   async updateDocument(user: User, id: string, update: DocumentCreate) {
     const doc = await this.getDocumentById(id);
     if (doc.owner != user.id) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(
+        'You have to be the owner to Update this document',
+      );
     }
     if (update.title) {
       doc.title = update.title;
@@ -68,7 +70,13 @@ export class DocumentService {
     doc.save();
   }
 
-  async deleteDocument(id: string) {
+  async deleteDocument(user: User, id: string) {
+    const doc = await this.getDocumentById(id);
+    if (doc.owner != user.id) {
+      throw new UnauthorizedException(
+        'You have to be the owner to Delete this document',
+      );
+    }
     const del = await this.documentModel.deleteOne({ _id: id }).exec();
     if (del.n === 0) {
       throw new NotFoundException();

@@ -58,8 +58,8 @@ export class DocumentController {
   }
 
   @Delete(':id')
-  async deleteDocument(@Param('id') id: string) {
-    await this.documentService.deleteDocument(id);
+  async deleteDocument(@GetUser() user: User, @Param('id') id: string) {
+    await this.documentService.deleteDocument(user, id);
     return null;
   }
 }
