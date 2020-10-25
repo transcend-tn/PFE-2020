@@ -7,9 +7,10 @@ import {
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserCreate, UserLogin } from '@tr/common';
+import { UserCreate, UserLogin, UserEdit } from '@tr/common';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from './user.repository';
+import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
@@ -85,5 +86,14 @@ export class UsersService {
       username: user.username,
       email: user.email,
     };
+  }
+
+  async editUser(data: UserEdit, currentUser: User) {
+    const user = await this.getUserById(currentUser.id);
+    user.fname = data.fname;
+    user.lname = data.lname;
+    user.email = data.email;
+    await this.userRepository.save(user);
+    return user;
   }
 }
