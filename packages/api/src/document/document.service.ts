@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Document } from './docuemnt.model';
 import { DocumentCreate } from '@tr/common';
+import { User } from '../users/user.entity';
 
 @Injectable()
 export class DocumentService {
@@ -11,8 +12,9 @@ export class DocumentService {
     @InjectModel('Document') private readonly documentModel: Model<Document>,
   ) {}
 
-  async createDocument(doc: DocumentCreate) {
+  async createDocument(user: User, doc: DocumentCreate) {
     const newDocument = new this.documentModel(doc);
+    newDocument.owner = user.id;
     return await newDocument.save();
   }
 
@@ -23,6 +25,8 @@ export class DocumentService {
       title: doc.title,
       body: doc.body,
       owner: doc.owner,
+      createdAt: doc.createdAt,
+      updatedAt: doc.updatedAt,
     }));
   }
 

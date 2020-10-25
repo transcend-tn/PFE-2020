@@ -11,6 +11,8 @@ import { DocumentService } from './document.service';
 import { DocumentCreate } from '@tr/common';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/users/get-user.decorator';
+import { User } from '../users/user.entity';
 
 @Controller('document')
 @UseGuards(AuthGuard())
@@ -18,8 +20,11 @@ export class DocumentController {
   constructor(private documentService: DocumentService) {}
 
   @Post()
-  async createDocument(@Body() document: DocumentCreate) {
-    const doc = await this.documentService.createDocument(document);
+  async createDocument(
+    @GetUser() user: User,
+    @Body() document: DocumentCreate,
+  ) {
+    const doc = await this.documentService.createDocument(user, document);
     return doc;
   }
 
