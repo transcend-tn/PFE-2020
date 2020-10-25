@@ -29,6 +29,8 @@ export class UsersService {
 
   async createUser(user: UserCreate) {
     const newUser = this.userRepository.create(user);
+    newUser.fname = '';
+    newUser.lname = '';
     newUser.salt = await bcrypt.genSalt();
     newUser.password = await this.hashPassword(newUser.password, newUser.salt);
     newUser.img = 'user.png';
