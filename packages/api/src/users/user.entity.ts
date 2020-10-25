@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
 @Unique(['username'])
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   username: string;

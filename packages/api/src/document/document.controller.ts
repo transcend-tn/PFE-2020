@@ -6,17 +6,26 @@ import {
   Param,
   Patch,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { DocumentCreate } from '@tr/common';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/users/get-user.decorator';
+import { User } from '../users/user.entity';
 
 @Controller('document')
+@UseGuards(AuthGuard())
 export class DocumentController {
   constructor(private documentService: DocumentService) {}
 
   @Post()
-  async createDocument(@Body() document: DocumentCreate) {
-    const doc = await this.documentService.createDocument(document);
+  async createDocument(
+    @GetUser() user: User,
+    @Body() document: DocumentCreate,
+  ) {
+    const doc = await this.documentService.createDocument(user, document);
     return doc;
   }
 
@@ -38,15 +47,19 @@ export class DocumentController {
     return docs;
   }
 
-  @Patch(':id')
-  async updateDocument(@Param('id') id: string, @Body() doc: DocumentCreate) {
-    await this.documentService.updateDocument(id, doc);
+  @Put(':id')
+  async updateDocument(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() doc: DocumentCreate,
+  ) {
+    await this.documentService.updateDocument(user, id, doc);
     return null;
   }
 
   @Delete(':id')
-  async deleteDocument(@Param('id') id: string) {
-    await this.documentService.deleteDocument(id);
+  async deleteDocument(@GetUser() user: User, @Param('id') id: string) {
+    await this.documentService.deleteDocument(user, id);
     return null;
   }
 }

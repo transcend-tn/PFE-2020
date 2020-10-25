@@ -4,6 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Document } from './docuemnt.model';
 import { DocumentCreate } from '@tr/common';
+import { User } from '../users/user.entity';
+import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 
 @Injectable()
 export class DocumentService {
@@ -11,8 +13,9 @@ export class DocumentService {
     @InjectModel('Document') private readonly documentModel: Model<Document>,
   ) {}
 
-  async createDocument(doc: DocumentCreate) {
+  async createDocument(user: User, doc: DocumentCreate) {
     const newDocument = new this.documentModel(doc);
+    newDocument.owner = user.id;
     return await newDocument.save();
   }
 
@@ -23,6 +26,8 @@ export class DocumentService {
       title: doc.title,
       body: doc.body,
       owner: doc.owner,
+      createdAt: doc.createdAt,
+      updatedAt: doc.updatedAt,
     }));
   }
 
@@ -49,8 +54,13 @@ export class DocumentService {
     }));
   }
 
-  async updateDocument(id: string, update: DocumentCreate) {
+  async updateDocument(user: User, id: string, update: DocumentCreate) {
     const doc = await this.getDocumentById(id);
+    if (doc.owner != user.id) {
+      throw new UnauthorizedException(
+        'You have to be the owner to Update this document',
+      );
+    }
     if (update.title) {
       doc.title = update.title;
     }
@@ -60,7 +70,13 @@ export class DocumentService {
     doc.save();
   }
 
-  async deleteDocument(id: string) {
+  async deleteDocument(user: User, id: string) {
+    const doc = await this.getDocumentById(id);
+    if (doc.owner != user.id) {
+      throw new UnauthorizedException(
+        'You have to be the owner to Delete this document',
+      );
+    }
     const del = await this.documentModel.deleteOne({ _id: id }).exec();
     if (del.n === 0) {
       throw new NotFoundException();
