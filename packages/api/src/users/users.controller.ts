@@ -1,6 +1,14 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserCreate, UserLogin } from '@tr/common';
+import { UserCreate, UserLogin, UserEdit } from '@tr/common';
 import { GetUser } from './get-user.decorator';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
@@ -18,6 +26,12 @@ export class UsersController {
   @Get(':id')
   getUserById(@Param('id') id: string) {
     return this.usersService.getUserById(id);
+  }
+
+  @Put()
+  @UseGuards(AuthGuard())
+  editUser(@Body() data: UserEdit, @GetUser() user: User) {
+    return this.usersService.editUser(data, user);
   }
 
   @Get()
