@@ -77,6 +77,13 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException();
     }
-    return user;
+    return {
+      id: user.id,
+      img: user.img,
+      fname: user.fname,
+      lname: user.lname,
+      username: user.username,
+      email: user.email,
+    };
   }
 }
