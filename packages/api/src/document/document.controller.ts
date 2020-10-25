@@ -9,8 +9,11 @@ import {
 } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { DocumentCreate } from '@tr/common';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('document')
+@UseGuards(AuthGuard())
 export class DocumentController {
   constructor(private documentService: DocumentService) {}
 
