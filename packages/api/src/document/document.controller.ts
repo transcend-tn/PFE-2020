@@ -47,8 +47,12 @@ export class DocumentController {
   }
 
   @Patch(':id')
-  async updateDocument(@Param('id') id: string, @Body() doc: DocumentCreate) {
-    await this.documentService.updateDocument(id, doc);
+  async updateDocument(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() doc: DocumentCreate,
+  ) {
+    await this.documentService.updateDocument(user, id, doc);
     return null;
   }
 

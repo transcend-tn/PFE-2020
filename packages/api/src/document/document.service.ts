@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { Document } from './docuemnt.model';
 import { DocumentCreate } from '@tr/common';
 import { User } from '../users/user.entity';
+import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 
 @Injectable()
 export class DocumentService {
@@ -53,8 +54,11 @@ export class DocumentService {
     }));
   }
 
-  async updateDocument(id: string, update: DocumentCreate) {
+  async updateDocument(user: User, id: string, update: DocumentCreate) {
     const doc = await this.getDocumentById(id);
+    if (doc.owner != user.id) {
+      throw new UnauthorizedException();
+    }
     if (update.title) {
       doc.title = update.title;
     }
