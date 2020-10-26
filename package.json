@@ -16,7 +16,7 @@
     "client": "yarn workspace @tr/client start",
     "server": "yarn workspace @tr/api server",
     "common": "yarn workspace @tr/common build",
-    "start": "concurrently --kill-others-on-fail \"yarn common\"  \"yarn api\"  \"yarn client\"  \"yarn server\" ",
+    "start": "yarn common && concurrently --kill-others-on-fail \"yarn api\"  \"yarn client\"  \"yarn server\" ",
     "format": "yarn workspace @tr/client format",
     "format:all": "yarn workspace @tr/client format:all"
   },
