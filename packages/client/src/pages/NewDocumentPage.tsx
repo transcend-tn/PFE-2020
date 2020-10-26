@@ -1,9 +1,11 @@
-import { convertFromRaw } from 'draft-js';
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { convertToRaw, EditorState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import React, { useState } from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import Card from 'react-bootstrap/esm/Card';
+import { Editor } from 'react-draft-wysiwyg';
+import { QueryStatus, useMutation } from 'react-query';
+import { documentCreateMutation } from '../services/document.service';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -17,59 +19,42 @@ const EDITOR_OPTIONS = [
   'emoji',
 ];
 
-const content = {
-  entityMap: {},
-  blocks: [
-    {
-      key: '637gr',
-      text: 'Initialized from content state.',
-      type: 'unstyled',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-  ],
-};
+const NewDocumentPage = () => {
+  const [mutate] = useMutation(documentCreateMutation);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-class NewDocumentPage extends Component {
-  constructor(props: any) {
-    super(props);
-    const contentState = convertFromRaw(content);
-    this.state = {
-      contentState,
-    };
-  }
+  const onEditorStateChange = (editorState: EditorState) => {
+    console.log('editorState: ', draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    return setEditorState(editorState);
+  };
 
-  onContentStateChange = (contentState: any) => {
-    this.setState({
-      contentState,
+  const onSubmitContent = () => {
+    console.log(editorState);
+    mutate({
+      body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+      title: 'title',
     });
   };
 
-  onSubmitContent = () => {
-    const { contentState }: any = this.state;
-    console.log('contentState: ', contentState);
-  };
+  return (
+    <Card>
+      <div className="m-4">
+        <Button variant="primary" onClick={onSubmitContent}>
+          <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+          {QueryStatus.Loading !== 'loading' ? 'Loading...' : 'Enregistrer'}
+        </Button>
+      </div>
+      <Editor
+        editorState={editorState}
+        onEditorStateChange={onEditorStateChange}
+        wrapperClassName="m-4"
+        editorClassName="ml-4 mb-4"
+        toolbar={{
+          options: EDITOR_OPTIONS,
+        }}
+      />
+    </Card>
+  );
+};
 
-  render() {
-    return (
-      <Card>
-        <div className="m-4">
-          <Button variant="primary" onClick={this.onSubmitContent}>
-            Enregistrer
-          </Button>
-        </div>
-        <Editor
-          wrapperClassName="m-4"
-          editorClassName="ml-4 mb-4"
-          toolbar={{
-            options: EDITOR_OPTIONS,
-          }}
-          onContentStateChange={this.onContentStateChange}
-        />
-      </Card>
-    );
-  }
-}
 export default NewDocumentPage;

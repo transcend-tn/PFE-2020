@@ -6,7 +6,7 @@ import EditDocumentPage from '../pages/EditDocumentPage';
 import EditProfilePage from '../pages/EditProfilePage';
 import ForgetPassword from '../pages/ForgetPasswordPage';
 import NewDocumentPage from '../pages/NewDocumentPage';
-import ProfilePage from '../pages/ProfilePage';
+import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import PropositionModificationPage from '../pages/PropositionModificationPage';
 import PropositionDetailsPage from '../pages/PropositionDetailsPage';
 
