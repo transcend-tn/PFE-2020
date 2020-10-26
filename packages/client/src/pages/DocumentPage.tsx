@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import DocumentHeader from '../components/DocumentHeader';
 import HistoryList from '../components/HistoryList';
 import MessageForm from '../components/MessageForm';
@@ -15,6 +16,9 @@ const doc = {
 };
 
 function DocumentPage() {
+  const { id } = useParams<{ id: string }>();
+  // TODO: to delete
+  console.log('id: ', id);
   return (
     <>
       <Row>

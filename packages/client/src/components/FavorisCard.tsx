@@ -5,6 +5,7 @@ import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export interface FavorisCardProps {
+  id: string;
   star?: boolean;
   timeEdit: string;
   document: string;
@@ -14,7 +15,8 @@ const favOn = '#f5bf42';
 const favOff = '#808080';
 
 function FavorisCard(props: FavorisCardProps) {
-  const [color, setColor] = useState(props.star ? favOn : favOff);
+  const { document, timeEdit, id, star } = props;
+  const [color, setColor] = useState(star ? favOn : favOff);
 
   function toggleColor() {
     setColor(color === favOn ? favOff : favOn);
@@ -25,10 +27,10 @@ function FavorisCard(props: FavorisCardProps) {
       <Media className="p-2 align-items-stretch">
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
-            <Link to="document" style={{ color: '#000000' }}>
-              <h6 className="mb-0"> {props.document} </h6>
+            <Link to={`document/${id}`} style={{ color: '#000000' }}>
+              <h6 className="mb-0"> {document} </h6>
             </Link>
-            <p className="mb-0 font-weight-light"> {props.timeEdit} </p>
+            <p className="mb-0 font-weight-light"> {timeEdit} </p>
           </div>
           <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
         </Media.Body>

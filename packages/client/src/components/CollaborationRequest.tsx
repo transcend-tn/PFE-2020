@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/esm/Card';
 import { Link } from 'react-router-dom';
 
 export interface CollaborationRequestProps {
+  id: string;
   /** username prop documentation */
   username: string;
   /** document prop documentation */
@@ -14,12 +15,14 @@ export interface CollaborationRequestProps {
 }
 
 function CollaborationRequest(props: CollaborationRequestProps) {
+  const { id, username, document } = props;
+
   function HandlerAccepter() {
-    console.log(`${props.username} " a été ajouté au "${props.document}" en tant que collaborateur"`);
+    console.log(`${username} " a été ajouté au "${document}" en tant que collaborateur"`);
   }
 
   function HandlerRefuse() {
-    console.log(`la demande de "${props.username}" a été refusée"`);
+    console.log(`la demande de "${username}" a été refusée"`);
   }
   return (
     <Card className="mb-2">
@@ -28,10 +31,10 @@ function CollaborationRequest(props: CollaborationRequestProps) {
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
             <Link to="profile" style={{ color: '#000000' }}>
-              <h6 className="mb-0">{props.username}</h6>
+              <h6 className="mb-0">{username}</h6>
             </Link>
-            <Link to="document" style={{ color: '#000000' }}>
-              <p className="mb-0 font-weight-light">{props.document}</p>
+            <Link to={`document/${id}`} style={{ color: '#000000' }}>
+              <p className="mb-0 font-weight-light">{document}</p>
             </Link>
           </div>
           <ButtonGroup size="sm" aria-label="refuse">

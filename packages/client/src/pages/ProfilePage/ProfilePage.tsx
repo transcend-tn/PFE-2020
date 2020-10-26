@@ -5,8 +5,8 @@ import ProfileCard from '../../components/ProfileCard';
 import CollaborationRequest from '../../components/CollaborationRequest';
 import DocumentsList from './containers/DocumentsList';
 
-const FAVORIS: number[] = [1, 2];
-const REQUESTS: number[] = [1, 2];
+const FAVORIS: string[] = ['1', '2'];
+const REQUESTS: string[] = ['1', '2'];
 
 function ProfilePage() {
   return (
@@ -22,12 +22,19 @@ function ProfilePage() {
             </Tab>
             <Tab eventKey="favoris" title="Favoris" className="mt-5">
               {FAVORIS.map((value) => {
-                return <Favoris key={`favoris-${value}`} document="document 1" timeEdit="12/04/2019" />;
+                return <Favoris key={`favoris-${value}`} document="document 1" timeEdit="12/04/2019" id={value} />;
               })}
             </Tab>
             <Tab eventKey="requests" title="Collaborations" className="mt-5">
               {REQUESTS.map((value) => {
-                return <CollaborationRequest key={`request-${value}`} username="Username 1" document="Document 1" />;
+                return (
+                  <CollaborationRequest
+                    key={`request-${value}`}
+                    username="Username 1"
+                    document="Document 1"
+                    id={value}
+                  />
+                );
               })}
             </Tab>
           </Tabs>

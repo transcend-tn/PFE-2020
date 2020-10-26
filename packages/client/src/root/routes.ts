@@ -25,7 +25,7 @@ const routes: Route[] = [
     Component: withMain(ProfilePage),
   },
   {
-    path: '/document',
+    path: '/document/:id',
     Component: withMain(DocumentPage),
   },
   {
