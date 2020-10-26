@@ -1,5 +1,3 @@
-import { DocumentCreate } from '@tr/common';
-
 import axios from '../config/axios';
 import { DOCUMENT } from './../constants/uris';
 
