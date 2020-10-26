@@ -23,11 +23,10 @@ const EDITOR_OPTIONS = [
 ];
 
 const NewDocumentPage = () => {
-  const [mutate] = useMutation(documentCreateMutation);
+  const [mutate, { status, data, error }] = useMutation(documentCreateMutation);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (editorState: EditorState) => {
-    console.log('editorState: ', draftToHtml(convertToRaw(editorState.getCurrentContent())));
     return setEditorState(editorState);
   };
 
@@ -71,7 +70,10 @@ const NewDocumentPage = () => {
       <Card>
         <div className="m-4">
           <Button variant="primary" onClick={onSubmitContent}>
-            {QueryStatus.Loading !== 'loading' ? 'Loading...' : 'Enregistrer'}
+            {QueryStatus.Loading === status && (
+              <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+            )}
+            {QueryStatus.Loading === status ? 'Loading...' : 'Enregistrer'}
           </Button>
         </div>
         <Editor
