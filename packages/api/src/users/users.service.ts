@@ -7,10 +7,11 @@ import {
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserCreate, UserLogin, UserEdit } from '@tr/common';
+import { UserCreate, UserLogin, UserEdit, UserChangePassword } from '@tr/common';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from './user.repository';
 import { User } from './user.entity';
+import { DeleteDateColumn } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -96,4 +97,23 @@ export class UsersService {
     await this.userRepository.save(user);
     return user;
   }
+
+  async changePassword(data: UserChangePassword, currentUser: User) {
+
+  if( await currentUser.validatePassword(data.oldPassword))
+  {
+    if (data.newPassword === data.confirmPassword) {
+      currentUser.password = await this.hashPassword(data.newPassword, currentUser.salt);
+      try {
+        currentUser.save();
+      } catch (error) {
+        throw new InternalServerErrorException("Try another time")
+      }
+    } else {
+      throw new ConflictException("Verify newPassword & confirmPassword")
+    }
+  }
+  else
+  throw new UnauthorizedException("Verify old password")
+}
 }

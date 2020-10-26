@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserCreate, UserLogin, UserEdit } from '@tr/common';
+import { UserCreate, UserLogin, UserEdit, UserChangePassword } from '@tr/common';
 import { GetUser } from './get-user.decorator';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
@@ -32,6 +32,12 @@ export class UsersController {
   @UseGuards(AuthGuard())
   editUser(@Body() data: UserEdit, @GetUser() user: User) {
     return this.usersService.editUser(data, user);
+  }
+
+  @Put('change-password')
+  @UseGuards(AuthGuard())
+  async changePassword(@Body() data: UserChangePassword, @GetUser() currentUser: User){
+    return this.usersService.changePassword(data, currentUser);
   }
 
   @Get()
