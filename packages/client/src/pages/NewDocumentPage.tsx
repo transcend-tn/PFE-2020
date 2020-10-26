@@ -24,6 +24,7 @@ const EDITOR_OPTIONS = [
 
 const NewDocumentPage = () => {
   const [mutate, { status, data, error }] = useMutation(documentCreateMutation);
+  const isLoading = QueryStatus.Loading === status;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (editorState: EditorState) => {
@@ -69,11 +70,9 @@ const NewDocumentPage = () => {
       </Form.Group>
       <Card>
         <div className="m-4">
-          <Button variant="primary" onClick={onSubmitContent}>
-            {QueryStatus.Loading === status && (
-              <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
-            )}
-            {QueryStatus.Loading === status ? 'Loading...' : 'Enregistrer'}
+          <Button variant="primary" onClick={onSubmitContent} disabled={isLoading}>
+            {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+            {isLoading ? 'Loading...' : 'Enregistrer'}
           </Button>
         </div>
         <Editor
