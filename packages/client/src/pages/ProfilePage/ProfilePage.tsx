@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row, Col, Tabs, Tab } from 'react-bootstrap';
-import Favoris from '../components/FavorisCard';
-import ProfileCard from '../components/ProfileCard';
-import CollaborationRequest from '../components/CollaborationRequest';
+import Favoris from '../../components/FavorisCard';
+import ProfileCard from '../../components/ProfileCard';
+import CollaborationRequest from '../../components/CollaborationRequest';
+import DocumentsList from './containers/DocumentsList';
 
 const FAVORIS: number[] = [1, 2];
 const REQUESTS: number[] = [1, 2];
-const DOCS: number[] = [1, 2];
 
 function ProfilePage() {
   return (
@@ -18,9 +18,7 @@ function ProfilePage() {
         <div className="card p-3">
           <Tabs defaultActiveKey="documents" id="uncontrolled-tab">
             <Tab eventKey="documents" title="Mes documents" className="mt-5">
-              {DOCS.map((value) => {
-                return <Favoris key={`favoris-${value}`} document="document 1" timeEdit="12/04/2019" />;
-              })}
+              <DocumentsList />
             </Tab>
             <Tab eventKey="favoris" title="Favoris" className="mt-5">
               {FAVORIS.map((value) => {
