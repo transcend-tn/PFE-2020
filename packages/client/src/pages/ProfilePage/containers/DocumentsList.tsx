@@ -15,7 +15,7 @@ function DocumentsList() {
     <>
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
         {data.map((doc: any) => {
-          return <Favoris key={`favoris-${doc.id}`} document={doc.title} timeEdit={doc.updatedAt} />;
+          return <Favoris key={`favoris-${doc.id}`} document={doc.title} timeEdit={doc.updatedAt} id={doc.id} />;
         })}
       </ReactPlaceholder>
     </>

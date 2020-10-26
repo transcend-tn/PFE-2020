@@ -27,8 +27,8 @@ function TeamMembersList() {
           <h5 className="d-flex justify-content-center mt-4">Team Members</h5>
         </Card.Title>
         <Card.Body>
-          {DATA.map((msg: any) => {
-            return <MemberCard img={msg.img} username={msg.username} />;
+          {DATA.map((msg: any, idx: number) => {
+            return <MemberCard img={msg.img} username={msg.username} key={`member-${idx}`} />;
           })}
           <hr />
           <div className="text-center">

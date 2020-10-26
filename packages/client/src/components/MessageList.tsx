@@ -28,8 +28,10 @@ const DATA: any = [
 function MessageList() {
   return (
     <>
-      {DATA.map((msg: any) => {
-        return <MessageCard img={msg.img} username={msg.username} time={msg.time} body={msg.body} />;
+      {DATA.map((msg: any, idx: number) => {
+        return (
+          <MessageCard img={msg.img} username={msg.username} time={msg.time} body={msg.body} key={`message-${idx}`} />
+        );
       })}
     </>
   );

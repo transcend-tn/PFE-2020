@@ -22,8 +22,8 @@ const DATA: any = [
 function HistoryList() {
   return (
     <div style={{ maxWidth: 500 }}>
-      {DATA.map((msg: any) => {
-        return <HistoryCard document={msg.document} username={msg.username} time={msg.time} />;
+      {DATA.map((msg: any, idx: number) => {
+        return <HistoryCard document={msg.document} username={msg.username} time={msg.time} key={`history-${idx}`} />;
       })}
     </div>
   );

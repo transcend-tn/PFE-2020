@@ -22,8 +22,8 @@ const DATA: any = [
 function PropositionList() {
   return (
     <>
-      {DATA.map((msg: any) => {
-        return <PropositionCard title={msg.title} username={msg.username} time={msg.time} />;
+      {DATA.map((msg: any, idx: number) => {
+        return <PropositionCard title={msg.title} username={msg.username} time={msg.time} key={`proposition-${idx}`} />;
       })}
     </>
   );
