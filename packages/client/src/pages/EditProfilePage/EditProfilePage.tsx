@@ -1,25 +1,25 @@
 import React from 'react';
-import { Row, Col, Tab, Tabs } from 'react-bootstrap';
+import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import Card from 'react-bootstrap/esm/Card';
-import ChangePasswordForm from '../components/ChangePasswordForm';
-import DeleteAccountCard from '../components/DeleteAccountCard';
-import EditProfileForm from '../components/EditProfileForm';
+import ChangePasswordFormContainer from './containers/ChangePasswordFormContainer';
+import DeleteAccountContainer from './containers/DeleteAccountContainer';
+import EditProfileFormContainer from './containers/EditProfileFormContainer';
 
 function EditProfilePage() {
   return (
     <Row>
       <Col lg={6} className="mb-3">
-        <DeleteAccountCard username="@Username" />
+        <DeleteAccountContainer />
       </Col>
       <Col lg={6}>
         <Card>
           <Card.Body>
             <Tabs defaultActiveKey="edit-profile" id="uncontrolled-tab">
               <Tab eventKey="edit-profile" title="Modifier vos coordonnées">
-                <EditProfileForm />
+                <EditProfileFormContainer />
               </Tab>
               <Tab eventKey="change-password" title="Chnager mot de passe">
-                <ChangePasswordForm />
+                <ChangePasswordFormContainer />
               </Tab>
             </Tabs>
           </Card.Body>

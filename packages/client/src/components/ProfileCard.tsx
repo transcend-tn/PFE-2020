@@ -1,11 +1,9 @@
 import React from 'react';
-import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/esm/Card';
-import { QueryStatus, useMutation } from 'react-query';
-import { editUserMutation } from '../services/user.service';
-import { Spinner } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
+import { Link } from 'react-router-dom';
+import { USER_IMG } from '../constants/temp';
 
 export interface ProfileCardInterface {
   username: string;
@@ -15,8 +13,6 @@ export interface ProfileCardInterface {
 }
 
 function ProfileCard(props: ProfileCardInterface) {
-  const [mutate, { status, data, error }] = useMutation(editUserMutation);
-  const isLoading = QueryStatus.Loading === status;
   return (
     <Card>
       <Card.Body>
@@ -25,34 +21,27 @@ function ProfileCard(props: ProfileCardInterface) {
             style={{ border: '1px solid #222' }}
             width={100}
             height={100}
-            src={
-              props.img
-                ? props.img
-                : 'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png'
-            }
+            src={props.img ? props.img : USER_IMG}
             roundedCircle
           />
         </div>
         <h5 className="text-center m-3">{props.username}</h5>
         <div className="d-flex justify-content-center mt-4">
           <div className="followers text-center mr-2">
-            {/*               conversion FR romplacer followers par abonné(s)
-              et following par abonnement(s) */}
-            <h6 className="text-muted">Followers</h6>
+            <h6 className="text-muted">abonné(s)</h6>
             <h6>{props.followers}</h6>
           </div>
 
           <div className="text-center ml-2">
-            <h6 className="text-muted">Following</h6>
+            <h6 className="text-muted">abonnement(s)</h6>
             <h6>{props.following}</h6>
           </div>
         </div>
 
         <div className="text-center mt-4">
           <Link to="edit-profile">
-            <Button className="btn-sm" variant="light" type="submit" disabled={isLoading}>
-              {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
-              {isLoading ? 'Loading...' : 'Editer le Profil'}
+            <Button className="btn-sm" variant="light" type="submit">
+              Editer Profile
             </Button>
           </Link>
         </div>
