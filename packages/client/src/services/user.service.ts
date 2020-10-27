@@ -1,4 +1,4 @@
-import { UserCreate, UserLogin } from '@tr/common';
+import { UserCreate, UserEdit, UserLogin } from '@tr/common';
 
 import axios from '../config/axios';
 import { SIGN_IN, SIGN_UP, USER_BY_ID, USERS_EDIT } from '../constants/uris';
@@ -18,6 +18,7 @@ export const getUserById = async (payload: string): Promise<any> => {
   return data;
 };
 export const editUserMutation = async (payload: any): Promise<string> => {
-  const { data } = await axios.put(USERS_EDIT(payload), payload);
+  const userId = '1';
+  const { data } = await axios.put(USERS_EDIT(userId), payload);
   return data;
 };

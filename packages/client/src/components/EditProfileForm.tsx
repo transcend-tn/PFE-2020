@@ -1,35 +1,23 @@
-import { useFormik } from 'formik';
 import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
-import * as Yup from 'yup';
-import { UserEdit } from '@tr/common';
 
-function EditProfileForm() {
-  const formik = useFormik({
-    initialValues: {
-      fname: '',
-      lname: '',
-      email: '',
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().required('name is required !'),
-      familyname: Yup.string().required('first name  is required !!'),
-      email: Yup.string().email('Invalid email address').required('This field is required !'),
-    }),
-    onSubmit: (values: UserEdit) => {
-      console.log(values);
-    },
-  });
+export interface EditProfileFormInterface {
+  formik: any;
+  isLoading: boolean;
+}
+
+function EditProfileForm(props: EditProfileFormInterface) {
+  const { formik, isLoading } = props;
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">
-      <Form.Group controlId="formBasicUsername">
+      <Form.Group controlId="formBasicFname">
         <Form.Label>Nom</Form.Label>
         <Form.Control
-          name="name"
+          name="fname"
           type="text"
-          placeholder="Enter name"
+          placeholder="Veuillez entrer votre prénom"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.fname}
@@ -38,12 +26,12 @@ function EditProfileForm() {
           <Form.Text className="text-danger">{formik.errors.fname}</Form.Text>
         ) : null}
       </Form.Group>
-      <Form.Group controlId="formBasicUsername">
+      <Form.Group controlId="formBasicLname">
         <Form.Label>Prénom</Form.Label>
         <Form.Control
-          name="familyname"
+          name="lname"
           type="text"
-          placeholder="Enter familyname"
+          placeholder="Veuillez entrer votre nom de famille"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.lname}
@@ -66,7 +54,7 @@ function EditProfileForm() {
           <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
         ) : null}
       </Form.Group>
-      <Button variant="primary" type="submit" className="btn-sm">
+      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading}>
         Enregistrer les modifications
       </Button>
     </form>

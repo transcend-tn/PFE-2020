@@ -1,30 +1,13 @@
 import React from 'react';
-import Form from 'react-bootstrap/esm/Form';
 import Button from 'react-bootstrap/esm/Button';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Form from 'react-bootstrap/esm/Form';
 
-import { UserChangePassword } from '@tr/common';
+export interface ChangePasswordFormInterface {
+  formik: any;
+}
 
-function ChangePasswordForm() {
-  const formik = useFormik({
-    initialValues: {
-      oldPassword: '',
-      newPassword: '',
-      confirmPassword: '',
-    },
-    validationSchema: Yup.object({
-      oldPassword: Yup.string().required('Old Password is required'),
-
-      newPassword: Yup.string().required('New Password is required'),
-      confirmPassword: Yup.string()
-        .required('Confirm password is required')
-        .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
-    }),
-    onSubmit: (values: UserChangePassword) => {
-      console.log(values);
-    },
-  });
+function ChangePasswordForm(props: ChangePasswordFormInterface) {
+  const { formik } = props;
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">
