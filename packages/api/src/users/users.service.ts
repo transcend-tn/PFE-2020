@@ -86,6 +86,7 @@ export class UsersService {
       lname: user.lname,
       username: user.username,
       email: user.email,
+      favorites: user.favorites
     };
   }
 
