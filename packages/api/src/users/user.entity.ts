@@ -4,8 +4,10 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   Column,
+  OneToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Favorite } from '../favorite/favorite.entity';
 
 @Entity()
 @Unique(['username'])
@@ -33,6 +35,9 @@ export class User extends BaseEntity {
 
   @Column()
   img: string;
+
+  @OneToMany(type=>Favorite, favorite=>favorite.user, {eager :true})
+  favorites: Favorite[];
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);

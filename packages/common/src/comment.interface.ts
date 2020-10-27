@@ -1,3 +1,3 @@
 export interface CommentCreate {
-  comment: string;
+  body: string;
 }
