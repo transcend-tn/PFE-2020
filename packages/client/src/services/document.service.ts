@@ -10,3 +10,8 @@ export const getDocumentByOwner = async (): Promise<any> => {
   const { data } = await axios.get(DOCUMENT);
   return data;
 };
+
+export const getDocumentById = async (): Promise<any> => {
+  const { data } = await axios.get(DOCUMENT);
+  return data;
+};
