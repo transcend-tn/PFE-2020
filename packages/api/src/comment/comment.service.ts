@@ -28,4 +28,8 @@ export class CommentService {
             createdAt: response.createdAt}
           
       }
+
+      async getCommentById(id: string) {
+        return await this.commentModel.find({documentId: id})
+      }
 }

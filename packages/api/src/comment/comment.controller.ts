@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CommentService } from './comment.service';
 import { CommentCreate } from '@tr/common';
@@ -13,4 +13,10 @@ export class CommentController {
     @Post(':id')
     addComment(@Body() comment:CommentCreate, @GetUser() currentUser:User, @Param('id') id:string)
     {return this.commentService.addComment(comment, currentUser, id);}
+
+    @Get('/document/:id')
+    getCommentById(@Param('id') id: string) {
+      return this.commentService.getCommentById(id);
+    }
+  
 }
