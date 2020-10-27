@@ -25,7 +25,7 @@ This Application uses :
 - [TypeScript] : An open-source language which builds on JavaScript by adding types.
 - [NestJS] : A progressive Node.js framework for building server-side applications.
 - [ReactJS] : A JavaScript library for building user interfaces
-- [React Query] : A JavaScript library for building user interfaces
+- [React Query] : A data-fetching library for React
 - [Easy Peasy] : An abstraction of Redux allows you to quickly and easily manage your state
 - [React Bootstrap]: A popular front-end framework rebuilt for React.
 - [React Icons]: Helps include popular icons in your React projects easily.
