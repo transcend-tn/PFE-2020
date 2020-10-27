@@ -20,7 +20,7 @@ function DeleteAccountContainer() {
 
   return (
     <ReactPlaceholder ready={!isLoading} customPlaceholder={<ProfileCardLoader />}>
-      <DeleteAccountCard username={data.username} handleDelete={handleDelete} />;
+      <DeleteAccountCard username={data.username} handleDelete={handleDelete} />
     </ReactPlaceholder>
   );
 }
