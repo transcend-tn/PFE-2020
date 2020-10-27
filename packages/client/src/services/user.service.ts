@@ -1,4 +1,4 @@
-import { UserCreate, UserEdit, UserLogin } from '@tr/common';
+import { UserCreate, UserLogin } from '@tr/common';
 
 import axios from '../config/axios';
 import { SIGN_IN, SIGN_UP, USER_BY_ID, USERS_EDIT } from '../constants/uris';

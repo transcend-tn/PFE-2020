@@ -7,7 +7,7 @@ import { USER_IMG } from '../constants/temp';
 
 export interface DeleteAccountCardInterface {
   username: string;
-  handleDelete: any;
+  handleDelete: () => void;
   img?: string;
 }
 
