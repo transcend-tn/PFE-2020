@@ -6,3 +6,4 @@ export const SIGN_IN = '/users/signin';
 export const SIGN_UP = '/users';
 
 export const DOCUMENT = '/document';
+export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;
