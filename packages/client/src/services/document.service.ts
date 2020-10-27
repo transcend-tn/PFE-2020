@@ -22,3 +22,7 @@ export const deleteDocumentMutation = async (payload: any): Promise<string> => {
   const { data } = await axios.delete(DOCUMENT_BY_ID(payload));
   return data;
 };
+export const updateDocumentMutation = async (payload: any): Promise<string> => {
+  const { data } = await axios.put(DOCUMENT, payload);
+  return data;
+};
