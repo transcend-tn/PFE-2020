@@ -25,9 +25,8 @@ export class FavoriteService {
   }
 
   async removeFavorite(id: string) {
-    const deleteFavorite = this.favoriteRepository.delete(id);
-    deleteFavorite.documentId = id;
-    await this.favoriteRepository.save(deleteFavorite);
+   await this.favoriteRepository.delete({id});
+    return { deleted: id}
   }
  
 }
