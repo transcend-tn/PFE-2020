@@ -3,6 +3,9 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/esm/Card';
+import { QueryStatus, useMutation } from 'react-query';
+import { editUserMutation } from '../services/user.service';
+import { Spinner } from 'react-bootstrap';
 
 export interface ProfileCardInterface {
   username: string;
@@ -10,7 +13,10 @@ export interface ProfileCardInterface {
   following: number;
   img?: string;
 }
+
 function ProfileCard(props: ProfileCardInterface) {
+  const [mutate, { status, data, error }] = useMutation(editUserMutation);
+  const isLoading = QueryStatus.Loading === status;
   return (
     <Card>
       <Card.Body>
@@ -44,8 +50,9 @@ function ProfileCard(props: ProfileCardInterface) {
 
         <div className="text-center mt-4">
           <Link to="edit-profile">
-            <Button className="btn-sm" variant="light" type="submit">
-              Editer le Profil
+            <Button className="btn-sm" variant="light" type="submit" disabled={isLoading}>
+              {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+              {isLoading ? 'Loading...' : 'Editer le Profil'}
             </Button>
           </Link>
         </div>
