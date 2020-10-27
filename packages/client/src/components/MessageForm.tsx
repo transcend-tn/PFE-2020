@@ -3,17 +3,16 @@ import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
-import { CommentCreate } from '@tr/common';
 
 function MessageForm() {
   const formik = useFormik({
     initialValues: {
-      comment: '',
+      body: '',
     },
     validationSchema: Yup.object({
-      comment: Yup.string(),
+      body: Yup.string(),
     }),
-    onSubmit: (values: CommentCreate) => {
+    onSubmit: (values: any) => {
       console.log(values);
     },
   });
@@ -22,12 +21,12 @@ function MessageForm() {
     <form onSubmit={formik.handleSubmit}>
       <Form.Group controlId="exampleForm.ControlTextarea1">
         <Form.Control
-          name="comment"
+          name="body"
           as="textarea"
           rows={1}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.comment}
+          value={formik.values.body}
           style={{ height: '100px', resize: 'none' }}
         />
       </Form.Group>
