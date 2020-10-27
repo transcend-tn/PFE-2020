@@ -3,10 +3,10 @@ import { useFormik } from 'formik';
 import { Button, Spinner } from 'react-bootstrap';
 import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
-import { Editor, EditorState } from 'react-draft-wysiwyg';
+import { Editor } from 'react-draft-wysiwyg';
 import * as Yup from 'yup';
 import draftToHtml from 'draftjs-to-html';
-import { convertToRaw } from 'draft-js';
+import { convertToRaw, EditorState } from 'draft-js';
 import { MutateFunction } from 'react-query';
 import { useState } from 'react';
 

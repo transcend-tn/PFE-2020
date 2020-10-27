@@ -32,7 +32,7 @@ const routes: Route[] = [
     Component: withMain(EditProfilePage),
   },
   {
-    path: 'document/new',
+    path: '/document/new',
     Component: withMain(NewDocumentPage),
   },
   {

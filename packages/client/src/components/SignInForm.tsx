@@ -27,11 +27,12 @@ function SignInForm(props: SignInFormProps) {
     }),
     onSubmit: (values: UserLogin) => {
       signIn(values).then(
-        () => {
-          history.push('/profile');
+        (values) => {
+          console.log('values: ', values);
+          history.push('/profile/1');
         },
-        () => {
-          console.log('error !!!');
+        (error) => {
+          console.log('error: ', error);
         },
       );
     },
