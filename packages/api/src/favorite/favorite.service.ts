@@ -23,4 +23,11 @@ export class FavoriteService {
 
     return newFavorite;
   }
+
+  async removeFavorite(id: string) {
+    const deleteFavorite = this.favoriteRepository.delete(id);
+    deleteFavorite.documentId = id;
+    await this.favoriteRepository.save(deleteFavorite);
+  }
+ 
 }
