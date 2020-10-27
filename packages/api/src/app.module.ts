@@ -4,6 +4,7 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DocumentModule } from './document/document.module';
+import { FavoriteModule } from './favorite/favorite.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { DocumentModule } from './document/document.module';
       'mongodb://127.0.0.1:27017/?compressors=zlib&gssapiServiceName=mongodb',
     ),
     DocumentModule,
+    FavoriteModule,
   ],
 })
 export class AppModule {}
