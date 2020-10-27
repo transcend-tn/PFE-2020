@@ -68,7 +68,7 @@ export class UsersService {
     const user = await this.userRepository.findOne({ username });
 
     if (user && (await user.validatePassword(password))) {
-      return { username: user.username, email: user.email };
+      return { id: user.id, fname: user.fname, lname: user.lname, username: user.username, email: user.email };
     } else {
       return null;
     }
