@@ -17,7 +17,7 @@ export const getUserById = async (payload: string): Promise<any> => {
   const { data } = await axios.get(USER_BY_ID(payload));
   return data;
 };
-export const editUserMutation = async (payload: any): Promise<string> => {
+export const editUserService = async (payload: any): Promise<string> => {
   const userId = '1';
   const { data } = await axios.put(USERS_EDIT(userId), payload);
   return data;

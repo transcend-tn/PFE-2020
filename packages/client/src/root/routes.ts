@@ -7,7 +7,6 @@ import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 import ForgetPassword from '../pages/ForgetPasswordPage';
 import NewDocumentPage from '../pages/NewDocumentPage/NewDocumentPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
-import PropositionModificationPage from '../pages/PropositionModificationPage';
 import PropositionDetailsPage from '../pages/PropositionDetailsPage';
 
 export interface Route {
@@ -21,35 +20,31 @@ const routes: Route[] = [
     Component: withCenter(Welcome),
   },
   {
-    path: '/profile',
+    path: '/forget-password',
+    Component: withCenter(ForgetPassword),
+  },
+  {
+    path: '/profile/:id',
     Component: withMain(ProfilePage),
+  },
+  {
+    path: '/profile/edit',
+    Component: withMain(EditProfilePage),
+  },
+  {
+    path: 'document/new',
+    Component: withMain(NewDocumentPage),
   },
   {
     path: '/document/:id',
     Component: withMain(DocumentPage),
   },
   {
-    path: '/new-document',
-    Component: withMain(NewDocumentPage),
-  },
-  {
-    path: '/forget-password',
-    Component: withCenter(ForgetPassword),
-  },
-  {
-    path: '/edit-profile',
-    Component: withMain(EditProfilePage),
-  },
-  {
-    path: '/edit-document',
+    path: '/document/:id/edit',
     Component: withMain(EditDocumentPage),
   },
   {
-    path: '/proposition-modification',
-    Component: withMain(PropositionModificationPage),
-  },
-  {
-    path: '/proposition-details',
+    path: '/document/:idc/proposition/:idp',
     Component: withMain(PropositionDetailsPage),
   },
 ];
