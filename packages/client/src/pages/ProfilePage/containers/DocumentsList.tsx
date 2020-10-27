@@ -2,7 +2,7 @@ import React from 'react';
 import ReactPlaceholder from 'react-placeholder';
 import { useQuery } from 'react-query';
 import Favoris from '../../../components/FavorisCard';
-import {getDocumentByOwner } from '../../../services/document.service';
+import { getDocumentByOwner } from '../../../services/document.service';
 
 function DocumentsList() {
   const { isLoading, isError, data = [], error } = useQuery('documents:getbyowner', getDocumentByOwner);
