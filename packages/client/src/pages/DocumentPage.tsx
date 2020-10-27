@@ -17,8 +17,7 @@ const doc = {
 
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();
-  // TODO: to delete
-  console.log('id: ', id);
+
   return (
     <>
       <Row>
@@ -26,7 +25,7 @@ function DocumentPage() {
           <div className="card p-3">
             <Tabs defaultActiveKey="Document" id="uncontrolled-tab">
               <Tab eventKey="Document" title="Document" className="mt-5">
-                <DocumentHeader title={doc.title} createdAt={doc.createdAt} />
+                <DocumentHeader title={doc.title} createdAt={doc.createdAt} id={id} />
                 <p className="mt-5">{doc.body}</p>
               </Tab>
               <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">

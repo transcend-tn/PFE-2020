@@ -1,11 +1,12 @@
 import { Action, action, thunk } from 'easy-peasy';
 import { Thunk } from 'easy-peasy';
 import { UserLogin, UserCreate } from '@tr/common';
+import jwt from 'jsonwebtoken';
 
 import { InjectionsModel } from './injections.model';
 
 export interface UserModel {
-  item: any;
+  user: any;
   token: string;
   addUser: Action<UserModel, any>;
   addToken: Action<UserModel, any>;
@@ -14,19 +15,19 @@ export interface UserModel {
 }
 
 export const userModel: UserModel = {
-  item: undefined,
+  user: undefined,
   token: localStorage.getItem('accessToken') || '',
   addUser: action((state, payload) => {
-    state.item = payload;
+    state.user = payload;
   }),
   addToken: action((state, payload) => {
+    const user = jwt.decode(payload.accessToken);
     localStorage.setItem('accessToken', JSON.stringify(payload));
     state.token = payload;
+    state.user = user;
   }),
   signUp: thunk(async (actions, payload, { injections }) => {
-    const data = await injections.usersService.signUp(payload);
-
-    actions.addUser(data);
+    return await injections.usersService.signUp(payload);
   }),
   signIn: thunk(async (actions, payload, { injections }) => {
     const data = await injections.usersService.signIn(payload);

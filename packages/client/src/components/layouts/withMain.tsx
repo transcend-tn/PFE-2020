@@ -12,7 +12,7 @@ const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => (
     <>
       <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: '#2f2f2f' }} variant="dark">
-        <Nav.Link as={Link} to="profile">
+        <Nav.Link as={Link} to={`profile/1`}>
           <RiHome2Line className="mr-2" color="#ffffff" size={30} />
         </Nav.Link>
 

@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/esm/Card';
 import Media from 'react-bootstrap/esm/Media';
 import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { DOCUMENT_BY_ID } from '../constants/uris';
 
 export interface FavorisCardProps {
   id: string;
@@ -27,7 +28,7 @@ function FavorisCard(props: FavorisCardProps) {
       <Media className="p-2 align-items-stretch">
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
-            <Link to={`document/${id}`} style={{ color: '#000000' }}>
+            <Link to={DOCUMENT_BY_ID(id)} style={{ color: '#000000' }}>
               <h6 className="mb-0"> {document} </h6>
             </Link>
             <p className="mb-0 font-weight-light"> {timeEdit} </p>
