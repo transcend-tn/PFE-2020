@@ -21,10 +21,11 @@ $ yarn start
 
 This Application uses :
 
+- [Yarn] : A package manager.
+- [TypeScript] : An open-source language which builds on JavaScript by adding types.
 - [NestJS] : A progressive Node.js framework for building server-side applications.
 - [ReactJS] : A JavaScript library for building user interfaces
-- [TypeScript] : An open-source language which builds on JavaScript by adding types.
-- [Yarn] : A package manager.
+- [React Query] : A JavaScript library for building user interfaces
 - [Easy Peasy] : An abstraction of Redux allows you to quickly and easily manage your state
 - [React Bootstrap]: A popular front-end framework rebuilt for React.
 - [React Icons]: Helps include popular icons in your React projects easily.
@@ -33,6 +34,7 @@ This Application uses :
 
 [nestjs]: https://nestjs.com/
 [reactjs]: https://reactjs.org/
+[React Query]: https://react-query.tanstack.com/
 [typescript]: https://www.typescriptlang.org/
 [easy peasy]: https://easy-peasy.now.sh/
 [yarn]: https://yarnpkg.com/
