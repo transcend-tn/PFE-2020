@@ -28,7 +28,7 @@ const routes: Route[] = [
     Component: withMain(ProfilePage),
   },
   {
-    path: '/profile/edit',
+    path: '/profile/:id/edit',
     Component: withMain(EditProfilePage),
   },
   {
