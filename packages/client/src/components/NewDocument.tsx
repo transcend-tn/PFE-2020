@@ -1,8 +1,14 @@
 import React from 'react';
+import { useFormik } from 'formik';
 import { Button, Spinner } from 'react-bootstrap';
 import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
 import { Editor, EditorState } from 'react-draft-wysiwyg';
+import * as Yup from 'yup';
+import draftToHtml from 'draftjs-to-html';
+import { convertToRaw } from 'draft-js';
+import { MutateFunction } from 'react-query';
+import { useState } from 'react';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -17,14 +23,31 @@ const EDITOR_OPTIONS = [
 ];
 
 export interface NewDocumentInterface {
-  formik: any;
   isLoading: boolean;
-  editorState: EditorState;
-  onEditorStateChange: (editorState: EditorState) => void;
+  createDocument: MutateFunction<string, unknown, any, unknown>;
 }
 
 const NewDocument = (props: NewDocumentInterface) => {
-  const { formik, isLoading, editorState, onEditorStateChange } = props;
+  const { isLoading, createDocument } = props;
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required('Title is required'),
+    }),
+    onSubmit: (values) => {
+      if (values.title !== '')
+        createDocument({
+          body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+          title: values.title,
+        });
+      values.title = '';
+      setEditorState(EditorState.createEmpty());
+    },
+  });
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">
@@ -45,12 +68,12 @@ const NewDocument = (props: NewDocumentInterface) => {
         <div className="m-4">
           <Button variant="primary" type="submit" disabled={isLoading}>
             {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
-            {isLoading ? 'Loading...' : 'Enregistrer'}
+            {isLoading ? 'Chargement...' : 'Enregistrer'}
           </Button>
         </div>
         <Editor
           editorState={editorState}
-          onEditorStateChange={onEditorStateChange}
+          onEditorStateChange={setEditorState}
           wrapperClassName="m-4"
           editorClassName="ml-4 mb-4"
           toolbar={{

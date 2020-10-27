@@ -1,14 +1,33 @@
+import { UserEdit } from '@tr/common';
+import { useFormik } from 'formik';
 import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
+import * as Yup from 'yup';
 
 export interface EditProfileFormInterface {
-  formik: any;
+  editUser: any;
   isLoading: boolean;
 }
 
 function EditProfileForm(props: EditProfileFormInterface) {
-  const { formik, isLoading } = props;
+  const { editUser, isLoading } = props;
+
+  const formik = useFormik({
+    initialValues: {
+      fname: '',
+      lname: '',
+      email: '',
+    },
+    validationSchema: Yup.object({
+      fname: Yup.string().required('Veuillez saisir votre prénom !'),
+      lname: Yup.string().required('Veuillez saisir votre nom !'),
+      email: Yup.string().email('Addresse email invalide').required('Veuillez saisir votre email !'),
+    }),
+    onSubmit: (payload: UserEdit) => {
+      editUser(payload);
+    },
+  });
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">

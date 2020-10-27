@@ -1,7 +1,7 @@
 import axios from '../config/axios';
 import { DOCUMENT, DOCUMENT_BY_ID } from './../constants/uris';
 
-export const documentCreateMutation = async (payload: any): Promise<string> => {
+export const createDocumentMutation = async (payload: any): Promise<string> => {
   const { data } = await axios.post(DOCUMENT, payload);
   return data;
 };
