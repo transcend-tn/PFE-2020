@@ -6,7 +6,7 @@ export const documentCreateMutation = async (payload: any): Promise<string> => {
   return data;
 };
 
-export const documentgetAllQuery = async (): Promise<any> => {
+export const getDocumentByOwner = async (): Promise<any> => {
   const { data } = await axios.get(DOCUMENT);
   return data;
 };
