@@ -16,7 +16,7 @@ export const getDocumentById = async (payload: string): Promise<any> => {
   return data;
 };
 
-export const deleteDocument = async (): Promise<any> => {
-  const { data } = await axios.get(DOCUMENT);
+export const deleteDocumentMutation = async (payload: any): Promise<string> => {
+  const { data } = await axios.delete(DOCUMENT, payload);
   return data;
 };
