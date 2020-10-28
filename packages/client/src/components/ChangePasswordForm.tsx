@@ -5,9 +5,13 @@ import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
 
-export interface ChangePasswordFormInterface {}
+export interface ChangePasswordFormInterface {
+  editPassword: any;
+  isLoading: boolean;
+}
 
 function ChangePasswordForm(props: ChangePasswordFormInterface) {
+  const { editPassword, isLoading } = props;
   const formik = useFormik({
     initialValues: {
       oldPassword: '',
@@ -22,8 +26,8 @@ function ChangePasswordForm(props: ChangePasswordFormInterface) {
         .required('Confirm password is required')
         .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
     }),
-    onSubmit: (values: UserChangePassword) => {
-      console.log(values);
+    onSubmit: (payload: UserChangePassword) => {
+      editPassword(payload);
     },
   });
   return (
@@ -73,7 +77,7 @@ function ChangePasswordForm(props: ChangePasswordFormInterface) {
         ) : null}
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" disabled={isLoading}>
         Enregistrer les modifications
       </Button>
     </form>

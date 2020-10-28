@@ -7,6 +7,7 @@ export const SIGN_UP = '/users';
 export const USER_BY_ID = (id: string) => `/users/${id}`;
 export const USERS = '/users';
 export const USERS_EDIT = (id: string) => `/users/${id}`;
+export const EDIT_PASSWORD = (id: string) => `/users/${id}`;
 
 export const DOCUMENT = '/document';
 export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;

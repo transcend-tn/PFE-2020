@@ -1,7 +1,7 @@
 import { UserCreate, UserLogin } from '@tr/common';
 
 import axios from '../config/axios';
-import { SIGN_IN, SIGN_UP, USER_BY_ID, USERS_EDIT } from '../constants/uris';
+import { SIGN_IN, SIGN_UP, USER_BY_ID, USERS_EDIT, EDIT_PASSWORD } from '../constants/uris';
 
 export const signIn = async (payload: UserLogin): Promise<any> => {
   const { data } = await axios.post(SIGN_IN, payload);
@@ -20,5 +20,11 @@ export const getUserById = async (payload: string): Promise<any> => {
 export const editUserService = async (payload: any): Promise<string> => {
   const userId = '1';
   const { data } = await axios.put(USERS_EDIT(userId), payload);
+  return data;
+};
+
+export const changePassword = async (payload: any): Promise<string> => {
+  const UserId = '1';
+  const { data } = await axios.put(EDIT_PASSWORD(UserId), payload);
   return data;
 };
