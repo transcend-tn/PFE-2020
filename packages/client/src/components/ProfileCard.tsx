@@ -13,33 +13,28 @@ export interface ProfileCardInterface {
 }
 
 function ProfileCard(props: ProfileCardInterface) {
+  const { username, followers, following, img } = props;
   return (
     <Card>
       <Card.Body>
         <div className="text-center">
-          <Image
-            style={{ border: '1px solid #222' }}
-            width={100}
-            height={100}
-            src={props.img ? props.img : USER_IMG}
-            roundedCircle
-          />
+          <Image className="border" width={100} height={100} src={img ? img : USER_IMG} roundedCircle />
         </div>
-        <h5 className="text-center m-3">{props.username}</h5>
+        <h5 className="text-center m-3">{username}</h5>
         <div className="d-flex justify-content-center mt-4">
           <div className="followers text-center mr-2">
             <h6 className="text-muted">abonné(s)</h6>
-            <h6>{props.followers}</h6>
+            <h6>{followers}</h6>
           </div>
 
           <div className="text-center ml-2">
             <h6 className="text-muted">abonnement(s)</h6>
-            <h6>{props.following}</h6>
+            <h6>{following}</h6>
           </div>
         </div>
 
         <div className="text-center mt-4">
-          <Link to="edit-profile">
+          <Link to={`/profile/${username}/edit`}>
             <Button className="btn-sm" variant="light" type="submit">
               Editer Profile
             </Button>

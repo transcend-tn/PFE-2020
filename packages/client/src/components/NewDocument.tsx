@@ -1,14 +1,12 @@
-import React from 'react';
+import { EditorState } from 'draft-js';
 import { useFormik } from 'formik';
+import React, { useState } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
 import { Editor } from 'react-draft-wysiwyg';
-import * as Yup from 'yup';
-import draftToHtml from 'draftjs-to-html';
-import { convertToRaw, EditorState } from 'draft-js';
 import { MutateFunction } from 'react-query';
-import { useState } from 'react';
+import * as Yup from 'yup';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -41,7 +39,7 @@ const NewDocument = (props: NewDocumentInterface) => {
     onSubmit: (values) => {
       if (values.title !== '')
         createDocument({
-          body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+          body: editorState.getCurrentContent(),
           title: values.title,
         });
       values.title = '';

@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import Favoris from '../../../components/FavorisCard';
 import { getDocumentsByOwner } from '../../../services/document.service';
 
-function DocumentsList() {
+function DocumentsListContainer() {
   const { isLoading, isError, data = [], error } = useQuery('documents:getbyowner', getDocumentsByOwner);
 
   if (isError) {
@@ -22,4 +22,4 @@ function DocumentsList() {
   );
 }
 
-export default DocumentsList;
+export default DocumentsListContainer;

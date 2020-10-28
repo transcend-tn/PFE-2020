@@ -12,7 +12,9 @@ export const getDocumentsByOwner = async (): Promise<any> => {
 };
 
 export const getDocumentById = async (payload: string): Promise<any> => {
+  console.log('payload: ', payload);
   const { data } = await axios.get(DOCUMENT_BY_ID(payload));
+  console.log('data: ', data);
   return data;
 };
 

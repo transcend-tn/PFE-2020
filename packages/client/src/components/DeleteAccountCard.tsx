@@ -7,7 +7,7 @@ import { USER_IMG } from '../constants/temp';
 
 export interface DeleteAccountCardInterface {
   username: string;
-  handleDelete: () => void;
+  handleDelete: any;
   img?: string;
 }
 
@@ -27,13 +27,7 @@ function DeleteAccountCard(props: DeleteAccountCardInterface) {
     <>
       <Card>
         <Card.Body className="text-center">
-          <Image
-            style={{ border: '1px solid #222' }}
-            width={100}
-            height={100}
-            src={img ? img : USER_IMG}
-            roundedCircle
-          />
+          <Image className="border" width={100} height={100} src={img ? img : USER_IMG} roundedCircle />
           <h5 className="mt-3 mb-3">{username}</h5>
           <Button className="btn-sm" type="submit" variant="danger" onClick={handleShow}>
             Supprimer le compte

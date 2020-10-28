@@ -6,11 +6,11 @@ import ProfileCardLoader from '../../../components/loaders/ProfileCardLoader';
 import { getUserById } from '../../../services/user.service';
 
 function DeleteAccountContainer() {
-  // TODO
-  // mutation deleteAccount
-  const { isLoading, isError, data = { username: '@Username' }, error } = useQuery('user:getUserById', getUserById);
+  const { isLoading, isError, data = [], error } = useQuery('user:getUserById', getUserById);
 
   const handleDelete = () => {
+    // TODO
+    // mutation deleteAccount
     console.log('handle delete: ');
   };
 

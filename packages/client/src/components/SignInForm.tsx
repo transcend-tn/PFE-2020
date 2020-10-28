@@ -1,12 +1,12 @@
+import { UserLogin } from '@tr/common';
+import { useFormik } from 'formik';
 import React from 'react';
-import Form from 'react-bootstrap/esm/Form';
 import Button from 'react-bootstrap/esm/Button';
 import Card from 'react-bootstrap/esm/Card';
+import Form from 'react-bootstrap/esm/Form';
 import { Link, useHistory } from 'react-router-dom';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useStoreActions } from '../hooks/store.hooks';
-import { UserLogin } from '@tr/common';
+import { useStoreActions, useStoreState } from '../hooks/store.hooks';
 
 export interface SignInFormProps {
   handleShowModal: () => void;
@@ -15,6 +15,7 @@ export interface SignInFormProps {
 function SignInForm(props: SignInFormProps) {
   const history = useHistory();
   const signIn = useStoreActions((actions) => actions.user.signIn);
+  const user = useStoreState((state) => state.user.user);
 
   const formik = useFormik({
     initialValues: {
@@ -28,8 +29,9 @@ function SignInForm(props: SignInFormProps) {
     onSubmit: (values: UserLogin) => {
       signIn(values).then(
         (values) => {
-          console.log('values: ', values);
-          history.push('/profile/1');
+          if (user) {
+            history.push(`/profile/${user.username}`);
+          }
         },
         (error) => {
           console.log('error: ', error);
