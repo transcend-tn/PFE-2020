@@ -11,3 +11,5 @@ export const USERS_EDIT = (id: string) => `/users/${id}`;
 export const DOCUMENT = '/document';
 export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;
 export const DOCUMENT_EDIT = (id: string) => `/document/${id}/edit`;
+
+export const FAVORITE = '/favorite';
