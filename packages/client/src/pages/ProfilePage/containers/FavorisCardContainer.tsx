@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation, QueryStatus, useQuery } from 'react-query';
+import { useMutation, QueryStatus } from 'react-query';
 import { addFavoriteMutation } from '../../../services/favorite.service';
 import FavorisCard from '../../../components/FavorisCard';
 
