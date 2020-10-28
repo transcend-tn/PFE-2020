@@ -9,6 +9,7 @@ import { RiHome2Line } from 'react-icons/ri';
 import { Link, useHistory } from 'react-router-dom';
 import { useStoreState } from '../../hooks/store.hooks';
 import { Button } from 'react-bootstrap';
+import { queryCache } from 'react-query';
 
 const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => {
@@ -17,6 +18,7 @@ const withMain = <P extends object>(Component: React.ComponentType) => {
 
     const onLogout = () => {
       localStorage.removeItem('accessToken');
+      queryCache.invalidateQueries();
       history.push('/');
     };
 
