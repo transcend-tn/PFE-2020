@@ -3,3 +3,8 @@ export interface DocumentCreate {
   body: string;
   owner: string;
 }
+
+export interface DocumentUpdate {
+  title: string;
+  body: string;
+}
