@@ -2,10 +2,10 @@ import React from 'react';
 import ReactPlaceholder from 'react-placeholder';
 import { useQuery } from 'react-query';
 import Favoris from '../../../components/FavorisCard';
-import { getDocumentByOwner } from '../../../services/document.service';
+import { getDocumentsByOwner } from '../../../services/document.service';
 
 function DocumentsList() {
-  const { isLoading, isError, data = [], error } = useQuery('documents:getbyowner', getDocumentByOwner);
+  const { isLoading, isError, data = [], error } = useQuery('documents:getbyowner', getDocumentsByOwner);
 
   if (isError) {
     return <span>Error: {error} !</span>;
