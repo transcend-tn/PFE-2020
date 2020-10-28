@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Document } from './docuemnt.model';
-import { DocumentCreate } from '@tr/common';
-import { User } from '../users/user.entity';
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
+import { InjectModel } from '@nestjs/mongoose';
+import { DocumentCreate } from '@tr/common';
+import { Model } from 'mongoose';
+import { User } from '../users/user.entity';
+import { Document } from './docuemnt.model';
 
 @Injectable()
 export class DocumentService {
