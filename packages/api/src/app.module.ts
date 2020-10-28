@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DocumentModule } from './document/document.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { CommentModule } from './comment/comment.module';
+import { CollaborationModule } from './collaboration/collaboration.module';
 import { RequestModule } from './request/request.module';
 
 @Module({
@@ -18,6 +19,7 @@ import { RequestModule } from './request/request.module';
     DocumentModule,
     FavoriteModule,
     CommentModule,
+    CollaborationModule,
     RequestModule,
   ],
 })
