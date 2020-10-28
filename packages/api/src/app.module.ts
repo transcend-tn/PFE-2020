@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DocumentModule } from './document/document.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { CommentModule } from './comment/comment.module';
+import { RequestModule } from './request/request.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CommentModule } from './comment/comment.module';
     DocumentModule,
     FavoriteModule,
     CommentModule,
+    RequestModule,
   ],
 })
 export class AppModule {}
