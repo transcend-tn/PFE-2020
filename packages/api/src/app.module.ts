@@ -7,6 +7,7 @@ import { DocumentModule } from './document/document.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { CommentModule } from './comment/comment.module';
 import { CollaborationModule } from './collaboration/collaboration.module';
+import { RequestModule } from './request/request.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CollaborationModule } from './collaboration/collaboration.module';
     FavoriteModule,
     CommentModule,
     CollaborationModule,
+    RequestModule,
   ],
 })
 export class AppModule {}
