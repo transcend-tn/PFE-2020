@@ -14,3 +14,5 @@ export const DOCUMENT_EDIT = (id: string) => `/document/${id}/edit`;
 
 export const FAVORITE = '/favorite';
 export const FAVORITE_BY_ID = (id: string) => `/favorite/${id}`;
+export const COMMENT = '/comment';
+export const COMMENT_BY_ID = (id: string) => `/comment/document/${id}`;

@@ -3,8 +3,16 @@ import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
+import { CommentCreate } from '@tr/common';
 
-function MessageForm() {
+export interface MessageFormInterface {
+  createComment: any;
+  isLoading: boolean;
+}
+
+function MessageForm(props: MessageFormInterface) {
+  const { createComment, isLoading } = props;
+
   const formik = useFormik({
     initialValues: {
       body: '',
@@ -12,8 +20,8 @@ function MessageForm() {
     validationSchema: Yup.object({
       body: Yup.string(),
     }),
-    onSubmit: (values: any) => {
-      console.log(values);
+    onSubmit: (payload: CommentCreate) => {
+      createComment(payload);
     },
   });
 
@@ -31,7 +39,7 @@ function MessageForm() {
         />
       </Form.Group>
       <div className="text-right mb-3">
-        <Button variant="success" size="sm" type="submit">
+        <Button variant="success" size="sm" type="submit" disabled={isLoading}>
           Commenter
         </Button>
       </div>
