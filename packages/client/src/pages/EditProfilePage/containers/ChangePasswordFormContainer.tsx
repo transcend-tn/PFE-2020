@@ -1,8 +1,13 @@
 import React from 'react';
+import { useMutation, QueryStatus } from 'react-query';
 import ChangePasswordForm from '../../../components/ChangePasswordForm';
+import { changePassword } from '../../../services/user.service';
 
 function ChangePasswordFormContainer() {
-  return <ChangePasswordForm />;
+  const [editPassword, { status }] = useMutation(changePassword);
+  const isLoading = QueryStatus.Loading === status;
+
+  return <ChangePasswordForm editPassword={editPassword} isLoading={isLoading} />;
 }
 
 export default ChangePasswordFormContainer;
