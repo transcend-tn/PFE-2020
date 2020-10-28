@@ -17,4 +17,8 @@ export class RequestService {
     request.body = body;
     return await request.save();
   }
+
+  async getRequest(id: string) {
+    return await this.requestModel.find({documentId:id})
+  }
 }
