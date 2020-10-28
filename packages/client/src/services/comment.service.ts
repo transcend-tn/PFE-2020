@@ -11,3 +11,4 @@ export const getCommentById = async (payload: string): Promise<any> => {
     const { data } = await axios.get(COMMENT_BY_ID(payload));
     return data;
   };
+};
