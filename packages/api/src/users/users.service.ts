@@ -8,15 +8,14 @@ import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.ex
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
-  UserCreate,
-  UserLogin,
-  UserEdit,
   UserChangePassword,
+  UserCreate,
+  UserEdit,
+  UserLogin,
 } from '@tr/common';
 import * as bcrypt from 'bcrypt';
-import { UserRepository } from './user.repository';
 import { User } from './user.entity';
-import { DeleteDateColumn } from 'typeorm';
+import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UsersService {
