@@ -21,4 +21,10 @@ export class RequestService {
   async getRequest(id: string) {
     return await this.requestModel.find({documentId:id})
   }
+
+  async getDocId(id:string)
+  {
+    const req = await this.requestModel.findById(id);
+    return req.documentId;
+  }
 }

@@ -13,7 +13,7 @@ export class CollaborationService {
   ) {}
 
   async collaborationTeam(id: string) {
-    return await this.collaborationModel.find();
+    return await this.collaborationModel.find({documentId:id});
   }
 
   async joinTeam(currentUser: User, id: string) {
@@ -40,5 +40,10 @@ export class CollaborationService {
     return await this.collaborationModel
       .findOne({ userId: currentUser.id, documentId: id })
       .exec();
+  }
+
+  async teamCount(id:string)
+  {
+    return await this.collaborationModel.find({documentId:id}).count();
   }
 }
