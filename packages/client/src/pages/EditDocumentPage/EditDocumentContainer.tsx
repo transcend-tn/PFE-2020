@@ -1,11 +1,13 @@
+import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { Col, Row, Tab, Tabs } from 'react-bootstrap';
+import { Col, Form, Row, Tab, Tabs } from 'react-bootstrap';
 import Button from 'react-bootstrap/esm/Button';
 import Card from 'react-bootstrap/esm/Card';
 import { Editor } from 'react-draft-wysiwyg';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import { getDocumentById } from '../../services/document.service';
+import * as Yup from 'yup';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -18,6 +20,18 @@ const EDITOR_OPTIONS = [
   'link',
   'emoji',
 ];
+
+const formik = useFormik({
+  initialValues: {
+    description: '',
+  },
+  validationSchema: Yup.object({
+    description: Yup.string(),
+  }),
+  onSubmit: () => {
+    console.log(formik.values.description);
+  },
+});
 
 const EditDocumentPage = () => {
   const [contentState, setContent] = useState('');
@@ -66,6 +80,16 @@ const EditDocumentPage = () => {
             </Card>
           </Tab>
           <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
+          <form onSubmit={formik.handleSubmit} className="mt-5">
+          <Form.Group controlId="description">
+          <Form.Control
+          name="description"
+          type="text"
+          placeholder="Enter votre description"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.description}
+        />
             <Row>
               <Col lg="6" className="mb-3">
                 <div className="card p-3">OLD VERSION TEXT HERE</div>
@@ -77,6 +101,8 @@ const EditDocumentPage = () => {
                 </div>
               </Col>
             </Row>
+            </Form.Group>
+            </form>
           </Tab>
         </Tabs>
       </div>
