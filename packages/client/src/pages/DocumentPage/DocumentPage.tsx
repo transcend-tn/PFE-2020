@@ -4,11 +4,11 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import DocumentHeader from '../../components/DocumentHeader';
 import HistoryList from '../../components/HistoryList';
-import MessageForm from '../../components/MessageForm';
-import MessageList from '../../components/MessageList';
 import PropositionList from '../../components/PropositionList';
 import TeamMembersList from '../../components/TeamMembersList';
 import { getDocumentById } from '../../services/document.service';
+import MessageFormContainer from './containers/MessageFormContainer';
+import MessageListContainer from './containers/MessageListContainer';
 
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();
@@ -42,8 +42,8 @@ function DocumentPage() {
             </Tabs>
           </div>
           <div className="bg-color-secondary card p-3 mt-5">
-            <MessageForm isLoading={isLoading} createComment={() => console.log('createComment')} />
-            <MessageList />
+            <MessageFormContainer />
+            <MessageListContainer />
           </div>
         </Col>
 

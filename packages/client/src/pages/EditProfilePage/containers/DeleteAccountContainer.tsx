@@ -3,15 +3,17 @@ import ReactPlaceholder from 'react-placeholder/lib';
 import { useQuery } from 'react-query';
 import DeleteAccountCard from '../../../components/DeleteAccountCard';
 import ProfileCardLoader from '../../../components/loaders/ProfileCardLoader';
+import { useStoreState } from '../../../hooks/store.hooks';
 import { getUserById } from '../../../services/user.service';
 
 function DeleteAccountContainer() {
-  const { isLoading, isError, data = [], error } = useQuery('user:getUserById', getUserById);
+  const user = useStoreState((state) => state.user.user);
+  const { isLoading, isError, data = {}, error } = useQuery(['user:getById', user.id], getUserById);
 
   const handleDelete = () => {
     // TODO
     // mutation deleteAccount
-    console.log('handle delete: ');
+    console.log('handle delete: ', data);
   };
 
   if (isError) {
@@ -20,7 +22,7 @@ function DeleteAccountContainer() {
 
   return (
     <ReactPlaceholder ready={!isLoading} customPlaceholder={<ProfileCardLoader />}>
-      <DeleteAccountCard username={data.username} handleDelete={handleDelete} />
+      <DeleteAccountCard user={data} handleDelete={handleDelete} />
     </ReactPlaceholder>
   );
 }

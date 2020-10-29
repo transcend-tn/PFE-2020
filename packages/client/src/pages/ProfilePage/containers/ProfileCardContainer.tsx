@@ -7,9 +7,7 @@ import { getUserById } from '../../../services/user.service';
 
 function ProfileCardContainer() {
   const user = useStoreState((state) => state.user.user);
-
-  const { isLoading, isError, data = {}, error } = useQuery(user.id, getUserById);
-  console.log('data: ', data);
+  const { isLoading, isError, data = {}, error } = useQuery(['user:getById', user.id], getUserById);
 
   if (isError) {
     return <span>Error: {error} !</span>;
@@ -18,7 +16,7 @@ function ProfileCardContainer() {
   return (
     <>
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
-        <ProfileCard followers={15} following={42} username={user.username} />
+        <ProfileCard followers={15} following={42} user={data} />
       </ReactPlaceholder>
     </>
   );

@@ -7,7 +7,12 @@ import {
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserCreate, UserLogin, UserEdit, UserChangePassword } from '@tr/common';
+import {
+  UserCreate,
+  UserLogin,
+  UserEdit,
+  UserChangePassword,
+} from '@tr/common';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from './user.repository';
 import { User } from './user.entity';
@@ -35,7 +40,7 @@ export class UsersService {
     newUser.lname = '';
     newUser.salt = await bcrypt.genSalt();
     newUser.password = await this.hashPassword(newUser.password, newUser.salt);
-    newUser.img = 'user.png';
+    newUser.img = '/user.png';
 
     try {
       await this.userRepository.save(newUser);
@@ -68,7 +73,13 @@ export class UsersService {
     const user = await this.userRepository.findOne({ username });
 
     if (user && (await user.validatePassword(password))) {
-      return { id: user.id, fname: user.fname, lname: user.lname, username: user.username, email: user.email };
+      return {
+        id: user.id,
+        fname: user.fname,
+        lname: user.lname,
+        username: user.username,
+        email: user.email,
+      };
     } else {
       return null;
     }
@@ -86,7 +97,7 @@ export class UsersService {
       lname: user.lname,
       username: user.username,
       email: user.email,
-      favorites: user.favorites
+      favorites: user.favorites,
     };
   }
 
@@ -100,21 +111,20 @@ export class UsersService {
   }
 
   async changePassword(data: UserChangePassword, currentUser: User) {
-
-  if( await currentUser.validatePassword(data.oldPassword))
-  {
-    if (data.newPassword === data.confirmPassword) {
-      currentUser.password = await this.hashPassword(data.newPassword, currentUser.salt);
-      try {
-        currentUser.save();
-      } catch (error) {
-        throw new InternalServerErrorException("Try another time")
+    if (await currentUser.validatePassword(data.oldPassword)) {
+      if (data.newPassword === data.confirmPassword) {
+        currentUser.password = await this.hashPassword(
+          data.newPassword,
+          currentUser.salt,
+        );
+        try {
+          currentUser.save();
+        } catch (error) {
+          throw new InternalServerErrorException('Try another time');
+        }
+      } else {
+        throw new ConflictException('Verify newPassword & confirmPassword');
       }
-    } else {
-      throw new ConflictException("Verify newPassword & confirmPassword")
-    }
+    } else throw new UnauthorizedException('Verify old password');
   }
-  else
-  throw new UnauthorizedException("Verify old password")
-}
 }

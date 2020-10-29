@@ -1,7 +1,7 @@
 import { UserCreate, UserLogin } from '@tr/common';
 
 import axios from '../config/axios';
-import { SIGN_IN, SIGN_UP, USER_BY_ID, USERS_EDIT, EDIT_PASSWORD } from '../constants/uris';
+import { SIGN_IN, SIGN_UP, USER_BY_ID, USERS, EDIT_PASSWORD } from '../constants/uris';
 
 export const signIn = async (payload: UserLogin): Promise<any> => {
   const { data } = await axios.post(SIGN_IN, payload);
@@ -13,16 +13,16 @@ export const signUp = async (payload: UserCreate): Promise<void> => {
   return data;
 };
 
-export const getUserById = async (payload: string): Promise<any> => {
+export const getUserById = async (key: any, payload: string): Promise<any> => {
   const { data } = await axios.get(USER_BY_ID(payload));
   return data;
 };
-export const editUserService = async ({ userId, payload }: any): Promise<string> => {
-  const { data } = await axios.put(USERS_EDIT(userId), payload);
+export const editUserService = async (payload: any): Promise<string> => {
+  const { data } = await axios.put(USERS, payload);
   return data;
 };
 
-export const changePassword = async ({ userId, payload }: any): Promise<string> => {
-  const { data } = await axios.put(EDIT_PASSWORD(userId), payload);
+export const changePassword = async (payload: any): Promise<string> => {
+  const { data } = await axios.put(EDIT_PASSWORD, payload);
   return data;
 };

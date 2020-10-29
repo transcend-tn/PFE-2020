@@ -8,10 +8,11 @@ import { CommentCreate } from '@tr/common';
 export interface MessageFormInterface {
   createComment?: any;
   isLoading?: boolean;
+  docId?: string;
 }
 
 function MessageForm(props: MessageFormInterface) {
-  const { createComment, isLoading } = props;
+  const { createComment, isLoading, docId } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -21,13 +22,13 @@ function MessageForm(props: MessageFormInterface) {
       body: Yup.string(),
     }),
     onSubmit: (payload: CommentCreate) => {
-      createComment(payload);
+      createComment({ docId, payload });
     },
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Form.Group controlId="exampleForm.ControlTextarea1">
+      <Form.Group controlId="Form.CreateMessage">
         <Form.Control
           name="body"
           as="textarea"

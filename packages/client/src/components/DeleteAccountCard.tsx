@@ -6,13 +6,12 @@ import Modal from 'react-bootstrap/esm/Modal';
 import { USER_IMG } from '../constants/temp';
 
 export interface DeleteAccountCardInterface {
-  username: string;
+  user: any;
   handleDelete: any;
-  img?: string;
 }
 
 function DeleteAccountCard(props: DeleteAccountCardInterface) {
-  const { username, img, handleDelete } = props;
+  const { user, handleDelete } = props;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -27,8 +26,9 @@ function DeleteAccountCard(props: DeleteAccountCardInterface) {
     <>
       <Card>
         <Card.Body className="text-center">
-          <Image className="border" width={100} height={100} src={img ? img : USER_IMG} roundedCircle />
-          <h5 className="mt-3 mb-3">{username}</h5>
+          <Image className="border" width={100} height={100} src={user.img ? user.img : USER_IMG} roundedCircle />
+          <h5 className="mt-3 mb-3">{user.username}</h5>
+          <h5 className="text-center m-2">{`${user.fname} ${user.lname}`}</h5>
           <Button className="btn-sm" type="submit" variant="danger" onClick={handleShow}>
             Supprimer le compte
           </Button>
