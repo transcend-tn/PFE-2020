@@ -67,7 +67,7 @@ function PropositionDetailsPage() {
         </Col>
 
         <Col lg="4">
-          <Vote yes={50} no={20} />
+          <Vote yes={50} />
         </Col>
       </Row>
     </>
