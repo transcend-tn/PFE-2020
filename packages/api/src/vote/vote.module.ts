@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { VoteController } from './vote.controller';
-import { VoteService } from './vote.service';
-import { UsersModule } from '../users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from '../users/users.module';
+import { VoteController } from './vote.controller';
 import { VoteSchema } from './vote.model';
+import { VoteService } from './vote.service';
 
 @Module({
   imports: [
@@ -11,6 +11,6 @@ import { VoteSchema } from './vote.model';
     MongooseModule.forFeature([{ name: 'Vote', schema: VoteSchema }]),
   ],
   controllers: [VoteController],
-  providers: [VoteService]
+  providers: [VoteService],
 })
 export class VoteModule {}
