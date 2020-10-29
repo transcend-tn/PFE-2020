@@ -6,8 +6,8 @@ import * as Yup from 'yup';
 import { CommentCreate } from '@tr/common';
 
 export interface MessageFormInterface {
-  createComment: any;
-  isLoading: boolean;
+  createComment?: any;
+  isLoading?: boolean;
 }
 
 function MessageForm(props: MessageFormInterface) {

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import Media from 'react-bootstrap/esm/Media';
 import { FaStar } from 'react-icons/fa';
-import { MutateFunction } from 'react-query';
 import { Link } from 'react-router-dom';
 import { DOCUMENT_BY_ID } from '../constants/uris';
 
@@ -11,19 +10,17 @@ export interface FavorisCardProps {
   star?: boolean;
   timeEdit: string;
   document: string;
-  createFavoris: MutateFunction<string, unknown, any, unknown>;
-  isLoading: boolean;
 }
 
 const favOn = '#f5bf42';
 const favOff = '#808080';
 
 function FavorisCard(props: FavorisCardProps) {
-  const { document, timeEdit, id, star, createFavoris, isLoading } = props;
+  const { id, star, timeEdit, document } = props;
   const [color, setColor] = useState(star ? favOn : favOff);
 
   function toggleColor() {
-    setColor(color === favOn ? favOff : favOn);
+    setColor(star ? favOn : favOff);
   }
 
   return (

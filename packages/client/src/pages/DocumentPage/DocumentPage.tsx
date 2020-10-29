@@ -12,7 +12,6 @@ import { getDocumentById } from '../../services/document.service';
 
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();
-  console.log('id: ', id);
 
   const { isLoading, isError, data = {}, error } = useQuery([id], getDocumentById);
 
@@ -43,7 +42,7 @@ function DocumentPage() {
             </Tabs>
           </div>
           <div className="bg-color-secondary card p-3 mt-5">
-            <MessageForm />
+            <MessageForm isLoading={isLoading} createComment={() => console.log('createComment')} />
             <MessageList />
           </div>
         </Col>
