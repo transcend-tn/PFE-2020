@@ -17,14 +17,12 @@ export const getUserById = async (payload: string): Promise<any> => {
   const { data } = await axios.get(USER_BY_ID(payload));
   return data;
 };
-export const editUserService = async (payload: any): Promise<string> => {
-  const userId = '1';
+export const editUserService = async ({ userId, payload }: any): Promise<string> => {
   const { data } = await axios.put(USERS_EDIT(userId), payload);
   return data;
 };
 
-export const changePassword = async (payload: any): Promise<string> => {
-  const UserId = '1';
-  const { data } = await axios.put(EDIT_PASSWORD(UserId), payload);
+export const changePassword = async ({ userId, payload }: any): Promise<string> => {
+  const { data } = await axios.put(EDIT_PASSWORD(userId), payload);
   return data;
 };

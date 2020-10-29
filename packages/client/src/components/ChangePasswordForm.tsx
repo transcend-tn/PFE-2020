@@ -8,10 +8,11 @@ import * as Yup from 'yup';
 export interface ChangePasswordFormInterface {
   editPassword: any;
   isLoading: boolean;
+  userId: string;
 }
 
 function ChangePasswordForm(props: ChangePasswordFormInterface) {
-  const { editPassword, isLoading } = props;
+  const { editPassword, isLoading, userId } = props;
   const formik = useFormik({
     initialValues: {
       oldPassword: '',
@@ -27,7 +28,7 @@ function ChangePasswordForm(props: ChangePasswordFormInterface) {
         .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
     }),
     onSubmit: (payload: UserChangePassword) => {
-      editPassword(payload);
+      editPassword({ userId, payload });
     },
   });
   return (

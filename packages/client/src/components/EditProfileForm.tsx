@@ -6,12 +6,13 @@ import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
 
 export interface EditProfileFormInterface {
+  userId: string;
   editUser: any;
   isLoading: boolean;
 }
 
 function EditProfileForm(props: EditProfileFormInterface) {
-  const { editUser, isLoading } = props;
+  const { editUser, isLoading, userId } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +26,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
       email: Yup.string().email('Addresse email invalide').required('Veuillez saisir votre email !'),
     }),
     onSubmit: (payload: UserEdit) => {
-      editUser(payload);
+      editUser({ userId, payload });
     },
   });
 
