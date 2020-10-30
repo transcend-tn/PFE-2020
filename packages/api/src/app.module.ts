@@ -8,6 +8,7 @@ import { FavoriteModule } from './favorite/favorite.module';
 import { CommentModule } from './comment/comment.module';
 import { CollaborationModule } from './collaboration/collaboration.module';
 import { RequestModule } from './request/request.module';
+import { VoteModule } from './vote/vote.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { RequestModule } from './request/request.module';
     CommentModule,
     CollaborationModule,
     RequestModule,
+    VoteModule,
   ],
 })
 export class AppModule {}

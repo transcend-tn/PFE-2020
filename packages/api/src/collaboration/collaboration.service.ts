@@ -48,4 +48,9 @@ export class CollaborationService {
       .findOne({ userId: currentUser.id, documentId: id })
       .exec();
   }
+
+  async teamCount(id:string)
+  {
+    return await this.collaborationModel.find({documentId:id}).count();
+  }
 }
