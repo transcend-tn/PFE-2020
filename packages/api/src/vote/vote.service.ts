@@ -22,10 +22,9 @@ export class VoteService {
     async addVote(id:string, currentUser:User)
     {   
         const docId = await new RequestService(this.requestModel).getDocId(id);
-        const voted = await this.voteModel.find({userId: currentUser.id, requestId:id});
         const isMember = await new CollaborationService(this.collaborationModel).isMember(currentUser,docId);
         
-        if(voted.length>0)
+        if(await this.voted(id, currentUser))
         {throw new UnauthorizedException("You are not allowed to voted");}
         if(isMember)
        { const newVote= new this.voteModel();
@@ -38,5 +37,10 @@ export class VoteService {
         return {totalVote:totalVote, teamMembers:teamMembers}}
         else
         throw new UnauthorizedException("You are not a member of this team");
+    }
+
+    async voted(id:string, currentUser:User) {
+        const voted = await this.voteModel.find({userId: currentUser.id, requestId:id});
+        return voted.length>0?true:false;
     }
 }
