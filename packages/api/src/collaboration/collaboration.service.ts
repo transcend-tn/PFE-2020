@@ -16,12 +16,9 @@ export class CollaborationService {
     private userRepository: UserRepository,
   ) {}
 
-  async collaborationTeam(id: string) {
-    const collaborations = await this.collaborationModel.find();
-    let ids:string[]=[]
-    collaborations.map((collaboration)=>{
-      ids.push(collaboration.userId);
-    })
+  async collaborationTeam(documentId: string) {
+    const collaborations = await this.collaborationModel.find({documentId});
+    const ids:string[]=collaborations.map((collaboration)=>collaboration.userId)
     return await this.userRepository.findByIds(ids);
 
   }
