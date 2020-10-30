@@ -13,7 +13,7 @@ export class CollaborationService {
     @InjectModel('Collaboration')
     private readonly collaborationModel: Model<Collaboration>,
     @InjectRepository(UserRepository)
-    private userRepository: UserRepository,
+    private userRepository?: UserRepository,
   ) {}
 
   async collaborationTeam(documentId: string) {
