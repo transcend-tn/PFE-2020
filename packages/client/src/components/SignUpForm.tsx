@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/esm/Form';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useStoreActions } from '../hooks/store.hooks';
 import { Button } from 'react-bootstrap';
@@ -104,9 +104,11 @@ function SignUpForm() {
         ) : null}
       </Form.Group>
       <div className="text-center mt-3">
-        <Button variant="success" type="submit">
-          Confirmer
-        </Button>
+        <Link to="/">
+          <Button variant="success" type="submit">
+            Confirmer
+          </Button>
+        </Link>
       </div>
     </form>
   );
