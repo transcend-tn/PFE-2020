@@ -32,10 +32,10 @@ function SignUpForm() {
     }),
     onSubmit: (values: UserCreate) => {
       signUp(values).then(
-        () => {
-          history.push('signin');
+        (values) => {
+          history.push('/');
         },
-        () => {
+        (error) => {
           console.log('error !!!');
         },
       );
