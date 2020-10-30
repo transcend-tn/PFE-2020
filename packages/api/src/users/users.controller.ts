@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -55,4 +56,15 @@ export class UsersController {
   signIn(@Body() authCredentialsDto: UserLogin) {
     return this.usersService.signIn(authCredentialsDto);
   }
+
+  @Delete()
+  @UseGuards(AuthGuard())
+  softRemove(@GetUser() currentUser:User)
+  {
+    return this.usersService.softDelete(currentUser.id);
+  }
+
+  @Get('restore/:id')
+  restore(@Param('id') id:string)
+  {return this.usersService.recoverUser(id)}
 }

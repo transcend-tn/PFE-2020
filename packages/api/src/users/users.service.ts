@@ -70,7 +70,6 @@ export class UsersService {
   async validateUserPassword(authCredentialsDto: UserLogin) {
     const { username, password } = authCredentialsDto;
     const user = await this.userRepository.findOne({ username });
-
     if (user && (await user.validatePassword(password))) {
       return {
         id: user.id,
@@ -126,4 +125,14 @@ export class UsersService {
       }
     } else throw new UnauthorizedException('Verify old password');
   }
+
+  async softDelete(id:string)
+{
+  return await this.userRepository.softDelete(id);
+}
+
+async recoverUser(id:string)
+{
+  return await this.userRepository.restore(id);
+}
 }
