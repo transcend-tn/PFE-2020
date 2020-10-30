@@ -4,21 +4,20 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import MemberCard from '../../../components/MemberCard';
 import { COLLABORATION_BY_ID } from '../../../constants/uris';
-
+import { collaborationTeam } from '../../../services/collaboration.service';
 
 function TeamMembersListContainer() {
-
   const [pending, setPending] = useState(false);
   const { id } = useParams<{ id: string }>();
-  const { isError, data = {}, error } = useQuery([id], COLLABORATION_BY_ID);
+  const { isError, data = [], error } = useQuery(['collaboration:team', id], collaborationTeam);
+  console.log('data: ', data);
 
   if (isError) {
     return <span>Error: {error} !</span>;
   }
 
   return (
-
-      <>
+    <>
       <Card>
         <Card.Title>
           <h5 className="d-flex justify-content-center mt-4">Team Members</h5>
@@ -35,7 +34,6 @@ function TeamMembersListContainer() {
           </div>
         </Card.Body>
       </Card>
-   
     </>
   );
 }

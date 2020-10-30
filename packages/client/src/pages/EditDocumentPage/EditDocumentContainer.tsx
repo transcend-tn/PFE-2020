@@ -21,23 +21,23 @@ const EDITOR_OPTIONS = [
   'emoji',
 ];
 
-const formik = useFormik({
-  initialValues: {
-    description: '',
-  },
-  validationSchema: Yup.object({
-    description: Yup.string(),
-  }),
-  onSubmit: () => {
-    console.log(formik.values.description);
-  },
-});
-
 const EditDocumentPage = () => {
   const [contentState, setContent] = useState('');
   const { id } = useParams<{ id: string }>();
 
   const { isLoading, isError, data = {}, error } = useQuery([id], getDocumentById);
+
+  const formik = useFormik({
+    initialValues: {
+      description: '',
+    },
+    validationSchema: Yup.object({
+      description: Yup.string(),
+    }),
+    onSubmit: () => {
+      console.log(formik.values.description);
+    },
+  });
 
   if (isError) {
     return <span>Error: {error} !</span>;
@@ -80,28 +80,28 @@ const EditDocumentPage = () => {
             </Card>
           </Tab>
           <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
-          <form onSubmit={formik.handleSubmit} className="mt-5">
-          <Form.Group controlId="description">
-          <Form.Control
-          name="description"
-          type="text"
-          placeholder="Enter votre description"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.description}
-        />
-            <Row>
-              <Col lg="6" className="mb-3">
-                <div className="card p-3">OLD VERSION TEXT HERE</div>
-              </Col>
-              <Col lg="6">
-                <div className="card p-3 min">
-                  {/* TODO: show all lines instead of only first line */}
-                  bla bla bla
-                </div>
-              </Col>
-            </Row>
-            </Form.Group>
+            <form onSubmit={formik.handleSubmit} className="mt-5">
+              <Form.Group controlId="description">
+                <Form.Control
+                  name="description"
+                  type="text"
+                  placeholder="Enter votre description"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.description}
+                />
+                <Row>
+                  <Col lg="6" className="mb-3">
+                    <div className="card p-3">OLD VERSION TEXT HERE</div>
+                  </Col>
+                  <Col lg="6">
+                    <div className="card p-3 min">
+                      {/* TODO: show all lines instead of only first line */}
+                      bla bla bla
+                    </div>
+                  </Col>
+                </Row>
+              </Form.Group>
             </form>
           </Tab>
         </Tabs>
