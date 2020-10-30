@@ -4,16 +4,23 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from '../users/user.entity';
 import { Collaboration } from './collaboration.model';
+import { UserRepository } from '../users/user.repository';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class CollaborationService {
   constructor(
     @InjectModel('Collaboration')
     private readonly collaborationModel: Model<Collaboration>,
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
   ) {}
 
-  async collaborationTeam(id: string) {
-    return await this.collaborationModel.find({documentId:id});
+  async collaborationTeam(documentId: string) {
+    const collaborations = await this.collaborationModel.find({documentId});
+    const ids:string[]=collaborations.map((collaboration)=>collaboration.userId)
+    return await this.userRepository.findByIds(ids);
+
   }
 
   async joinTeam(currentUser: User, id: string) {
