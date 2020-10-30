@@ -18,7 +18,7 @@ function Vote(props: VoteProps) {
     <Card>
       <Card.Body>
         <h4 className="text-center">Votez</h4>
-        <h5 className="mb-3">Validation</h5>
+        <h5 className="mb-3">X/Y</h5>
         <ProgressBar variant="success" now={props.yes} label={`${props.yes}%`} />
         
         <ButtonToolbar aria-label="Actions" className="mt-3 justify-content-center">
