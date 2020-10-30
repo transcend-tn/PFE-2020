@@ -104,11 +104,9 @@ function SignUpForm() {
         ) : null}
       </Form.Group>
       <div className="text-center mt-3">
-        <Link to="/">
           <Button variant="success" type="submit">
             Confirmer
           </Button>
-        </Link>
       </div>
     </form>
   );
