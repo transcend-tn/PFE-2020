@@ -3,7 +3,6 @@ import { Card, Button } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import MemberCard from '../../../components/MemberCard';
-import { COLLABORATION_BY_ID } from '../../../constants/uris';
 import { collaborationTeam } from '../../../services/collaboration.service';
 
 function TeamMembersListContainer() {

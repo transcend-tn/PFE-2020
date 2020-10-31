@@ -2,11 +2,10 @@ import React from 'react';
 import { Row, Col, Tabs, Tab } from 'react-bootstrap';
 import Favoris from '../../components/FavorisCard';
 import ProfileCardContainer from './containers/ProfileCardContainer';
-import CollaborationRequest from '../../components/CollaborationRequest';
 import DocumentsListContainer from './containers/DocumentsListContainer';
+import CollaborationRequestContainer from './containers/CollaborationRequestContainer';
 
 const FAVORIS: string[] = ['1', '2'];
-const REQUESTS: string[] = ['1', '2'];
 
 function ProfilePage() {
   return (
@@ -25,17 +24,8 @@ function ProfilePage() {
                 return <Favoris key={`favoris-${value}`} document="document 1" timeEdit="12/04/2019" id={value} />;
               })}
             </Tab>
-            <Tab eventKey="requests" title="Collaborations" className="mt-5">
-              {REQUESTS.map((value) => {
-                return (
-                  <CollaborationRequest
-                    key={`request-${value}`}
-                    username="Username 1"
-                    document="Document 1"
-                    id={value}
-                  />
-                );
-              })}
+            <Tab eventKey="requests" title="Collaborations" className="mt-5">                              
+              <CollaborationRequestContainer />              
             </Tab>
           </Tabs>
         </div>

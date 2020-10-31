@@ -12,22 +12,22 @@ export interface CollaborationRequestProps {
   username: string;
   /** document prop documentation */
   document: string;
+  img?: string;
+  accepter: any;
+  refuser: any;
+  isLoading: boolean ;
+  chargement:boolean ;
 }
 
+const IMG_DEFAULT = 'user.png';
+
 function CollaborationRequest(props: CollaborationRequestProps) {
-  const { id, username, document } = props;
+  const { id, username, document, img, accepter, refuser, isLoading, chargement } = props;
 
-  function HandlerAccepter() {
-    console.log(`${username} " a été ajouté au "${document}" en tant que collaborateur"`);
-  }
-
-  function HandlerRefuse() {
-    console.log(`la demande de "${username}" a été refusée"`);
-  }
   return (
     <Card className="mb-2">
       <Media className="p-2 align-items-stretch">
-        <Image src="https://picsum.photos/200" roundedCircle width={50} height={50} className="mr-2" />
+      <Image src={props.img ? props.img : IMG_DEFAULT} roundedCircle width={50} height={50} className="mr-2" />
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
             <Link to={`profile/${username}`} style={{ color: '#000000' }}>
@@ -38,10 +38,10 @@ function CollaborationRequest(props: CollaborationRequestProps) {
             </Link>
           </div>
           <ButtonGroup size="sm" aria-label="refuse">
-            <Button variant="success" type="submit" onClick={HandlerAccepter} className="mr-2">
+            <Button variant="success" type="submit" onClick={accepter} className="mr-2" disabled={isLoading}>
               Accepter
             </Button>
-            <Button variant="danger" type="submit" onClick={HandlerRefuse}>
+            <Button variant="danger" type="submit" onClick={refuser} disabled={chargement}>
               Refuser
             </Button>
           </ButtonGroup>
