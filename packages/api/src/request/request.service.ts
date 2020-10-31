@@ -13,7 +13,7 @@ export class RequestService {
   constructor(
     @InjectModel('Request') private readonly requestModel: Model<Request>,
     @InjectModel('Collaboration')
-    private readonly collaborationModel: Model<Collaboration>,
+    private readonly collaborationModel?: Model<Collaboration>,
   ) {}
 
   async createRequest(currentUser: User, id: string, newRequest: RequestCreate) {
