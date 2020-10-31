@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../users/get-user.decorator';
 import { User } from '../users/user.entity';
 import { RequestService } from './request.service';
+import { RequestCreate } from '@tr/common';
 
 @Controller('request')
 @UseGuards(AuthGuard())
@@ -13,9 +14,9 @@ export class RequestController {
   createRequest(
     @GetUser() currentUser: User,
     @Param('id') id: string,
-    @Body('body') body: string,
+    @Body() newRequest: RequestCreate,
   ) {
-    return this.requestService.createRequest(currentUser, id, body);
+    return this.requestService.createRequest(currentUser, id, newRequest);
   }
 
   @Get(':id')
