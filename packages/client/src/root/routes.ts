@@ -7,7 +7,7 @@ import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 import ForgetPassword from '../pages/ForgetPasswordPage';
 import NewDocumentPage from '../pages/NewDocumentPage/NewDocumentPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
-import PropositionDetailsPage from '../pages/PropositionDetailsPage';
+import PropositionDetailsPage from '../pages/PropositionDetailsPage/PropositionDetailsPage';
 
 export interface Route {
   path: string;
