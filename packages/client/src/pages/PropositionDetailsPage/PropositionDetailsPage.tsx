@@ -1,18 +1,24 @@
 import React from 'react';
-import { Col, Row, Tabs, Tab } from 'react-bootstrap';
-import Card from 'react-bootstrap/esm/Card';
-import MessageForm from '../components/MessageForm';
-import MessageList from '../components/MessageList';
-import Vote from '../components/Vote';
-
-const pr = {
-  title: 'document-01',
-  createdAt: '01/10/2020',
-  body:
-    'Id duis reprehenderit nostrud sint ea nostrud fugiat aliqua exercitation nostrud nostrud ad do mollit. Dolor reprehenderit culpa pariatur duis aute duis ut dolore. Minim officia do Lorem sunt sit nulla Lorem. Ut non velit irure nisi sit Lorem cillum nisi laboris labore qui est minim ad. Amet do officia officia amet voluptate ex voluptate cupidatat reprehenderit ullamco ad cillum consectetur. Consequat deserunt id eu adipisicing irure dolore deserunt eu duis tempor ut adipisicing. Aliquip et est quis ut consectetur qui Lorem ullamco aliqua id enim cillum.',
-};
+import { Col, Row, Tabs, Tab, Form, Card } from 'react-bootstrap';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import Vote from '../../components/Vote';
+import { getRequestById } from '../../services/request.service';
+import MessageFormContainer from '../DocumentPage/containers/MessageFormContainer';
+import MessageListContainer from '../DocumentPage/containers/MessageListContainer';
 
 function PropositionDetailsPage() {
+  const { id } = useParams<{ id: string }>();
+
+  const { isLoading, isError, data = {}, error } = useQuery([id], getRequestById);
+
+  if (isError) {
+    return <span>Error: {error} !</span>;
+  }
+
+  if (isLoading) {
+    return <span>Chargement ...</span>;
+  }
   return (
     <>
       <Row>
@@ -22,9 +28,9 @@ function PropositionDetailsPage() {
               <Tab eventKey="Proposition" title="Proposition de Modification" className="mt-5">
                 <Card>
                   <Card.Body>
-                    <Card.Title>{pr.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted"> {pr.createdAt}</Card.Subtitle>
-                    <Card.Text>{pr.body}</Card.Text>
+                    <Card.Title>{data.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted"> {data.createdAt}</Card.Subtitle>
+                    <Card.Text>{data.body}</Card.Text>
                   </Card.Body>
                 </Card>
               </Tab>
@@ -61,8 +67,8 @@ function PropositionDetailsPage() {
             </Tabs>
           </div>
           <div className="bg-color-secondary card p-3 mt-5">
-            <MessageForm />
-            <MessageList />
+            <MessageFormContainer />
+            <MessageListContainer />
           </div>
         </Col>
 
