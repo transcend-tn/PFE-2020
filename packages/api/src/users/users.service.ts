@@ -129,7 +129,6 @@ export class UsersService {
   async softDelete(id:string)
 {
   await this.userRepository.softDelete(id);
-  return {recoveryLink: `http://localhost:3000/users/restore/${id}`}
 }
 
 async recoverUser(id:string)
