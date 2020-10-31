@@ -46,12 +46,12 @@ export class CollaborationService {
 
   async isMember(currentUser: User, id: string) {
     return await this.collaborationModel
-      .findOne({ userId: currentUser.id, documentId: id })
+      .findOne({ userId: currentUser.id, documentId: id, state:true })
       .exec();
   }
 
   async teamCount(id:string)
   {
-    return await this.collaborationModel.find({documentId:id}).count();
+    return await this.collaborationModel.find({documentId:id , state:true}).count();
   }
 }
