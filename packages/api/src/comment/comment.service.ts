@@ -12,7 +12,7 @@ export class CommentService {
         @InjectModel('Comment') private readonly commentModel: Model<Comment>,
       ) {}
 
-      async addComment(comment:CommentCreate, currentUser:User, id:string)
+      async documentComment(comment:CommentCreate, currentUser:User, id:string)
       {
           const newComment = new this.commentModel(comment);
 
@@ -29,7 +29,28 @@ export class CommentService {
           
       }
 
-      async getCommentById(id: string) {
+      async getCommentByDocId(id: string) {
         return await this.commentModel.find({documentId: id})
+      }
+
+      async getCommentByReqId(id: string) {
+        return await this.commentModel.find({requestId: id})
+      }
+
+      async requestComment(comment:CommentCreate, currentUser:User, id:string)
+      {
+          const newComment = new this.commentModel(comment);
+
+          newComment.userId = currentUser.id;
+          newComment.body = comment.body;
+          newComment.requestId = id;
+          const response=  await newComment.save();
+          return {
+            id : response._id, 
+            userId: response.userId, 
+            requestId: response.requestId, 
+            body: response.body, 
+            createdAt: response.createdAt}
+          
       }
 }
