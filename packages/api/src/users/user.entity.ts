@@ -5,6 +5,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Favorite } from '../favorite/favorite.entity';
@@ -35,6 +38,15 @@ export class User extends BaseEntity {
 
   @Column()
   img: string;
+
+  @CreateDateColumn({type: "timestamp"})
+  createdAt: Date;
+
+  @UpdateDateColumn({type: "timestamp"})
+  updatedAt: Date;
+
+  @DeleteDateColumn({type: "timestamp"})
+  deletedAt: Date;
 
   @OneToMany(type=>Favorite, favorite=>favorite.user, {eager :true})
   favorites: Favorite[];
