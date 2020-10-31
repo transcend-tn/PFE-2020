@@ -23,7 +23,7 @@ function PropositionList() {
   return (
     <>
       {DATA.map((msg: any, idx: number) => {
-        return <PropositionCard title={msg.title} username={msg.username} time={msg.time} key={`proposition-${idx}`} />;
+        return <PropositionCard id={`id`} title={msg.title} username={msg.username} time={msg.time} key={`proposition-${idx}`} />;
       })}
     </>
   );
