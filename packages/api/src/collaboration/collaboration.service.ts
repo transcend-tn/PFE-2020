@@ -27,6 +27,7 @@ export class CollaborationService {
     const collaboration = new this.collaborationModel();
     collaboration.userId = currentUser.id;
     collaboration.documentId = id;
+    collaboration.state = false;
     if (await this.isMember(currentUser, id)) {
       throw new ConflictException('You are already a member of this team');
     } else {
