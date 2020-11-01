@@ -8,6 +8,8 @@ import { User } from '../users/user.entity';
 import { Document } from './document.model';
 import { Collaboration } from '../collaboration/collaboration.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserRepository } from '../users/user.repository';
 
 @Injectable()
 export class DocumentService {
@@ -15,6 +17,8 @@ export class DocumentService {
     @InjectModel('Document') private readonly documentModel: Model<Document>,
     @InjectModel('Collaboration')
     private readonly collaborationModel: Model<Collaboration>,
+    @InjectRepository(UserRepository)
+    private userRepository?: UserRepository,
   ) {}
 
   async createDocument(user: User, doc: DocumentCreate) {
@@ -59,6 +63,18 @@ export class DocumentService {
       owner: doc.owner,
     }));
   }
+
+  async getCollaborationRequests(owner: string) 
+  { 
+    const docs = await this.getDocumentByOwner(owner); 
+    const ids:string[]=docs.map((doc)=>doc.id); 
+    
+    const requests= Promise.all(ids.map(async (id)=> await new CollaborationService(this.collaborationModel,this.userRepository).collaborationRequests(id)));
+    console.log(requests)
+    return requests;
+
+     
+  } 
 
   async updateDocument(user: User, id: string, update: DocumentCreate) {
     const doc = await this.getDocumentById(id);
