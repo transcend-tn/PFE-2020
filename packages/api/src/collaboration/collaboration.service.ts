@@ -65,10 +65,19 @@ export class CollaborationService {
     return await this.collaborationModel.find({documentId:id , state:true}).count();
   }
 
-  async approve(userId:string, docId:string)
+  async enable(userId:string, docId:string)
   {
     const user = await this.collaborationModel.findOne({documentId:docId , userId:userId})
     user.state = true;
-    return await user.save();
+    await user.save();
+    return user;
+  }
+
+  async disable(userId:string, docId:string)
+  {
+    const user = await this.collaborationModel.findOne({documentId:docId , userId:userId})
+    user.state = false;
+    await user.save();
+    return user;
   }
 }
