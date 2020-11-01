@@ -22,7 +22,7 @@ export const editUserService = async (payload: any): Promise<string> => {
   return data;
 };
 
-export const changePassword = async (payload: any): Promise<string> => {
+export const changePasswordService = async (payload: any): Promise<string> => {
   const { data } = await axios.put(EDIT_PASSWORD, payload);
   return data;
 };

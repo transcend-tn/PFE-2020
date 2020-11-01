@@ -8,11 +8,10 @@ import * as Yup from 'yup';
 export interface ChangePasswordFormInterface {
   editPassword: any;
   isLoading: boolean;
-  userId: string;
 }
 
 function ChangePasswordForm(props: ChangePasswordFormInterface) {
-  const { editPassword, isLoading, userId } = props;
+  const { editPassword, isLoading} = props;
   const formik = useFormik({
     initialValues: {
       oldPassword: '',
@@ -20,15 +19,15 @@ function ChangePasswordForm(props: ChangePasswordFormInterface) {
       confirmPassword: '',
     },
     validationSchema: Yup.object({
-      oldPassword: Yup.string().required('Old Password is required'),
+      oldPassword: Yup.string().required('Veuillez saisir votre Mot de passe actuel'),
 
-      newPassword: Yup.string().required('New Password is required'),
+      newPassword: Yup.string().required('Veuillez saisir votre nouveau mot de passe'),
       confirmPassword: Yup.string()
-        .required('Confirm password is required')
-        .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
+        .required('Confirmer le mot de passe')
+        .oneOf([Yup.ref('newPassword')], 'Le mot de passe doit correspondre'),
     }),
     onSubmit: (payload: UserChangePassword) => {
-      editPassword({ userId, payload });
+      editPassword(payload);
     },
   });
   return (
