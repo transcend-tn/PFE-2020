@@ -6,7 +6,9 @@ import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
 import { Editor } from 'react-draft-wysiwyg';
 import { MutateFunction } from 'react-query';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
+import { DOCUMENT_BY_ID } from '../constants/uris';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -23,10 +25,11 @@ const EDITOR_OPTIONS = [
 export interface NewDocumentInterface {
   isLoading: boolean;
   createDocument: MutateFunction<string, unknown, any, unknown>;
+  docId: string;
 }
 
 const NewDocument = (props: NewDocumentInterface) => {
-  const { isLoading, createDocument } = props;
+  const { isLoading, createDocument, docId } = props;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const formik = useFormik({
@@ -64,10 +67,12 @@ const NewDocument = (props: NewDocumentInterface) => {
       </Form.Group>
       <Card>
         <div className="m-4">
-          <Button variant="primary" type="submit" disabled={isLoading}>
-            {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
-            {isLoading ? 'Chargement...' : 'Enregistrer'}
-          </Button>
+          <Link to={DOCUMENT_BY_ID(docId)}>
+            <Button variant="primary" type="submit" disabled={isLoading}>
+              {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+              {isLoading ? 'Chargement...' : 'Enregistrer'}
+            </Button>
+          </Link>
         </div>
         <Editor
           editorState={editorState}
