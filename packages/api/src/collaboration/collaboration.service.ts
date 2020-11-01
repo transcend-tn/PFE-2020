@@ -25,8 +25,10 @@ export class CollaborationService {
 
   async collaborationRequests(documentId: string) {
     const collaborations = await this.collaborationModel.find({documentId, state:false});
+/*     const result= { [documentId]: collaborations.map(async (c)=>await this.userRepository.findOne(c.userId)) }
+    return result */
     const ids:string[]=collaborations.map((collaboration)=>collaboration.userId)
-    return await this.userRepository.findByIds(ids);
+    return {[documentId]: await this.userRepository.findByIds(ids)}
 
   }
 
@@ -61,5 +63,12 @@ export class CollaborationService {
   async teamCount(id:string)
   {
     return await this.collaborationModel.find({documentId:id , state:true}).count();
+  }
+
+  async approve(userId:string, docId:string)
+  {
+    const user = await this.collaborationModel.findOne({documentId:docId , userId:userId})
+    user.state = true;
+    return await user.save();
   }
 }

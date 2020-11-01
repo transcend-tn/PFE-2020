@@ -70,7 +70,6 @@ export class DocumentService {
     const ids:string[]=docs.map((doc)=>doc.id); 
     
     const requests= Promise.all(ids.map(async (id)=> await new CollaborationService(this.collaborationModel,this.userRepository).collaborationRequests(id)));
-    console.log(requests)
     return requests;  
   } 
 
