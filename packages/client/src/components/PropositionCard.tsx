@@ -13,19 +13,19 @@ export interface PropositionCardProps {
 
 function PropositionCard(props: PropositionCardProps) {
   const { id, title, username, time } = props;
-  
+
   return (
     <div style={{ maxWidth: 500 }}>
       <Media className="border mb-2 max-width-300">
         <Media.Body className="p-2">
           <Link to={REQUEST_BY_ID(id)} style={{ color: '#000000' }}>
-            <span> {props.title} </span>
+            <span> {title} </span>
           </Link>
           <div className="d-flex flex-row font-weight-light">
-            <span className="mr-2"> {props.username} </span>
+            <span className="mr-2"> {username} </span>
             <span className="text-secondary">
               <BsClock size={12} color="#9E9E93" className="mr-1" />
-              {props.time}
+              {time}
             </span>
           </div>
         </Media.Body>

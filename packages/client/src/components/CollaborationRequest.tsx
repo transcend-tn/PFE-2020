@@ -15,8 +15,8 @@ export interface CollaborationRequestProps {
   img?: string;
   onJoin: any;
   onLeave: any;
-  isJoinLoading: boolean ;
-  isLeaveLoading:boolean ;
+  isJoinLoading: boolean;
+  isLeaveLoading: boolean;
 }
 
 const IMG_DEFAULT = 'user.png';
@@ -27,7 +27,7 @@ function CollaborationRequest(props: CollaborationRequestProps) {
   return (
     <Card className="mb-2">
       <Media className="p-2 align-items-stretch">
-      <Image src={props.img ? props.img : IMG_DEFAULT} roundedCircle width={50} height={50} className="mr-2" />
+        <Image src={img ? img : IMG_DEFAULT} roundedCircle width={50} height={50} className="mr-2" />
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
             <Link to={`profile/${username}`} style={{ color: '#000000' }}>

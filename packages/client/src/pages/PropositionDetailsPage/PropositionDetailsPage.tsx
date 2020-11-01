@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row, Tabs, Tab, Form, Card } from 'react-bootstrap';
+import { Card, Col, Row, Tab, Tabs } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import Vote from '../../components/Vote';
