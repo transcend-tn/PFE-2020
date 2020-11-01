@@ -80,4 +80,14 @@ export class CollaborationService {
     await user.save();
     return user;
   }
+
+  async remove(userId:string, docId:string)
+  {
+    const del = await this.collaborationModel
+    .deleteOne({ userId: userId, documentId: docId })
+    .exec();
+  if (del.n === 0) {
+    throw new NotFoundException();
+  }
+  }
 }
