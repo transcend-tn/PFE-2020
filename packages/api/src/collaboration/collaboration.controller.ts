@@ -17,8 +17,8 @@ export class CollaborationController {
 
   @Post(':id')
   @UseGuards(AuthGuard())
-  joinTeam(@GetUser() currentUser: User, @Param('id') id: string) {
-    return this.collaborationService.joinTeam(currentUser, id);
+  joinTeam(@GetUser() currentUser: User, @Param('id') id: string, isOwner:boolean=false) {
+    return this.collaborationService.joinTeam(currentUser, id, isOwner);
   }
 
   @Get(':id')

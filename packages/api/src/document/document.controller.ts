@@ -25,8 +25,7 @@ export class DocumentController {
     @GetUser() user: User,
     @Body() document: DocumentCreate,
   ) {
-    const doc = await this.documentService.createDocument(user, document);
-    return null;
+     return await this.documentService.createDocument(user, document);
   }
 
   @Get()
