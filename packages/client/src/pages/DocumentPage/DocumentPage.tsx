@@ -32,6 +32,10 @@ function DocumentPage() {
               <Tab eventKey="Document" title="Document" className="mt-5">
                 <DocumentHeader title={data.title} createdAt={data.createdAt} docId={id} />
                 <p className="mt-5">{data.body}</p>
+                <div className="bg-color-secondary card p-3 mt-5">
+                  <MessageFormContainer />
+                  <MessageListContainer />
+                </div>
               </Tab>
               <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
                 <PropositionList />
@@ -40,10 +44,6 @@ function DocumentPage() {
                 <HistoryList />
               </Tab>
             </Tabs>
-          </div>
-          <div className="bg-color-secondary card p-3 mt-5">
-            <MessageFormContainer />
-            <MessageListContainer />
           </div>
         </Col>
 
