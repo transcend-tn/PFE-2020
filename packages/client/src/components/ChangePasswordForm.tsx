@@ -1,6 +1,7 @@
 import { UserChangePassword } from '@tr/common';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { Toast } from 'react-bootstrap';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
@@ -12,6 +13,7 @@ export interface ChangePasswordFormInterface {
 }
 
 function ChangePasswordForm(props: ChangePasswordFormInterface) {
+  const [show, setShow] = useState(false);
   const { editPassword, isLoading, userId } = props;
   const formik = useFormik({
     initialValues: {
@@ -78,7 +80,14 @@ function ChangePasswordForm(props: ChangePasswordFormInterface) {
         ) : null}
       </Form.Group>
 
-      <Button variant="primary" type="submit" disabled={isLoading}>
+      <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide style={{position: 'absolute', top: 0, right: 0,}}>
+        <Toast.Header>
+          <strong className="mr-auto">Succès</strong>
+        </Toast.Header>
+        <Toast.Body>Votre mot de passe a été modifié</Toast.Body>
+      </Toast>
+      
+      <Button variant="primary" type="submit" disabled={isLoading} onClick={() => setShow(true)}>
         Enregistrer les modifications
       </Button>
     </form>

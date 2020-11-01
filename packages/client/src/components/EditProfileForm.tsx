@@ -1,6 +1,7 @@
 import { UserEdit } from '@tr/common';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { Toast } from 'react-bootstrap';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
@@ -11,8 +12,8 @@ export interface EditProfileFormInterface {
 }
 
 function EditProfileForm(props: EditProfileFormInterface) {
+  const [show, setShow] = useState(false);
   const { editUser, isLoading } = props;
-
   const formik = useFormik({
     initialValues: {
       fname: '',
@@ -20,8 +21,8 @@ function EditProfileForm(props: EditProfileFormInterface) {
       email: '',
     },
     validationSchema: Yup.object({
-      fname: Yup.string().required('Veuillez saisir votre prénom !'),
-      lname: Yup.string().required('Veuillez saisir votre nom !'),
+      fname: Yup.string().required('Veuillez saisir votre nom !'),
+      lname: Yup.string().required('Veuillez saisir votre prénom !'),
       email: Yup.string().email('Addresse email invalide').required('Veuillez saisir votre email !'),
     }),
     onSubmit: (payload: UserEdit) => {
@@ -36,7 +37,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
         <Form.Control
           name="fname"
           type="text"
-          placeholder="Veuillez entrer votre prénom"
+          placeholder="Veuillez entrer votre nom de famille"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.fname}
@@ -50,7 +51,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
         <Form.Control
           name="lname"
           type="text"
-          placeholder="Veuillez entrer votre nom de famille"
+          placeholder="Veuillez entrer votre prénom"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.lname}
@@ -64,7 +65,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
         <Form.Control
           name="email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Enter votre email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
@@ -73,9 +74,17 @@ function EditProfileForm(props: EditProfileFormInterface) {
           <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
         ) : null}
       </Form.Group>
-      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading}>
+      
+      <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide style={{position: 'absolute', top: 0, right: 0,}}>
+        <Toast.Header>
+          <strong className="mr-auto">Succès</strong>
+        </Toast.Header>
+        <Toast.Body>Les modifications ont été enregistrées</Toast.Body>
+      </Toast>
+
+      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading} onClick={() => setShow(true)}>
         Enregistrer les modifications
-      </Button>
+      </Button>    
     </form>
   );
 }
