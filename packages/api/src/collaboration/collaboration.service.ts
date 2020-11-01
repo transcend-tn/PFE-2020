@@ -23,11 +23,11 @@ export class CollaborationService {
 
   }
 
-  async joinTeam(currentUser: User, id: string) {
+  async joinTeam(currentUser: User, id: string, isOwner:boolean) {
     const collaboration = new this.collaborationModel();
     collaboration.userId = currentUser.id;
     collaboration.documentId = id;
-    collaboration.state = false;
+    collaboration.state = isOwner;
     if (await this.isMember(currentUser, id)) {
       throw new ConflictException('You are already a member of this team');
     } else {

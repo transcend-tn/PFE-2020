@@ -5,18 +5,24 @@ import { InjectModel } from '@nestjs/mongoose';
 import { DocumentCreate } from '@tr/common';
 import { Model } from 'mongoose';
 import { User } from '../users/user.entity';
-import { Document } from './docuemnt.model';
+import { Document } from './document.model';
+import { Collaboration } from '../collaboration/collaboration.model';
+import { CollaborationService } from '../collaboration/collaboration.service';
 
 @Injectable()
 export class DocumentService {
   constructor(
     @InjectModel('Document') private readonly documentModel: Model<Document>,
+    @InjectModel('Collaboration')
+    private readonly collaborationModel: Model<Collaboration>,
   ) {}
 
   async createDocument(user: User, doc: DocumentCreate) {
     const newDocument = new this.documentModel(doc);
     newDocument.owner = user.id;
-    return await newDocument.save();
+    await new CollaborationService(this.collaborationModel).joinTeam(user,newDocument._id,true);
+    await newDocument.save();
+    return {document:newDocument}
   }
 
   async getDocument() {
