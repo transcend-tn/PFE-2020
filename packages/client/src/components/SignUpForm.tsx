@@ -14,10 +14,10 @@ function SignUpForm() {
 
   const formik = useFormik({
     initialValues: {
-      username: 'johndoe',
-      email: 'johndoee@localhost.com',
-      password: 'mm',
-      confirmPassword: 'mm',
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     validationSchema: Yup.object({
       username: Yup.string()
