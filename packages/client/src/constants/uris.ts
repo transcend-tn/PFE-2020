@@ -20,6 +20,7 @@ export const COMMENT_MESSAGE_ADD = (docId: string) => `/comment/${docId}`;
 export const COMMENT_BY_DOC_ID = (id: string) => `/comment/document/${id}`;
 
 export const COLLABORATION_BY_ID= (id: string) => `/collaboration/${id}`;
+export const JOIN_TEAM = (docId: string) => `/collaboration/${docId}`;
 
 export const REQUEST = '/request';
 export const REQUEST_BY_ID = (id: string) => `/request/${id}`;
