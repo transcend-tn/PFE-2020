@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -31,5 +32,17 @@ export class CollaborationController {
   @UseGuards(AuthGuard())
   leaveTeam(@GetUser() currentUser: User, @Param('id') id: string) {
     return this.collaborationService.leaveTeam(currentUser, id);
+  }
+
+  @Put('enable/:idc/:idu')
+  enable(@Param('idc') idc:string, @Param('idu') idu:string)
+  {
+    return this.collaborationService.enable(idu,idc);
+  }
+
+  @Put('disable/:idc/:idu')
+  disable(@Param('idc') idc:string, @Param('idu') idu:string)
+  {
+    return this.collaborationService.disable(idu,idc);
   }
 }
