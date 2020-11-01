@@ -39,6 +39,11 @@ export class DocumentController {
     return await this.documentService.getCollaborationRequests(currentUser.id);
   }
 
+  @Get('followers')
+  async getFollowers(@GetUser() currentUser: User,) {
+    return await this.documentService.getFollowers(currentUser.id);
+  }
+
   @Get(':id')
   async getDocumentById(@Param('id') id: string) {
     const doc = await this.documentService.getDocumentById(id);

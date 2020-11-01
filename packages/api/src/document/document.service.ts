@@ -71,10 +71,19 @@ export class DocumentService {
     
     const requests= Promise.all(ids.map(async (id)=> await new CollaborationService(this.collaborationModel,this.userRepository).collaborationRequests(id)));
     console.log(requests)
-    return requests;
+    return requests;  
+  } 
+
+  async getFollowers(owner: string) 
+  { 
+    const docs = await this.getDocumentByOwner(owner); 
+    const ids:string[]=docs.map((doc)=>doc.id); 
+    
+    const followers= Promise.all(ids.map(async (id)=> + await new CollaborationService(this.collaborationModel,this.userRepository).teamCount(id)-1));
+    return ((await followers).reduce((a, b) => a + b, 0))
 
      
-  } 
+  }  
 
   async updateDocument(user: User, id: string, update: DocumentCreate) {
     const doc = await this.getDocumentById(id);
