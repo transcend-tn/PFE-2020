@@ -1,6 +1,7 @@
 import withCenter from '../components/layouts/withCenter';
 import withMain from '../components/layouts/withMain';
 import Welcome from '../components/Welcome';
+import PageIntrouvable from '../pages/PageIntrouvablePage';
 import DocumentPage from '../pages/DocumentPage/DocumentPage';
 import EditDocumentPage from '../pages/EditDocumentPage/EditDocumentContainer';
 import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
@@ -46,6 +47,10 @@ const routes: Route[] = [
   {
     path: '/document/:idc/proposition/:idp',
     Component: withMain(PropositionDetailsPage),
+  },
+  {
+    path: '*',
+    Component: withMain(PageIntrouvable),
   },
 ];
 
