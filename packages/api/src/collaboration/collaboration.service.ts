@@ -17,7 +17,7 @@ export class CollaborationService {
   ) {}
 
   async collaborationTeam(documentId: string) {
-    const collaborations = await this.collaborationModel.find({documentId});
+    const collaborations = await this.collaborationModel.find({documentId, state:true});
     const ids:string[]=collaborations.map((collaboration)=>collaboration.userId)
     return await this.userRepository.findByIds(ids);
 
