@@ -45,4 +45,10 @@ export class CollaborationController {
   {
     return this.collaborationService.disable(idu,idc);
   }
+
+  @Delete('remove/:idc/:idu')
+  remove(@Param('idc') idc:string, @Param('idu') idu:string)
+  {
+    return this.collaborationService.remove(idu,idc);
+  }
 }
