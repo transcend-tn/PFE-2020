@@ -112,4 +112,10 @@ export class DocumentService {
       throw new NotFoundException();
     }
   }
+
+  async isOwner(currentUser:User, docId:string)
+  {
+    const isOwner = await this.documentModel.findOne({_id:docId, owner:currentUser.id})?true:false;
+    return isOwner;
+  }
 }

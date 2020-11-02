@@ -71,4 +71,9 @@ export class DocumentController {
     await this.documentService.deleteDocument(user, id);
     return null;
   }
+
+  @Get('/isowner/:id')
+  async isOwner(@GetUser() currentUser:User, @Param('id') id: string) {
+    return await this.documentService.isOwner(currentUser, id);
+  }
 }
