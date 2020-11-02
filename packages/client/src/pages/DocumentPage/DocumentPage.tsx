@@ -15,6 +15,7 @@ function DocumentPage() {
 
   const { isLoading, isError, data = {}, error } = useQuery([id], getDocumentById);
 
+
   if (isError) {
     return <span>Error: {error} !</span>;
   }
