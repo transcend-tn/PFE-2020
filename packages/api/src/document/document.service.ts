@@ -5,18 +5,28 @@ import { InjectModel } from '@nestjs/mongoose';
 import { DocumentCreate } from '@tr/common';
 import { Model } from 'mongoose';
 import { User } from '../users/user.entity';
-import { Document } from './docuemnt.model';
+import { Document } from './document.model';
+import { Collaboration } from '../collaboration/collaboration.model';
+import { CollaborationService } from '../collaboration/collaboration.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserRepository } from '../users/user.repository';
 
 @Injectable()
 export class DocumentService {
   constructor(
     @InjectModel('Document') private readonly documentModel: Model<Document>,
+    @InjectModel('Collaboration')
+    private readonly collaborationModel: Model<Collaboration>,
+    @InjectRepository(UserRepository)
+    private userRepository?: UserRepository,
   ) {}
 
   async createDocument(user: User, doc: DocumentCreate) {
     const newDocument = new this.documentModel(doc);
     newDocument.owner = user.id;
-    return await newDocument.save();
+    await new CollaborationService(this.collaborationModel).joinTeam(user,newDocument._id,true);
+    await newDocument.save();
+    return {document:newDocument}
   }
 
   async getDocument() {
@@ -54,6 +64,26 @@ export class DocumentService {
     }));
   }
 
+  async getCollaborationRequests(owner: string) 
+  { 
+    const docs = await this.getDocumentByOwner(owner); 
+    const ids:string[]=docs.map((doc)=>doc.id); 
+    
+    const requests= Promise.all(ids.map(async (id)=> await new CollaborationService(this.collaborationModel,this.userRepository).collaborationRequests(id)));
+    return requests;  
+  } 
+
+  async getFollowers(owner: string) 
+  { 
+    const docs = await this.getDocumentByOwner(owner); 
+    const ids:string[]=docs.map((doc)=>doc.id); 
+    
+    const followers= Promise.all(ids.map(async (id)=> + await new CollaborationService(this.collaborationModel,this.userRepository).teamCount(id)-1));
+    return ((await followers).reduce((a, b) => a + b, 0))
+
+     
+  }  
+
   async updateDocument(user: User, id: string, update: DocumentCreate) {
     const doc = await this.getDocumentById(id);
     if (doc.owner != user.id) {
@@ -81,5 +111,11 @@ export class DocumentService {
     if (del.n === 0) {
       throw new NotFoundException();
     }
+  }
+
+  async isOwner(currentUser:User, docId:string)
+  {
+    const isOwner = await this.documentModel.findOne({_id:docId, owner:currentUser.id})?true:false;
+    return isOwner;
   }
 }

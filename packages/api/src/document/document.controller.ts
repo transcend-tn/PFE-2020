@@ -25,14 +25,23 @@ export class DocumentController {
     @GetUser() user: User,
     @Body() document: DocumentCreate,
   ) {
-    const doc = await this.documentService.createDocument(user, document);
-    return null;
+     return await this.documentService.createDocument(user, document);
   }
 
   @Get()
   async getDocument() {
     const doc = await this.documentService.getDocument();
     return doc;
+  }
+
+  @Get('collaboration-requests')
+  async getCollaborationRequests(@GetUser() currentUser: User,) {
+    return await this.documentService.getCollaborationRequests(currentUser.id);
+  }
+
+  @Get('followers')
+  async getFollowers(@GetUser() currentUser: User,) {
+    return await this.documentService.getFollowers(currentUser.id);
   }
 
   @Get(':id')
@@ -61,5 +70,10 @@ export class DocumentController {
   async deleteDocument(@GetUser() user: User, @Param('id') id: string) {
     await this.documentService.deleteDocument(user, id);
     return null;
+  }
+
+  @Get('/isowner/:id')
+  async isOwner(@GetUser() currentUser:User, @Param('id') id: string) {
+    return await this.documentService.isOwner(currentUser, id);
   }
 }

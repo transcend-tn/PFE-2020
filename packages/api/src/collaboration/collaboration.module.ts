@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CollaborationSchema } from './collaboration.model';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserRepository } from '../users/user.repository';
+import { DocumentSchema } from '../document/document.model';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UserRepository } from '../users/user.repository';
     MongooseModule.forFeature([
       { name: 'Collaboration', schema: CollaborationSchema },
     ]),
+    MongooseModule.forFeature([{ name: 'Document', schema: DocumentSchema }]),
   ],
   controllers: [CollaborationController],
   providers: [CollaborationService],
