@@ -13,42 +13,40 @@ import { User } from '../users/user.entity';
 import { CollaborationService } from './collaboration.service';
 
 @Controller('collaboration')
+@UseGuards(AuthGuard())
 export class CollaborationController {
   constructor(private collaborationService: CollaborationService) {}
 
   @Post(':id')
-  @UseGuards(AuthGuard())
   joinTeam(@GetUser() currentUser: User, @Param('id') id: string, isOwner:boolean=false) {
     return this.collaborationService.joinTeam(currentUser, id, isOwner);
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard())
   collaborationTeam(@Param('id') id: string) {
     return this.collaborationService.collaborationTeam(id);
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard())
   leaveTeam(@GetUser() currentUser: User, @Param('id') id: string) {
     return this.collaborationService.leaveTeam(currentUser, id);
   }
 
   @Put('enable/:idc/:idu')
-  enable(@Param('idc') idc:string, @Param('idu') idu:string)
+  enable(@GetUser() currentUser: User, @Param('idc') idc:string, @Param('idu') idu:string)
   {
-    return this.collaborationService.enable(idu,idc);
+    return this.collaborationService.enable(currentUser, idu, idc);
   }
 
   @Put('disable/:idc/:idu')
-  disable(@Param('idc') idc:string, @Param('idu') idu:string)
+  disable(@GetUser() currentUser: User, @Param('idc') idc:string, @Param('idu') idu:string)
   {
-    return this.collaborationService.disable(idu,idc);
+    return this.collaborationService.disable(currentUser, idu, idc);
   }
 
   @Delete('remove/:idc/:idu')
-  remove(@Param('idc') idc:string, @Param('idu') idu:string)
+  remove(@GetUser() currentUser: User, @Param('idc') idc:string, @Param('idu') idu:string)
   {
-    return this.collaborationService.remove(idu,idc);
+    return this.collaborationService.remove(currentUser, idu, idc);
   }
 }
