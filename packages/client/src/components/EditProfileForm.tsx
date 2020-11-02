@@ -12,7 +12,6 @@ export interface EditProfileFormInterface {
 
 function EditProfileForm(props: EditProfileFormInterface) {
   const { editUser, isLoading } = props;
-
   const formik = useFormik({
     initialValues: {
       fname: '',
@@ -20,8 +19,8 @@ function EditProfileForm(props: EditProfileFormInterface) {
       email: '',
     },
     validationSchema: Yup.object({
-      fname: Yup.string().required('Veuillez saisir votre prénom !'),
-      lname: Yup.string().required('Veuillez saisir votre nom !'),
+      fname: Yup.string().required('Veuillez saisir votre nom !'),
+      lname: Yup.string().required('Veuillez saisir votre prénom !'),
       email: Yup.string().email('Addresse email invalide').required('Veuillez saisir votre email !'),
     }),
     onSubmit: (payload: UserEdit) => {
@@ -36,7 +35,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
         <Form.Control
           name="fname"
           type="text"
-          placeholder="Veuillez entrer votre prénom"
+          placeholder="Veuillez entrer votre nom de famille"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.fname}
@@ -50,7 +49,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
         <Form.Control
           name="lname"
           type="text"
-          placeholder="Veuillez entrer votre nom de famille"
+          placeholder="Veuillez entrer votre prénom"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.lname}
@@ -64,7 +63,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
         <Form.Control
           name="email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Enter votre email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
@@ -73,9 +72,10 @@ function EditProfileForm(props: EditProfileFormInterface) {
           <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
         ) : null}
       </Form.Group>
-      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading}>
+
+      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading} >
         Enregistrer les modifications
-      </Button>
+      </Button>    
     </form>
   );
 }

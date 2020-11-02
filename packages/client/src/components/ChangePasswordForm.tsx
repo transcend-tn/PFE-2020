@@ -76,8 +76,8 @@ function ChangePasswordForm(props: ChangePasswordFormInterface) {
           <Form.Text className="text-danger">{formik.errors.confirmPassword}</Form.Text>
         ) : null}
       </Form.Group>
-
-      <Button variant="primary" type="submit" disabled={isLoading}>
+      
+      <Button variant="primary" type="submit" disabled={isLoading} >
         Enregistrer les modifications
       </Button>
     </form>
