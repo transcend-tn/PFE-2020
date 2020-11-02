@@ -16,9 +16,7 @@ function Welcome() {
       <Row className="pb-3">
         <Col sm={6}>
           <h1 className="text-primary display-4">PFE 2020</h1>
-          <p className="lead">
-            <div>Un espace dédié à vos projets collaboratifs !</div>
-          </p>
+          <p className="lead">Un espace dédié à vos projets collaboratifs !</p>
         </Col>
         <Col sm={6}>
           <SignInForm handleShowModal={toggleModal} />
