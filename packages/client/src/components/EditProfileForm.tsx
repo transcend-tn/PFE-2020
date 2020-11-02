@@ -1,7 +1,6 @@
 import { UserEdit } from '@tr/common';
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
-import { Toast } from 'react-bootstrap';
+import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
 import * as Yup from 'yup';
@@ -12,7 +11,6 @@ export interface EditProfileFormInterface {
 }
 
 function EditProfileForm(props: EditProfileFormInterface) {
-  const [show, setShow] = useState(false);
   const { editUser, isLoading } = props;
   const formik = useFormik({
     initialValues: {
@@ -74,15 +72,8 @@ function EditProfileForm(props: EditProfileFormInterface) {
           <Form.Text className="text-danger">{formik.errors.email}</Form.Text>
         ) : null}
       </Form.Group>
-      
-      <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide style={{position: 'absolute', top: 0, right: 0,}}>
-        <Toast.Header>
-          <strong className="mr-auto">Succès</strong>
-        </Toast.Header>
-        <Toast.Body>Les modifications ont été enregistrées</Toast.Body>
-      </Toast>
 
-      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading} onClick={() => setShow(true)}>
+      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading} >
         Enregistrer les modifications
       </Button>    
     </form>
