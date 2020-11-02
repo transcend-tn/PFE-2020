@@ -17,11 +17,13 @@ function DocumentHeader(props: DocumentHeaderProps) {
   const { docId, title, createdAt} = props;
   const { id } = useParams<{ id: string }>();
   const { data} = useQuery([id], getDocumentById);
-  const date = new Date (data.createdAt)
+  console.log(data)
+  const date = format (new Date (data.createdAt),"dd-MM-yyyy HH:mm")
+
   return (
     <Card className="card-header p-3">
       <Card.Title>{title}</Card.Title>
-      <Card.Text className="text-muted"> Crée le {format(new Date(), "dd-MM-yyyy")} {data.createdAt} </Card.Text>
+      <Card.Text className="text-muted"> Crée le {date} </Card.Text>
       <div className="d-flex flex-row-reverse">
         <Link to={DOCUMENT_EDIT(docId)}>
           <Button variant="secondary" size="sm" type="submit">
