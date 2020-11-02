@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/esm/Form';
 import { Editor } from 'react-draft-wysiwyg';
 import { MutateFunction } from 'react-query';
 import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
+import { useStoreState } from '../hooks/store.hooks';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -26,6 +28,8 @@ export interface NewDocumentInterface {
 }
 
 const NewDocument = (props: NewDocumentInterface) => {
+  const history = useHistory();
+  const user = useStoreState((state) => state.user.user);
   const { isLoading, createDocument } = props;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -37,13 +41,20 @@ const NewDocument = (props: NewDocumentInterface) => {
       title: Yup.string().required('Title is required'),
     }),
     onSubmit: (values) => {
-      if (values.title !== '')
         createDocument({
           body: editorState.getCurrentContent(),
           title: values.title,
-        });
-      values.title = '';
-      setEditorState(EditorState.createEmpty());
+        }).then(
+          ()=>{
+            values.title = '';
+            setEditorState(EditorState.createEmpty());
+            history.push(`/profile/${user.username}`);
+          },
+          (error)=>{
+            console.log({error})
+          }
+        );
+
     },
   });
 
