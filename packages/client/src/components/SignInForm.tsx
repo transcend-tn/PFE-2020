@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
 import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useStoreActions, useStoreState } from '../hooks/store.hooks';
 
@@ -34,7 +35,9 @@ function SignInForm(props: SignInFormProps) {
           }
         },
         (error) => {
-          console.log('error: ', error);
+          toast.error('Error Notification !', {
+            position: toast.POSITION.TOP_LEFT,
+          });
         },
       );
     },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import routes from './routes';
 
@@ -21,6 +22,7 @@ function App() {
             );
           })}
         </Switch>
+        <ToastContainer />
       </Router>
     </ReactQueryCacheProvider>
   );
