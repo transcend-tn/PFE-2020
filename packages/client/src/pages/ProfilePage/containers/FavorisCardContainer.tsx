@@ -1,13 +1,21 @@
 import React from 'react';
 import { useMutation, QueryStatus } from 'react-query';
-import { addFavoriteMutation } from '../../../services/favorite.service';
+import { addFavoriteMutation, removeFavoritetMutation } from '../../../services/favorite.service';
 import FavorisCard from '../../../components/FavorisCard';
 
 const FavorisCardContainer = () => {
-  // const [createFavoris, { status }] = useMutation(addFavoriteMutation);
-  // const isLoading = QueryStatus.Loading === status;
+  const [add, { status }] = useMutation(addFavoriteMutation);
+  const isAddLoading = QueryStatus.Loading === status;
+  const [remove, { status: etats  }] = useMutation(removeFavoritetMutation);
+  const isRemoveLoading = QueryStatus.Loading === status;
 
-  return <FavorisCard id={`id`} timeEdit={`timeEdit`} document={` document`} />;
+  return <FavorisCard id={`id`} timeEdit={`timeEdit`} document={` document`} 
+  
+           onAdd={add}
+           isAddLoading={isAddLoading}
+           onRemove={remove}
+           isRemoveLoading={isRemoveLoading}
+  />;
 };
 
 export default FavorisCardContainer;

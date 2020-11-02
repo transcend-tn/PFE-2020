@@ -10,13 +10,17 @@ export interface FavorisCardProps {
   star?: boolean;
   timeEdit: string;
   document: string;
+  onAdd: any;
+  onRemove: any;
+  isAddLoading: boolean;
+  isRemoveLoading: boolean;
 }
 
 const favOn = '#f5bf42';
 const favOff = '#808080';
 
 function FavorisCard(props: FavorisCardProps) {
-  const { id, star, timeEdit, document } = props;
+  const { id, star, timeEdit, document,onAdd,onRemove, isAddLoading,isRemoveLoading } = props;
   const [color, setColor] = useState(star ? favOn : favOff);
 
   function toggleColor() {
@@ -33,7 +37,7 @@ function FavorisCard(props: FavorisCardProps) {
             </Link>
             <p className="mb-0 font-weight-light" style={{  fontSize : "small" }}> {timeEdit} </p>
           </div>
-          <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
+          <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }}/>
         </Media.Body>
       </Media>
     </Card>
