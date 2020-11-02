@@ -6,9 +6,9 @@ import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
 import { Editor } from 'react-draft-wysiwyg';
 import { MutateFunction } from 'react-query';
-import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { DOCUMENT_BY_ID } from '../constants/uris';
+import { DocumentCreate } from '@tr/common';
+import { useHistory } from 'react-router-dom';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -29,23 +29,31 @@ export interface NewDocumentInterface {
 }
 
 const NewDocument = (props: NewDocumentInterface) => {
+  const history = useHistory();
   const { isLoading, createDocument, docId } = props;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const formik = useFormik({
     initialValues: {
       title: '',
+      body: '',
+      owner: '',
     },
     validationSchema: Yup.object({
       title: Yup.string().required('Title is required'),
     }),
-    onSubmit: (values) => {
-      if (values.title !== '')
-        createDocument({
-          body: editorState.getCurrentContent(),
-          title: values.title,
-        });
-      values.title = '';
+    onSubmit: (values: DocumentCreate) => {
+      createDocument({
+        body: editorState.getCurrentContent(),
+        title: values.title,
+      }).then(
+        (values) =>{
+          history.push(`/document/${docId}`);
+        },
+        (error) => {
+          console.log('error !!!');
+        },      
+      );
       setEditorState(EditorState.createEmpty());
     },
   });
@@ -66,13 +74,11 @@ const NewDocument = (props: NewDocumentInterface) => {
         ) : null}
       </Form.Group>
       <Card>
-        <div className="m-4">
-          <Link to={DOCUMENT_BY_ID(docId)}>
-            <Button variant="primary" type="submit" disabled={isLoading}>
-              {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
-              {isLoading ? 'Chargement...' : 'Enregistrer'}
-            </Button>
-          </Link>
+        <div className="m-4">          
+          <Button variant="primary" type="submit" disabled={isLoading}>
+            {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+            {isLoading ? 'Chargement...' : 'Enregistrer'}
+          </Button>
         </div>
         <Editor
           editorState={editorState}
