@@ -9,7 +9,7 @@ function TeamMembersListContainer() {
   const [pending, setPending] = useState(false);
   const { id } = useParams<{ id: string }>();
   const { isError, data = [], error } = useQuery(['collaboration:team', id], collaborationTeam);
-  console.log('data: ', data);
+  console.log('data : ', data);
 
   if (isError) {
     return <span>Error: {error} !</span>;
