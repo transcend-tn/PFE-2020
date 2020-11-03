@@ -5,11 +5,14 @@ import { Comment } from './comment.model';
 
 import { User } from '../users/user.entity';
 import { CommentCreate } from '@tr/common';
+import { UserRepository } from '../users/user.repository';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class CommentService {
     constructor(
         @InjectModel('Comment') private readonly commentModel: Model<Comment>,
+        private userRepository?: UserRepository,
       ) {}
 
       async documentComment(comment:CommentCreate, currentUser:User, id:string)
@@ -30,7 +33,13 @@ export class CommentService {
       }
 
       async getCommentByDocId(id: string) {
-        return await this.commentModel.find({documentId: id})
+        let comments=  await this.commentModel.find({documentId: id})
+        let data = Promise.all(comments.map(async (comment)=>
+        {
+          const user= await new UsersService(this.userRepository,null).getUserById(comment.userId)
+          return {username: user.username, img: user.img, body: comment.body, createdAt: comment.createdAt}
+        }))
+        return data;
       }
 
       async getCommentByReqId(id: string) {

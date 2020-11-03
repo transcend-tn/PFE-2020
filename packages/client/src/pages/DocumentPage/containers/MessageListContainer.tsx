@@ -19,7 +19,7 @@ function MessageListContainer() {
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
         {data.map((msg: any, idx: number) => {console.log(data)
           return (
-            <MessageCard username={msg.userId} time={formatDistance(new Date(),new Date(msg.createdAt))} body={msg.body} key={`message-${idx}`} />
+            <MessageCard username={msg.username} time={formatDistance(new Date(),new Date(msg.createdAt))} body={msg.body} key={`message-${idx}`} />
           );
         })}
       </ReactPlaceholder>
