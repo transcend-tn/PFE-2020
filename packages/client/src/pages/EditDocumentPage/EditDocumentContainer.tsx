@@ -79,7 +79,7 @@ const EditDocumentPage = () => {
               />
             </Card>
           </Tab>
-          <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
+          <Tab eventKey="PR" title="Comparer" className="mt-5">
             <form onSubmit={formik.handleSubmit} className="mt-5">
               <Form.Group controlId="description">
                 <Form.Control
