@@ -9,6 +9,7 @@ export interface MessageFormInterface {
   createComment?: any;
   isLoading?: boolean;
   docId?: string;
+  reqId?: string;
 }
 
 function MessageForm(props: MessageFormInterface) {
