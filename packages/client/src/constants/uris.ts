@@ -16,8 +16,11 @@ export const FAVORITE = '/favorite';
 export const FAVORITE_BY_ID = (id: string) => `/favorite/${id}`;
 
 export const COMMENT = '/comment';
-export const COMMENT_MESSAGE_ADD = (docId: string) => `/comment/${docId}`;
+export const COMMENT_MESSAGE_ADD = (docId: string) => `/comment/document/${docId}`;
 export const COMMENT_BY_DOC_ID = (id: string) => `/comment/document/${id}`;
+
+export const REQUEST_COMMENT_ADD = (reqId: string) => `/comment/request/${reqId}`;
+export const REQUEST_BY_REQ_ID = (id: string) => `/comment/request/${id}`;
 
 export const COLLABORATION_BY_ID= (id: string) => `/collaboration/${id}`;
 export const JOIN_TEAM = (docId: string) => `/collaboration/${docId}`;

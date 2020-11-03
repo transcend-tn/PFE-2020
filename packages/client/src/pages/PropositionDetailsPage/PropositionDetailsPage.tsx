@@ -4,8 +4,9 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import Vote from '../../components/Vote';
 import { getRequestById } from '../../services/request.service';
-import MessageFormContainer from '../DocumentPage/containers/MessageFormContainer';
-import MessageListContainer from '../DocumentPage/containers/MessageListContainer';
+import MessageFormContainer from './Containers/MessageFormContainer';
+import MessageListContainer from './Containers/MessageListContainer';
+
 
 function PropositionDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -67,8 +68,8 @@ function PropositionDetailsPage() {
             </Tabs>
           </div>
           <div className="bg-color-secondary card p-3 mt-5">
-            <MessageFormContainer />
-            <MessageListContainer />
+          <MessageFormContainer/>
+          <MessageListContainer/>
           </div>
         </Col>
 
