@@ -18,19 +18,18 @@ export interface MessageCardProps {
 function MessageCard(props: MessageCardProps) {
 const { id: docId } = useParams<{ id: string }>();
 const {data} = useQuery(['comments:getbyid', docId], getCommentByDocId);
-const time = new Date(data.time)
 
   return (
     <Card className="p-1 mb-2">
       <Media>
         <Media.Body className="d-flex p-2">
-          <Image src={props.img ? props.img : 'user.png'} roundedCircle width={50} height={50} className="mr-4" />
+          <Image src={props.img ? props.img : 'http://localhost:3001/user.png'} roundedCircle width={50} height={50} className="mr-4" />
           <div className="d-flex flex-column">
             <div className="font-weight-light text-secondary">
-              <span className="mr-2"> {props.username} </span>
+              <span className="h6 mr-2"> {props.username} </span>
               <span className="text-secondary">
                 <BsClock size={12} color="#9E9E93" className="mr-1" />
-                {data.time} {formatDistanceToNow(new Date(), { addSuffix: true })}
+                {props.time}
               </span>
             </div>
             <p>{props.body}</p>

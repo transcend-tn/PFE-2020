@@ -18,7 +18,7 @@ function DocumentHeader(props: DocumentHeaderProps) {
   const { id } = useParams<{ id: string }>();
   const { data} = useQuery([id], getDocumentById);
   console.log(data)
-  const date = format (new Date (data.createdAt),"dd-MM-yyyy HH:mm")
+  const date = format (new Date (data.createdAt),"d/MM/yyyy, HH:mm")
 
   return (
     <Card className="card-header p-3">

@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React from 'react';
 import ReactPlaceholder from 'react-placeholder';
 import { useQuery } from 'react-query';
@@ -15,7 +16,14 @@ function DocumentsListContainer() {
     <>
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
         {data.map((doc: any) => {
-          return <Favoris key={`favoris-${doc.id}`} document={doc.title} timeEdit={doc.updatedAt} id={doc.id} />;
+          return (
+            <Favoris
+              key={`favoris-${doc.id}`}
+              document={doc.title}
+              timeEdit={format(new Date(doc.createdAt), 'd MMMM, HH:mm')}
+              id={doc.id}
+            />
+          );
         })}
       </ReactPlaceholder>
     </>

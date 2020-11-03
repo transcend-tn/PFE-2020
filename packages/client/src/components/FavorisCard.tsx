@@ -31,7 +31,7 @@ function FavorisCard(props: FavorisCardProps) {
             <Link to={DOCUMENT_BY_ID(id)} style={{ color: '#000000' }}>
               <h6 className="mb-0"> {document} </h6>
             </Link>
-            <p className="mb-0 font-weight-light"> {timeEdit} </p>
+            <p className="mb-0 font-weight-light" style={{  fontSize : "small" }}> {timeEdit} </p>
           </div>
           <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }} />
         </Media.Body>
