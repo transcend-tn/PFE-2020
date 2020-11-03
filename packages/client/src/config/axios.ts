@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ENTRYPOINT } from '../constants/uris';
 
 const instance = (config: AxiosRequestConfig = {}): AxiosInstance => {
@@ -11,18 +11,23 @@ const instance = (config: AxiosRequestConfig = {}): AxiosInstance => {
   const axiosInstance = Axios.create(axiosConfig);
 
   axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error: AxiosError) => error,
+    (response: AxiosResponse) => response,
+    (error: AxiosError) => {
+      if (error && error.response && error.response.status === 401) {
+        localStorage.clear();
+        window.location.assign('http://localhost:3001/');
+      }
+      return error;
+    },
   );
 
   axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => {
       const { origin } = new URL(`${config.baseURL}/${config.url}`);
       const allowedOrigins = [ENTRYPOINT];
-      const tokenStr = localStorage.getItem('accessToken');
-      if (tokenStr && allowedOrigins.includes(origin)) {
-        const token = JSON.parse(tokenStr);
-        config.headers.authorization = `Bearer ${token.accessToken}`;
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken && allowedOrigins.includes(origin)) {
+        config.headers.authorization = `Bearer ${accessToken}`;
       }
       return config;
     },

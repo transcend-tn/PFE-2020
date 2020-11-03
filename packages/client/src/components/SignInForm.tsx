@@ -1,12 +1,15 @@
 import { UserLogin } from '@tr/common';
 import { useFormik } from 'formik';
+import jwt from 'jsonwebtoken';
 import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
+import { QueryStatus, useMutation } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useStoreActions, useStoreState } from '../hooks/store.hooks';
+import { useStoreActions } from '../hooks/store.hooks';
+import { signInMutation } from '../services/user.service';
 
 export interface SignInFormProps {
   handleShowModal: () => void;
@@ -14,8 +17,10 @@ export interface SignInFormProps {
 
 function SignInForm(props: SignInFormProps) {
   const history = useHistory();
-  const signIn = useStoreActions((actions) => actions.user.signIn);
-  const user = useStoreState((state) => state.user.user);
+  const addToken = useStoreActions((actions) => actions.user.addToken);
+  const addUser = useStoreActions((actions) => actions.user.addUser);
+  const [signIn, { status }] = useMutation(signInMutation);
+  const isLoading = QueryStatus.Loading === status;
 
   const formik = useFormik({
     initialValues: {
@@ -23,13 +28,16 @@ function SignInForm(props: SignInFormProps) {
       password: 'mm',
     },
     validationSchema: Yup.object({
-      username: Yup.string().required('This field is required !'),
-      password: Yup.string().required('Password is required'),
+      username: Yup.string().required('Veuillez saisir votre username !'),
+      password: Yup.string().required('Veuillez saisir votre mot de passe !'),
     }),
     onSubmit: (values: UserLogin) => {
       signIn(values).then(
         (values) => {
-          if (user) {
+          if (values) {
+            const user: any = jwt.decode(values.accessToken);
+            addUser(user);
+            addToken(values.accessToken);
             history.push(`/profile/${user.username}`);
           }
         },
@@ -79,7 +87,7 @@ function SignInForm(props: SignInFormProps) {
             </div>
             <hr />
             <div className="text-center">
-              <Button variant="success" type="button" onClick={props.handleShowModal}>
+              <Button variant="success" type="button" onClick={props.handleShowModal} disabled={isLoading}>
                 Inscription
               </Button>
             </div>

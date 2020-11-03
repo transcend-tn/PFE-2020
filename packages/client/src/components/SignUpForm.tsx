@@ -1,16 +1,17 @@
-import React from 'react';
-import Form from 'react-bootstrap/esm/Form';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
-
-import { useStoreActions } from '../hooks/store.hooks';
-import { Button } from 'react-bootstrap';
 import { UserCreate } from '@tr/common';
+import { useFormik } from 'formik';
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/esm/Form';
+import { QueryStatus, useMutation } from 'react-query';
+import { useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
+import { signUpMutation } from '../services/user.service';
 
 function SignUpForm() {
   const history = useHistory();
-  const signUp = useStoreActions((actions) => actions.user.signUp);
+  const [signUp, { status }] = useMutation(signUpMutation);
+  const isLoading = QueryStatus.Loading === status;
 
   const formik = useFormik({
     initialValues: {
@@ -104,7 +105,7 @@ function SignUpForm() {
         ) : null}
       </Form.Group>
       <div className="text-center mt-3">
-        <Button variant="success" type="submit">
+        <Button variant="success" type="submit" disabled={isLoading}>
           Confirmer
         </Button>
       </div>

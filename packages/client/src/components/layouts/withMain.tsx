@@ -1,19 +1,21 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/esm/Container';
 import Nav from 'react-bootstrap/esm/Nav';
 import Navbar from 'react-bootstrap/esm/Navbar';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
-import Container from 'react-bootstrap/esm/Container';
 import { BiAddToQueue } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { RiHome2Line } from 'react-icons/ri';
+import { queryCache } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
 import { useStoreState } from '../../hooks/store.hooks';
-import { Button } from 'react-bootstrap';
-import { queryCache } from 'react-query';
 
 const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => {
     const user = useStoreState((state) => state.user.user);
+    if (!user) return null;
+
     const history = useHistory();
 
     const onLogout = () => {
