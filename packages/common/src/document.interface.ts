@@ -1,10 +1,10 @@
 export interface DocumentCreate {
   title: string;
-  body: string;
+  body: object;
   owner: string;
 }
 
 export interface DocumentUpdate {
   title: string;
-  body: string;
+  body: object;
 }
