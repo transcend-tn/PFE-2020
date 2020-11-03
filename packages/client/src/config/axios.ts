@@ -1,5 +1,6 @@
 import Axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ENTRYPOINT } from '../constants/uris';
+import { toast } from 'react-toastify';
 
 const instance = (config: AxiosRequestConfig = {}): AxiosInstance => {
   const { headers, ...conf } = config;
@@ -15,7 +16,13 @@ const instance = (config: AxiosRequestConfig = {}): AxiosInstance => {
     (error: AxiosError) => {
       if (error && error.response && error.response.status === 401) {
         localStorage.clear();
-        window.location.assign('http://localhost:3001/');
+        toast.error('Connexion Echouée', {
+          position: toast.POSITION.TOP_LEFT,
+          className: "fade alert alert-danger show",
+        });
+/*         TODO: window.location.assign('http://localhost:3001/');
+        without interrup notifications */
+
       }
       return error;
     },

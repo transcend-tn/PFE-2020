@@ -41,12 +41,12 @@ function SignInForm(props: SignInFormProps) {
             addToken(values.accessToken);
             history.push(`/profile/${user.username}`);
           }
-        },
-        () => {
-          toast.error('Error Notification !', {
+/*           else
+          toast.error('Connexion Echouée', {
             position: toast.POSITION.TOP_LEFT,
-          });
-        },
+            className: "fade alert alert-danger show",
+          }); */
+        }
       );
     },
   });
