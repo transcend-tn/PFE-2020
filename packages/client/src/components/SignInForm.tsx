@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
 import { QueryStatus, useMutation } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useStoreActions } from '../hooks/store.hooks';
 import { signInMutation } from '../services/user.service';
@@ -41,8 +42,10 @@ function SignInForm(props: SignInFormProps) {
             history.push(`/profile/${user.username}`);
           }
         },
-        (error) => {
-          console.log('error: ', error);
+        () => {
+          toast.error('Error Notification !', {
+            position: toast.POSITION.TOP_LEFT,
+          });
         },
       );
     },
