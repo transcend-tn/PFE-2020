@@ -32,7 +32,8 @@ function DocumentPage() {
             <Tabs defaultActiveKey="Document" id="uncontrolled-tab">
               <Tab eventKey="Document" title="Document" className="mt-5">
                 <DocumentHeader title={data.title} createdAt={data.createdAt} docId={id} />
-                <p className="mt-5">{data.body}</p>
+                {/* TODO: convert data.body to text */}
+                <p className="mt-5">{JSON.stringify(data.body)}</p> 
               </Tab>
               <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
                 <PropositionList />
