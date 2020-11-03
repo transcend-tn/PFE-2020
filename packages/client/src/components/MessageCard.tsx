@@ -23,7 +23,7 @@ const {data} = useQuery(['comments:getbyid', docId], getCommentByDocId);
     <Card className="p-1 mb-2">
       <Media>
         <Media.Body className="d-flex p-2">
-          <Image src={props.img ? props.img : 'http://localhost:3001/user.png'} roundedCircle width={50} height={50} className="mr-4" />
+          <Image src={props.img ? props.img : 'http://localhost:3001/user.png'} roundedCircle width={50} height={50} className="mr-2" />
           <div className="d-flex flex-column">
             <div className="font-weight-light text-secondary">
               <span className="h6 mr-2"> {props.username} </span>
