@@ -47,7 +47,7 @@ export class DocumentController {
   @Get(':id')
   async getDocumentById(@Param('id') id: string) {
     const doc = await this.documentService.getDocumentById(id);
-    return { id: doc.id, title: doc.title, body: doc.body };
+    return doc;
   }
 
   @Get('/owner/:id')
