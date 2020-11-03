@@ -29,12 +29,12 @@ function SignInForm(props: SignInFormProps) {
     }),
     onSubmit: (values: UserLogin) => {
       signIn(values).then(
-        (values) => {
+        () => {
           if (user) {
             history.push(`/profile/${user.username}`);
           }
         },
-        (error) => {
+        () => {
           toast.error('Error Notification !', {
             position: toast.POSITION.TOP_LEFT,
           });
