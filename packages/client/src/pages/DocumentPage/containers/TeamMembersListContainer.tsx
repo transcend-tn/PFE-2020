@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import MemberCard from '../../../components/MemberCard';
+import { useStoreState } from '../../../hooks/store.hooks';
 import { collaborationTeam } from '../../../services/collaboration.service';
 
 function TeamMembersListContainer() {
   const [pending, setPending] = useState(false);
   const { id } = useParams<{ id: string }>();
-  const { isError, data = [], error } = useQuery(['collaboration:team', id], collaborationTeam);
-  console.log('data: ', data);
-
+  const { isError, data = [], error } = useQuery(['collaboration:getTeam', id], collaborationTeam);
+  const currentUser = useStoreState((state) => state.user.user);
+  console.log(data.id);
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -22,11 +23,12 @@ function TeamMembersListContainer() {
           <h5 className="d-flex justify-content-center mt-4">Team Members</h5>
         </Card.Title>
         <Card.Body>
-          {data.map((msg: any, idx: number) => {
-            return <MemberCard img={msg.img} username={msg.username} key={`member-${idx}`} />;
+          {data.map((member: any, idx: number) => {
+            return <MemberCard img={member.img} username={member.username} key={`member-${idx}`} />;
           })}
           <hr />
           <div className="text-center">
+
             <Button variant="success" onClick={() => setPending(true)} disabled={pending}>
               {pending ? 'Pending' : 'Join Team'}
             </Button>

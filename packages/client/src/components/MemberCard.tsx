@@ -24,9 +24,6 @@ function MemberCard(props: MemberCardInterface) {
             <h6 className="mb-0">{props.username}</h6>
             <p className="mb-0 font-weight-light">Member</p>
           </div>
-          <Button variant="danger" type="submit" size="sm" onClick={handlerLeave}>
-            Leave
-          </Button>
         </Media.Body>
       </Media>
     </Card>

@@ -5,10 +5,10 @@ import { useParams } from 'react-router-dom';
 import DocumentHeader from '../../components/DocumentHeader';
 import HistoryList from '../../components/HistoryList';
 import PropositionList from '../../components/PropositionList';
-import TeamMembersList from '../../components/TeamMembersList';
 import { getDocumentById } from '../../services/document.service';
 import MessageFormContainer from './containers/MessageFormContainer';
 import MessageListContainer from './containers/MessageListContainer';
+import TeamMembersListContainer from './containers/TeamMembersListContainer';
 import { format } from 'date-fns';
 
 function DocumentPage() {
@@ -49,7 +49,7 @@ function DocumentPage() {
         </Col>
 
         <Col lg="4">
-          <TeamMembersList />
+          <TeamMembersListContainer />
         </Col>
       </Row>
     </>
