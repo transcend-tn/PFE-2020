@@ -10,7 +10,6 @@ import { useStoreState } from '../../../hooks/store.hooks';
 function DocumentsListContainer() {
   const user = useStoreState(state => state.user.user);
   const { isLoading, isError, data = [], error } = useQuery(['documents:getbyowner',user.id],getDocumentsByOwner);
-  console.log(data)
   if (isError) {
     return <span>Error: {error} !</span>;
   }
