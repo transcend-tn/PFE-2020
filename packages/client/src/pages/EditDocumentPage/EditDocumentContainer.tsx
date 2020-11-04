@@ -25,8 +25,8 @@ const EditDocumentPage = () => {
   const [contentState, setContent] = useState('');
   const { id } = useParams<{ id: string }>();
 
-  const { isLoading, isError, data = {}, error } = useQuery([id], getDocumentById);
-
+  const { isLoading, isError, data = {}, error } = useQuery(['document:getbyid',id], getDocumentById);
+console.log(data)
   const formik = useFormik({
     initialValues: {
       description: '',
