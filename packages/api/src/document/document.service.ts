@@ -59,6 +59,8 @@ export class DocumentService {
     const docs = await this.documentModel.find({ owner: owner }).exec();
     return docs.map(doc => ({
       id: doc.id,
+      title: doc.title,
+      createdAt: doc.createdAt,
       body: doc.body,
       owner: doc.owner,
     }));
