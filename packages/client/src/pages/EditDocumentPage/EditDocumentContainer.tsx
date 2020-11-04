@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import { getDocumentById } from '../../services/document.service';
 import * as Yup from 'yup';
+import { convertFromRaw, EditorState } from 'draft-js';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -24,9 +25,10 @@ const EDITOR_OPTIONS = [
 const EditDocumentPage = () => {
   const [contentState, setContent] = useState('');
   const { id } = useParams<{ id: string }>();
-
-  const { isLoading, isError, data = {}, error } = useQuery([id], getDocumentById);
-
+  const { isLoading, isError, data = {}, error } = useQuery(['document:getbyid',id], getDocumentById);
+  const body = data.body;
+  console.log(body);
+  
   const formik = useFormik({
     initialValues: {
       description: '',
@@ -69,7 +71,7 @@ const EditDocumentPage = () => {
         <Tabs defaultActiveKey="Document" id="uncontrolled-tab">
           <Tab eventKey="Document" title="Document" className="mt-5">
             <Card className="card-header p-2 bg-white">
-              <Editor
+              <Editor 
                 wrapperClassName="m-4"
                 editorClassName="ml-4 mb-4"
                 toolbar={{

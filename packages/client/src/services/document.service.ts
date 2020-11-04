@@ -12,8 +12,8 @@ export const getDocumentsByOwner = async (key: any, id: string): Promise<any> =>
   return data;
 };
 
-export const getDocumentById = async (payload: string): Promise<any> => {
-  const { data } = await axios.get(DOCUMENT_BY_ID(payload));
+export const getDocumentById = async (key: any, id: string): Promise<any> => {
+  const { data } = await axios.get(DOCUMENT_BY_ID(id));
   return data;
 };
 

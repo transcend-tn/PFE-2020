@@ -9,12 +9,11 @@ import TeamMembersList from '../../components/TeamMembersList';
 import { getDocumentById } from '../../services/document.service';
 import MessageFormContainer from './containers/MessageFormContainer';
 import MessageListContainer from './containers/MessageListContainer';
+import { format } from 'date-fns';
 
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();
-
-  const { isLoading, isError, data = {}, error } = useQuery([id], getDocumentById);
-
+  const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
 
   if (isError) {
     return <span>Error: {error} !</span>;
@@ -31,7 +30,7 @@ function DocumentPage() {
           <div className="card p-3">
             <Tabs defaultActiveKey="Document" id="uncontrolled-tab">
               <Tab eventKey="Document" title="Document" className="mt-5">
-                <DocumentHeader title={data.title} createdAt={data.createdAt} docId={id} />
+                <DocumentHeader title={data.title} createdAt= {format (new Date (data.createdAt),"d/MM/yyyy, HH:mm")} docId={id} />
                 {/* TODO: convert data.body to text */}
                 <p className="mt-5">{JSON.stringify(data.body)}</p> 
               </Tab>
