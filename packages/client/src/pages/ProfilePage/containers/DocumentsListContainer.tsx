@@ -2,12 +2,13 @@ import { format } from 'date-fns';
 import React from 'react';
 import ReactPlaceholder from 'react-placeholder';
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import Favoris from '../../../components/FavorisCard';
 import { getDocumentsByOwner } from '../../../services/document.service';
 
 function DocumentsListContainer() {
-  const { isLoading, isError, data = [], error } = useQuery('documents:getbyowner', getDocumentsByOwner);
-
+  const { id } = useParams<{ id: string }>();
+  const { isLoading, isError, data = [], error } = useQuery(['documents:getbyowner',id],getDocumentsByOwner);
   if (isError) {
     return <span>Error: {error} !</span>;
   }
