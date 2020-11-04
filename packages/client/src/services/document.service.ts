@@ -1,5 +1,5 @@
 import axios from '../config/axios';
-import { DOCUMENT, DOCUMENT_BY_ID } from './../constants/uris';
+import { DOCUMENT, DOCUMENT_BY_ID, DOCUMENT_BY_OWNER } from './../constants/uris';
 import { DocumentUpdate } from '../../../common/src/document.interface';
 
 export const createDocumentMutation = async (payload: any): Promise<string> => {
@@ -7,8 +7,8 @@ export const createDocumentMutation = async (payload: any): Promise<string> => {
   return data;
 };
 
-export const getDocumentsByOwner = async (): Promise<any> => {
-  const { data } = await axios.get(DOCUMENT);
+export const getDocumentsByOwner = async (key: any, id: string): Promise<any> => {
+  const { data } = await axios.get(DOCUMENT_BY_OWNER(id));
   return data;
 };
 
