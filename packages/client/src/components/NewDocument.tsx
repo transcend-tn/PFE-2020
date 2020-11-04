@@ -9,6 +9,7 @@ import { MutateFunction } from 'react-query';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import { useStoreState } from '../hooks/store.hooks';
+import { toast } from 'react-toastify';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -48,7 +49,11 @@ const NewDocument = (props: NewDocumentInterface) => {
           ()=>{
             values.title = '';
             setEditorState(EditorState.createEmpty());
-            history.push(`/profile/${user.username}`);
+          
+            toast.success('Document Créé', {
+              position: toast.POSITION.TOP_RIGHT,
+              className: "fade alert alert-success show",
+            });
           },
           (error)=>{
             console.log({error})
