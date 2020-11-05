@@ -3,7 +3,8 @@ import { Row, Col, Tabs, Tab } from 'react-bootstrap';
 import Favoris from '../../components/FavorisCard';
 import ProfileCardContainer from './containers/ProfileCardContainer';
 import DocumentsListContainer from './containers/DocumentsListContainer';
-import CollaborationRequestContainer from './containers/CollaborationRequestContainer';
+import CollaborationRequestList from './containers/CollaborationRequestList';
+
 
 const FAVORIS: string[] = ['1', '2'];
 
@@ -25,7 +26,7 @@ function ProfilePage() {
               })}
             </Tab>
             <Tab eventKey="requests" title="Collaborations" className="mt-5">                              
-              <CollaborationRequestContainer />              
+              <CollaborationRequestList />              
             </Tab>
           </Tabs>
         </div>

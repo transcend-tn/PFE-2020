@@ -12,6 +12,7 @@ export const DOCUMENT = '/document';
 export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;
 export const DOCUMENT_EDIT = (id: string) => `/document/${id}/edit`;
 export const DOCUMENT_BY_OWNER = (id: string) => `/document/owner/${id}`;
+export const COLLABORATION_REQUESTS = '/document/collaboration-requests';
 
 export const FAVORITE = '/favorite';
 export const FAVORITE_BY_ID = (id: string) => `/favorite/${id}`;
@@ -25,6 +26,8 @@ export const REQUEST_BY_REQ_ID = (id: string) => `/comment/request/${id}`;
 
 export const COLLABORATION_BY_ID= (id: string) => `/collaboration/${id}`;
 export const JOIN_TEAM = (docId: string) => `/collaboration/${docId}`;
+export const ENABLE = (docId: string, userId: string) => `/collaboration/enable/${docId}/${userId}`;
+export const DISABLE = (docId: string, userId: string) => `/collaboration/disable/${docId}/${userId}`;
 
 export const REQUEST = '/request';
 export const REQUEST_BY_ID = (id: string) => `/request/${id}`;
