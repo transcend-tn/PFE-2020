@@ -20,7 +20,7 @@ function DocumentsListContainer() {
           return (
             <Favoris
               key={`favoris-${doc.id}`}
-              document={doc.title}
+              documenTitle={doc.title}
               timeEdit={format(new Date(doc.createdAt), 'd MMMM, HH:mm')}
               id={doc.id}
             />

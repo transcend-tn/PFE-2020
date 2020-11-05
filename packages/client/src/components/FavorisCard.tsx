@@ -9,18 +9,18 @@ export interface FavorisCardProps {
   id: string;
   star?: boolean;
   timeEdit: string;
-  document: string;
-  onAdd: any;
-  onRemove: any;
-  isAddLoading: boolean;
-  isRemoveLoading: boolean;
+  documenTitle: string;
+  onAdd?: any;
+  onRemove?: any;
+  isAddLoading?: boolean;
+  isRemoveLoading?: boolean;
 }
 
 const favOn = '#f5bf42';
 const favOff = '#808080';
 
 function FavorisCard(props: FavorisCardProps) {
-  const { id, star, timeEdit, document,onAdd,onRemove, isAddLoading,isRemoveLoading } = props;
+  const { id, star, timeEdit,  documenTitle,onAdd,onRemove} = props;
   const [color, setColor] = useState(star ? favOn : favOff);
 
   function toggleColor() {
@@ -33,7 +33,7 @@ function FavorisCard(props: FavorisCardProps) {
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
             <Link to={DOCUMENT_BY_ID(id)} style={{ color: '#000000' }}>
-              <h6 className="mb-0"> {document} </h6>
+              <h6 className="mb-0"> { documenTitle} </h6>
             </Link>
             <p className="mb-0 font-weight-light" style={{  fontSize : "small" }}> {timeEdit} </p>
           </div>
