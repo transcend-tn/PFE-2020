@@ -7,11 +7,12 @@ import { useStoreState } from '../../../hooks/store.hooks';
 import { collaborationTeam } from '../../../services/collaboration.service';
 
 function TeamMembersListContainer() {
-  const [pending, setPending] = useState(false);
   const { id } = useParams<{ id: string }>();
   const { isError, data = [], error } = useQuery(['collaboration:getTeam', id], collaborationTeam);
   const currentUser = useStoreState((state) => state.user.user);
-  console.log(data.id);
+  const teamIds = data.map((member: any) => member.id);
+  const [isMemmber, setIsMember] = useState(teamIds.includes(currentUser.id));
+
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -28,10 +29,20 @@ function TeamMembersListContainer() {
           })}
           <hr />
           <div className="text-center">
-
-            <Button variant="success" onClick={() => setPending(true)} disabled={pending}>
-              {pending ? 'Pending' : 'Join Team'}
-            </Button>
+            {isMemmber===false? (
+              <Button
+                variant="success"
+                onClick={() => {
+                  setIsMember(!isMemmber);
+                }}
+              >
+                Join Team
+              </Button>
+            ) : (
+              <Button variant="danger" onClick={() => setIsMember(!isMemmber)}>
+                Leave Team
+              </Button>
+            )}
           </div>
         </Card.Body>
       </Card>
