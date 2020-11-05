@@ -29,20 +29,14 @@ function TeamMembersListContainer() {
           })}
           <hr />
           <div className="text-center">
-            {isMemmber===false? (
-              <Button
-                variant="success"
-                onClick={() => {
-                  setIsMember(!isMemmber);
-                }}
-              >
-                Join Team
-              </Button>
-            ) : (
-              <Button variant="danger" onClick={() => setIsMember(!isMemmber)}>
-                Leave Team
-              </Button>
-            )}
+            <Button
+              variant={isMemmber ? 'danger' : 'success'}
+              onClick={() => {
+                setIsMember(!isMemmber);
+              }}
+            >
+              {isMemmber ? 'Leave Team' : 'Join Team'}
+            </Button>
           </div>
         </Card.Body>
       </Card>
