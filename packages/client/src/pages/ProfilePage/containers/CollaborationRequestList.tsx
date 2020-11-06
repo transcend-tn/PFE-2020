@@ -15,7 +15,7 @@ function CollaborationRequestList() {
     const isRefuseLoading = QueryStatus.Loading === etats;
     
     const { isError, data = [], error } = useQuery('document:getcollaborationrequest', getCollaborationRequests);
-    console.log(data);
+    
     if (isError) {
         return <span>Error: {error} !</span>;
     }
@@ -26,7 +26,8 @@ function CollaborationRequestList() {
               return (
                 <CollaborationRequest key={`collaboration-${idx}`}
                     id={collab.id} 
-                    username={collab.username} 
+                    //on n'a pas les attributs (username, documentTitle, img) dans l'api/src/collaboration/collaboration.model.ts 
+                    username={collab.username}
                     document={collab.documentTitle} 
                     img={collab.img}
                     docId={documentId}
