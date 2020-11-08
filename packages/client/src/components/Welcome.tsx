@@ -65,7 +65,7 @@ function Welcome() {
           <Modal.Title>Inscription </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <SignUpForm />
+          <SignUpForm onSuccess={toggleModal} />
         </Modal.Body>
       </Modal>
     </div>

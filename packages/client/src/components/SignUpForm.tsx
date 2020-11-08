@@ -8,7 +8,11 @@ import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { signUpMutation } from '../services/user.service';
 
-function SignUpForm() {
+export interface SignUpFormProps {
+  onSuccess: () => void;
+}
+
+function SignUpForm(props: SignUpFormProps) {
   const history = useHistory();
   const [signUp, { status }] = useMutation(signUpMutation);
   const isLoading = QueryStatus.Loading === status;
@@ -34,7 +38,7 @@ function SignUpForm() {
     onSubmit: (values: UserCreate) => {
       signUp(values).then(
         (values) => {
-          history.push('/');
+          props.onSuccess();
         },
         (error) => {
           console.log('error !!!');
