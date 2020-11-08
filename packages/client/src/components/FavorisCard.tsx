@@ -10,8 +10,8 @@ export interface FavorisCardProps {
   active?: boolean;
   timeEdit: string;
   documenTitle: string;
-  onAdd?: any;
-  onRemove?: any;
+  onAdd?: () => void;
+  onRemove?: () => void;
   isAddLoading?: boolean;
   isRemoveLoading?: boolean;
 }
@@ -23,11 +23,12 @@ function FavorisCard(props: FavorisCardProps) {
   const { id, active, timeEdit, documenTitle, onAdd, onRemove } = props;
 
   const toggleFavoris = () => {
-    if (active) {
-      onRemove();
-    } else {
-      console.log('onAdd: ', onAdd);
-      onAdd();
+    if (onAdd && onRemove) {
+      if (active) {
+        onRemove();
+      } else {
+        onAdd();
+      }
     }
   };
 

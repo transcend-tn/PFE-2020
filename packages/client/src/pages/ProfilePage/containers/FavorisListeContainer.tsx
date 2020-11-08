@@ -5,10 +5,10 @@ import FavorisCard from '../../../components/FavorisCard';
 import { addFavoriteMutation, getFavoriteById, removeFavoritetMutation } from '../../../services/favorite.service';
 import { format } from 'date-fns';
 import ReactPlaceholder from 'react-placeholder';
+import { getDocumentsFavoris } from '../../../services/document.service';
 
 const FavorisListeContainer = () => {
-  const { id } = useParams<{ id: string }>();
-  const { isLoading, isError, data = [], error } = useQuery(['favorie:getbyid', id], getFavoriteById);
+  const { isLoading, isError, data = [], error } = useQuery(['documents:getFavoris'], getDocumentsFavoris);
   const [add, { status }] = useMutation(addFavoriteMutation);
   const isAddLoading = QueryStatus.Loading === status;
   const [remove, { status: etats }] = useMutation(removeFavoritetMutation);
