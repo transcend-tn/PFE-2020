@@ -26,7 +26,7 @@ const FavorisListeContainer = () => {
               key={`favoris-${idx}`}
               id={`id`}
               timeEdit={format(new Date(fav.createdAt), 'd MMMM, HH:mm')}
-              documenTitle={fav.documentId}
+              documenTitle={fav.title}
               onAdd={add}
               isAddLoading={isAddLoading}
               onRemove={remove}

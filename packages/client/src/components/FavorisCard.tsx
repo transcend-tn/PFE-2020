@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import Media from 'react-bootstrap/esm/Media';
 import { FaStar } from 'react-icons/fa';
+import { MutateFunction } from 'react-query';
 import { Link } from 'react-router-dom';
 import { DOCUMENT_BY_ID } from '../constants/uris';
 
@@ -10,8 +11,8 @@ export interface FavorisCardProps {
   active?: boolean;
   timeEdit: string;
   documenTitle: string;
-  onAdd?: () => void;
-  onRemove?: () => void;
+  onAdd?: MutateFunction<string, unknown, any, unknown>;
+  onRemove?: MutateFunction<string, unknown, any, unknown>;
   isAddLoading?: boolean;
   isRemoveLoading?: boolean;
 }
@@ -25,9 +26,9 @@ function FavorisCard(props: FavorisCardProps) {
   const toggleFavoris = () => {
     if (onAdd && onRemove) {
       if (active) {
-        onRemove();
+        onRemove({ id });
       } else {
-        onAdd();
+        onAdd({ id });
       }
     }
   };
