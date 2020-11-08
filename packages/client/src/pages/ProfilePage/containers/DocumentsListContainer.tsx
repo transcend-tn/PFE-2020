@@ -9,6 +9,13 @@ import { getDocumentsByOwner } from '../../../services/document.service';
 function DocumentsListContainer() {
   const user = useStoreState((state) => state.user.user);
   const { isLoading, isError, data = [], error } = useQuery(['documents:getbyowner', user.id], getDocumentsByOwner);
+  console.log('data: ', data);
+  const {
+    isLoading: isFavorisLoading,
+    isError: isFavorisError,
+    data: dataFavoris = ['5fa849fe76eee2118073162c'],
+    error: favorisError,
+  } = useQuery(['favoris:getbyowner', user.id], getDocumentsByOwner);
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -23,6 +30,7 @@ function DocumentsListContainer() {
               documenTitle={doc.title}
               timeEdit={format(new Date(doc.createdAt), 'd MMMM, HH:mm')}
               id={doc.id}
+              active={dataFavoris.includes(doc.id)}
             />
           );
         })}

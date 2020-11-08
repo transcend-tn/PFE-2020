@@ -7,7 +7,7 @@ import { DOCUMENT_BY_ID } from '../constants/uris';
 
 export interface FavorisCardProps {
   id: string;
-  star?: boolean;
+  active?: boolean;
   timeEdit: string;
   documenTitle: string;
   onAdd?: any;
@@ -20,12 +20,16 @@ const favOn = '#f5bf42';
 const favOff = '#808080';
 
 function FavorisCard(props: FavorisCardProps) {
-  const { id, star, timeEdit,  documenTitle,onAdd,onRemove} = props;
-  const [color, setColor] = useState(star ? favOn : favOff);
+  const { id, active, timeEdit, documenTitle, onAdd, onRemove } = props;
 
-  function toggleColor() {
-    setColor(star ? favOn : favOff);
-  }
+  const toggleFavoris = () => {
+    if (active) {
+      onRemove();
+    } else {
+      console.log('onAdd: ', onAdd);
+      onAdd();
+    }
+  };
 
   return (
     <Card className="mb-2">
@@ -33,11 +37,14 @@ function FavorisCard(props: FavorisCardProps) {
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
             <Link to={DOCUMENT_BY_ID(id)} style={{ color: '#000000' }}>
-              <h6 className="mb-0"> { documenTitle} </h6>
+              <h6 className="mb-0"> {documenTitle} </h6>
             </Link>
-            <p className="mb-0 font-weight-light" style={{  fontSize : "small" }}> {timeEdit} </p>
+            <p className="mb-0 font-weight-light" style={{ fontSize: 'small' }}>
+              {' '}
+              {timeEdit}{' '}
+            </p>
           </div>
-          <FaStar color={color} onClick={toggleColor} style={{ fontSize: 25 }}/>
+          <FaStar color={active ? favOn : favOff} onClick={toggleFavoris} style={{ fontSize: 25 }} />
         </Media.Body>
       </Media>
     </Card>
