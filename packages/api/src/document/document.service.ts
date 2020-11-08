@@ -17,7 +17,7 @@ export class DocumentService {
   constructor(
     @InjectModel('Document') private readonly documentModel: Model<Document>,
     @InjectModel('Collaboration')
-    private readonly collaborationModel: Model<Collaboration>,
+    private readonly collaborationModel?: Model<Collaboration>,
     @InjectRepository(UserRepository)
     private userRepository?: UserRepository,
   ) {}
