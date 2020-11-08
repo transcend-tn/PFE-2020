@@ -1,12 +1,9 @@
 import React from 'react';
-import Media from 'react-bootstrap/esm/Media';
-import Image from 'react-bootstrap/esm/Image';
 import Card from 'react-bootstrap/esm/Card';
+import Image from 'react-bootstrap/esm/Image';
+import Media from 'react-bootstrap/esm/Media';
 import { BsClock } from 'react-icons/bs';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { getCommentByDocId } from '../services/comment.service';
-import { formatDistanceToNow } from 'date-fns';
 
 export interface MessageCardProps {
   img?: string;
@@ -16,14 +13,19 @@ export interface MessageCardProps {
 }
 
 function MessageCard(props: MessageCardProps) {
-const { id: docId } = useParams<{ id: string }>();
-const {data} = useQuery(['comments:getbyid', docId], getCommentByDocId);
+  const { id: docId } = useParams<{ id: string }>();
 
   return (
     <Card className="p-1 mb-2">
       <Media>
         <Media.Body className="d-flex p-2">
-          <Image src={props.img ? props.img : 'http://localhost:3001/user.png'} roundedCircle width={50} height={50} className="mr-2" />
+          <Image
+            src={props.img ? props.img : 'http://localhost:3001/user.png'}
+            roundedCircle
+            width={50}
+            height={50}
+            className="mr-2"
+          />
           <div className="d-flex flex-column">
             <div className="font-weight-light text-secondary">
               <span className="h6 mr-2"> {props.username} </span>

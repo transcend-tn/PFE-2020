@@ -1,8 +1,7 @@
 import React from 'react';
-import Media from 'react-bootstrap/esm/Media';
-import Button from 'react-bootstrap/esm/Button';
-import Image from 'react-bootstrap/esm/Image';
 import Card from 'react-bootstrap/esm/Card';
+import Image from 'react-bootstrap/esm/Image';
+import Media from 'react-bootstrap/esm/Media';
 
 export interface MemberCardInterface {
   username: string;
@@ -12,9 +11,6 @@ export interface MemberCardInterface {
 const IMG_DEFAULT = 'user.png';
 
 function MemberCard(props: MemberCardInterface) {
-  function handlerLeave() {
-    console.log(`${props.username} "a été supprimer"`);
-  }
   return (
     <Card className="mb-2">
       <Media className="p-2 align-items-stretch">
