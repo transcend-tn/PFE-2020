@@ -10,6 +10,7 @@ import { Collaboration } from '../collaboration/collaboration.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '../users/user.repository';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class DocumentService {
@@ -43,15 +44,17 @@ export class DocumentService {
 
   async getDocumentById(id: string) {
     let doc;
+    let username;
     try {
       doc = await this.documentModel.findById(id).exec();
+      username = (await new UsersService(this.userRepository,null).getUserById(doc.owner)).username;
     } catch (error) {
       throw new NotFoundException();
     }
     if (!doc) {
       throw new NotFoundException();
     } else {
-      return doc;
+      return {...doc._doc, username} ;
     }
   }
 
