@@ -15,7 +15,7 @@ import TeamMembersListContainer from './containers/TeamMembersListContainer';
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
-  const { title, body, owner, createdAt } = data;
+  const { title, body, username, createdAt } = data;
 
   if (!body) return null;
   const contentState = convertFromRaw(body ? JSON.parse(body) : {});
@@ -35,7 +35,12 @@ function DocumentPage() {
           <div className="card p-3">
             <Tabs defaultActiveKey="Document" id="uncontrolled-tab">
               <Tab eventKey="Document" title="Document" className="mt-5">
-                <DocumentHeader title={title} createdAt={format(new Date(createdAt), 'd/MM/yyyy, HH:mm')} docId={id} />
+                <DocumentHeader
+                  title={title}
+                  createdAt={format(new Date(createdAt), 'd/MM/yyyy, HH:mm')}
+                  docId={id}
+                  username={username}
+                />
                 <Editor editorState={EditorState.createWithContent(contentState)} onChange={() => {}} />
               </Tab>
               <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
