@@ -1,11 +1,10 @@
-import React from 'react';
-import { QueryStatus, useMutation, useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
-import FavorisCard from '../../../components/FavorisCard';
-import { addFavoriteMutation, getFavoriteById, removeFavoritetMutation } from '../../../services/favorite.service';
 import { format } from 'date-fns';
+import React from 'react';
 import ReactPlaceholder from 'react-placeholder';
+import { QueryStatus, useMutation, useQuery } from 'react-query';
+import FavorisCard from '../../../components/FavorisCard';
 import { getDocumentsFavoris } from '../../../services/document.service';
+import { addFavoriteMutation, removeFavoritetMutation } from '../../../services/favorite.service';
 
 const FavorisListeContainer = () => {
   const { isLoading, isError, data = [], error } = useQuery(['documents:getFavoris'], getDocumentsFavoris);
