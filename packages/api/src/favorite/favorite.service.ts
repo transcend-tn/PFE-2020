@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Model } from 'mongoose';
@@ -29,6 +29,9 @@ export class FavoriteService {
 
     newFavorite.userId = currentUser.id;
     newFavorite.documentId = id;
+    if (await this.favoriteRepository.findOne({userId: currentUser.id, documentId: id})) {
+      throw new ConflictException('Cant add same document twice')
+    }
     try {
       await this.favoriteRepository.save(newFavorite);
     } catch (error) {

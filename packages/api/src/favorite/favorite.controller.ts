@@ -1,4 +1,4 @@
-import { Controller, Delete, Param, Post, UseGuards, Get } from '@nestjs/common';
+import { Controller, Delete, Param, Post, UseGuards, Get, Body } from '@nestjs/common';
 import { GetUser } from 'src/users/get-user.decorator';
 import { FavoriteService } from './favorite.service';
 import { User } from '../users/user.entity';
@@ -14,8 +14,8 @@ export class FavoriteController {
     return this.favoriteService.getFavorite(currentUser);
   }
 
-  @Post(':id')
-  addFavorite(@GetUser() currentUser: User, @Param('id') id:string) {
+  @Post()
+  addFavorite(@GetUser() currentUser: User, @Body('id') id:string) {
     return this.favoriteService.addFavorite(currentUser, id);
   }
 
