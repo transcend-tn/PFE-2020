@@ -20,8 +20,8 @@ export class FavoriteController {
   }
 
   @Delete(':id')
-  removeFavorite(@Param('id') id:string) {
-    return this.favoriteService.removeFavorite(id);
+  removeFavorite(@GetUser() currentUser: User, @Param('id') id:string) {
+    return this.favoriteService.removeFavorite(currentUser, id);
   }
 
 

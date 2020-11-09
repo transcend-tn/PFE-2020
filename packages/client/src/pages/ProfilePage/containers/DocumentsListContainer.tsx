@@ -1,26 +1,31 @@
 import { format } from 'date-fns';
 import React from 'react';
 import ReactPlaceholder from 'react-placeholder';
-import { QueryStatus, useMutation, useQuery } from 'react-query';
+import { QueryStatus, useMutation, useQuery, useQueryCache } from 'react-query';
 import Favoris from '../../../components/FavorisCard';
 import { useStoreState } from '../../../hooks/store.hooks';
 import { getDocumentsByOwner, getDocumentsFavoris } from '../../../services/document.service';
 import { addFavoriteMutation, removeFavoritetMutation } from '../../../services/favorite.service';
 
 function DocumentsListContainer() {
+  const cache = useQueryCache();
   const user = useStoreState((state) => state.user.user);
   const { isLoading: d_isLoading, isError: d_isError, data: d_data = [], error: d_error } = useQuery(
     ['documents:getbyowner', user.id],
-    getDocumentsByOwner,
+    getDocumentsByOwner
   );
   const { isLoading: f_isLoading, isError: f_isError, data: f_data = [], error: f_error } = useQuery(
     ['documents:getFavoris'],
     getDocumentsFavoris,
   );
 
-  const [add, { status }] = useMutation(addFavoriteMutation);
+  const [add, { status }] = useMutation(addFavoriteMutation, {
+    onSuccess: () => cache.invalidateQueries('documents:getFavoris')
+  });
   const isAddLoading = QueryStatus.Loading === status;
-  const [remove, { status: etats }] = useMutation(removeFavoritetMutation);
+  const [remove, { status: etats }] = useMutation(removeFavoritetMutation, {
+    onSuccess: () => cache.invalidateQueries('documents:getFavoris')
+  });
   const isRemoveLoading = QueryStatus.Loading === etats;
 
   if (d_isError || f_isError) {

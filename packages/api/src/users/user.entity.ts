@@ -48,7 +48,7 @@ export class User extends BaseEntity {
   @DeleteDateColumn({type: "timestamp"})
   deletedAt: Date;
 
-  @OneToMany(type=>Favorite, favorite=>favorite.user, {eager :true})
+  @OneToMany(type=>Favorite, favorite=>favorite.user)
   favorites: Favorite[];
 
   async validatePassword(password: string): Promise<boolean> {

@@ -19,7 +19,7 @@ export class Favorite extends BaseEntity {
   @Column()
   documentId: string;
 
-  @ManyToOne(type=>User, user=>user.favorites, {eager :false})
+  @ManyToOne(type=>User, user=>user.favorites)
   user:User;
 
 }

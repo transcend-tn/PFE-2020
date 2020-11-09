@@ -1,16 +1,19 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useState } from 'react';
 import ReactPlaceholder from 'react-placeholder';
-import { QueryStatus, useMutation, useQuery } from 'react-query';
+import { QueryStatus, useMutation, useQuery, useQueryCache } from 'react-query';
 import FavorisCard from '../../../components/FavorisCard';
 import { getDocumentsFavoris } from '../../../services/document.service';
 import { removeFavoritetMutation } from '../../../services/favorite.service';
 
 const FavorisListeContainer = () => {
-  const { isLoading, isError, data = [], error } = useQuery(['documents:getFavoris'], getDocumentsFavoris);
-  const [remove, { status: etats }] = useMutation(removeFavoritetMutation);
+  const cache = useQueryCache();
+  const [favs, setFavs] = useState(true);
+  let { isLoading, isError, data = [], error } = useQuery(['documents:getFavoris'], getDocumentsFavoris);
+  const [remove, { status: etats }] = useMutation(removeFavoritetMutation, {
+    onSuccess: () => cache.invalidateQueries('documents:getFavoris'),
+  });
   const isRemoveLoading = QueryStatus.Loading === etats;
-
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -27,7 +30,7 @@ const FavorisListeContainer = () => {
               documenTitle={fav.title}
               onRemove={remove}
               isRemoveLoading={isRemoveLoading}
-              active
+              active={favs}
             />
           );
         })}

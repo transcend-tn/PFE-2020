@@ -41,8 +41,8 @@ export class FavoriteService {
     return newFavorite;
   }
 
-  async removeFavorite(id: string) {
-    await this.favoriteRepository.delete({ id });
+  async removeFavorite(currentUser: User, id: string) {
+    await this.favoriteRepository.delete(await (await this.favoriteRepository.findOne({userId:currentUser.id, documentId:id})).id);
     return { deleted: id };
   }
 }

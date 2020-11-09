@@ -2,7 +2,7 @@ import axios from '../config/axios';
 import { FAVORITE, FAVORITE_BY_ID } from '../constants/uris';
 
 export const addFavoriteMutation = async ({ id }: any): Promise<string> => {
-  const { data } = await axios.post(FAVORITE, id);
+  const { data } = await axios.post(FAVORITE, {id});
   return data;
 };
 
