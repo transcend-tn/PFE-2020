@@ -24,13 +24,11 @@ function FavorisCard(props: FavorisCardProps) {
   const { id, active, timeEdit, documenTitle, onAdd, onRemove } = props;
 
   const toggleFavoris = () => {
-    if (onAdd && onRemove) {
       if (active) {
-        onRemove({ id });
+        onRemove && onRemove({ id });
       } else {
-        onAdd({ id });
+        onAdd && onAdd({ id });
       }
-    }
   };
 
   return (
