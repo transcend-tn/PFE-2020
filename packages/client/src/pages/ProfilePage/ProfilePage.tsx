@@ -1,9 +1,9 @@
 import React from 'react';
 import { Row, Col, Tabs, Tab } from 'react-bootstrap';
-import Favoris from '../../components/FavorisCard';
 import ProfileCardContainer from './containers/ProfileCardContainer';
 import DocumentsListContainer from './containers/DocumentsListContainer';
 import CollaborationRequestContainer from './containers/CollaborationRequestContainer';
+import FavorisListeContainer from './containers/FavorisListeContainer';
 
 const FAVORIS: string[] = ['1', '2'];
 
@@ -20,9 +20,7 @@ function ProfilePage() {
               <DocumentsListContainer />
             </Tab>
             <Tab eventKey="favoris" title="Favoris" className="mt-5">
-              {FAVORIS.map((value) => {
-                return <Favoris key={`favoris-${value}`} document="document 1" timeEdit="12/04/2019" id={value} />;
-              })}
+            <FavorisListeContainer/>
             </Tab>
             <Tab eventKey="requests" title="Collaborations" className="mt-5">                              
               <CollaborationRequestContainer />              

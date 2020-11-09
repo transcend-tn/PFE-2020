@@ -7,11 +7,10 @@ import routes from './routes';
 
 import './styles/index.scss';
 
-const queryCache = new QueryCache();
 
 function App() {
   return (
-    <ReactQueryCacheProvider queryCache={queryCache}>
+    <ReactQueryCacheProvider >
       <Router>
         <Switch>
           {routes.map(({ path, Component }: any) => {
