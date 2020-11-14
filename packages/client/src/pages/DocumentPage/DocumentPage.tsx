@@ -11,6 +11,7 @@ import { getDocumentById } from '../../services/document.service';
 import MessageFormContainer from './containers/MessageFormContainer';
 import MessageListContainer from './containers/MessageListContainer';
 import TeamMembersListContainer from './containers/TeamMembersListContainer';
+import { format } from 'date-fns';
 
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();

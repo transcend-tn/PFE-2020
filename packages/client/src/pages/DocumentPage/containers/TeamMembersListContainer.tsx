@@ -1,3 +1,4 @@
+import { is } from 'date-fns/locale';
 import React, { useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useQuery } from 'react-query';
@@ -11,12 +12,12 @@ function TeamMembersListContainer() {
   const { isError, data = [], error } = useQuery(['collaboration:getTeam', id], collaborationTeam);
   const currentUser = useStoreState((state) => state.user.user);
   const teamIds = data.map((member: any) => member.id);
-  const [isMemmber, setIsMember] = useState(teamIds.includes(currentUser.id));
+  const isMember = teamIds.includes(currentUser.id);
 
   if (isError) {
     return <span>Error: {error} !</span>;
   }
-
+if (data.length!=0)
   return (
     <>
       <Card>
@@ -29,19 +30,20 @@ function TeamMembersListContainer() {
           })}
           <hr />
           <div className="text-center">
-            <Button
-              variant={isMemmber ? 'danger' : 'success'}
-              onClick={() => {
-                setIsMember(!isMemmber);
-              }}
-            >
-              {isMemmber ? 'Leave Team' : 'Join Team'}
-            </Button>
+          <Button
+                variant={isMember ? "danger" :"success"}
+                onClick={() => {
+                  // appel webservice
+                }}
+              >
+                 {isMember ? 'Leave Team' : 'Join Team'}
+              </Button>
           </div>
         </Card.Body>
       </Card>
     </>
   );
+  return (null);
 }
 
 export default TeamMembersListContainer;
