@@ -14,8 +14,7 @@ export const DOCUMENT_EDIT = (id: string) => `/document/${id}/edit`;
 export const DOCUMENT_BY_OWNER = (id: string) => `/document/owner/${id}`;
 
 export const FAVORITE = '/favorite';
-export const FAVORITE_ADD =  (id: string) => `/favorite/${id}`;  
-export const FAVORITE_REMOVE = (id: string) => `/favorite/${id}`;
+export const FAVORITE_BY_ID = (id: string) => `/favorite/${id}`;
 
 export const COMMENT = '/comment';
 export const COMMENT_MESSAGE_ADD = (docId: string) => `/comment/document/${docId}`;

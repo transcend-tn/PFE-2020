@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { convertFromRaw, Editor, EditorState } from 'draft-js';
 import React from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
