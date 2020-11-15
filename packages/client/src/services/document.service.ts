@@ -1,5 +1,6 @@
 import axios from '../config/axios';
 import { DOCUMENT, DOCUMENT_BY_ID, DOCUMENT_BY_OWNER, FAVORITE } from './../constants/uris';
+import { COLLABORATION_REQUESTS, DOCUMENT, DOCUMENT_BY_ID, DOCUMENT_BY_OWNER } from './../constants/uris';
 import { DocumentUpdate } from '../../../common/src/document.interface';
 
 export const createDocumentMutation = async (payload: any): Promise<string> => {
@@ -28,5 +29,10 @@ export const deleteDocumentMutation = async (payload: any): Promise<string> => {
 };
 export const updateDocumentMutation = async (payload: DocumentUpdate): Promise<string> => {
   const { data } = await axios.put(DOCUMENT, payload);
+  return data;
+};
+
+export const getCollaborationRequests = async (key: any, id: string): Promise<any> => {
+  const { data } = await axios.get(COLLABORATION_REQUESTS);
   return data;
 };

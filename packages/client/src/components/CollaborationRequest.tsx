@@ -13,16 +13,18 @@ export interface CollaborationRequestProps {
   /** document prop documentation */
   document: string;
   img?: string;
-  onJoin: any;
-  onLeave: any;
-  isJoinLoading: boolean;
-  isLeaveLoading: boolean;
+  docId?: string;
+  userId?: string;
+  onAccept: any;
+  onRefuse: any;
+  isAcceptLoading: boolean;
+  isRefuseLoading: boolean;
 }
 
 const IMG_DEFAULT = 'user.png';
 
 function CollaborationRequest(props: CollaborationRequestProps) {
-  const { id, username, document, img, onJoin, onLeave, isJoinLoading, isLeaveLoading } = props;
+  const { id, username, document, img, onAccept, onRefuse, isAcceptLoading, isRefuseLoading } = props;
 
   return (
     <Card className="mb-2">
@@ -38,10 +40,10 @@ function CollaborationRequest(props: CollaborationRequestProps) {
             </Link>
           </div>
           <ButtonGroup size="sm" aria-label="refuse">
-            <Button variant="success" type="submit" onClick={onJoin} className="mr-2" disabled={isJoinLoading}>
+            <Button variant="success" type="submit" onClick={onAccept} className="mr-2" disabled={isAcceptLoading}>
               Accepter
             </Button>
-            <Button variant="danger" type="submit" onClick={onLeave} disabled={isLeaveLoading}>
+            <Button variant="danger" type="submit" onClick={onRefuse} disabled={isRefuseLoading}>
               Refuser
             </Button>
           </ButtonGroup>

@@ -41,7 +41,9 @@ export class CollaborationService {
     const ids: string[] = collaborations.map(
       collaboration => collaboration.userId,
     );
-    return { [documentId]: await this.userRepository.findByIds(ids) };
+    
+    const usersByIds = await this.userRepository.findByIds(ids);
+    return !!usersByIds.length ? {[documentId]: usersByIds} : null;
   }
 
   async joinTeam(currentUser: User, id: string, isOwner: boolean) {
