@@ -71,8 +71,13 @@ export class DocumentService {
     const docs = await this.getDocumentByOwner(owner); 
     const ids:string[]=docs.map((doc)=>doc.id); 
     
-    const requests= Promise.all(ids.map(async (id)=> await new CollaborationService(this.collaborationModel,this.userRepository).collaborationRequests(id)));
-    return requests;  
+    const requests= await Promise.all(ids.map(async (id)=> await new CollaborationService(this.collaborationModel,this.userRepository).collaborationRequests(id)));
+    return requests.reduce((acc, request) => {
+      return {
+        ...acc,
+        ...request
+      }
+    }, {})  
   } 
 
   async getFollowers(owner: string) 
