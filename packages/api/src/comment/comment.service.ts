@@ -16,7 +16,7 @@ export class CommentService {
       ) {}
 
       async documentComment(comment:CommentCreate, currentUser:User, id:string)
-      {
+      {if (!!comment.body.length){
           const newComment = new this.commentModel(comment);
 
           newComment.userId = currentUser.id;
@@ -28,12 +28,13 @@ export class CommentService {
             userId: response.userId, 
             documentId: response.documentId, 
             body: response.body, 
-            createdAt: response.createdAt}
+            createdAt: response.createdAt}}
+            else return null;
           
       }
 
       async getCommentByDocId(id: string) {
-        let comments=  await this.commentModel.find({documentId: id})
+        let comments=  await (await this.commentModel.find({documentId: id})).reverse();
         let data = Promise.all(comments.map(async (comment)=>
         {
           const user= await new UsersService(this.userRepository,null).getUserById(comment.userId)

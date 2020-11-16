@@ -22,9 +22,17 @@ function MessageForm(props: MessageFormInterface) {
     validationSchema: Yup.object({
       body: Yup.string(),
     }),
-    onSubmit: (payload: CommentCreate) => {
-      createComment({ docId, payload });
-    },
+    
+    onSubmit: async (payload: CommentCreate, {setSubmitting, setErrors, setStatus, resetForm}) => {
+      try {
+        createComment({ docId, payload });
+        resetForm({})
+        setStatus({success: true})
+      } catch (error) {
+        setStatus({success: false})
+        setSubmitting(false)
+      }
+    }
   });
 
   return (
