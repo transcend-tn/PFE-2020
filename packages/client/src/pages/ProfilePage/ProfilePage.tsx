@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col, Tabs, Tab } from 'react-bootstrap';
 import ProfileCardContainer from './containers/ProfileCardContainer';
 import DocumentsListContainer from './containers/DocumentsListContainer';
-import CollaborationRequestContainer from './containers/CollaborationRequestContainer';
 import FavorisListeContainer from './containers/FavorisListeContainer';
 import CollaborationRequestList from './containers/CollaborationRequestList';
 

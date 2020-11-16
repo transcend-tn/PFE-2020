@@ -1,6 +1,11 @@
 import axios from '../config/axios';
-import { DOCUMENT, DOCUMENT_BY_ID, DOCUMENT_BY_OWNER, FAVORITE } from './../constants/uris';
-import { COLLABORATION_REQUESTS, DOCUMENT, DOCUMENT_BY_ID, DOCUMENT_BY_OWNER } from './../constants/uris';
+import {
+  DOCUMENT,
+  DOCUMENT_BY_ID,
+  DOCUMENT_BY_OWNER,
+  FAVORITE,
+  COLLABORATION_REQUESTS,
+} from './../constants/uris';
 import { DocumentUpdate } from '../../../common/src/document.interface';
 
 export const createDocumentMutation = async (payload: any): Promise<string> => {
