@@ -5,6 +5,7 @@ import { QueryStatus, useMutation, useQuery } from 'react-query';
 import { disableMutation, enableMutation } from '../../../services/collaboration.service';
 import { useParams } from 'react-router-dom';
 import { Accordion, Card } from 'react-bootstrap';
+import {IoMdDocument} from 'react-icons/io';
 
 function CollaborationRequestList() {
   const { id: documentId } = useParams<{ id: string }>();
@@ -27,7 +28,7 @@ function CollaborationRequestList() {
           return (
             <Card>
               <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
-              {docId}
+              <IoMdDocument size={25}/> {docId}
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
