@@ -22,7 +22,7 @@ const FavorisListeContainer = () => {
     <>
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
         {data.map((fav: any, idx: number) => {
-          return (
+          return (fav!==null?
             <FavorisCard
               key={`favoris-${idx}`}
               id={fav._id}
@@ -31,7 +31,7 @@ const FavorisListeContainer = () => {
               onRemove={remove}
               isRemoveLoading={isRemoveLoading}
               active={favs}
-            />
+            />:null
           );
         })}
       </ReactPlaceholder>

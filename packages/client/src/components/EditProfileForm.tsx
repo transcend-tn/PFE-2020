@@ -30,32 +30,32 @@ function EditProfileForm(props: EditProfileFormInterface) {
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">
-      <Form.Group controlId="formBasicFname">
-        <Form.Label>Nom</Form.Label>
-        <Form.Control
-          name="fname"
-          type="text"
-          placeholder="Veuillez entrer votre nom de famille"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.fname}
-        />
-        {formik.touched.fname && formik.errors.fname ? (
-          <Form.Text className="text-danger">{formik.errors.fname}</Form.Text>
-        ) : null}
-      </Form.Group>
       <Form.Group controlId="formBasicLname">
-        <Form.Label>Prénom</Form.Label>
+        <Form.Label>Nom</Form.Label>
         <Form.Control
           name="lname"
           type="text"
-          placeholder="Veuillez entrer votre prénom"
+          placeholder="Veuillez entrer votre nom de famille"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.lname}
         />
         {formik.touched.lname && formik.errors.lname ? (
           <Form.Text className="text-danger">{formik.errors.lname}</Form.Text>
+        ) : null}
+      </Form.Group>
+      <Form.Group controlId="formBasicFname">
+        <Form.Label>Prénom</Form.Label>
+        <Form.Control
+          name="fname"
+          type="text"
+          placeholder="Veuillez entrer votre prénom"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.fname}
+        />
+        {formik.touched.fname && formik.errors.fname ? (
+          <Form.Text className="text-danger">{formik.errors.fname}</Form.Text>
         ) : null}
       </Form.Group>
       <Form.Group controlId="formBasicEmail">

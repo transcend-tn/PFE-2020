@@ -42,7 +42,7 @@ function DocumentsListContainer() {
               documenTitle={doc.title}
               timeEdit={format(new Date(doc.createdAt), 'd MMMM, HH:mm')}
               id={doc.id}
-              active={f_data.map((d: any) => d._id).includes(doc.id)}
+              active={f_data.map((d: any) => d!==null?d._id:-1).includes(doc.id)}
               onAdd={add}
               isAddLoading={isAddLoading}
               onRemove={remove}
