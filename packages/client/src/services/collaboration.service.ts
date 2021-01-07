@@ -7,8 +7,8 @@ export const collaborationTeam= async (key: any, docId: string): Promise<any> =>
     return data;
 };
 
-export const joinTeamMutation = async ({ docId, payload }: any): Promise<any> => {
-  const { data } = await axios.post(JOIN_TEAM(docId), payload);
+export const joinTeamMutation = async ( docId : any): Promise<any> => {
+  const { data } = await axios.post(JOIN_TEAM(docId));
   return data;
 }
 

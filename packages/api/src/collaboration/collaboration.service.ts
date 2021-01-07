@@ -57,6 +57,8 @@ export class CollaborationService {
     collaboration.userId = currentUser.id;
     collaboration.documentId = id;
     collaboration.state = isOwner;
+    if(await this.collaborationModel.findOne({documentId: id, userId:currentUser.id}))
+    {throw new ConflictException('You already requested to join this team');}
     if (await this.isMember(currentUser, id)) {
       throw new ConflictException('You are already a member of this team');
     } else {
