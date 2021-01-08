@@ -67,12 +67,22 @@ export class CollaborationService {
   }
 
   async leaveTeam(currentUser: User, id: string) {
+    if (
+     ! await new DocumentService(
+        this.documentModel,
+        this.collaborationModel,
+        this.userRepository,
+      ).isOwner(currentUser, id)
+    ){
+     
+  
     const del = await this.collaborationModel
       .deleteOne({ userId: currentUser.id, documentId: id })
       .exec();
     if (del.n === 0) {
       throw new NotFoundException();
     }
+  }
   }
 
   async isMember(currentUser: User, id: string) {

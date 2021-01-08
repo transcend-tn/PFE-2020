@@ -26,6 +26,7 @@ export const REQUEST_BY_REQ_ID = (id: string) => `/comment/request/${id}`;
 
 export const COLLABORATION_BY_ID= (id: string) => `/collaboration/${id}`;
 export const JOIN_TEAM = (docId: string) => `/collaboration/${docId}`;
+export const LEAVE_TEAM = (docId: string) => `/collaboration/${docId}`;
 export const ENABLE = (docId: string, userId: string) => `/collaboration/enable/${docId}/${userId}`;
 export const DISABLE = (docId: string, userId: string) => `/collaboration/disable/${docId}/${userId}`;
 export const REMOVE = (docId: string, userId: string) => `/collaboration/remove/${docId}/${userId}`;

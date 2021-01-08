@@ -5,13 +5,16 @@ import { useMutation, useQuery, useQueryCache } from 'react-query';
 import { useParams } from 'react-router-dom';
 import MemberCard from '../../../components/MemberCard';
 import { useStoreState } from '../../../hooks/store.hooks';
-import { collaborationTeam, joinTeamMutation } from '../../../services/collaboration.service';
+import { collaborationTeam, joinTeamMutation, leaveTeamMutation } from '../../../services/collaboration.service';
 
 function TeamMembersListContainer() {
   const { id } = useParams<{ id: string }>();
   const { isError, data = [], error } = useQuery(['collaboration:getTeam', id], collaborationTeam);
   const cache = useQueryCache();
-  const [joinTeam, { status }] = useMutation(joinTeamMutation, {
+  const [joinTeam, { status: join_status }] = useMutation(joinTeamMutation, {
+    onSuccess: () => cache.invalidateQueries('collaboration:getTeam'),
+  });
+  const [leaveTeam, { status: leave_status  }] = useMutation(leaveTeamMutation, {
     onSuccess: () => cache.invalidateQueries('collaboration:getTeam'),
   });
   const currentUser = useStoreState((state) => state.user.user);
@@ -38,7 +41,7 @@ if (data.length!=0)
                 variant={isMember ? "danger" :"success"}
                 onClick={() => {
                   // appel webservice
-                  isMember?console.log("leaving team.."):joinTeam(id)
+                  isMember?leaveTeam(id):joinTeam(id)
                 }}
               >
                  {isMember ? 'Leave Team' : 'Join Team'}
