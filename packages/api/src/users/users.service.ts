@@ -16,6 +16,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
+import {Like} from "typeorm";
 
 @Injectable()
 export class UsersService {
@@ -85,6 +86,21 @@ export class UsersService {
 
   async getUserById(id: string) {
     const user = await this.userRepository.findOne(id);
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return {
+      id: user.id,
+      img: user.img,
+      fname: user.fname,
+      lname: user.lname,
+      username: user.username,
+      email: user.email,
+      favorites: user.favorites,
+    };
+  }
+  async getUserByUsername(username: string) {
+    const user = await this.userRepository.findOne({username})
     if (!user) {
       throw new NotFoundException();
     }

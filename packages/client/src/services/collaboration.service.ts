@@ -32,8 +32,8 @@ export const removeMutation = async ({ docId, userId}: any ): Promise<string> =>
   return data;
 };
 
-export const documentsCollab= async (): Promise<any> => {
-  const { data } = await axios.get(COLLABORATION);
+export const documentsCollab= async  (key: any, userId : any ): Promise<any> => {
+  const { data } = await axios.get(COLLABORATION(userId));
   return data;
 };
 

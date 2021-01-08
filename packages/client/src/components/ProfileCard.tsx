@@ -9,18 +9,20 @@ export interface ProfileCardInterface {
   followers: number;
   following: number;
   user: any;
+  canEdit: Boolean;
 }
 
 function ProfileCard(props: ProfileCardInterface) {
-  const { user, followers, following } = props;
+  const { user, followers, following, canEdit } = props;
   return (
     <Card>
       <Card.Body>
         <div className="text-center">
           <Image className="border" width={100} height={100} src={user.img ? user.img : USER_IMG} roundedCircle />
+
+          <h5 className="text-center mt-2 mb-0">{`${user.fname} ${user.lname}`}</h5>
+          <a href="" className="text-muted mt-0">@{user.username}</a>
         </div>
-        <h5 className="text-center m-3">{user.username}</h5>
-        <h5 className="text-center m-2">{`${user.fname} ${user.lname}`}</h5>
         <div className="d-flex justify-content-center mt-4">
           <div className="followers text-center mr-2">
             <h6 className="text-muted">abonné(s)</h6>
@@ -33,13 +35,13 @@ function ProfileCard(props: ProfileCardInterface) {
           </div>
         </div>
 
-        <div className="text-center mt-4">
+        {canEdit && <div className="text-center mt-4">
           <Link to={`/profile/${user.username}/edit`}>
             <Button className="btn-sm" variant="light" type="submit">
               Editer Profile
             </Button>
           </Link>
-        </div>
+        </div>}
       </Card.Body>
     </Card>
   );

@@ -29,6 +29,11 @@ export class UsersController {
     return this.usersService.getUserById(id);
   }
 
+  @Get('/username/:username')
+  getUserByUsername(@Param('username') username: string) {
+    return this.usersService.getUserByUsername(username);
+  }
+
   @Put()
   @UseGuards(AuthGuard())
   editUser(@Body() data: UserEdit, @GetUser() user: User) {

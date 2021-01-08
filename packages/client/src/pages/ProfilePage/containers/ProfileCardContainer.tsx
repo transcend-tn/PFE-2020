@@ -3,12 +3,16 @@ import ReactPlaceholder from 'react-placeholder';
 import { useQuery } from 'react-query';
 import ProfileCard from '../../../components/ProfileCard';
 import { useStoreState } from '../../../hooks/store.hooks';
-import { getUserById } from '../../../services/user.service';
+import { getUserById, getUserByUsername } from '../../../services/user.service';
 
-function ProfileCardContainer() {
-  const user = useStoreState((state) => state.user.user);
-  const { isLoading, isError, data = {}, error } = useQuery(['user:getById', user.id], getUserById);
+export interface ProfileCardProps {
+  username: string;
+}
 
+function ProfileCardContainer(props: ProfileCardProps) {
+  const { username } = props;
+  const currentUsername = useStoreState((state) => state.user.user.username);
+  const { isLoading, isError, data = {}, error } = useQuery(['user:getUserByUsername', username], getUserByUsername);
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -16,7 +20,7 @@ function ProfileCardContainer() {
   return (
     <>
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
-        <ProfileCard followers={15} following={42} user={data} />
+        <ProfileCard followers={15} following={42} user={data} canEdit={username === currentUsername} />
       </ReactPlaceholder>
     </>
   );

@@ -50,8 +50,8 @@ export class CollaborationController {
     return this.collaborationService.remove(currentUser, idu, idc);
   }
 
-  @Get()
-  getDocuments(@GetUser() currentUser: User) {
-    return this.collaborationService.getDocuments(currentUser);
+  @Get('documents/:idu')
+  getDocuments(@Param('idu') idu:string) {
+    return this.collaborationService.getDocuments(idu);
   }
 }

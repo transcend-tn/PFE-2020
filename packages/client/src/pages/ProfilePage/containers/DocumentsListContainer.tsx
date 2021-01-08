@@ -7,12 +7,21 @@ import { useStoreState } from '../../../hooks/store.hooks';
 import { documentsCollab } from '../../../services/collaboration.service';
 import { getDocumentsByOwner, getDocumentsFavoris } from '../../../services/document.service';
 import { addFavoriteMutation, removeFavoritetMutation } from '../../../services/favorite.service';
+import { getUserByUsername } from '../../../services/user.service';
 
-function DocumentsListContainer() {
+export interface DocumentsListProps {
+  username: string;
+}
+
+function DocumentsListContainer(props: DocumentsListProps) {
+  const { username } = props;
   const cache = useQueryCache();
-  const user = useStoreState((state) => state.user.user);
+  const currentUser = useStoreState((state) => state.user.user);
+  const { isLoading, isError, data: user = {}, error } = useQuery(['user:getUserByUsername', username], getUserByUsername);
+  console.log("user : "+user.id)
+  console.log("current : "+currentUser.id)
   const { isLoading: d_isLoading, isError: d_isError, data: d_data = [], error: d_error } = useQuery(
-    ['documents:getbyowner', user.id],
+    ['collaboration:documentsCollab', user.id],
     documentsCollab
   );
   const { isLoading: f_isLoading, isError: f_isError, data: f_data = [], error: f_error } = useQuery(

@@ -150,8 +150,8 @@ export class CollaborationService {
     } else throw new UnauthorizedException('You need to be the owner');
   }
 
-  async getDocuments(currentUser: User) {
-    const docs= await this.collaborationModel.find({ userId:currentUser.id, state: true })
+  async getDocuments(userId: string) {
+    const docs= await this.collaborationModel.find({ userId , state: true })
     const docIds = docs.map(doc=>doc.documentId)
     return await new DocumentService(
       this.documentModel,

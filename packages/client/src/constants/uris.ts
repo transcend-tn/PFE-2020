@@ -5,6 +5,7 @@ export const ENTRYPOINT = `${PROTOCOL}://${BASE_URL}:${PORT}`;
 export const SIGN_IN = '/users/signin';
 export const SIGN_UP = '/users';
 export const USER_BY_ID = (id: string) => `/users/${id}`;
+export const USER_BY_USERNAME = (username: string) => `/users/username/${username}`;
 export const USERS = '/users';
 export const EDIT_PASSWORD = `/users/change-password`;
 
@@ -24,7 +25,7 @@ export const COMMENT_BY_DOC_ID = (id: string) => `/comment/document/${id}`;
 export const REQUEST_COMMENT_ADD = (reqId: string) => `/comment/request/${reqId}`;
 export const REQUEST_BY_REQ_ID = (id: string) => `/comment/request/${id}`;
 
-export const COLLABORATION = '/collaboration';
+export const COLLABORATION = (userId: string) => `/collaboration/documents/${userId}`;
 export const COLLABORATION_BY_ID= (id: string) => `/collaboration/${id}`;
 export const JOIN_TEAM = (docId: string) => `/collaboration/${docId}`;
 export const LEAVE_TEAM = (docId: string) => `/collaboration/${docId}`;
