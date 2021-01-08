@@ -4,6 +4,7 @@ import ReactPlaceholder from 'react-placeholder';
 import { QueryStatus, useMutation, useQuery, useQueryCache } from 'react-query';
 import Favoris from '../../../components/FavorisCard';
 import { useStoreState } from '../../../hooks/store.hooks';
+import { documentsCollab } from '../../../services/collaboration.service';
 import { getDocumentsByOwner, getDocumentsFavoris } from '../../../services/document.service';
 import { addFavoriteMutation, removeFavoritetMutation } from '../../../services/favorite.service';
 
@@ -12,7 +13,7 @@ function DocumentsListContainer() {
   const user = useStoreState((state) => state.user.user);
   const { isLoading: d_isLoading, isError: d_isError, data: d_data = [], error: d_error } = useQuery(
     ['documents:getbyowner', user.id],
-    getDocumentsByOwner
+    documentsCollab
   );
   const { isLoading: f_isLoading, isError: f_isError, data: f_data = [], error: f_error } = useQuery(
     ['documents:getFavoris'],

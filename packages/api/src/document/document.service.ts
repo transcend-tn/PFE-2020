@@ -151,4 +151,15 @@ export class DocumentService {
       : false;
     return isOwner;
   }
+
+  async getDocumentByIds(ids: string[]) {
+    const docs=  await this.documentModel.find({_id:{$in:ids}})
+    return docs.map(doc => ({
+      id: doc.id,
+      title: doc.title,
+      createdAt: doc.createdAt,
+      body: doc.body,
+      owner: doc.owner,
+    }));
+  }
 }

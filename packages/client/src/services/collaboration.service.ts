@@ -1,5 +1,5 @@
 import axios from '../config/axios';
-import { COLLABORATION_BY_ID, ENABLE, JOIN_TEAM, DISABLE, REMOVE, LEAVE_TEAM } from '../constants/uris';
+import { COLLABORATION_BY_ID, ENABLE, JOIN_TEAM, DISABLE, REMOVE, LEAVE_TEAM, COLLABORATION } from '../constants/uris';
 
 
 export const collaborationTeam= async (key: any, docId: string): Promise<any> => {
@@ -29,6 +29,11 @@ export const disableMutation = async ({ docId, userId}: any ): Promise<string> =
 
 export const removeMutation = async ({ docId, userId}: any ): Promise<string> => {
   const { data } = await axios.delete(REMOVE(docId, userId));
+  return data;
+};
+
+export const documentsCollab= async (): Promise<any> => {
+  const { data } = await axios.get(COLLABORATION);
   return data;
 };
 
