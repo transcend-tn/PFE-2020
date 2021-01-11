@@ -18,14 +18,12 @@ function DocumentsListContainer(props: DocumentsListProps) {
   const cache = useQueryCache();
   const currentUser = useStoreState((state) => state.user.user);
   const { isLoading, isError, data: user = {}, error } = useQuery(['user:getUserByUsername', username], getUserByUsername);
-  console.log("user : "+user.id)
-  console.log("current : "+currentUser.id)
   const { isLoading: d_isLoading, isError: d_isError, data: d_data = [], error: d_error } = useQuery(
     ['collaboration:documentsCollab', user.id],
     documentsCollab
   );
   const { isLoading: f_isLoading, isError: f_isError, data: f_data = [], error: f_error } = useQuery(
-    ['documents:getFavoris'],
+    ['documents:getFavoris', user.id],
     getDocumentsFavoris,
   );
 
@@ -57,6 +55,7 @@ function DocumentsListContainer(props: DocumentsListProps) {
               isAddLoading={isAddLoading}
               onRemove={remove}
               isRemoveLoading={isRemoveLoading}
+              showStar={currentUser.id===user.id}
             />
           );
         })}

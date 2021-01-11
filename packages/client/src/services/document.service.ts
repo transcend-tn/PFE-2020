@@ -5,6 +5,7 @@ import {
   DOCUMENT_BY_OWNER,
   FAVORITE,
   COLLABORATION_REQUESTS,
+  FAVORITE_BY_ID,
 } from './../constants/uris';
 import { DocumentUpdate } from '../../../common/src/document.interface';
 
@@ -18,8 +19,8 @@ export const getDocumentsByOwner = async (key: any, id: string): Promise<any> =>
   return data;
 };
 
-export const getDocumentsFavoris = async (key: any): Promise<any> => {
-  const { data } = await axios.get(FAVORITE);
+export const getDocumentsFavoris = async (key: any, id: string): Promise<any> => {
+  const { data } = await axios.get(FAVORITE_BY_ID(id));
   return data;
 };
 

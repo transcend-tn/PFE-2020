@@ -5,11 +5,19 @@ import { QueryStatus, useMutation, useQuery, useQueryCache } from 'react-query';
 import FavorisCard from '../../../components/FavorisCard';
 import { getDocumentsFavoris } from '../../../services/document.service';
 import { removeFavoritetMutation } from '../../../services/favorite.service';
+import { getUserByUsername } from '../../../services/user.service';
+import { useStoreState } from '../../../hooks/store.hooks';
 
-const FavorisListeContainer = () => {
+export interface FavorisListeProps {
+  username: string;
+}
+const FavorisListeContainer = (props:FavorisListeProps) => {
+  const { username } = props;
   const cache = useQueryCache();
   const [favs, setFavs] = useState(true);
-  let { isLoading, isError, data = [], error } = useQuery(['documents:getFavoris'], getDocumentsFavoris);
+  const currentUser = useStoreState((state) => state.user.user);
+  const { isLoading:u_isLoading, isError:u_isError, data: user = {}, error:u_error } = useQuery(['user:getUserByUsername', username], getUserByUsername);
+  let { isLoading, isError, data = [], error } = useQuery(['documents:getFavoris', user.id], getDocumentsFavoris);
   const [remove, { status: etats }] = useMutation(removeFavoritetMutation, {
     onSuccess: () => cache.invalidateQueries('documents:getFavoris'),
   });
@@ -31,6 +39,7 @@ const FavorisListeContainer = () => {
               onRemove={remove}
               isRemoveLoading={isRemoveLoading}
               active={favs}
+              showStar={currentUser.id===user.id}
             />:null
           );
         })}

@@ -8,6 +8,7 @@ import { DOCUMENT_BY_ID } from '../constants/uris';
 
 export interface FavorisCardProps {
   id: string;
+  showStar:boolean;
   active?: boolean;
   timeEdit: string;
   documenTitle: string;
@@ -21,7 +22,7 @@ const favOn = '#f5bf42';
 const favOff = '#808080';
 
 function FavorisCard(props: FavorisCardProps) {
-  const { id, active, timeEdit, documenTitle, onAdd, onRemove } = props;
+  const { id, showStar, active, timeEdit, documenTitle, onAdd, onRemove } = props;
 
   const toggleFavoris = () => {
       if (active) {
@@ -44,7 +45,7 @@ function FavorisCard(props: FavorisCardProps) {
               {timeEdit}{' '}
             </p>
           </div>
-          <FaStar color={active ? favOn : favOff} onClick={toggleFavoris} style={{ fontSize: 25 }} />
+          {showStar && <FaStar color={active ? favOn : favOff} onClick={toggleFavoris} style={{ fontSize: 25 }} />}
         </Media.Body>
       </Media>
     </Card>

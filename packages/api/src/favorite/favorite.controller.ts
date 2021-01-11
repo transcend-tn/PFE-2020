@@ -9,9 +9,9 @@ import { AuthGuard } from '@nestjs/passport';
 export class FavoriteController {
   constructor(private favoriteService: FavoriteService) {}
 
-  @Get()
-  getFavorite(@GetUser() currentUser: User) {
-    return this.favoriteService.getFavorite(currentUser);
+  @Get(':id')
+  getFavorite(@Param('id') id:string) {
+    return this.favoriteService.getFavorite(id);
   }
 
   @Post()

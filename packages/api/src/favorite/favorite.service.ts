@@ -14,9 +14,9 @@ export class FavoriteService {
     @InjectModel('Document') private readonly documentModel: Model<Document>,
   ) {}
 
-  async getFavorite(currentUser: User) {
+  async getFavorite(id: string) {
     let favs = {};
-    const data = await this.favoriteRepository.find({ userId: currentUser.id });
+    const data = await this.favoriteRepository.find({ userId: id });
     favs = Promise.all(
       data.map(
         async f => await this.documentModel.findOne({ _id: f.documentId }),
