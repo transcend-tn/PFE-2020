@@ -1,4 +1,5 @@
-import { convertFromRaw, Editor, EditorState } from 'draft-js';
+import { convertFromRaw, EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 import React from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import { useQuery } from 'react-query';
@@ -16,10 +17,10 @@ function DocumentPage() {
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, createdAt } = data;
-
+  // console.log(body);
   if (!body) return null;
   const contentState = convertFromRaw(body ? JSON.parse(body) : {});
-
+// console.log(contentState)
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -41,7 +42,7 @@ function DocumentPage() {
                   docId={id}
                   username={username}
                 />
-                <Editor editorState={EditorState.createWithContent(contentState)} onChange={() => {}} />
+                <Editor editorState={EditorState.createWithContent(contentState)} readOnly={true} toolbarHidden/>
               </Tab>
               <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
                 <PropositionList />
