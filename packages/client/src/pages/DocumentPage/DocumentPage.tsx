@@ -6,12 +6,12 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import DocumentHeader from '../../components/DocumentHeader';
 import HistoryList from '../../components/HistoryList';
-import PropositionList from '../../components/PropositionList';
 import { getDocumentById } from '../../services/document.service';
 import MessageFormContainer from './containers/MessageFormContainer';
 import MessageListContainer from './containers/MessageListContainer';
 import TeamMembersListContainer from './containers/TeamMembersListContainer';
 import { format } from 'date-fns';
+import PropositionListContainer from './containers/PropositionListContainer';
 
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();
@@ -45,7 +45,7 @@ function DocumentPage() {
                 <Editor editorState={EditorState.createWithContent(contentState)} readOnly={true} toolbarHidden/>
               </Tab>
               <Tab eventKey="PR" title="Propositions de Modifications" className="mt-5">
-                <PropositionList />
+                <PropositionListContainer />
               </Tab>
               <Tab eventKey="Historique" title="Historique" className="mt-5">
                 <HistoryList />

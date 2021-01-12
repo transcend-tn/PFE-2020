@@ -13,8 +13,8 @@ export const signUpMutation = async (payload: UserCreate): Promise<void> => {
   return data;
 };
 
-export const getUserById = async (key: any, payload: string): Promise<any> => {
-  const { data } = await axios.get(USER_BY_ID(payload));
+export const getUserById = async (key: any, id: string): Promise<any> => {
+  const { data } = await axios.get(USER_BY_ID(id));
   return data;
 };
 

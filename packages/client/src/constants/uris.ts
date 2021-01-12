@@ -35,4 +35,5 @@ export const REMOVE = (docId: string, userId: string) => `/collaboration/remove/
 
 export const REQUEST = '/request';
 export const REQUEST_BY_ID = (id: string) => `/request/${id}`;
+export const REQUEST_DETAIL = (idc: string, idp: string) => `/document/${idc}/proposition/${idp}`;
 
