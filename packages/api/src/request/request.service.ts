@@ -32,7 +32,7 @@ export class RequestService {
   }
 
   async getRequest(id: string) {
-    return await this.requestModel.find({documentId:id})
+    return (await this.requestModel.find({documentId:id})).reverse()
   }
 
   async getDocId(id:string)
