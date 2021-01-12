@@ -2,6 +2,7 @@ import { PORT, BASE_URL, PROTOCOL } from './config';
 
 export const ENTRYPOINT = `${PROTOCOL}://${BASE_URL}:${PORT}`;
 
+export const PROFILE = (id: string) => `/profile/${id}`;
 export const SIGN_IN = '/users/signin';
 export const SIGN_UP = '/users';
 export const USER_BY_ID = (id: string) => `/users/${id}`;
@@ -35,5 +36,5 @@ export const REMOVE = (docId: string, userId: string) => `/collaboration/remove/
 
 export const REQUEST = '/request';
 export const REQUEST_BY_ID = (id: string) => `/request/${id}`;
-export const REQUEST_DETAIL = (idc: string, idp: string) => `/document/${idc}/proposition/${idp}`;
+export const REQUEST_DETAIL = (id: string) => `/request/detail/${id}`;
 

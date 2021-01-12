@@ -1,18 +1,26 @@
 import React from 'react';
 import { Card, Col, Row, Tab, Tabs } from 'react-bootstrap';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Vote from '../../components/Vote';
-import { getRequestById } from '../../services/request.service';
 import MessageFormContainer from './Containers/MessageFormContainer';
 import MessageListContainer from './Containers/MessageListContainer';
+import { getRequestDetail } from '../../services/request.service';
+import { getUserById } from '../../services/user.service';
+import { formatDistance } from 'date-fns';
+import { convertFromRaw, EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import { PROFILE } from '../../constants/uris';
 
 
 function PropositionDetailsPage() {
   const { id } = useParams<{ id: string }>();
 
-  const { isLoading, isError, data = {}, error } = useQuery([id], getRequestById);
-
+  const { isLoading, isError, data = {}, error } = useQuery(['request:getDetail',id], getRequestDetail);
+  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(['user:getUserByUsername',data.userId], getUserById);
+  console.log(data.body);
+  if (!data.body) return null;
+  const contentState = convertFromRaw(data.body ? JSON.parse(data.body) : {});
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -27,13 +35,17 @@ function PropositionDetailsPage() {
           <div className="card p-3">
             <Tabs defaultActiveKey="Proposition" id="uncontrolled-tab">
               <Tab eventKey="Proposition" title="Proposition de Modification" className="mt-5">
+              
+                    <h4  className="mb-0">{data.title}</h4>
+                    <p className="mt-0 font-weight-light">
+                      <Link to={PROFILE(user.username)}>
+                      {user.username}
+                      </Link>
+                      {'\xa0'}{formatDistance(new Date(),new Date(data.createdAt))}{'\xa0'}ago
+                      </p>
+
                 <Card>
-                  <Card.Body>
-                    <Card.Title>{data.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted"> {data.createdAt}</Card.Subtitle>
-                    <Card.Text>{data.body}</Card.Text>
-                  </Card.Body>
-                </Card>
+                    <Editor editorState={EditorState.createWithContent(contentState)} readOnly={true} toolbarHidden/></Card>
               </Tab>
               <Tab eventKey="Comparer" title="Comparer" className="mt-5">
                 <Row>

@@ -40,4 +40,8 @@ export class RequestService {
     const req = await this.requestModel.findById(id);
     return req.documentId;
   }
+
+  async getRequestDetail(id: string) {
+    return await this.requestModel.findById(id);
+  }
 }

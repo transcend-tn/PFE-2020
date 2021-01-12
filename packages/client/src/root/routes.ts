@@ -45,7 +45,7 @@ const routes: Route[] = [
     Component: withMain(EditDocumentPage),
   },
   {
-    path: '/document/:idc/proposition/:idp',
+    path: '/request/detail/:id',
     Component: withMain(PropositionDetailsPage),
   },
   {

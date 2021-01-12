@@ -23,4 +23,9 @@ export class RequestController {
   getRequest(@Param('id') id: string) {
     return this.requestService.getRequest(id);
   }
+
+  @Get('/detail/:id')
+  getRequestDetail(@Param('id') id: string) {
+    return this.requestService.getRequestDetail(id);
+  }
 }

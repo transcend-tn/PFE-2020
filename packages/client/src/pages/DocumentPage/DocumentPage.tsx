@@ -1,7 +1,7 @@
 import { convertFromRaw, EditorState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
 import React from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
+import { Editor } from 'react-draft-wysiwyg';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import DocumentHeader from '../../components/DocumentHeader';
@@ -9,15 +9,14 @@ import HistoryList from '../../components/HistoryList';
 import { getDocumentById } from '../../services/document.service';
 import MessageFormContainer from './containers/MessageFormContainer';
 import MessageListContainer from './containers/MessageListContainer';
-import TeamMembersListContainer from './containers/TeamMembersListContainer';
-import { format } from 'date-fns';
 import PropositionListContainer from './containers/PropositionListContainer';
+import TeamMembersListContainer from './containers/TeamMembersListContainer';
 
 function DocumentPage() {
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, createdAt } = data;
-  // console.log(body);
+  console.log(body);
   if (!body) return null;
   const contentState = convertFromRaw(body ? JSON.parse(body) : {});
 // console.log(contentState)
@@ -38,7 +37,7 @@ function DocumentPage() {
               <Tab eventKey="Document" title="Document" className="mt-5">
                 <DocumentHeader
                   title={title}
-                  createdAt={format(new Date(createdAt), 'd/MM/yyyy, HH:mm')}
+                  createdAt={createdAt}
                   docId={id}
                   username={username}
                 />

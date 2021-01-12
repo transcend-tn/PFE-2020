@@ -23,7 +23,7 @@ function PropositionCard(props: PropositionCardProps) {
       <Media className="border mb-2 max-width-300">
         <Media.Body className="p-2">
 
-          <Link to={REQUEST_DETAIL(idc, idp)} style={{ color: '#000000' }}>
+          <Link to={REQUEST_DETAIL(idp)} style={{ color: '#000000' }}>
             <h6 className="mb-0">{title}</h6>
           </Link>
 
