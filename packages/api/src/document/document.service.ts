@@ -3,7 +3,7 @@ import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 import { InjectModel } from '@nestjs/mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DocumentCreate } from '@tr/common';
+import { DocumentCreate, DocumentUpdate } from '@tr/common';
 import { Model } from 'mongoose';
 import { Collaboration } from '../collaboration/collaboration.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
@@ -113,20 +113,17 @@ export class DocumentService {
     return (await followers).reduce((a, b) => a + b, 0);
   }
 
-  async updateDocument(user: User, id: string, update: DocumentCreate) {
-    const doc = await this.getDocumentById(id);
+  async updateDocument(user: User, id: string, update: DocumentUpdate) {
+ 
+  const doc = await this.getDocumentById(id);
+
     if (doc.owner != user.id) {
       throw new UnauthorizedException(
         'You have to be the owner to Update this document',
       );
     }
-    if (update.title) {
-      doc.title = update.title;
-    }
-    if (update.body) {
-      doc.body = update.body;
-    }
-    doc.save();
+    else
+    await this.documentModel.updateOne({_id:id},update)
   }
 
   async deleteDocument(user: User, id: string) {

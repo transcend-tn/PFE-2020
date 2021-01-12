@@ -9,7 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { DocumentService } from './document.service';
-import { DocumentCreate } from '@tr/common';
+import { DocumentCreate, DocumentUpdate } from '@tr/common';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/users/get-user.decorator';
@@ -60,7 +60,7 @@ export class DocumentController {
   async updateDocument(
     @GetUser() user: User,
     @Param('id') id: string,
-    @Body() doc: DocumentCreate,
+    @Body() doc: DocumentUpdate,
   ) {
     await this.documentService.updateDocument(user, id, doc);
     return null;

@@ -5,6 +5,6 @@ export interface DocumentCreate {
 }
 
 export interface DocumentUpdate {
-  title: string;
-  body: object;
+  title?: string;
+  body?: object;
 }
