@@ -6,3 +6,8 @@ export const getRequestById = async (payload: string): Promise<any> => {
     return data;
 };
 
+export const createRequestMutation = async (payload: any): Promise<string> => {
+    const { data } = await axios.post(REQUEST_BY_ID(payload.id), payload.body);
+    return data;
+  };
+

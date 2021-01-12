@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { getDocumentById, updateDocumentMutation } from '../../services/document.service';
+import { createRequestMutation } from '../../services/request.service';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -24,7 +25,7 @@ const EDITOR_OPTIONS = [
 const EditDocumentPage = () => {
 
   const { id } = useParams<{ id: string }>();
-  const [updateDocument, { status }] = useMutation(updateDocumentMutation);
+  const [requestUpdateDocument, { status }] = useMutation(createRequestMutation);
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, createdAt } = data;
   const [editorState, setEditorState] = useState(body);
@@ -49,11 +50,11 @@ const EditDocumentPage = () => {
       const payload = {
         id: id,
         body:{
+          title: values.title,
           body: JSON.stringify(body),
-          // title: values.title,
         }
       }
-      updateDocument(payload).then(
+      requestUpdateDocument(payload).then(
         () => {
           values.title = '';
           // setEditorState(EditorState.createEmpty());
