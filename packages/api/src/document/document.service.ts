@@ -5,8 +5,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentCreate, DocumentUpdate } from '@tr/common';
 import { Model } from 'mongoose';
+import { Vote } from 'src/vote/vote.model';
 import { Collaboration } from '../collaboration/collaboration.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
+import { Request } from '../request/request.model';
 import { User } from '../users/user.entity';
 import { UserRepository } from '../users/user.repository';
 import { UsersService } from '../users/users.service';
@@ -16,10 +18,10 @@ import { Document } from './document.model';
 export class DocumentService {
   constructor(
     @InjectModel('Document') private readonly documentModel: Model<Document>,
-    @InjectModel('Collaboration')
-    private readonly collaborationModel?: Model<Collaboration>,
-    @InjectRepository(UserRepository)
-    private userRepository?: UserRepository,
+    @InjectModel('Collaboration') private readonly collaborationModel?: Model<Collaboration>,
+    @InjectRepository(UserRepository) private userRepository?: UserRepository,
+    @InjectModel('Request') private readonly requestModel?: Model<Request>,
+    @InjectModel('Vote') private readonly voteModel?: Model<Vote>,
   ) {}
 
   async createDocument(user: User, doc: DocumentCreate) {
@@ -114,16 +116,26 @@ export class DocumentService {
   }
 
   async updateDocument(user: User, id: string, update: DocumentUpdate) {
- 
+  
   const doc = await this.getDocumentById(id);
 
+    if(update.reqId == undefined)
+    {
+      throw new UnauthorizedException(
+        'No Update Request Matching',
+      );
+    }
     if (doc.owner != user.id) {
       throw new UnauthorizedException(
         'You have to be the owner to Update this document',
       );
     }
     else
-    await this.documentModel.updateOne({_id:id},update)
+   { 
+     await this.documentModel.updateOne({_id:id},{body:update.body})
+     await this.requestModel.deleteMany({_id:update.reqId})
+     await this.voteModel.deleteMany({requestId:update.reqId})
+   }
   }
 
   async deleteDocument(user: User, id: string) {

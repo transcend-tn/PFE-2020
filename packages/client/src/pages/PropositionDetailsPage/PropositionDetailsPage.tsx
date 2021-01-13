@@ -11,16 +11,25 @@ import { formatDistance } from 'date-fns';
 import { convertFromRaw, EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { PROFILE } from '../../constants/uris';
+import { getDocumentById } from '../../services/document.service';
+import { getVoteStats } from '../../services/vote.service';
+import { useStoreState } from '../../hooks/store.hooks';
 
 
 function PropositionDetailsPage() {
   const { id } = useParams<{ id: string }>();
+  const currentUser = useStoreState((state) => state.user.user);
+  const { isLoading, isError, data = {}, error } = useQuery(['request:getDetail', id], getRequestDetail);
+  const { isLoading: doc_isLoading, isError: doc_isError, data: doc_data = {}, error: doc_error } = useQuery(['document:getOld', data.documentId], getDocumentById);
+  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(['user:getUserByUsername', data.userId], getUserById);
+  const { isLoading: vote_isLoading, isError: vote_isError, data: vote_data = {}, error: vote_error } = useQuery(['vote:getStats', id], getVoteStats);
+  const {voteCount, teamCount, voted} = vote_data;
+  const isOwner = doc_data.owner==currentUser.id;
 
-  const { isLoading, isError, data = {}, error } = useQuery(['request:getDetail',id], getRequestDetail);
-  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(['user:getUserByUsername',data.userId], getUserById);
-  console.log(data.body);
+  if (!doc_data.body) return null;
+  const oldBody = convertFromRaw(doc_data.body ? JSON.parse(doc_data.body) : {});
   if (!data.body) return null;
-  const contentState = convertFromRaw(data.body ? JSON.parse(data.body) : {});
+  const newBody = convertFromRaw(data.body ? JSON.parse(data.body) : {});
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -35,58 +44,51 @@ function PropositionDetailsPage() {
           <div className="card p-3">
             <Tabs defaultActiveKey="Proposition" id="uncontrolled-tab">
               <Tab eventKey="Proposition" title="Proposition de Modification" className="mt-5">
-              
-                    <h4  className="mb-0">{data.title}</h4>
-                    <p className="mt-0 font-weight-light">
-                      <Link to={PROFILE(user.username)}>
-                      {user.username}
-                      </Link>
-                      {'\xa0'}{formatDistance(new Date(),new Date(data.createdAt))}{'\xa0'}ago
+
+                <h4 className="mb-0">{data.title}</h4>
+                <p className="mt-0 font-weight-light">
+                  <Link to={PROFILE(user.username)}>
+                    {user.username}
+                  </Link>
+                  {'\xa0'}{formatDistance(new Date(), new Date(data.createdAt))}{'\xa0'}ago
                       </p>
 
                 <Card>
-                    <Editor editorState={EditorState.createWithContent(contentState)} readOnly={true} toolbarHidden/></Card>
+                  <Editor editorState={EditorState.createWithContent(newBody)} readOnly={true} toolbarHidden /></Card>
               </Tab>
+
+
               <Tab eventKey="Comparer" title="Comparer" className="mt-5">
-                <Row>
-                  <Col lg="6" className="mb-3">
-                    <div className="card p-3">
-                      OLD VERSION TEXT HERE
-                      <p>
-                        Quis eu cupidatat incididunt esse qui nisi qui do velit do occaecat magna. Ea excepteur est nisi
-                        amet aliqua sint proident anim ex Lorem quis minim culpa. Laborum quis aute pariatur dolore
-                        fugiat cillum exercitation voluptate ut nostrud minim eu ea ea. Mollit magna fugiat et mollit
-                        ipsum voluptate veniam incididunt nisi sit do irure id mollit. Nisi aliqua duis fugiat aute do
-                        nostrud ullamco nostrud excepteur. Tempor id Lorem esse esse reprehenderit irure reprehenderit
-                        proident minim cupidatat ipsum.
-                      </p>
+                <div className="card-deck mb-3 text-center">
+                  <div className="card  box-shadow">
+                    <div className="card-header">
+                      <h4 className="my-0 font-weight-light" style={{ fontSize: 'small' }}>Old Version</h4>
                     </div>
-                  </Col>
-                  <Col lg="6">
-                    <div className="card p-3 min">
-                      NEW VERSION TEXT HERE
-                      <p>
-                        Magna minim do et nulla sunt qui culpa enim consequat fugiat sunt. Reprehenderit anim est
-                        ullamco cillum laborum ipsum ea ipsum mollit voluptate incididunt aliqua nostrud qui. Ut Lorem
-                        in Lorem ad do consequat aute velit do. Culpa culpa est est sint eiusmod consectetur laboris non
-                        dolor adipisicing laboris ad sint. Et cupidatat dolore ipsum duis eu ipsum aute do in officia
-                        voluptate excepteur Lorem enim. Consectetur ea deserunt proident aliquip ad. Officia consequat
-                        ut reprehenderit laborum aliquip nisi cupidatat cupidatat pariatur ullamco.
-                      </p>
+                    <div className="card-body">
+                      <Editor editorState={EditorState.createWithContent(oldBody)} readOnly={true} toolbarHidden />
                     </div>
-                  </Col>
-                </Row>
+                  </div>
+                  <div className="card  box-shadow">
+                    <div className="card-header">
+                      <h4 className="my-0 font-weight-light" style={{ fontSize: 'small' }}>New Version</h4>
+                    </div>
+                    <div className="card-body">
+                      <Editor editorState={EditorState.createWithContent(newBody)} readOnly={true} toolbarHidden />
+                    </div>
+                  </div>
+                </div>
+
               </Tab>
             </Tabs>
           </div>
           <div className="bg-color-secondary card p-3 mt-5">
-          <MessageFormContainer/>
-          <MessageListContainer/>
+            <MessageFormContainer />
+            <MessageListContainer />
           </div>
         </Col>
 
         <Col lg="4">
-          <Vote yes={50} />
+          <Vote voteCount={voteCount} teamCount={teamCount} voted={voted} isOwner={isOwner} newBody={data.body} docId={data.documentId}/>
         </Col>
       </Row>
     </>

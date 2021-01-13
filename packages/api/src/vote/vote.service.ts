@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Vote } from './vote.model';
@@ -19,6 +19,15 @@ export class VoteService {
         private readonly requestModel: Model<Request>,
       ) {}
 
+      async getVoteStats(id:string, currentUser:User)
+      {
+        const docId = await new RequestService(this.requestModel).getDocId(id);
+        const voteCount = await this.voteModel.find({requestId:id}).count();
+        const teamCount = await new CollaborationService(this.collaborationModel).teamCount(docId);
+        const voted =  await this.voted(id, currentUser)
+        return {voteCount:voteCount, teamCount:teamCount, voted:voted}
+      }  
+
     async addVote(id:string, currentUser:User)
     {   
         const docId = await new RequestService(this.requestModel).getDocId(id);
@@ -31,10 +40,10 @@ export class VoteService {
         newVote.userId = currentUser.id;
         newVote.requestId = id;
         await newVote.save();
-        const totalVote = await this.voteModel.find({requestId:id}).count();
-        const teamMembers = await new CollaborationService(this.collaborationModel).teamCount(docId);
+        const voteCount = await this.voteModel.find({requestId:id}).count();
+        const teamCount = await new CollaborationService(this.collaborationModel).teamCount(docId);
  
-        return {totalVote:totalVote, teamMembers:teamMembers}}
+        return {voteCount:voteCount, teamCount:teamCount}}
         else
         throw new UnauthorizedException("You are not a member of this team");
     }
@@ -42,5 +51,14 @@ export class VoteService {
     async voted(id:string, currentUser:User) {
         const voted = await this.voteModel.find({userId: currentUser.id, requestId:id});
         return voted.length>0?true:false;
+    }
+
+    
+    async cancelVote(id:string, currentUser:User)
+    {
+      const del = await this.voteModel.deleteOne({ requestId: id, userId: currentUser.id}).exec();
+      if (del.n === 0) {
+        throw new NotFoundException();
+      }
     }
 }

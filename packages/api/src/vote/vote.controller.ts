@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/users/get-user.decorator';
 import { User } from '../users/user.entity';
@@ -16,6 +16,12 @@ export class VoteController {
 
   @Get(':id')
   voted(@Param('id') id: string, @GetUser() currentUser: User) {
-    return this.voteService.voted(id, currentUser);
+    return this.voteService.getVoteStats(id, currentUser);
+  }
+
+  @Delete(':id')
+  async cancelVote(@Param('id') id: string, @GetUser() currentUser: User) {
+    await this.voteService.cancelVote(id, currentUser);
+    return null;
   }
 }

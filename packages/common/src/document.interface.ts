@@ -7,4 +7,5 @@ export interface DocumentCreate {
 export interface DocumentUpdate {
   title?: string;
   body?: object;
+  reqId?:string;
 }

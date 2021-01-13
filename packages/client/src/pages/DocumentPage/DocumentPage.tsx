@@ -16,7 +16,6 @@ function DocumentPage() {
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, createdAt } = data;
-  console.log(body);
   if (!body) return null;
   const contentState = convertFromRaw(body ? JSON.parse(body) : {});
 // console.log(contentState)

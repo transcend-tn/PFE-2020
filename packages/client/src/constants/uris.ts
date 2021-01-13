@@ -38,3 +38,5 @@ export const REQUEST = '/request';
 export const REQUEST_BY_ID = (id: string) => `/request/${id}`;
 export const REQUEST_DETAIL = (id: string) => `/request/detail/${id}`;
 
+export const VOTE = (id: string) => `/vote/${id}`;
+
