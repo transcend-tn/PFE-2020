@@ -32,7 +32,7 @@ function CollaborationRequestList() {
       <Accordion>
         {Object.keys(data).map((docTitle: any, idx: number) => {
           return (
-            <Card>
+            <Card key={`collaboration-${idx}`}>
               <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
               <IoMdDocument size={25}/> {docTitle.split('#')[0]}
               </Accordion.Toggle>
