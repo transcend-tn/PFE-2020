@@ -5,11 +5,14 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row, Spinner, Tab, Tabs } from 'react-bootstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import { useMutation, useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { getDocumentById } from '../../services/document.service';
 import { createRequestMutation } from '../../services/request.service';
+import * as Diff2Html from 'diff2html';
+import 'diff2html/bundles/css/diff2html.min.css';
+import { DOCUMENT_BY_ID } from '../../constants/uris';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -70,13 +73,13 @@ const EditDocumentPage = () => {
     },
   });
 
+  /////////////   Diff with only JSDIFF /////////////////////
   const Diff = require('diff');
   const oldBody = body ? convertFromRaw(JSON.parse(body)).getPlainText() : '';
   const newBody = editorState ? editorState.getCurrentContent().getPlainText() : '';
   let span = null;
   let display = document.createElement('span');
   const diff = Diff.diffChars(oldBody, newBody);
-
   diff.forEach((part: any) => {
     // green for additions, red for deletions
     // grey for common parts
@@ -88,6 +91,15 @@ const EditDocumentPage = () => {
     span.appendChild(document.createTextNode(part.value));
     display.appendChild(span);
   });
+  ////////////// use Diff2Html ////////////
+  const input = Diff.createPatch(title, oldBody, newBody);
+  let outputHtml = Diff2Html.html(input, {
+    drawFileList: false,
+    matching: 'lines',
+    outputFormat: 'side-by-side',
+  });
+  //////////////////////////////////////////
+
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -121,7 +133,7 @@ const EditDocumentPage = () => {
           </div>
         </div>
         <Row>
-          <Col lg="8" className="mb-3">
+          <Col lg="12" className="mb-3">
             <div className="card p-3">
               <Tabs defaultActiveKey="Document" id="uncontrolled-tab">
                 <Tab eventKey="Document" title="Document" className="mt-5">
@@ -131,7 +143,11 @@ const EditDocumentPage = () => {
                     onEditorStateChange={setEditorState}
                   />
                 </Tab>
-                <Tab eventKey="PR" title="Comparer" className="mt-5">
+                <Tab eventKey="Comparer" title="Comparer" className="mt-5">
+                  {/* <div className="bg-white p-4 text-left" dangerouslySetInnerHTML={{ __html: display.innerHTML }} /> */}
+                  <div className="p-4" dangerouslySetInnerHTML={{ __html: outputHtml }} />
+                </Tab>
+                <Tab eventKey="Preview" title="Preview" className="mt-5">
                   <div className="card-deck mb-3 text-center">
                     <div className="card  box-shadow">
                       <div className="card-header">
@@ -167,10 +183,6 @@ const EditDocumentPage = () => {
                 </Tab>
               </Tabs>
             </div>
-          </Col>
-          <Col lg="4" className="mb-3">
-            <h4>Watch changes</h4>
-            <div className="bg-white p-4 text-left" dangerouslySetInnerHTML={{ __html: display.innerHTML }} />
           </Col>
         </Row>
       </form>
