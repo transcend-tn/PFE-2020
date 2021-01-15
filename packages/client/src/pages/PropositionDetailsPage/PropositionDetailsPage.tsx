@@ -14,22 +14,43 @@ import { PROFILE } from '../../constants/uris';
 import { getDocumentById } from '../../services/document.service';
 import { getVoteStats } from '../../services/vote.service';
 import { useStoreState } from '../../hooks/store.hooks';
-
+import * as Diff2Html from 'diff2html';
 
 function PropositionDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const currentUser = useStoreState((state) => state.user.user);
   const { isLoading, isError, data = {}, error } = useQuery(['request:getDetail', id], getRequestDetail);
-  const { isLoading: doc_isLoading, isError: doc_isError, data: doc_data = {}, error: doc_error } = useQuery(['document:getOld', data.documentId], getDocumentById);
-  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(['user:getUserByUsername', data.userId], getUserById);
-  const { isLoading: vote_isLoading, isError: vote_isError, data: vote_data = {}, error: vote_error } = useQuery(['vote:getStats', id], getVoteStats);
-  const {voteCount, teamCount, voted} = vote_data;
-  const isOwner = doc_data.owner==currentUser.id;
+  const { isLoading: doc_isLoading, isError: doc_isError, data: doc_data = {}, error: doc_error } = useQuery(
+    ['document:getOld', data.documentId],
+    getDocumentById,
+  );
+  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(
+    ['user:getUserByUsername', data.userId],
+    getUserById,
+  );
+  const { isLoading: vote_isLoading, isError: vote_isError, data: vote_data = {}, error: vote_error } = useQuery(
+    ['vote:getStats', id],
+    getVoteStats,
+  );
+  const { voteCount, teamCount, voted } = vote_data;
+  const isOwner = doc_data.owner == currentUser.id;
 
   if (!doc_data.body) return null;
   const oldBody = convertFromRaw(doc_data.body ? JSON.parse(doc_data.body) : {});
   if (!data.body) return null;
   const newBody = convertFromRaw(data.body ? JSON.parse(data.body) : {});
+
+  const Diff = require('diff');
+  const oldBodyTxt = oldBody ? oldBody.getPlainText() : '';
+  const newBodyTxt = newBody ? newBody.getPlainText() : '';
+  ////////////// use Diff2Html ////////////
+  const input = Diff.createPatch(doc_data.title, oldBodyTxt, newBodyTxt);
+  let outputHtml = Diff2Html.html(input, {
+    drawFileList: false,
+    matching: 'lines',
+    outputFormat: 'side-by-side',
+  });
+  //////////////////////////////////////////
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -44,25 +65,30 @@ function PropositionDetailsPage() {
           <div className="card p-3">
             <Tabs defaultActiveKey="Proposition" id="uncontrolled-tab">
               <Tab eventKey="Proposition" title="Proposition de Modification" className="mt-5">
-
                 <h4 className="mb-0">{data.title}</h4>
                 <p className="mt-0 font-weight-light">
-                  <Link to={PROFILE(user.username)}>
-                    {user.username}
-                  </Link>
-                  {'\xa0'}{formatDistance(new Date(), new Date(data.createdAt))}{'\xa0'}ago
-                      </p>
+                  <Link to={PROFILE(user.username)}>{user.username}</Link>
+                  {'\xa0'}
+                  {formatDistance(new Date(), new Date(data.createdAt))}
+                  {'\xa0'}ago
+                </p>
 
                 <Card>
-                  <Editor editorState={EditorState.createWithContent(newBody)} readOnly={true} toolbarHidden /></Card>
+                  <Editor editorState={EditorState.createWithContent(newBody)} readOnly={true} toolbarHidden />
+                </Card>
+              </Tab>
+              <Tab eventKey="Comparer" title="Comparer" className="mt-5">
+                {/* <div className="bg-white p-4 text-left" dangerouslySetInnerHTML={{ __html: display.innerHTML }} /> */}
+                <div className="p-4" dangerouslySetInnerHTML={{ __html: outputHtml }} />
               </Tab>
 
-
-              <Tab eventKey="Comparer" title="Comparer" className="mt-5">
+              <Tab eventKey="Preview" title="Preview" className="mt-5">
                 <div className="card-deck mb-3 text-center">
                   <div className="card  box-shadow">
                     <div className="card-header">
-                      <h4 className="my-0 font-weight-light" style={{ fontSize: 'small' }}>Old Version</h4>
+                      <h4 className="my-0 font-weight-light" style={{ fontSize: 'small' }}>
+                        Old Version
+                      </h4>
                     </div>
                     <div className="card-body">
                       <Editor editorState={EditorState.createWithContent(oldBody)} readOnly={true} toolbarHidden />
@@ -70,14 +96,15 @@ function PropositionDetailsPage() {
                   </div>
                   <div className="card  box-shadow">
                     <div className="card-header">
-                      <h4 className="my-0 font-weight-light" style={{ fontSize: 'small' }}>New Version</h4>
+                      <h4 className="my-0 font-weight-light" style={{ fontSize: 'small' }}>
+                        New Version
+                      </h4>
                     </div>
                     <div className="card-body">
                       <Editor editorState={EditorState.createWithContent(newBody)} readOnly={true} toolbarHidden />
                     </div>
                   </div>
                 </div>
-
               </Tab>
             </Tabs>
           </div>
@@ -88,7 +115,14 @@ function PropositionDetailsPage() {
         </Col>
 
         <Col lg="4">
-          <Vote voteCount={voteCount} teamCount={teamCount} voted={voted} isOwner={isOwner} newBody={data.body} docId={data.documentId}/>
+          <Vote
+            voteCount={voteCount}
+            teamCount={teamCount}
+            voted={voted}
+            isOwner={isOwner}
+            newBody={data.body}
+            docId={data.documentId}
+          />
         </Col>
       </Row>
     </>

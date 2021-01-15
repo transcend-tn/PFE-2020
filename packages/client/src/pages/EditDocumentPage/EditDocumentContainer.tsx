@@ -1,3 +1,5 @@
+import * as Diff2Html from 'diff2html';
+import 'diff2html/bundles/css/diff2html.min.css';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { useFormik } from 'formik';
@@ -5,14 +7,11 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row, Spinner, Tab, Tabs } from 'react-bootstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import { useMutation, useQuery } from 'react-query';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { getDocumentById } from '../../services/document.service';
 import { createRequestMutation } from '../../services/request.service';
-import * as Diff2Html from 'diff2html';
-import 'diff2html/bundles/css/diff2html.min.css';
-import { DOCUMENT_BY_ID } from '../../constants/uris';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -72,26 +71,10 @@ const EditDocumentPage = () => {
       );
     },
   });
-
-  /////////////   Diff with only JSDIFF /////////////////////
+  ///////// use Difff & Diff2Html //////////
   const Diff = require('diff');
   const oldBody = body ? convertFromRaw(JSON.parse(body)).getPlainText() : '';
   const newBody = editorState ? editorState.getCurrentContent().getPlainText() : '';
-  let span = null;
-  let display = document.createElement('span');
-  const diff = Diff.diffChars(oldBody, newBody);
-  diff.forEach((part: any) => {
-    // green for additions, red for deletions
-    // grey for common parts
-    const color = part.added ? 'green' : part.removed ? 'red' : 'grey';
-    const backgroundColor = part.added ? '#d1e7dd' : part.removed ? '#f8d7da' : ''; //#e2e3e5
-    span = document.createElement('span');
-    span.style.color = color;
-    span.style.backgroundColor = backgroundColor;
-    span.appendChild(document.createTextNode(part.value));
-    display.appendChild(span);
-  });
-  ////////////// use Diff2Html ////////////
   const input = Diff.createPatch(title, oldBody, newBody);
   let outputHtml = Diff2Html.html(input, {
     drawFileList: false,
