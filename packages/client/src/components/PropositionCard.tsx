@@ -5,39 +5,56 @@ import { Link } from 'react-router-dom';
 import { REQUEST_BY_ID, REQUEST_DETAIL } from '../constants/uris';
 import { useQuery } from 'react-query';
 import { getUserById } from '../services/user.service';
+import Button from 'react-bootstrap/esm/Button';
 
 export interface PropositionCardProps {
   idc: string;
   idp: string;
   title: string;
-  userId:string;
+  userId: string;
   username?: string;
   time: string;
+  canDelete?: boolean;
 }
 
 function PropositionCard(props: PropositionCardProps) {
-  const { idc, idp, title, userId, time } = props;
-  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(['user:getUserByUsername',userId], getUserById);
+  const { idc, idp, title, userId, time, canDelete } = props;
+  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(
+    ['user:getUserByUsername', userId],
+    getUserById,
+  );
   return (
     <div style={{ maxWidth: 500 }}>
       <Media className="border mb-2 max-width-300">
         <Media.Body className="p-2">
+          <div className="d-flex justify-content-between align-items-center media-body">
+            <div>
+              <Link to={REQUEST_DETAIL(idp)} style={{ color: '#000000' }}>
+                <h6 className="mb-0">{title}</h6>
+              </Link>
 
-          <Link to={REQUEST_DETAIL(idp)} style={{ color: '#000000' }}>
-            <h6 className="mb-0">{title}</h6>
-          </Link>
-
-       
-          <div className="d-flex flex-row">
-          <p className="mb-0 font-weight-light" style={{ fontSize: 'small' }}>
-          <span className="text-secondary">
-              {/* <BsClock size={12} color="#9E9E93" className="mr-1" /> */}
-              {time}{'\xa0'}{"By"}{'\xa0'}
-            </span>
-          </p>
-          <Link to={`/profile/${user.username}`}>
-          <p className="mb-0 font-weight-light" style={{ fontSize: 'small' }}>{user.username} </p>
-          </Link>
+              <div className="d-flex flex-row">
+                <p className="mb-0 font-weight-light" style={{ fontSize: 'small' }}>
+                  <span className="text-secondary">
+                    {/* <BsClock size={12} color="#9E9E93" className="mr-1" /> */}
+                    {time}
+                    {'\xa0'}
+                    {'By'}
+                    {'\xa0'}
+                  </span>
+                </p>
+                <Link to={`/profile/${user.username}`}>
+                  <p className="mb-0 font-weight-light" style={{ fontSize: 'small' }}>
+                    {user.username}{' '}
+                  </p>
+                </Link>
+              </div>
+            </div>
+            {canDelete && (
+              <Button variant="" className="close btn-sm mb-1">
+                <span aria-hidden="true">×</span>
+              </Button>
+            )}
           </div>
         </Media.Body>
       </Media>
