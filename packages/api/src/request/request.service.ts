@@ -5,8 +5,6 @@ import { Request } from './Request.model';
 import { User } from '../users/user.entity';
 import { RequestCreate } from '@tr/common';
 import { Collaboration } from '../collaboration/collaboration.model';
-import { Comment } from '../Comment/Comment.model';
-import { Vote } from '../Vote/Vote.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 import { Comment } from '../Comment/Comment.model';

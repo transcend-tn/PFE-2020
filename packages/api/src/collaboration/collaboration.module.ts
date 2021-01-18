@@ -12,10 +12,8 @@ import { DocumentSchema } from '../document/document.model';
   imports: [
     UsersModule,
     TypeOrmModule.forFeature([UserRepository]),
-    MongooseModule.forFeature([
-      { name: 'Collaboration', schema: CollaborationSchema },
-      { name: 'Document', schema: DocumentSchema }
-    ]),
+    MongooseModule.forFeature([{ name: 'Collaboration', schema: CollaborationSchema },]),
+    MongooseModule.forFeature([{ name: 'Document', schema: DocumentSchema }]),
   ],
   controllers: [CollaborationController],
   providers: [CollaborationService],
