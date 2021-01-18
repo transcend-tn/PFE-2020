@@ -9,7 +9,8 @@ import { Comment } from '../Comment/Comment.model';
 import { Vote } from '../Vote/Vote.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
-
+import { Comment } from '../Comment/Comment.model';
+import { Vote } from '../Vote/Vote.model';
 @Injectable()
 export class RequestService {
   constructor(
