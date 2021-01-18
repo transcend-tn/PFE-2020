@@ -1,11 +1,11 @@
 import React from 'react';
-import Media from 'react-bootstrap/esm/Media';
-import { BsClock } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-import { REQUEST_BY_ID, REQUEST_DETAIL } from '../constants/uris';
-import { useQuery } from 'react-query';
-import { getUserById } from '../services/user.service';
 import Button from 'react-bootstrap/esm/Button';
+import Media from 'react-bootstrap/esm/Media';
+import { useMutation, useQuery, useQueryCache } from 'react-query';
+import { Link } from 'react-router-dom';
+import { REQUEST_DETAIL } from '../constants/uris';
+import { deleteRequest } from '../services/request.service';
+import { getUserById } from '../services/user.service';
 
 export interface PropositionCardProps {
   idc: string;
@@ -18,11 +18,16 @@ export interface PropositionCardProps {
 }
 
 function PropositionCard(props: PropositionCardProps) {
+  const cache = useQueryCache();
   const { idc, idp, title, userId, time, canDelete } = props;
   const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(
     ['user:getUserByUsername', userId],
     getUserById,
   );
+  const [deletePR, { status }] = useMutation(deleteRequest, {
+    onSuccess: () => cache.invalidateQueries('propositions:getbyid'),
+  });
+
   return (
     <div style={{ maxWidth: 500 }}>
       <Media className="border mb-2 max-width-300">
@@ -51,7 +56,7 @@ function PropositionCard(props: PropositionCardProps) {
               </div>
             </div>
             {canDelete && (
-              <Button variant="" className="close btn-sm mb-1">
+              <Button variant="" className="close btn-sm mb-1" onClick={() => deletePR(idp)}>
                 <span aria-hidden="true">×</span>
               </Button>
             )}

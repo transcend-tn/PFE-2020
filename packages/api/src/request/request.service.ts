@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Request } from './Request.model';
@@ -12,8 +12,7 @@ import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.ex
 export class RequestService {
   constructor(
     @InjectModel('Request') private readonly requestModel: Model<Request>,
-    @InjectModel('Collaboration')
-    private readonly collaborationModel?: Model<Collaboration>,
+    @InjectModel('Collaboration') private readonly collaborationModel?: Model<Collaboration>,
   ) {}
 
   async createRequest(currentUser: User, id: string, newRequest: RequestCreate) {
@@ -43,5 +42,13 @@ export class RequestService {
 
   async getRequestDetail(id: string) {
     return await this.requestModel.findById(id);
+  }
+
+  async deleteRequest(currentUser:User, id:string)
+  {  
+    const del = await this.requestModel.deleteOne({ _id: id}).exec();
+    if (del.n === 0) {
+      throw new NotFoundException();
+    }
   }
 }

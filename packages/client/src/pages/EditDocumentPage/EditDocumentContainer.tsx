@@ -58,8 +58,6 @@ const EditDocumentPage = () => {
       requestUpdateDocument(payload).then(
         () => {
           values.title = '';
-          // setEditorState(EditorState.createEmpty());
-
           toast.success('PR Créé', {
             position: toast.POSITION.TOP_RIGHT,
             className: 'fade alert alert-success show',
@@ -127,7 +125,6 @@ const EditDocumentPage = () => {
                   />
                 </Tab>
                 <Tab eventKey="Comparer" title="Comparer" className="mt-5">
-                  {/* <div className="bg-white p-4 text-left" dangerouslySetInnerHTML={{ __html: display.innerHTML }} /> */}
                   <div className="p-4" dangerouslySetInnerHTML={{ __html: outputHtml }} />
                 </Tab>
                 <Tab eventKey="Preview" title="Preview" className="mt-5">
@@ -139,7 +136,6 @@ const EditDocumentPage = () => {
                         </h4>
                       </div>
                       <div className="card-body">
-                        {/* <Editor editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(body)))} readOnly={true} toolbarHidden /> */}
                         <div
                           className="text-left"
                           dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(body)) }}

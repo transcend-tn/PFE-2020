@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../users/get-user.decorator';
 import { User } from '../users/user.entity';
@@ -27,5 +27,11 @@ export class RequestController {
   @Get('/detail/:id')
   getRequestDetail(@Param('id') id: string) {
     return this.requestService.getRequestDetail(id);
+  }
+
+  @Delete(':id')
+  async deleteRequest(@GetUser() user: User, @Param('id') id: string) {
+    await this.requestService.deleteRequest(user,id)
+    return null;
   }
 }
