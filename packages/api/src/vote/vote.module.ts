@@ -10,12 +10,10 @@ import { RequestSchema } from '../request/Request.model';
 @Module({
   imports: [
     UsersModule,
-    MongooseModule.forFeature([{ name: 'Vote', schema: VoteSchema }]),
     MongooseModule.forFeature([
+      { name: 'Vote', schema: VoteSchema },
       { name: 'Collaboration', schema: CollaborationSchema },
-    ]),
-    MongooseModule.forFeature([
-      { name: 'Request', schema: RequestSchema },
+      { name: 'Request', schema: RequestSchema }
     ]),
   ],
   controllers: [VoteController],

@@ -5,6 +5,8 @@ import { Request } from './Request.model';
 import { User } from '../users/user.entity';
 import { RequestCreate } from '@tr/common';
 import { Collaboration } from '../collaboration/collaboration.model';
+import { Comment } from '../Comment/Comment.model';
+import { Vote } from '../Vote/Vote.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
 import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception';
 
@@ -13,6 +15,8 @@ export class RequestService {
   constructor(
     @InjectModel('Request') private readonly requestModel: Model<Request>,
     @InjectModel('Collaboration') private readonly collaborationModel?: Model<Collaboration>,
+    @InjectModel('Comment') private readonly commentModel?: Model<Comment>,
+    @InjectModel('Vote') private readonly voteModel?: Model<Vote>,
   ) {}
 
   async createRequest(currentUser: User, id: string, newRequest: RequestCreate) {
@@ -47,6 +51,8 @@ export class RequestService {
   async deleteRequest(currentUser:User, id:string)
   {  
     const del = await this.requestModel.deleteOne({ _id: id}).exec();
+    await this.commentModel.deleteMany({requestId:id});
+    await this.voteModel.deleteMany({requestId:id})
     if (del.n === 0) {
       throw new NotFoundException();
     }
