@@ -13,7 +13,7 @@ export interface MessageFormInterface {
 }
 
 function MessageForm(props: MessageFormInterface) {
-  const { createComment, isLoading, docId } = props;
+  const { createComment, isLoading, reqId } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -22,17 +22,17 @@ function MessageForm(props: MessageFormInterface) {
     validationSchema: Yup.object({
       body: Yup.string(),
     }),
-    
-    onSubmit: async (payload: CommentCreate, {setSubmitting, setErrors, setStatus, resetForm}) => {
+
+    onSubmit: async (payload: CommentCreate, { setSubmitting, setErrors, setStatus, resetForm }) => {
       try {
-        createComment({ docId, payload });
-        resetForm({})
-        setStatus({success: true})
+        createComment({ reqId, payload });
+        resetForm({});
+        setStatus({ success: true });
       } catch (error) {
-        setStatus({success: false})
-        setSubmitting(false)
+        setStatus({ success: false });
+        setSubmitting(false);
       }
-    }
+    },
   });
 
   return (

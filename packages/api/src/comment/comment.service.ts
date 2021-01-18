@@ -44,7 +44,13 @@ export class CommentService {
       }
 
       async getCommentByReqId(id: string) {
-        return await this.commentModel.find({requestId: id})
+      let comments = await (await this.commentModel.find({requestId: id})).reverse();
+      let data = Promise.all(comments.map(async (comment)=>
+        {
+          const user= await new UsersService(this.userRepository,null).getUserById(comment.userId)
+          return {username: user.username, img: user.img, body: comment.body, createdAt: comment.createdAt}
+        }))
+        return data;
       }
 
       async requestComment(comment:CommentCreate, currentUser:User, id:string)
