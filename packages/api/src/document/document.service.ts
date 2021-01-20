@@ -27,6 +27,7 @@ export class DocumentService {
   async createDocument(user: User, doc: DocumentCreate) {
     const newDocument = new this.documentModel(doc);
     newDocument.owner = user.id;
+    newDocument._history =[{status: "created", body: doc.body, user: user.id, time: new Date()}]
     await new CollaborationService(this.collaborationModel).joinTeam(
       user,
       newDocument._id,
@@ -131,8 +132,9 @@ export class DocumentService {
       );
     }
     else
-   { 
-     await this.documentModel.updateOne({_id:id},{body:update.body})
+   {
+     const uid = await (await this.requestModel.findOne({_id:update.reqId})).userId;
+     await this.documentModel.updateOne({_id:id},{body:update.body, $push: {_history: { status: "updated", body: update.body, user:uid, time: new Date()}}})
      await this.requestModel.deleteMany({_id:update.reqId})
      await this.voteModel.deleteMany({requestId:update.reqId})
    }

@@ -6,6 +6,12 @@ export interface Document extends mongoose.Document {
   owner: string;
   createdAt: Date;
   updatedAt: Date;
+  _history: [{
+    body: object,
+    user: string,
+    time: Date,
+    status: String,
+}]
 }
 
 export const DocumentSchema = new mongoose.Schema(
@@ -15,6 +21,7 @@ export const DocumentSchema = new mongoose.Schema(
     owner: { type: String },
     createdAt: { type: Date },
     updatedAt: { type: Date },
+    _history: {type: [Object]}
   },
   {
     timestamps: true,
