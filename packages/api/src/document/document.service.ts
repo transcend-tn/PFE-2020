@@ -176,4 +176,9 @@ export class DocumentService {
       owner: doc.owner,
     }));
   }
+
+  async getDocumentHistory(id: string) {
+    const doc=  await this.documentModel.findById(id)
+    return doc._history.reverse();
+  }
 }

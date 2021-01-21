@@ -76,4 +76,9 @@ export class DocumentController {
   async isOwner(@GetUser() currentUser:User, @Param('id') id: string) {
     return await this.documentService.isOwner(currentUser, id);
   }
+
+  @Get('/history/:id')
+  async getDocumentHistory(@Param('id') id: string) {
+    return await this.documentService.getDocumentHistory(id);
+  }
 }
