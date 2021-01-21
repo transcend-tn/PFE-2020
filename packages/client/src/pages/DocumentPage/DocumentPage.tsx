@@ -23,7 +23,6 @@ function DocumentPage() {
     error: history_error,
   } = useQuery(['document:history', id], getDocumentHistory);
 
-  console.log(history_data);
   if (!body) return null;
   const contentState = convertFromRaw(body ? JSON.parse(body) : {});
   // console.log(contentState)

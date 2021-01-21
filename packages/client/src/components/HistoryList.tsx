@@ -10,7 +10,15 @@ function HistoryList(props: HistoryListProps) {
   return (
     <div style={{ maxWidth: 500 }}>
       {data.map((snapshot: any, idx: number) => {
-        return <HistoryCard title={snapshot.title} user={snapshot.user} time={snapshot.time} key={`history-${idx}`} />;
+        return (
+          <HistoryCard
+            title={snapshot.title}
+            body={snapshot.body}
+            user={snapshot.user}
+            time={snapshot.time}
+            key={`history-${idx}`}
+          />
+        );
       })}
     </div>
   );
