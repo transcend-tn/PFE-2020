@@ -9,6 +9,7 @@ import { UserRepository } from '../users/user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { RequestSchema } from '../request/request.model'; 
 import { VoteSchema } from '../vote/vote.model'; 
+import { CommentSchema } from '../comment/comment.model';
  
 @Module({ 
   imports: [ 
@@ -17,7 +18,8 @@ import { VoteSchema } from '../vote/vote.model';
     MongooseModule.forFeature([{ name: 'Document', schema: DocumentSchema }]), 
     MongooseModule.forFeature([{ name: 'Collaboration', schema: CollaborationSchema }]), 
     MongooseModule.forFeature([{ name: 'Request', schema: RequestSchema }]), 
-    MongooseModule.forFeature([{ name: 'Vote', schema: VoteSchema }]), 
+    MongooseModule.forFeature([{ name: 'Vote', schema: VoteSchema }]),
+    MongooseModule.forFeature([{ name: 'Comment', schema: CommentSchema }]), 
   ], 
   controllers: [DocumentController], 
   providers: [DocumentService], 

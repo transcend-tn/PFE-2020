@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentCreate, DocumentUpdate } from '@tr/common';
 import { Model } from 'mongoose';
+import { Comment } from 'src/comment/comment.model';
 import { Vote } from 'src/vote/vote.model';
 import { Collaboration } from '../collaboration/collaboration.model';
 import { CollaborationService } from '../collaboration/collaboration.service';
@@ -22,6 +23,7 @@ export class DocumentService {
     @InjectRepository(UserRepository) private userRepository?: UserRepository,
     @InjectModel('Request') private readonly requestModel?: Model<Request>,
     @InjectModel('Vote') private readonly voteModel?: Model<Vote>,
+    @InjectModel('Comment') private readonly commentModel?: Model<Comment>,
   ) {}
 
   async createDocument(user: User, doc: DocumentCreate) {
@@ -137,6 +139,7 @@ export class DocumentService {
      await this.documentModel.updateOne({_id:id},{body:update.body, $push: {_history: { status: "updated", body: update.body, user:uid, time: new Date()}}})
      await this.requestModel.deleteMany({_id:update.reqId})
      await this.voteModel.deleteMany({requestId:update.reqId})
+     await this.commentModel.deleteMany({requestId:update.reqId})
    }
   }
 
