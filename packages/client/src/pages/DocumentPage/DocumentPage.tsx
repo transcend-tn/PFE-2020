@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import DocumentHeader from '../../components/DocumentHeader';
 import HistoryList from '../../components/HistoryList';
-import { getDocumentById } from '../../services/document.service';
+import { getDocumentById, getDocumentHistory } from '../../services/document.service';
 import MessageFormContainer from './containers/MessageFormContainer';
 import MessageListContainer from './containers/MessageListContainer';
 import PropositionListContainer from './containers/PropositionListContainer';
@@ -16,7 +16,14 @@ function DocumentPage() {
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, owner, createdAt } = data;
+  const {
+    isLoading: history_isLoading,
+    isError: history_isError,
+    data: history_data = [],
+    error: history_error,
+  } = useQuery(['document:history', id], getDocumentHistory);
 
+  console.log(history_data);
   if (!body) return null;
   const contentState = convertFromRaw(body ? JSON.parse(body) : {});
   // console.log(contentState)
@@ -42,7 +49,7 @@ function DocumentPage() {
                 <PropositionListContainer owner={owner} />
               </Tab>
               <Tab eventKey="Historique" title="Historique" className="mt-5">
-                <HistoryList />
+                <HistoryList data={history_data} />
               </Tab>
             </Tabs>
           </div>

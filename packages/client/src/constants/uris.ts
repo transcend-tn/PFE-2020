@@ -15,6 +15,7 @@ export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;
 export const DOCUMENT_EDIT = (id: string) => `/document/${id}/edit`;
 export const DOCUMENT_BY_OWNER = (id: string) => `/document/owner/${id}`;
 export const COLLABORATION_REQUESTS = '/document/collaboration-requests';
+export const DOCUMENT_HISTORY = (id: string) => `/document/history/${id}`;
 
 export const FAVORITE = '/favorite';
 export const FAVORITE_BY_ID = (id: string) => `/favorite/${id}`;
@@ -27,7 +28,7 @@ export const REQUEST_COMMENT_ADD = (reqId: string) => `/comment/request/${reqId}
 export const REQUEST_BY_REQ_ID = (id: string) => `/comment/request/${id}`;
 
 export const COLLABORATION = (userId: string) => `/collaboration/documents/${userId}`;
-export const COLLABORATION_BY_ID= (id: string) => `/collaboration/${id}`;
+export const COLLABORATION_BY_ID = (id: string) => `/collaboration/${id}`;
 export const JOIN_TEAM = (docId: string) => `/collaboration/${docId}`;
 export const LEAVE_TEAM = (docId: string) => `/collaboration/${docId}`;
 export const ENABLE = (docId: string, userId: string) => `/collaboration/enable/${docId}/${userId}`;
@@ -39,4 +40,3 @@ export const REQUEST_BY_ID = (id: string) => `/request/${id}`;
 export const REQUEST_DETAIL = (id: string) => `/request/detail/${id}`;
 
 export const VOTE = (id: string) => `/vote/${id}`;
-
