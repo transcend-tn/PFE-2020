@@ -103,15 +103,13 @@ const CloneDocumentPage = () => {
         <Row>
           <Col lg="12" className="mb-3">
             <div className="card p-3">
-              <Tabs defaultActiveKey="Document" id="uncontrolled-tab">
-                <Tab eventKey="Document" title="Document" className="mt-5">
-                  <Editor
-                    toolbar={{ options: EDITOR_OPTIONS }}
-                    editorState={editorState}
-                    onEditorStateChange={setEditorState}
-                  />
-                </Tab>
-              </Tabs>
+              <Editor
+                toolbar={{ options: EDITOR_OPTIONS }}
+                editorState={editorState}
+                onEditorStateChange={setEditorState}
+                readOnly={true}
+                toolbarHidden
+              />
             </div>
           </Col>
         </Row>
