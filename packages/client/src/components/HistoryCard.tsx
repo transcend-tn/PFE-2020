@@ -4,7 +4,7 @@ import Media from 'react-bootstrap/esm/Media';
 import { BsClock } from 'react-icons/bs';
 import { MdContentCopy } from 'react-icons/md';
 import { format } from 'date-fns';
-import { PROFILE } from '../constants/uris';
+import { PROFILE, DOCUMENT_CLONE } from '../constants/uris';
 import { Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/esm/Modal';
 import { Editor } from 'react-draft-wysiwyg';
@@ -61,9 +61,9 @@ function HistoryCard(props: HistoryCardProps) {
               </span>
             </div>
           </div>
-          <Button variant="link">
-            <MdContentCopy color="#33A2FF" onClick={onCopyHistory} />
-          </Button>
+          <Link to={{ pathname: DOCUMENT_CLONE, state: { body: body } }}>
+            <MdContentCopy color="#33A2FF" />
+          </Link>
         </Media.Body>
       </Media>
 
