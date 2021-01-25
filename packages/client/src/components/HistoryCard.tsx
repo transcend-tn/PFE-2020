@@ -62,7 +62,7 @@ function HistoryCard(props: HistoryCardProps) {
               </span>
             </div>
           </div>
-          <Link to={{ pathname: DOCUMENT_SNAPSHOT(id, histId), state: { body: body } }}>
+          <Link to={DOCUMENT_SNAPSHOT(id, histId)}>
             <MdContentCopy color="#33A2FF" />
           </Link>
         </Media.Body>
