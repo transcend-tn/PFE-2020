@@ -13,7 +13,7 @@ export interface MessageFormInterface {
 }
 
 function MessageForm(props: MessageFormInterface) {
-  const { createComment, isLoading, reqId } = props;
+  const { createComment, isLoading, reqId, docId } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -24,13 +24,15 @@ function MessageForm(props: MessageFormInterface) {
     }),
 
     onSubmit: async (payload: CommentCreate, { setSubmitting, setErrors, setStatus, resetForm }) => {
-      try {
+      if (docId) {
+        createComment({ docId, payload });
+        resetForm({});
+        setStatus({ success: true });
+      }
+      if (reqId) {
         createComment({ reqId, payload });
         resetForm({});
         setStatus({ success: true });
-      } catch (error) {
-        setStatus({ success: false });
-        setSubmitting(false);
       }
     },
   });

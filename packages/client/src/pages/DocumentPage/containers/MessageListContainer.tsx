@@ -4,12 +4,12 @@ import { getCommentByDocId } from '../../../services/comment.service';
 import ReactPlaceholder from 'react-placeholder';
 import MessageCard from '../../../components/MessageCard';
 import { useParams } from 'react-router-dom';
-import { formatDistance } from 'date-fns'
+import { formatDistance } from 'date-fns';
 
 function MessageListContainer() {
   const { id: docId } = useParams<{ id: string }>();
   const { isLoading, isError, data = [], error } = useQuery(['comments:getbyid', docId], getCommentByDocId);
-
+  console.log(data);
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -19,7 +19,12 @@ function MessageListContainer() {
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
         {data.map((msg: any, idx: number) => {
           return (
-            <MessageCard username={msg.username} time={formatDistance(new Date(),new Date(msg.createdAt))} body={msg.body} key={`message-${idx}`} />
+            <MessageCard
+              username={msg.username}
+              time={formatDistance(new Date(), new Date(msg.createdAt))}
+              body={msg.body}
+              key={`message-${idx}`}
+            />
           );
         })}
       </ReactPlaceholder>
