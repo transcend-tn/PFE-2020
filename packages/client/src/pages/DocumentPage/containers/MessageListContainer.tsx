@@ -9,7 +9,6 @@ import { formatDistance } from 'date-fns';
 function MessageListContainer() {
   const { id: docId } = useParams<{ id: string }>();
   const { isLoading, isError, data = [], error } = useQuery(['comments:getbyid', docId], getCommentByDocId);
-  console.log(data);
   if (isError) {
     return <span>Error: {error} !</span>;
   }

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import MemberCard from '../../../components/MemberCard';
 import { useStoreState } from '../../../hooks/store.hooks';
 import { collaborationTeam, joinTeamMutation, leaveTeamMutation } from '../../../services/collaboration.service';
-
+import { toast } from 'react-toastify';
 export interface TeamMembersListContainerProps {
   owner?: string;
 }
@@ -15,8 +15,14 @@ function TeamMembersListContainer(props: TeamMembersListContainerProps) {
   const { id } = useParams<{ id: string }>();
   const { isError, data = [], error } = useQuery(['collaboration:getTeam', id], collaborationTeam);
   const cache = useQueryCache();
-  const [joinTeam, { status: join_status }] = useMutation(joinTeamMutation, {
-    onSuccess: () => cache.invalidateQueries('collaboration:getTeam'),
+  const [joinTeam, { status: join_status, isLoading }] = useMutation(joinTeamMutation, {
+    onSuccess: (response) => {
+      toast.success('Request Sent', {
+        position: toast.POSITION.TOP_RIGHT,
+        className: 'fade alert alert-success show',
+      });
+      cache.invalidateQueries('collaboration:getTeam');
+    },
   });
   const [leaveTeam, { status: leave_status }] = useMutation(leaveTeamMutation, {
     onSuccess: () => cache.invalidateQueries('collaboration:getTeam'),
