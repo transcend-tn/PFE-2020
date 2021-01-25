@@ -12,6 +12,7 @@ function HistoryList(props: HistoryListProps) {
       {data.map((snapshot: any, idx: number) => {
         return (
           <HistoryCard
+            histId={snapshot.id}
             title={snapshot.title}
             body={snapshot.body}
             user={snapshot.user}

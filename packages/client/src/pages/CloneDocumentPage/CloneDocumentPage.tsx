@@ -1,17 +1,14 @@
-import * as Diff2Html from 'diff2html';
 import 'diff2html/bundles/css/diff2html.min.css';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Form, Row, Spinner, Tab, Tabs } from 'react-bootstrap';
+import { Button, Col, Form, Row, Spinner } from 'react-bootstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import { useMutation, useQuery } from 'react-query';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { getDocumentById, createDocumentMutation } from '../../services/document.service';
-import { createRequestMutation } from '../../services/request.service';
+import { createDocumentMutation, getDocumentSnapshot } from '../../services/document.service';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -26,10 +23,13 @@ const EDITOR_OPTIONS = [
 ];
 
 const CloneDocumentPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { docId, histId } = useParams<{ docId: string; histId: string }>();
   const [createDocument, { status }] = useMutation(createDocumentMutation);
-  const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
-  const body = useHistory<any>().location.state.body;
+  const { isLoading, isError, data = {}, error } = useQuery(
+    ['document:getSnapshot', { docId, histId }],
+    getDocumentSnapshot,
+  );
+  const body = data.body;
   const [editorState, setEditorState] = useState(body);
   useEffect(() => {
     const state: any = body

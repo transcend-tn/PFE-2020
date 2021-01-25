@@ -81,4 +81,10 @@ export class DocumentController {
   async getDocumentHistory(@Param('id') id: string) {
     return await this.documentService.getDocumentHistory(id);
   }
+
+  @Get('/:docid/:hid')
+  async getDocumentSnapshot(@GetUser() currentUser:User, @Param('docid') docid: string,@Param('hid') hid: string) {
+    return await this.documentService.getDocumentSnapshot(currentUser, docid, hid);
+
+  }
 }

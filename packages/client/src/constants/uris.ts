@@ -11,12 +11,12 @@ export const USERS = '/users';
 export const EDIT_PASSWORD = `/users/change-password`;
 
 export const DOCUMENT = '/document';
-export const DOCUMENT_CLONE = '/document/clone';
 export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;
 export const DOCUMENT_EDIT = (id: string) => `/document/${id}/edit`;
 export const DOCUMENT_BY_OWNER = (id: string) => `/document/owner/${id}`;
 export const COLLABORATION_REQUESTS = '/document/collaboration-requests';
 export const DOCUMENT_HISTORY = (id: string) => `/document/history/${id}`;
+export const DOCUMENT_SNAPSHOT = (docId: string, histId: string) => `/document/${docId}/${histId}`;
 
 export const FAVORITE = '/favorite';
 export const FAVORITE_BY_ID = (id: string) => `/favorite/${id}`;

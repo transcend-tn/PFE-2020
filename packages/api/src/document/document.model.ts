@@ -7,6 +7,7 @@ export interface Document extends mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
   _history: [{
+    id:string;
     title: string,
     body: object,
     user: string,

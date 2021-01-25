@@ -1,14 +1,13 @@
-import React from 'react';
-import Button from 'react-bootstrap/esm/Button';
-import Media from 'react-bootstrap/esm/Media';
-import { BsClock } from 'react-icons/bs';
-import { MdContentCopy } from 'react-icons/md';
 import { format } from 'date-fns';
-import { PROFILE, DOCUMENT_CLONE } from '../constants/uris';
-import { Link } from 'react-router-dom';
+import { convertFromRaw, EditorState } from 'draft-js';
+import React from 'react';
+import Media from 'react-bootstrap/esm/Media';
 import Modal from 'react-bootstrap/esm/Modal';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertFromRaw } from 'draft-js';
+import { BsClock } from 'react-icons/bs';
+import { MdContentCopy } from 'react-icons/md';
+import { Link, useParams } from 'react-router-dom';
+import { DOCUMENT_SNAPSHOT, PROFILE } from '../constants/uris';
 
 function MyVerticallyCenteredModal(props: any) {
   return (
@@ -27,6 +26,7 @@ function MyVerticallyCenteredModal(props: any) {
   );
 }
 export interface HistoryCardProps {
+  histId: string;
   title: string;
   body: string;
   user: string;
@@ -34,7 +34,8 @@ export interface HistoryCardProps {
 }
 
 function HistoryCard(props: HistoryCardProps) {
-  const { title, body, user, time } = props;
+  const { id } = useParams<{ id: string }>();
+  const { histId, title, body, user, time } = props;
   const [modalShow, setModalShow] = React.useState(false);
   const onCopyHistory = () => {
     console.log('onCopyHistory');
@@ -61,7 +62,7 @@ function HistoryCard(props: HistoryCardProps) {
               </span>
             </div>
           </div>
-          <Link to={{ pathname: DOCUMENT_CLONE, state: { body: body } }}>
+          <Link to={{ pathname: DOCUMENT_SNAPSHOT(id, histId), state: { body: body } }}>
             <MdContentCopy color="#33A2FF" />
           </Link>
         </Media.Body>

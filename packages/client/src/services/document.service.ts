@@ -6,6 +6,7 @@ import {
   FAVORITE,
   COLLABORATION_REQUESTS,
   FAVORITE_BY_ID,
+  DOCUMENT_SNAPSHOT,
 } from './../constants/uris';
 import { DocumentUpdate } from '../../../common/src/document.interface';
 import { DOCUMENT_HISTORY } from '../constants/uris';
@@ -46,5 +47,10 @@ export const getCollaborationRequests = async (key: any, id: string): Promise<an
 
 export const getDocumentHistory = async (key: any, id: string): Promise<any> => {
   const { data } = await axios.get(DOCUMENT_HISTORY(id));
+  return data;
+};
+
+export const getDocumentSnapshot = async (key: any, { docId, histId }: any): Promise<any> => {
+  const { data } = await axios.get(DOCUMENT_SNAPSHOT(docId, histId));
   return data;
 };

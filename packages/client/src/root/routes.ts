@@ -38,7 +38,7 @@ const routes: Route[] = [
     Component: withMain(NewDocumentPage),
   },
   {
-    path: '/document/clone',
+    path: '/document/:docId/:histId',
     Component: withMain(CloneDocumentPage),
   },
   {
