@@ -31,7 +31,7 @@ const EditDocumentPage = () => {
   const [requestUpdateDocument, { status }] = useMutation(createRequestMutation);
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, createdAt } = data;
-  const [editorState, setEditorState] = useState(body);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   let history = useHistory();
   useEffect(() => {
     const state: any = body
