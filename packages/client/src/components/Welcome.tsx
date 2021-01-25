@@ -15,7 +15,7 @@ function Welcome() {
   const toggleModal = () => setShow(!show);
   let history = useHistory();
   const currentUser = useStoreState((state) => state.user.user);
-  if (currentUser.username) history.push(PROFILE(currentUser.username));
+  if (currentUser != null && currentUser.username) history.push(PROFILE(currentUser.username));
 
   return (
     <div style={{ maxWidth: 800 }}>

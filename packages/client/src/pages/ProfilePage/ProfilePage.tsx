@@ -8,7 +8,6 @@ import CollaborationRequestList from './containers/CollaborationRequestList';
 import DocumentsListContainer from './containers/DocumentsListContainer';
 import FavorisListeContainer from './containers/FavorisListeContainer';
 import ProfileCardContainer from './containers/ProfileCardContainer';
-
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const currentUser = useStoreState((state) => state.user.user);
@@ -16,12 +15,14 @@ function ProfilePage() {
     ['user:getUserByUsername', id],
     getUserByUsername,
   );
-  if (user.username === undefined && status === 'success')
+
+  if (user.username === undefined && status === 'success') {
     return (
       <Alert key="error" variant="danger">
-        username : <b>{id}</b> not found !
+        <b>{id}</b> not found !
       </Alert>
     );
+  }
 
   return (
     <Row>
