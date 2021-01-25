@@ -5,11 +5,17 @@ import Media from 'react-bootstrap/esm/Media';
 import { RiTeamLine, RiThumbUpLine, RiHistoryLine, RiEarthFill } from 'react-icons/ri';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import { useHistory } from 'react-router-dom';
+import { PROFILE } from '../constants/uris';
+import { useStoreState } from '../hooks/store.hooks';
 
 function Welcome() {
   const [show, setShow] = useState(false);
 
   const toggleModal = () => setShow(!show);
+  let history = useHistory();
+  const currentUser = useStoreState((state) => state.user.user);
+  if (currentUser.username) history.push(PROFILE(currentUser.username));
 
   return (
     <div style={{ maxWidth: 800 }}>

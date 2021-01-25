@@ -55,7 +55,7 @@ const routes: Route[] = [
   },
   {
     path: '*',
-    Component: withMain(PageIntrouvable),
+    Component: withCenter(PageIntrouvable),
   },
 ];
 

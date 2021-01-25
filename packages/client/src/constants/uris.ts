@@ -1,6 +1,7 @@
-import { PORT, BASE_URL, PROTOCOL } from './config';
+import { PORT, BASE_URL, PROTOCOL, PORT_FRONT } from './config';
 
 export const ENTRYPOINT = `${PROTOCOL}://${BASE_URL}:${PORT}`;
+export const HOME_PAGE = 'http://localhost:3001';
 
 export const PROFILE = (id: string) => `/profile/${id}`;
 export const SIGN_IN = '/users/signin';
