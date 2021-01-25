@@ -8,6 +8,9 @@ import { Editor } from 'react-draft-wysiwyg';
 import { MutateFunction } from 'react-query';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
+import { PROFILE } from '../constants/uris';
+import { useStoreState } from '../hooks/store.hooks';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -29,7 +32,8 @@ export interface NewDocumentInterface {
 const NewDocument = (props: NewDocumentInterface) => {
   const { isLoading, createDocument } = props;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
+  const currentUser = useStoreState((state) => state.user.user);
+  let history = useHistory();
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -45,13 +49,13 @@ const NewDocument = (props: NewDocumentInterface) => {
         title: values.title,
       }).then(
         () => {
-          values.title = '';
           setEditorState(EditorState.createEmpty());
-
-          toast.success('Document Créé', {
+          toast.success(`${values.title} created`, {
             position: toast.POSITION.TOP_RIGHT,
             className: 'fade alert alert-success show',
           });
+          values.title = '';
+          history.push(PROFILE(currentUser.username));
         },
         (error) => {
           console.log({ error });

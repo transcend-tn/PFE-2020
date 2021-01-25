@@ -30,22 +30,8 @@ function EditProfileForm(props: EditProfileFormInterface) {
 
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">
-      <Form.Group controlId="formBasicLname">
-        <Form.Label>Nom</Form.Label>
-        <Form.Control
-          name="lname"
-          type="text"
-          placeholder="Veuillez entrer votre nom de famille"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lname}
-        />
-        {formik.touched.lname && formik.errors.lname ? (
-          <Form.Text className="text-danger">{formik.errors.lname}</Form.Text>
-        ) : null}
-      </Form.Group>
       <Form.Group controlId="formBasicFname">
-        <Form.Label>Prénom</Form.Label>
+        <Form.Label>Nom</Form.Label>
         <Form.Control
           name="fname"
           type="text"
@@ -56,6 +42,20 @@ function EditProfileForm(props: EditProfileFormInterface) {
         />
         {formik.touched.fname && formik.errors.fname ? (
           <Form.Text className="text-danger">{formik.errors.fname}</Form.Text>
+        ) : null}
+      </Form.Group>
+      <Form.Group controlId="formBasicLname">
+        <Form.Label>Prénom</Form.Label>
+        <Form.Control
+          name="lname"
+          type="text"
+          placeholder="Veuillez entrer votre nom de famille"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.lname}
+        />
+        {formik.touched.lname && formik.errors.lname ? (
+          <Form.Text className="text-danger">{formik.errors.lname}</Form.Text>
         ) : null}
       </Form.Group>
       <Form.Group controlId="formBasicEmail">
@@ -73,9 +73,9 @@ function EditProfileForm(props: EditProfileFormInterface) {
         ) : null}
       </Form.Group>
 
-      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading} >
+      <Button variant="primary" type="submit" className="btn-sm" disabled={isLoading}>
         Enregistrer les modifications
-      </Button>    
+      </Button>
     </form>
   );
 }

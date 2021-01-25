@@ -7,9 +7,10 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row, Spinner, Tab, Tabs } from 'react-bootstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import { useMutation, useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import { DOCUMENT_BY_ID } from '../../constants/uris';
 import { getDocumentById } from '../../services/document.service';
 import { createRequestMutation } from '../../services/request.service';
 
@@ -31,6 +32,7 @@ const EditDocumentPage = () => {
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, createdAt } = data;
   const [editorState, setEditorState] = useState(body);
+  let history = useHistory();
   useEffect(() => {
     const state: any = body
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(body)))
@@ -57,11 +59,12 @@ const EditDocumentPage = () => {
       };
       requestUpdateDocument(payload).then(
         () => {
-          values.title = '';
-          toast.success('PR Créé', {
+          toast.success(`${values.title} created`, {
             position: toast.POSITION.TOP_RIGHT,
             className: 'fade alert alert-success show',
           });
+          values.title = '';
+          history.push(DOCUMENT_BY_ID(id) + '?tab=PR');
         },
         (error) => {
           console.log({ error });

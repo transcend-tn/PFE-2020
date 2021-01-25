@@ -18,7 +18,7 @@ function EditProfilePage() {
               <Tab eventKey="edit-profile" title="Modifier vos coordonnées">
                 <EditProfileFormContainer />
               </Tab>
-              <Tab eventKey="change-password" title="Chnager mot de passe">
+              <Tab eventKey="change-password" title="Changer mot de passe">
                 <ChangePasswordFormContainer />
               </Tab>
             </Tabs>

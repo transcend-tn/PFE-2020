@@ -38,16 +38,16 @@ const routes: Route[] = [
     Component: withMain(NewDocumentPage),
   },
   {
-    path: '/document/:docId/:histId',
-    Component: withMain(CloneDocumentPage),
-  },
-  {
     path: '/document/:id',
     Component: withMain(DocumentPage),
   },
   {
-    path: '/document/:id/edit',
+    path: '/document/edit/:id',
     Component: withMain(EditDocumentPage),
+  },
+  {
+    path: '/document/:docId/:histId',
+    Component: withMain(CloneDocumentPage),
   },
   {
     path: '/request/detail/:id',

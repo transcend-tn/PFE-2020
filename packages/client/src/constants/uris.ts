@@ -12,7 +12,7 @@ export const EDIT_PASSWORD = `/users/change-password`;
 
 export const DOCUMENT = '/document';
 export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;
-export const DOCUMENT_EDIT = (id: string) => `/document/${id}/edit`;
+export const DOCUMENT_EDIT = (id: string) => `/document/edit/${id}`;
 export const DOCUMENT_BY_OWNER = (id: string) => `/document/owner/${id}`;
 export const COLLABORATION_REQUESTS = '/document/collaboration-requests';
 export const DOCUMENT_HISTORY = (id: string) => `/document/history/${id}`;
