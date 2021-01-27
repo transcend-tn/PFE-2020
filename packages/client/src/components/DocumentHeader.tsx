@@ -17,15 +17,13 @@ function DocumentHeader(props: DocumentHeaderProps) {
   return (
     <Card className="card-header p-3">
       <div className="input-group d-flex justify-content-between">
-        <div>
-          <p className="mt-0 font-weight-light">
-
-            <h4>{title}</h4>
-            <Link to={PROFILE(username)}>
-              {username}
-            </Link>
-            {'\xa0'}{formatDistance(new Date(), new Date(createdAt))}{'\xa0'}ago
-                      </p> </div>
+        <div className="mt-0 font-weight-light">
+          <h4>{title}</h4>
+          <Link to={PROFILE(username)}>{username}</Link>
+          {'\xa0'}
+          {formatDistance(new Date(), new Date(createdAt))}
+          {'\xa0'}ago
+        </div>
 
         <Link to={DOCUMENT_EDIT(docId)}>
           <Button variant="btn btn-btn btn-outline-secondary" size="sm" type="submit">

@@ -3,7 +3,7 @@ import ReactPlaceholder from 'react-placeholder';
 import { useQuery } from 'react-query';
 import ProfileCard from '../../../components/ProfileCard';
 import { useStoreState } from '../../../hooks/store.hooks';
-import { getUserById, getUserByUsername } from '../../../services/user.service';
+import { getUserByUsername } from '../../../services/user.service';
 
 export interface ProfileCardProps {
   username: string;

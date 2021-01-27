@@ -8,7 +8,6 @@ import { deleteRequest } from '../services/request.service';
 import { getUserById } from '../services/user.service';
 
 export interface PropositionCardProps {
-  idc: string;
   idp: string;
   title: string;
   userId: string;
@@ -19,12 +18,9 @@ export interface PropositionCardProps {
 
 function PropositionCard(props: PropositionCardProps) {
   const cache = useQueryCache();
-  const { idc, idp, title, userId, time, canDelete } = props;
-  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(
-    ['user:getUserByUsername', userId],
-    getUserById,
-  );
-  const [deletePR, { status }] = useMutation(deleteRequest, {
+  const { idp, title, userId, time, canDelete } = props;
+  const { data: user = {} } = useQuery(['user:getUserByUsername', userId], getUserById);
+  const [deletePR] = useMutation(deleteRequest, {
     onSuccess: () => cache.invalidateQueries('propositions:getbyid'),
   });
 

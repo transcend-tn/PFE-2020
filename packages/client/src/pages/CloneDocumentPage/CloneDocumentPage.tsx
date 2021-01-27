@@ -24,7 +24,7 @@ const EDITOR_OPTIONS = [
 
 const CloneDocumentPage = () => {
   const { docId, histId } = useParams<{ docId: string; histId: string }>();
-  const [createDocument, { status }] = useMutation(createDocumentMutation);
+  const [createDocument] = useMutation(createDocumentMutation);
   const { isLoading, isError, data = {}, error } = useQuery(
     ['document:getSnapshot', { docId, histId }],
     getDocumentSnapshot,

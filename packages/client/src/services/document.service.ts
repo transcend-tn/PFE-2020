@@ -1,15 +1,13 @@
 import axios from '../config/axios';
+import { DOCUMENT_HISTORY } from '../constants/uris';
 import {
+  COLLABORATION_REQUESTS,
   DOCUMENT,
   DOCUMENT_BY_ID,
   DOCUMENT_BY_OWNER,
-  FAVORITE,
-  COLLABORATION_REQUESTS,
-  FAVORITE_BY_ID,
   DOCUMENT_SNAPSHOT,
+  FAVORITE_BY_ID,
 } from './../constants/uris';
-import { DocumentUpdate } from '../../../common/src/document.interface';
-import { DOCUMENT_HISTORY } from '../constants/uris';
 
 export const createDocumentMutation = async (payload: any): Promise<string> => {
   const { data } = await axios.post(DOCUMENT, payload);

@@ -3,9 +3,9 @@ import { ProgressBar } from 'react-bootstrap';
 import Button from 'react-bootstrap/esm/Button';
 import { useMutation, useQueryCache } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
+import { DOCUMENT_BY_ID } from '../constants/uris';
 import { updateDocumentMutation } from '../services/document.service';
 import { addVote, cancelVote } from '../services/vote.service';
-import { DOCUMENT_BY_ID } from '../constants/uris';
 
 export interface VoteProps {
   voteCount: number;
@@ -19,13 +19,13 @@ export interface VoteProps {
 function Vote(props: VoteProps) {
   const { id } = useParams<{ id: string }>();
   const cache = useQueryCache();
-  const [av, { status: av_status }] = useMutation(addVote, {
+  const [av] = useMutation(addVote, {
     onSuccess: () => cache.invalidateQueries('vote:getStats'),
   });
-  const [cv, { status: cv_status }] = useMutation(cancelVote, {
+  const [cv] = useMutation(cancelVote, {
     onSuccess: () => cache.invalidateQueries('vote:getStats'),
   });
-  const [update, { status: update_status }] = useMutation(updateDocumentMutation, {
+  const [update] = useMutation(updateDocumentMutation, {
     onSuccess: () => console.log('MERGED'),
   });
   let history = useHistory();
@@ -38,9 +38,7 @@ function Vote(props: VoteProps) {
   }
   function mergeHandler() {
     if (canMerge) {
-      updateDocumentMutation({ id: docId, body: updatePayload }).then(() =>
-        history.push(DOCUMENT_BY_ID(docId) + '?tab=history'),
-      );
+      update({ id: docId, body: updatePayload }).then(() => history.push(DOCUMENT_BY_ID(docId) + '?tab=history'));
     } else console.log('cant merge');
   }
 

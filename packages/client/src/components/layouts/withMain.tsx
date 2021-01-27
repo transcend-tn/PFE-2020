@@ -9,7 +9,6 @@ import { CgProfile } from 'react-icons/cg';
 import { RiHome2Line } from 'react-icons/ri';
 import { queryCache } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
-import { PROFILE } from '../../constants/uris';
 import { useStoreState } from '../../hooks/store.hooks';
 
 const withMain = <P extends object>(Component: React.ComponentType) => {
@@ -38,7 +37,19 @@ const withMain = <P extends object>(Component: React.ComponentType) => {
               <Nav.Link as={Link} to="/document/new">
                 <BiAddToQueue color="#ffffff" size={30} />
               </Nav.Link>
-              <NavDropdown title={<div className="btn-group"><CgProfile color="#ffffff" size={30} /><p className="nav-link mb-0" style={{paddingTop: 3, paddingBottom: 0}}>{user.fname}{'\xa0'}{user.lname}</p></div>} id="collasible-nav-dropdown">
+              <NavDropdown
+                title={
+                  <div className="btn-group">
+                    <CgProfile color="#ffffff" size={30} />
+                    <p className="nav-link mb-0" style={{ paddingTop: 3, paddingBottom: 0 }}>
+                      {user.fname}
+                      {'\xa0'}
+                      {user.lname}
+                    </p>
+                  </div>
+                }
+                id="collasible-nav-dropdown"
+              >
                 <NavDropdown.Item as={Link} to={`/profile/${user.username}`}>
                   Profile
                 </NavDropdown.Item>

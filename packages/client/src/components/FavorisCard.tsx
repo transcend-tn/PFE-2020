@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import Media from 'react-bootstrap/esm/Media';
 import { FaStar } from 'react-icons/fa';
@@ -8,7 +8,7 @@ import { DOCUMENT_BY_ID } from '../constants/uris';
 
 export interface FavorisCardProps {
   id: string;
-  showStar:boolean;
+  showStar: boolean;
   active?: boolean;
   timeEdit: string;
   documenTitle: string;
@@ -25,11 +25,11 @@ function FavorisCard(props: FavorisCardProps) {
   const { id, showStar, active, timeEdit, documenTitle, onAdd, onRemove } = props;
 
   const toggleFavoris = () => {
-      if (active) {
-        onRemove && onRemove({ id });
-      } else {
-        onAdd && onAdd({ id });
-      }
+    if (active) {
+      onRemove && onRemove({ id });
+    } else {
+      onAdd && onAdd({ id });
+    }
   };
 
   return (

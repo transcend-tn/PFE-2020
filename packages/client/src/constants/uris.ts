@@ -1,4 +1,4 @@
-import { PORT, BASE_URL, PROTOCOL, PORT_FRONT } from './config';
+import { BASE_URL, PORT, PROTOCOL } from './config';
 
 export const ENTRYPOINT = `${PROTOCOL}://${BASE_URL}:${PORT}`;
 export const HOME_PAGE = 'http://localhost:3001';

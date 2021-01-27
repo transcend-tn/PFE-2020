@@ -37,9 +37,6 @@ function HistoryCard(props: HistoryCardProps) {
   const { id } = useParams<{ id: string }>();
   const { histId, title, body, user, time } = props;
   const [modalShow, setModalShow] = React.useState(false);
-  const onCopyHistory = () => {
-    console.log('onCopyHistory');
-  };
 
   return (
     <div style={{ maxWidth: 500 }}>

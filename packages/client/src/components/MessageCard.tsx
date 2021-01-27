@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/esm/Card';
 import Image from 'react-bootstrap/esm/Image';
 import Media from 'react-bootstrap/esm/Media';
 import { BsClock } from 'react-icons/bs';
-import { useParams } from 'react-router-dom';
 
 export interface MessageCardProps {
   img?: string;
@@ -13,8 +12,6 @@ export interface MessageCardProps {
 }
 
 function MessageCard(props: MessageCardProps) {
-  const { id: docId } = useParams<{ id: string }>();
-
   return (
     <Card className="p-1 mb-2">
       <Media>

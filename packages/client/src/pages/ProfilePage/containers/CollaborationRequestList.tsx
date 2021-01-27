@@ -1,11 +1,10 @@
 import React from 'react';
-import CollaborationRequest from '../../../components/CollaborationRequest';
-import { getCollaborationRequests } from '../../../services/document.service';
-import { QueryStatus, useMutation, useQuery, useQueryCache } from 'react-query';
-import { removeMutation, enableMutation } from '../../../services/collaboration.service';
-import { useParams } from 'react-router-dom';
 import { Accordion, Card } from 'react-bootstrap';
 import { IoMdDocument } from 'react-icons/io';
+import { QueryStatus, useMutation, useQuery, useQueryCache } from 'react-query';
+import CollaborationRequest from '../../../components/CollaborationRequest';
+import { enableMutation, removeMutation } from '../../../services/collaboration.service';
+import { getCollaborationRequests } from '../../../services/document.service';
 
 function CollaborationRequestList() {
   const cache = useQueryCache();
@@ -41,9 +40,7 @@ function CollaborationRequestList() {
                     <CollaborationRequest
                       key={`collaboration-${idx}`}
                       userId={user.id}
-                      //on n'a pas les attributs (username, documentTitle, img) dans l'api/src/collaboration/collaboration.model.ts
                       username={user.username}
-                      data={data}
                       img={user.img}
                       docId={docTitle.split('#').pop()}
                       onAccept={accept}

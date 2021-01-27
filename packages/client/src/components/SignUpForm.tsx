@@ -4,7 +4,6 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/esm/Form';
 import { QueryStatus, useMutation } from 'react-query';
-import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { signUpMutation } from '../services/user.service';
 
@@ -13,7 +12,6 @@ export interface SignUpFormProps {
 }
 
 function SignUpForm(props: SignUpFormProps) {
-  const history = useHistory();
   const [signUp, { status }] = useMutation(signUpMutation);
   const isLoading = QueryStatus.Loading === status;
 

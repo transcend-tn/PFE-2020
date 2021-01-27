@@ -1,12 +1,11 @@
-import React from 'react';
-import { getRequestById } from '../../../services/request.service';
-import { useQuery } from 'react-query';
-import PropositionCard from '../../../components/PropositionCard';
-import ReactPlaceholder from 'react-placeholder';
-import { useParams } from 'react-router-dom';
-import { getUserById } from '../../../services/user.service';
 import { format } from 'date-fns';
+import React from 'react';
+import ReactPlaceholder from 'react-placeholder';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import PropositionCard from '../../../components/PropositionCard';
 import { useStoreState } from '../../../hooks/store.hooks';
+import { getRequestById } from '../../../services/request.service';
 
 export interface PropositionListContainerProps {
   owner: string;
@@ -17,11 +16,7 @@ function PropositionListContainer(props: PropositionListContainerProps) {
   const { owner } = props;
   const currentUser = useStoreState((state) => state.user.user);
   const { isLoading, isError, data = [], error } = useQuery(['propositions:getbyid', docId], getRequestById);
-  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(
-    ['user:getUserByUsername'],
-    getUserById,
-  );
-  //  console.log(data)
+
   if (isError) {
     return <span>Error: {error} !</span>;
   }
@@ -32,12 +27,11 @@ function PropositionListContainer(props: PropositionListContainerProps) {
           return (
             <PropositionCard
               idp={pr._id}
-              idc={pr.documentId}
               title={pr.title}
               userId={pr.userId}
               time={format(new Date(pr.createdAt), 'd MMMM, HH:mm')}
               key={`proposition-${idx}`}
-              canDelete={owner == currentUser.id}
+              canDelete={owner === currentUser.id.toString()}
             />
           );
         })}

@@ -2,10 +2,10 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useMutation, useQuery, useQueryCache } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import MemberCard from '../../../components/MemberCard';
 import { useStoreState } from '../../../hooks/store.hooks';
 import { collaborationTeam, joinTeamMutation, leaveTeamMutation } from '../../../services/collaboration.service';
-import { toast } from 'react-toastify';
 export interface TeamMembersListContainerProps {
   owner?: string;
 }
@@ -15,8 +15,8 @@ function TeamMembersListContainer(props: TeamMembersListContainerProps) {
   const { id } = useParams<{ id: string }>();
   const { isError, data = [], error } = useQuery(['collaboration:getTeam', id], collaborationTeam);
   const cache = useQueryCache();
-  const [joinTeam, { status: join_status, isLoading }] = useMutation(joinTeamMutation, {
-    onSuccess: (response) => {
+  const [joinTeam] = useMutation(joinTeamMutation, {
+    onSuccess: () => {
       toast.success('Request Sent', {
         position: toast.POSITION.TOP_RIGHT,
         className: 'fade alert alert-success show',
@@ -24,18 +24,18 @@ function TeamMembersListContainer(props: TeamMembersListContainerProps) {
       cache.invalidateQueries('collaboration:getTeam');
     },
   });
-  const [leaveTeam, { status: leave_status }] = useMutation(leaveTeamMutation, {
+  const [leaveTeam] = useMutation(leaveTeamMutation, {
     onSuccess: () => cache.invalidateQueries('collaboration:getTeam'),
   });
   const currentUser = useStoreState((state) => state.user.user);
-  const canLeave: boolean = !(owner == currentUser.id);
+  const canLeave: boolean = !(owner === currentUser.id.toString());
   const teamIds = data.map((member: any) => member.id);
   const isMember = teamIds.includes(currentUser.id);
 
   if (isError) {
     return <span>Error: {error} !</span>;
   }
-  if (data.length != 0)
+  if (data.length !== 0)
     return (
       <>
         <Card>

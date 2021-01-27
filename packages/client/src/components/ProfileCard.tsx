@@ -21,7 +21,7 @@ function ProfileCard(props: ProfileCardInterface) {
           <Image className="border" width={100} height={100} src={user.img ? user.img : USER_IMG} roundedCircle />
 
           <h5 className="text-center mt-2 mb-0">{`${user.fname} ${user.lname}`}</h5>
-          <a href="" className="text-muted mt-0">@{user.username}</a>
+          <p className="text-muted mt-0">@{user.username}</p>
         </div>
         <div className="d-flex justify-content-center mt-4">
           <div className="followers text-center mr-2">
@@ -35,13 +35,15 @@ function ProfileCard(props: ProfileCardInterface) {
           </div>
         </div>
 
-        {canEdit && <div className="text-center mt-4">
-          <Link to={`/profile/${user.username}/edit`}>
-            <Button className="btn-sm" variant="light" type="submit">
-              Editer Profile
-            </Button>
-          </Link>
-        </div>}
+        {canEdit && (
+          <div className="text-center mt-4">
+            <Link to={`/profile/${user.username}/edit`}>
+              <Button className="btn-sm" variant="light" type="submit">
+                Editer Profile
+              </Button>
+            </Link>
+          </div>
+        )}
       </Card.Body>
     </Card>
   );

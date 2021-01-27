@@ -11,10 +11,7 @@ import ProfileCardContainer from './containers/ProfileCardContainer';
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const currentUser = useStoreState((state) => state.user.user);
-  const { isLoading: u_isLoading, status, isError: u_isError, data: user = {}, error: u_error } = useQuery(
-    ['user:getUserByUsername', id],
-    getUserByUsername,
-  );
+  const { status, data: user = {} } = useQuery(['user:getUserByUsername', id], getUserByUsername);
 
   if (user.username === undefined && status === 'success') {
     return (

@@ -16,12 +16,7 @@ function DocumentPage() {
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
   const { title, body, username, owner, createdAt } = data;
-  const {
-    isLoading: history_isLoading,
-    isError: history_isError,
-    data: history_data = [],
-    error: history_error,
-  } = useQuery(['document:history', id], getDocumentHistory);
+  const { data: history_data = [] } = useQuery(['document:history', id], getDocumentHistory);
   let tab = new URLSearchParams(useLocation().search).get('tab');
   let validTab = false;
   if (tab) {

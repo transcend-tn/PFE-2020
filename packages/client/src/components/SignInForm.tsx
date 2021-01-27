@@ -7,7 +7,6 @@ import Card from 'react-bootstrap/esm/Card';
 import Form from 'react-bootstrap/esm/Form';
 import { QueryStatus, useMutation } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useStoreActions } from '../hooks/store.hooks';
 import { signInMutation } from '../services/user.service';
@@ -33,21 +32,19 @@ function SignInForm(props: SignInFormProps) {
       password: Yup.string().required('Veuillez saisir votre mot de passe !'),
     }),
     onSubmit: (values: UserLogin) => {
-      signIn(values).then(
-        (values) => {
-          if (values) {
-            const user: any = jwt.decode(values.accessToken);
-            addUser(user);
-            addToken(values.accessToken);
-            history.push(`/profile/${user.username}`);
-          }
-/*           else
+      signIn(values).then((values) => {
+        if (values) {
+          const user: any = jwt.decode(values.accessToken);
+          addUser(user);
+          addToken(values.accessToken);
+          history.push(`/profile/${user.username}`);
+        }
+        /*           else
           toast.error('Connexion Echouée', {
             position: toast.POSITION.TOP_LEFT,
             className: "fade alert alert-danger show",
           }); */
-        }
-      );
+      });
     },
   });
 

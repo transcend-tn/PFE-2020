@@ -1,39 +1,30 @@
+import { formatDistance } from 'date-fns';
+import * as Diff2Html from 'diff2html';
+import { convertFromRaw, EditorState } from 'draft-js';
 import React from 'react';
 import { Card, Col, Row, Tab, Tabs } from 'react-bootstrap';
+import { Editor } from 'react-draft-wysiwyg';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import Vote from '../../components/Vote';
-import MessageFormContainer from './Containers/MessageFormContainer';
-import MessageListContainer from './Containers/MessageListContainer';
+import { PROFILE } from '../../constants/uris';
+import { useStoreState } from '../../hooks/store.hooks';
+import { getDocumentById } from '../../services/document.service';
 import { getRequestDetail } from '../../services/request.service';
 import { getUserById } from '../../services/user.service';
-import { formatDistance } from 'date-fns';
-import { convertFromRaw, EditorState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import { PROFILE } from '../../constants/uris';
-import { getDocumentById } from '../../services/document.service';
 import { getVoteStats } from '../../services/vote.service';
-import { useStoreState } from '../../hooks/store.hooks';
-import * as Diff2Html from 'diff2html';
+import MessageFormContainer from './Containers/MessageFormContainer';
+import MessageListContainer from './Containers/MessageListContainer';
 
 function PropositionDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const currentUser = useStoreState((state) => state.user.user);
   const { isLoading, isError, data = {}, error } = useQuery(['request:getDetail', id], getRequestDetail);
-  const { isLoading: doc_isLoading, isError: doc_isError, data: doc_data = {}, error: doc_error } = useQuery(
-    ['document:getOld', data.documentId],
-    getDocumentById,
-  );
-  const { isLoading: user_isLoading, isError: user_isError, data: user = {}, error: user_error } = useQuery(
-    ['user:getUserByUsername', data.userId],
-    getUserById,
-  );
-  const { isLoading: vote_isLoading, isError: vote_isError, data: vote_data = {}, error: vote_error } = useQuery(
-    ['vote:getStats', id],
-    getVoteStats,
-  );
+  const { data: doc_data = {} } = useQuery(['document:getOld', data.documentId], getDocumentById);
+  const { data: user = {} } = useQuery(['user:getUserByUsername', data.userId], getUserById);
+  const { data: vote_data = {} } = useQuery(['vote:getStats', id], getVoteStats);
   const { voteCount, teamCount, voted } = vote_data;
-  const isOwner = doc_data.owner == currentUser.id;
+  const isOwner = doc_data.owner === currentUser.id.toString();
 
   if (!doc_data.body) return null;
   const oldBody = convertFromRaw(doc_data.body ? JSON.parse(doc_data.body) : {});

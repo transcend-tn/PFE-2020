@@ -28,9 +28,9 @@ const EDITOR_OPTIONS = [
 
 const EditDocumentPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [requestUpdateDocument, { status }] = useMutation(createRequestMutation);
+  const [requestUpdateDocument] = useMutation(createRequestMutation);
   const { isLoading, isError, data = {}, error } = useQuery(['document:getById', id], getDocumentById);
-  const { title, body, username, createdAt } = data;
+  const { title, body } = data;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   let history = useHistory();
   useEffect(() => {

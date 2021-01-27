@@ -7,10 +7,7 @@ import Card from 'react-bootstrap/esm/Card';
 import { Link } from 'react-router-dom';
 
 export interface CollaborationRequestProps {
-  /** username prop documentation */
   username: string;
-  /** document prop documentation */
-  data: string;
   img?: string;
   docId?: string;
   userId?: string;
@@ -23,7 +20,7 @@ export interface CollaborationRequestProps {
 const IMG_DEFAULT = 'user.png';
 
 function CollaborationRequest(props: CollaborationRequestProps) {
-  const { docId, userId, username, data, img, onAccept, onRefuse, isAcceptLoading, isRefuseLoading } = props;
+  const { docId, userId, username, img, onAccept, onRefuse, isAcceptLoading, isRefuseLoading } = props;
 
   return (
     <Card className="mb-2">
@@ -39,10 +36,21 @@ function CollaborationRequest(props: CollaborationRequestProps) {
             </Link>
           </div>
           <ButtonGroup size="sm" aria-label="refuse">
-            <Button variant="success" type="submit" onClick={()=>onAccept({docId,userId})} className="mr-2" disabled={isAcceptLoading}>
+            <Button
+              variant="success"
+              type="submit"
+              onClick={() => onAccept({ docId, userId })}
+              className="mr-2"
+              disabled={isAcceptLoading}
+            >
               Accepter
             </Button>
-            <Button variant="danger" type="submit" onClick={()=>onRefuse({docId,userId})} disabled={isRefuseLoading}>
+            <Button
+              variant="danger"
+              type="submit"
+              onClick={() => onRefuse({ docId, userId })}
+              disabled={isRefuseLoading}
+            >
               Refuser
             </Button>
           </ButtonGroup>
