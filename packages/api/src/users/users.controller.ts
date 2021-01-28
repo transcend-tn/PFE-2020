@@ -72,4 +72,9 @@ export class UsersController {
   @Get('restore/:id')
   restore(@Param('id') id:string)
   {return this.usersService.recoverUser(id)}
+
+  @Get('/find/:keyword')
+  searchUser(@Param('keyword') keyword: string) {
+    return this.usersService.searchUser(keyword);
+  }
 }

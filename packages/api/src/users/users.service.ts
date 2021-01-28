@@ -151,4 +151,16 @@ async recoverUser(id:string)
 {
   await this.userRepository.restore(id);
 }
+
+async searchUser(keyword: string) {
+  const users = await this.userRepository.find({
+    where : [
+      {username : Like(`%${keyword}%`)},
+      {fname : Like(`%${keyword}%`)},
+      {lname : Like(`%${keyword}%`)},
+    ],
+    order: {fname: "ASC"}
+  });
+  return users;
+}
 }

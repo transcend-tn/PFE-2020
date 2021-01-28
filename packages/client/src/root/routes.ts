@@ -10,6 +10,7 @@ import NewDocumentPage from '../pages/NewDocumentPage/NewDocumentPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import PropositionDetailsPage from '../pages/PropositionDetailsPage/PropositionDetailsPage';
 import CloneDocumentPage from '../pages/CloneDocumentPage/CloneDocumentPage';
+import SearchPage from '../pages/SearchPage/SearchPage';
 
 export interface Route {
   path: string;
@@ -20,6 +21,10 @@ const routes: Route[] = [
   {
     path: '/',
     Component: withCenter(Welcome),
+  },
+  {
+    path: '/search/:keyword',
+    Component: withMain(SearchPage),
   },
   {
     path: '/forget-password',

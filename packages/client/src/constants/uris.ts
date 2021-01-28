@@ -3,11 +3,14 @@ import { BASE_URL, PORT, PROTOCOL } from './config';
 export const ENTRYPOINT = `${PROTOCOL}://${BASE_URL}:${PORT}`;
 export const HOME_PAGE = 'http://localhost:3001';
 
+export const SEARCH = (id: string) => `/search/${id}`;
+
 export const PROFILE = (id: string) => `/profile/${id}`;
 export const SIGN_IN = '/users/signin';
 export const SIGN_UP = '/users';
 export const USER_BY_ID = (id: string) => `/users/${id}`;
 export const USER_BY_USERNAME = (username: string) => `/users/username/${username}`;
+export const USER_BY_KEYWORD = (keyword: string) => `/users/find/${keyword}`;
 export const USERS = '/users';
 export const EDIT_PASSWORD = `/users/change-password`;
 

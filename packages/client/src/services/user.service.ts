@@ -1,7 +1,15 @@
 import { UserCreate, UserLogin } from '@tr/common';
 
 import axios from '../config/axios';
-import { SIGN_IN, SIGN_UP, USER_BY_ID, USERS, EDIT_PASSWORD, USER_BY_USERNAME } from '../constants/uris';
+import {
+  SIGN_IN,
+  SIGN_UP,
+  USER_BY_ID,
+  USERS,
+  EDIT_PASSWORD,
+  USER_BY_USERNAME,
+  USER_BY_KEYWORD,
+} from '../constants/uris';
 
 export const signInMutation = async (payload: UserLogin): Promise<any> => {
   const { data } = await axios.post(SIGN_IN, payload);
@@ -20,6 +28,11 @@ export const getUserById = async (key: any, id: string): Promise<any> => {
 
 export const getUserByUsername = async (key: any, username: string): Promise<any> => {
   const { data } = await axios.get(USER_BY_USERNAME(username));
+  return data;
+};
+
+export const getUserByKeyword = async (key: any, keyword: string): Promise<any> => {
+  const { data } = await axios.get(USER_BY_KEYWORD(keyword));
   return data;
 };
 

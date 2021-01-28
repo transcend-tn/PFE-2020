@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, FormControl } from 'react-bootstrap';
 import Container from 'react-bootstrap/esm/Container';
 import Nav from 'react-bootstrap/esm/Nav';
 import Navbar from 'react-bootstrap/esm/Navbar';
@@ -10,6 +10,10 @@ import { RiHome2Line } from 'react-icons/ri';
 import { queryCache } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
 import { useStoreState } from '../../hooks/store.hooks';
+import Form from 'react-bootstrap/esm/Form';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { SEARCH } from '../../constants/uris';
 
 const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => {
@@ -24,12 +28,40 @@ const withMain = <P extends object>(Component: React.ComponentType) => {
       history.push('/');
     };
 
+    const formik = useFormik({
+      initialValues: {
+        search: '',
+      },
+      validationSchema: Yup.object({
+        search: Yup.string().required('Field required to perform a search'),
+      }),
+      onSubmit: (values) => {
+        history.push(SEARCH(values.search));
+      },
+    });
+
     return (
       <>
         <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: '#2f2f2f' }} variant="dark">
           <Nav.Link as={Link} to={`/profile/${user.username}`}>
             <RiHome2Line className="mr-2" color="#ffffff" size={30} />
           </Nav.Link>
+
+          <form onSubmit={formik.handleSubmit} className="form-inline">
+            <Form.Group controlId="search">
+              <Form.Control
+                name="search"
+                type="text"
+                placeholder="Search"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.search}
+              />
+              {formik.touched.search && formik.errors.search ? (
+                <Form.Text className="text-danger">{formik.errors.search}</Form.Text>
+              ) : null}
+            </Form.Group>
+          </form>
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
