@@ -33,7 +33,7 @@ const withMain = <P extends object>(Component: React.ComponentType) => {
         search: '',
       },
       validationSchema: Yup.object({
-        search: Yup.string().required('Field required to perform a search'),
+        search: Yup.string().required(' '),
       }),
       onSubmit: (values) => {
         history.push(SEARCH(values.search));
