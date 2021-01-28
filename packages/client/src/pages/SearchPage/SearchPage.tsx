@@ -8,7 +8,6 @@ import { useQuery } from 'react-query';
 const SearchPage = () => {
   const { keyword } = useParams<{ keyword: string }>();
   const { status, data: users = [] } = useQuery(['user:getUserByKeyword', keyword], getUserByKeyword);
-  // console.log(users)
   return (
     <Card className=" p-3">
       <h5>Search Page</h5>
@@ -21,7 +20,7 @@ const SearchPage = () => {
           userId={user.id}
           onFollow=""
           onUnfollow=""
-          isFriend={true}
+          isFriend={false}
         />
       ))}
     </Card>

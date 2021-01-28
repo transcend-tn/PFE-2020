@@ -22,31 +22,29 @@ function UserCard(props: UserCardProps) {
   const { userId, fullName, username, img, onFollow, onUnfollow, isFriend } = props;
 
   return (
-    <>
-      <Card className="mb-2">
-        <Media className="p-2 align-items-stretch">
-          <Image src={img ? img : IMG_DEFAULT} roundedCircle width={50} height={50} className="mr-2" />
-          <Media.Body className="d-flex justify-content-between align-items-center">
-            <div>
-              <Link to={`/profile/${username}`} style={{ color: '#000000' }}>
-                <h6 className="mb-0">{fullName}</h6>
-              </Link>
-              <p className="mb-0 font-weight-light">@{username}</p>
-            </div>
-            <ButtonGroup size="sm" aria-label="refuse">
-              <Button
-                variant={isFriend ? 'secondary' : 'outline-secondary'}
-                type="submit"
-                onClick={isFriend ? () => onUnfollow({ userId }) : () => onFollow({ userId })}
-                className="mr-2"
-              >
-                {isFriend ? 'Following' : 'Follow'}
-              </Button>
-            </ButtonGroup>
-          </Media.Body>
-        </Media>
-      </Card>
-    </>
+    <Card className="mb-2">
+      <Media className="p-2 align-items-stretch">
+        <Image src={img ? img : IMG_DEFAULT} roundedCircle width={50} height={50} className="mr-2" />
+        <Media.Body className="d-flex justify-content-between align-items-center">
+          <div>
+            <Link to={`/profile/${username}`} style={{ color: '#000000' }}>
+              <h6 className="mb-0">{fullName}</h6>
+            </Link>
+            <p className="mb-0 font-weight-light">@{username}</p>
+          </div>
+          <ButtonGroup size="sm" aria-label="refuse">
+            <Button
+              variant={isFriend ? 'secondary' : 'outline-secondary'}
+              type="submit"
+              onClick={isFriend ? () => onUnfollow({ userId }) : () => onFollow({ userId })}
+              className="mr-2"
+            >
+              {isFriend ? 'Following' : 'Follow'}
+            </Button>
+          </ButtonGroup>
+        </Media.Body>
+      </Media>
+    </Card>
   );
 }
 
