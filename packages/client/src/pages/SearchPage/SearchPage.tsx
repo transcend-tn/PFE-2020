@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom';
 import UserCard from '../../components/UserCard';
 import { getUserByKeyword } from '../../services/user.service';
 import { useQuery } from 'react-query';
+import { useStoreState } from '../../hooks/store.hooks';
 
 const SearchPage = () => {
   const { keyword } = useParams<{ keyword: string }>();
-  const { status, data: users = [] } = useQuery(['user:getUserByKeyword', keyword], getUserByKeyword);
+  const currentUser = useStoreState((state) => state.user.user);
+  const { data: users = [] } = useQuery(['user:getUserByKeyword', keyword], getUserByKeyword);
   return (
     <Card className=" p-3">
       <h5>Search Page</h5>
@@ -20,7 +22,8 @@ const SearchPage = () => {
           userId={user.id}
           onFollow=""
           onUnfollow=""
-          isFriend={false}
+          isFriend={user.followers.map((f: any) => f.id).includes(currentUser.id)}
+          showBtn={user.id !== currentUser.id ? true : false}
         />
       ))}
     </Card>

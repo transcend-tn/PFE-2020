@@ -14,12 +14,13 @@ export interface UserCardProps {
   onFollow: any;
   onUnfollow: any;
   isFriend: boolean;
+  showBtn?: boolean;
 }
 
 const IMG_DEFAULT = '/user.png';
 
 function UserCard(props: UserCardProps) {
-  const { userId, fullName, username, img, onFollow, onUnfollow, isFriend } = props;
+  const { userId, fullName, username, img, onFollow, onUnfollow, isFriend, showBtn } = props;
 
   return (
     <Card className="mb-2">
@@ -27,20 +28,23 @@ function UserCard(props: UserCardProps) {
         <Image src={img ? img : IMG_DEFAULT} roundedCircle width={50} height={50} className="mr-2" />
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
-            <Link to={`/profile/${username}`} style={{ color: '#000000' }}>
+            <Link to={`/profile/${username}`} style={{ color: '#000000' }} data-dismiss="modal">
               <h6 className="mb-0">{fullName}</h6>
             </Link>
             <p className="mb-0 font-weight-light">@{username}</p>
           </div>
           <ButtonGroup size="sm" aria-label="refuse">
-            <Button
-              variant={isFriend ? 'secondary' : 'outline-secondary'}
-              type="submit"
-              onClick={isFriend ? () => onUnfollow({ userId }) : () => onFollow({ userId })}
-              className="mr-2"
-            >
-              {isFriend ? 'Following' : 'Follow'}
-            </Button>
+            {showBtn === true ? (
+              <Button
+                size="sm"
+                variant={isFriend ? 'secondary' : 'outline-secondary'}
+                type="submit"
+                onClick={isFriend ? () => onUnfollow({ userId }) : () => onFollow({ userId })}
+                className="mr-2"
+              >
+                {isFriend ? 'Following' : 'Follow'}
+              </Button>
+            ) : null}
           </ButtonGroup>
         </Media.Body>
       </Media>

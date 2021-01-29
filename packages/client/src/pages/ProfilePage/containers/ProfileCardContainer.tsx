@@ -20,7 +20,12 @@ function ProfileCardContainer(props: ProfileCardProps) {
   return (
     <>
       <ReactPlaceholder ready={!isLoading} showLoadingAnimation firstLaunchOnly>
-        <ProfileCard followers={15} following={42} user={data} canEdit={username === currentUsername} />
+        <ProfileCard
+          following={data.followingCount}
+          followers={data.followersCount}
+          user={data}
+          canEdit={username === currentUsername}
+        />
       </ReactPlaceholder>
     </>
   );

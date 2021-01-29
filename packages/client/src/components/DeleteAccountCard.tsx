@@ -27,8 +27,8 @@ function DeleteAccountCard(props: DeleteAccountCardInterface) {
       <Card>
         <Card.Body className="text-center">
           <Image className="border" width={100} height={100} src={user.img ? user.img : USER_IMG} roundedCircle />
-          <h5 className="mt-3 mb-3">{user.username}</h5>
-          <h5 className="text-center m-2">{`${user.fname} ${user.lname}`}</h5>
+          <h5 className="text-center mt-2 mb-0">{`${user.fname} ${user.lname}`}</h5>
+          <p className="text-muted mt-0">@{user.username}</p>
           <Button className="btn-sm" type="submit" variant="danger" onClick={handleShow}>
             Supprimer le compte
           </Button>

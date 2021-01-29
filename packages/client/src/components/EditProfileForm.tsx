@@ -19,8 +19,8 @@ function EditProfileForm(props: EditProfileFormInterface) {
       email: '',
     },
     validationSchema: Yup.object({
-      fname: Yup.string().required('Veuillez saisir votre nom !'),
-      lname: Yup.string().required('Veuillez saisir votre prénom !'),
+      fname: Yup.string().required('Veuillez saisir votre prénom !'),
+      lname: Yup.string().required('Veuillez saisir votre nom !'),
       email: Yup.string().email('Addresse email invalide').required('Veuillez saisir votre email !'),
     }),
     onSubmit: (payload: UserEdit) => {
@@ -31,7 +31,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
   return (
     <form onSubmit={formik.handleSubmit} className="mt-5">
       <Form.Group controlId="formBasicFname">
-        <Form.Label>Nom</Form.Label>
+        <Form.Label>Prénom</Form.Label>
         <Form.Control
           name="fname"
           type="text"
@@ -45,7 +45,7 @@ function EditProfileForm(props: EditProfileFormInterface) {
         ) : null}
       </Form.Group>
       <Form.Group controlId="formBasicLname">
-        <Form.Label>Prénom</Form.Label>
+        <Form.Label>Nom</Form.Label>
         <Form.Control
           name="lname"
           type="text"

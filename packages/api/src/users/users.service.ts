@@ -85,7 +85,7 @@ export class UsersService {
   }
 
   async getUserById(id: string) {
-    const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.findOne(id,{ relations: ["following", "followers"] });
     if (!user) {
       throw new NotFoundException();
     }
@@ -97,10 +97,15 @@ export class UsersService {
       username: user.username,
       email: user.email,
       favorites: user.favorites,
+      following: user.following,
+      followingCount: user.following.length,
+      followers: user.followers,
+      followersCount: user.followers.length,
+      
     };
   }
   async getUserByUsername(username: string) {
-    const user = await this.userRepository.findOne({username})
+    const user = await this.userRepository.findOne({username},{ relations: ["following", "followers"] })
     if (!user) {
       throw new NotFoundException();
     }
@@ -112,6 +117,10 @@ export class UsersService {
       username: user.username,
       email: user.email,
       favorites: user.favorites,
+      following: user.following,
+      followingCount: user.following.length,
+      followers: user.followers,
+      followersCount: user.followers.length,
     };
   }
 
@@ -159,7 +168,8 @@ async searchUser(keyword: string) {
       {fname : Like(`%${keyword}%`)},
       {lname : Like(`%${keyword}%`)},
     ],
-    order: {fname: "ASC"}
+    order: {fname: "ASC"},
+    relations: ["following", "followers"]
   });
   return users;
 }

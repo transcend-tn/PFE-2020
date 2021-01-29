@@ -8,6 +8,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToMany,
+  JoinTable,
+  RelationCount,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Favorite } from '../favorite/favorite.entity';
@@ -50,6 +53,23 @@ export class User extends BaseEntity {
 
   @OneToMany(type=>Favorite, favorite=>favorite.user)
   favorites: Favorite[];
+
+  @ManyToMany(type => User, user => user.following)
+  @JoinTable()
+  followers: User[];
+  
+  @ManyToMany(type => User, user => user.followers)
+  following: User[];
+
+  async followersCount()
+  {
+    return await this.followers.length
+  }
+  // @RelationCount((user: User) => user.followers)
+  // followersCount: number;
+  
+  // @RelationCount((user: User) => user.following)
+  // followingCount: number;
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
