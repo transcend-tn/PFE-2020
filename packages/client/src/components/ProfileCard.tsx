@@ -7,6 +7,8 @@ import { USER_IMG } from '../constants/temp';
 import Modal from 'react-bootstrap/esm/Modal';
 import UserCard from './UserCard';
 import { useStoreState } from '../hooks/store.hooks';
+import { follow, unfollow } from '../services/user.service';
+import { useMutation, useQueryCache } from 'react-query';
 
 export interface ProfileCardInterface {
   followers: number;
@@ -17,6 +19,13 @@ export interface ProfileCardInterface {
 
 function ProfileCard(props: ProfileCardInterface) {
   const { user, followers, following, canEdit } = props;
+  const cache = useQueryCache();
+  const [followUser, { status: follow_status }] = useMutation(follow, {
+    onSuccess: () => cache.invalidateQueries('user:getUserByUsername'),
+  });
+  const [unfollowUser, { status: unfollow_status }] = useMutation(unfollow, {
+    onSuccess: () => cache.invalidateQueries('user:getUserByUsername'),
+  });
   const currentUser = useStoreState((state) => state.user.user);
   const [followersShow, setfollowersShow] = useState(false);
   const [followingShow, setfollowingShow] = useState(false);
@@ -56,13 +65,13 @@ function ProfileCard(props: ProfileCardInterface) {
             </div>
           ) : isFollowing ? (
             <div className="text-center mt-4">
-              <Button className="btn-sm" variant="outline-danger" type="submit">
+              <Button className="btn-sm" variant="outline-danger" type="submit" onClick={() => unfollowUser(user.id)}>
                 Unfollow
               </Button>
             </div>
           ) : (
             <div className="text-center mt-4">
-              <Button className="btn-sm" variant="outline-secondary" type="submit">
+              <Button className="btn-sm" variant="outline-secondary" type="submit" onClick={() => followUser(user.id)}>
                 Follow
               </Button>
             </div>

@@ -61,16 +61,6 @@ export class User extends BaseEntity {
   @ManyToMany(type => User, user => user.followers)
   following: User[];
 
-  async followersCount()
-  {
-    return await this.followers.length
-  }
-  // @RelationCount((user: User) => user.followers)
-  // followersCount: number;
-  
-  // @RelationCount((user: User) => user.following)
-  // followingCount: number;
-
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
     return hash === this.password;

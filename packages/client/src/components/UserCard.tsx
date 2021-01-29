@@ -5,6 +5,8 @@ import Image from 'react-bootstrap/esm/Image';
 import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
 import Card from 'react-bootstrap/esm/Card';
 import { Link } from 'react-router-dom';
+import { useMutation, useQueryCache } from 'react-query';
+import { follow, unfollow } from '../services/user.service';
 
 export interface UserCardProps {
   fullName: string;
@@ -21,7 +23,19 @@ const IMG_DEFAULT = '/user.png';
 
 function UserCard(props: UserCardProps) {
   const { userId, fullName, username, img, onFollow, onUnfollow, isFriend, showBtn } = props;
-
+  const cache = useQueryCache();
+  const [followUser, { status: follow_status }] = useMutation(follow, {
+    onSuccess: () => {
+      cache.invalidateQueries('user:getUserByUsername');
+      cache.invalidateQueries('user:getUserByKeyword');
+    },
+  });
+  const [unfollowUser, { status: unfollow_status }] = useMutation(unfollow, {
+    onSuccess: () => {
+      cache.invalidateQueries('user:getUserByUsername');
+      cache.invalidateQueries('user:getUserByKeyword');
+    },
+  });
   return (
     <Card className="mb-2">
       <Media className="p-2 align-items-stretch">
@@ -37,12 +51,12 @@ function UserCard(props: UserCardProps) {
             {showBtn === true ? (
               <Button
                 size="sm"
-                variant={isFriend ? 'secondary' : 'outline-secondary'}
+                variant={isFriend ? 'outline-danger' : 'outline-secondary'}
                 type="submit"
-                onClick={isFriend ? () => onUnfollow({ userId }) : () => onFollow({ userId })}
+                onClick={isFriend ? () => unfollowUser(userId) : () => followUser(userId)}
                 className="mr-2"
               >
-                {isFriend ? 'Following' : 'Follow'}
+                {isFriend ? 'Unfollow' : 'Follow'}
               </Button>
             ) : null}
           </ButtonGroup>

@@ -13,6 +13,8 @@ export const USER_BY_USERNAME = (username: string) => `/users/username/${usernam
 export const USER_BY_KEYWORD = (keyword: string) => `/users/find/${keyword}`;
 export const USERS = '/users';
 export const EDIT_PASSWORD = `/users/change-password`;
+export const USER_FOLLOW = (id: string) => `/users/follow/${id}`;
+export const USER_UNFOLLOW = (id: string) => `/users/unfollow/${id}`;
 
 export const DOCUMENT = '/document';
 export const DOCUMENT_BY_ID = (id: string) => `/document/${id}`;

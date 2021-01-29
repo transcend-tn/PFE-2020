@@ -173,4 +173,33 @@ async searchUser(keyword: string) {
   });
   return users;
 }
+
+async getFollowerById(id: string) {
+  const user = await this.userRepository.findOne(id);
+  if (!user) {
+    throw new NotFoundException();
+  }
+  return user
+}
+
+async follow(currentUser: User, id:string)
+{ 
+  const me = await this.getUserById(currentUser.id);
+  await me.following.push(await this.getFollowerById(id))
+  await this.userRepository.save(me);
+  return await this.getUserById(currentUser.id);
+}
+
+async unfollow(currentUser: User, id:string)
+{ 
+  const me = await this.getUserById(currentUser.id);
+  for (let i =0; i < me.following.length; i++)
+   if (me.following[i].id.toString() === id) {
+    me.following.splice(i,1);
+      break;
+   }
+  await this.userRepository.save(me);
+  return await this.getUserById(currentUser.id);
+}
+
 }

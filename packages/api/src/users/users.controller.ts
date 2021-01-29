@@ -77,4 +77,16 @@ export class UsersController {
   searchUser(@Param('keyword') keyword: string) {
     return this.usersService.searchUser(keyword);
   }
+
+  @Post('/follow/:id')
+  @UseGuards(AuthGuard())
+  follow(@GetUser() currentUser:User, @Param('id') id:string) {
+    return this.usersService.follow(currentUser, id);
+  }
+
+  @Put('/unfollow/:id')
+  @UseGuards(AuthGuard())
+  unfollow(@GetUser() currentUser:User, @Param('id') id:string) {
+    return this.usersService.unfollow(currentUser, id);
+  }
 }
