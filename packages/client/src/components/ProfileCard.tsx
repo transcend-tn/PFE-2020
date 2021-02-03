@@ -7,8 +7,8 @@ import { USER_IMG } from '../constants/temp';
 import Modal from 'react-bootstrap/esm/Modal';
 import UserCard from './UserCard';
 import { useStoreState } from '../hooks/store.hooks';
-import { follow, unfollow } from '../services/user.service';
-import { useMutation, useQueryCache } from 'react-query';
+import { follow, getUserByUsername, unfollow } from '../services/user.service';
+import { useMutation, useQuery, useQueryCache } from 'react-query';
 
 export interface ProfileCardInterface {
   followers: number;
@@ -27,6 +27,7 @@ function ProfileCard(props: ProfileCardInterface) {
     onSuccess: () => cache.invalidateQueries('user:getUserByUsername'),
   });
   const currentUser = useStoreState((state) => state.user.user);
+  const { data: current_user } = useQuery(['user:getUserByUsername', currentUser.username], getUserByUsername);
   const [followersShow, setfollowersShow] = useState(false);
   const [followingShow, setfollowingShow] = useState(false);
   const isFollowing = user.followers
@@ -92,7 +93,7 @@ function ProfileCard(props: ProfileCardInterface) {
                 userId={u.id}
                 onFollow=""
                 onUnfollow=""
-                isFriend={user.following.map((f: any) => f.id).includes(u.id)}
+                isFriend={current_user ? current_user.following.map((f: any) => f.id).includes(u.id) : null}
                 showBtn={currentUser.id !== u.id ? true : false}
               />
             ))}
@@ -113,7 +114,7 @@ function ProfileCard(props: ProfileCardInterface) {
                 userId={u.id}
                 onFollow=""
                 onUnfollow=""
-                isFriend={true}
+                isFriend={current_user ? current_user.following.map((f: any) => f.id).includes(u.id) : null}
                 showBtn={currentUser.id !== u.id ? true : false}
               />
             ))}
