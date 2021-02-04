@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/esm/Card';
 import { Link } from 'react-router-dom';
 
 export interface CollaborationRequestProps {
+  fullName?: string;
   username: string;
   img?: string;
   docId?: string;
@@ -20,7 +21,7 @@ export interface CollaborationRequestProps {
 const IMG_DEFAULT = 'user.png';
 
 function CollaborationRequest(props: CollaborationRequestProps) {
-  const { docId, userId, username, img, onAccept, onRefuse, isAcceptLoading, isRefuseLoading } = props;
+  const { fullName, docId, userId, username, img, onAccept, onRefuse, isAcceptLoading, isRefuseLoading } = props;
 
   return (
     <Card className="mb-2">
@@ -29,11 +30,9 @@ function CollaborationRequest(props: CollaborationRequestProps) {
         <Media.Body className="d-flex justify-content-between align-items-center">
           <div>
             <Link to={`profile/${username}`} style={{ color: '#000000' }}>
-              <h6 className="mb-0">{username}</h6>
+              <h6 className="mb-0">{fullName}</h6>
             </Link>
-            <Link to={`document/${docId}`} style={{ color: '#000000' }}>
-              <p className="mb-0 font-weight-light">{docId}</p>
-            </Link>
+            <p className="mb-0 font-weight-light">@{username}</p>
           </div>
           <ButtonGroup size="sm" aria-label="refuse">
             <Button

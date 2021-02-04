@@ -40,6 +40,7 @@ function CollaborationRequestList() {
                     <CollaborationRequest
                       key={`collaboration-${idx}`}
                       userId={user.id}
+                      fullName={user.fname + ' ' + user.lname}
                       username={user.username}
                       img={user.img}
                       docId={docTitle.split('#').pop()}
