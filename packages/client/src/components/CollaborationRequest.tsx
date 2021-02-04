@@ -1,9 +1,9 @@
 import React from 'react';
-import Media from 'react-bootstrap/esm/Media';
 import Button from 'react-bootstrap/esm/Button';
-import Image from 'react-bootstrap/esm/Image';
 import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
 import Card from 'react-bootstrap/esm/Card';
+import Image from 'react-bootstrap/esm/Image';
+import Media from 'react-bootstrap/esm/Media';
 import { Link } from 'react-router-dom';
 
 export interface CollaborationRequestProps {
