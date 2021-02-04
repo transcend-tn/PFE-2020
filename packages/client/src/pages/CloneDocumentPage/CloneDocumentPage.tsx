@@ -5,10 +5,12 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row, Spinner } from 'react-bootstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import { useMutation, useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { createDocumentMutation, getDocumentSnapshot } from '../../services/document.service';
+import { PROFILE } from '../../constants/uris';
+import { useStoreState } from '../../hooks/store.hooks';
 
 const EDITOR_OPTIONS = [
   'history',
@@ -24,11 +26,13 @@ const EDITOR_OPTIONS = [
 
 const CloneDocumentPage = () => {
   const { docId, histId } = useParams<{ docId: string; histId: string }>();
+  const currentUsername = useStoreState((state) => state.user.user.username);
   const [createDocument] = useMutation(createDocumentMutation);
   const { isLoading, isError, data = {}, error } = useQuery(
     ['document:getSnapshot', { docId, histId }],
     getDocumentSnapshot,
   );
+  let history = useHistory();
   const body = data.body;
   const [editorState, setEditorState] = useState(body);
   useEffect(() => {
@@ -60,6 +64,7 @@ const CloneDocumentPage = () => {
             position: toast.POSITION.TOP_RIGHT,
             className: 'fade alert alert-success show',
           });
+          history.push(PROFILE(currentUsername));
         },
         (error) => {
           console.log({ error });
