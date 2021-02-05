@@ -38,7 +38,7 @@ const EditDocumentPage = () => {
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(body)))
       : EditorState.createEmpty();
     setEditorState(state);
-  }, [body]); // add 'value' to the dependency list to recalculate state when value changes.
+  }, [body]);
 
   const formik = useFormik({
     initialValues: {
