@@ -1,7 +1,7 @@
 import React from 'react';
-import { useMutation, QueryStatus } from 'react-query';
+import { QueryStatus, useMutation } from 'react-query';
 import ChangePasswordForm from '../../../components/ChangePasswordForm';
-import {  changePasswordService } from '../../../services/user.service';
+import { changePasswordService } from '../../../services/user.service';
 
 function ChangePasswordFormContainer() {
   const [editPassword, { status }] = useMutation(changePasswordService);
