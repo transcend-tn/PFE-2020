@@ -1,10 +1,10 @@
-import React from 'react';
-import { useQuery } from 'react-query';
-import ReactPlaceholder from 'react-placeholder';
-import MessageCard from '../../../components/MessageCard';
-import { useParams } from 'react-router-dom';
-import { getCommentByReqId } from '../../../services/comment.service';
 import { formatDistance } from 'date-fns';
+import React from 'react';
+import ReactPlaceholder from 'react-placeholder';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import MessageCard from '../../../components/MessageCard';
+import { getCommentByReqId } from '../../../services/comment.service';
 
 function MessageListContainer() {
   const { id: reqId } = useParams<{ id: string }>();
