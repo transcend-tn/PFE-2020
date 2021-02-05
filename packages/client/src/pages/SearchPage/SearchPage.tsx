@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from 'react-bootstrap/esm/Card';
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import UserCard from '../../components/UserCard';
-import { getUserByKeyword } from '../../services/user.service';
-import { useQuery } from 'react-query';
 import { useStoreState } from '../../hooks/store.hooks';
+import { getUserByKeyword } from '../../services/user.service';
 
 const SearchPage = () => {
   const { keyword } = useParams<{ keyword: string }>();
