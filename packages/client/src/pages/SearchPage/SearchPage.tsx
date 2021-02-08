@@ -20,8 +20,6 @@ const SearchPage = () => {
           fullName={`${user.fname} ${user.lname}`}
           username={user.username}
           userId={user.id}
-          onFollow=""
-          onUnfollow=""
           isFriend={user.followers.map((f: any) => f.id).includes(currentUser.id)}
           showBtn={user.id !== currentUser.id ? true : false}
         />

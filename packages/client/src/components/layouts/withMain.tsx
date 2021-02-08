@@ -1,6 +1,8 @@
+import { useFormik } from 'formik';
 import React from 'react';
-import { Button, FormControl } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/esm/Container';
+import Form from 'react-bootstrap/esm/Form';
 import Nav from 'react-bootstrap/esm/Nav';
 import Navbar from 'react-bootstrap/esm/Navbar';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
@@ -9,11 +11,9 @@ import { CgProfile } from 'react-icons/cg';
 import { RiHome2Line } from 'react-icons/ri';
 import { queryCache } from 'react-query';
 import { Link, useHistory } from 'react-router-dom';
-import { useStoreState } from '../../hooks/store.hooks';
-import Form from 'react-bootstrap/esm/Form';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { SEARCH } from '../../constants/uris';
+import { useStoreState } from '../../hooks/store.hooks';
 
 const withMain = <P extends object>(Component: React.ComponentType) => {
   return (props: P) => {

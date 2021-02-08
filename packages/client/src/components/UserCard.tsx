@@ -13,8 +13,6 @@ export interface UserCardProps {
   username: string;
   img?: string;
   userId?: string;
-  onFollow: any;
-  onUnfollow: any;
   isFriend: boolean;
   showBtn?: boolean;
 }
@@ -22,15 +20,15 @@ export interface UserCardProps {
 const IMG_DEFAULT = '/user.png';
 
 function UserCard(props: UserCardProps) {
-  const { userId, fullName, username, img, onFollow, onUnfollow, isFriend, showBtn } = props;
+  const { userId, fullName, username, img, isFriend, showBtn } = props;
   const cache = useQueryCache();
-  const [followUser, { status: follow_status }] = useMutation(follow, {
+  const [followUser] = useMutation(follow, {
     onSuccess: () => {
       cache.invalidateQueries('user:getUserByUsername');
       cache.invalidateQueries('user:getUserByKeyword');
     },
   });
-  const [unfollowUser, { status: unfollow_status }] = useMutation(unfollow, {
+  const [unfollowUser] = useMutation(unfollow, {
     onSuccess: () => {
       cache.invalidateQueries('user:getUserByUsername');
       cache.invalidateQueries('user:getUserByKeyword');

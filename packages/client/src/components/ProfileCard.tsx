@@ -20,10 +20,10 @@ export interface ProfileCardInterface {
 function ProfileCard(props: ProfileCardInterface) {
   const { user, followers, following, canEdit } = props;
   const cache = useQueryCache();
-  const [followUser, { status: follow_status }] = useMutation(follow, {
+  const [followUser] = useMutation(follow, {
     onSuccess: () => cache.invalidateQueries('user:getUserByUsername'),
   });
-  const [unfollowUser, { status: unfollow_status }] = useMutation(unfollow, {
+  const [unfollowUser] = useMutation(unfollow, {
     onSuccess: () => cache.invalidateQueries('user:getUserByUsername'),
   });
   const currentUser = useStoreState((state) => state.user.user);
@@ -91,8 +91,6 @@ function ProfileCard(props: ProfileCardInterface) {
                 fullName={`${u.fname} ${u.lname}`}
                 username={u.username}
                 userId={u.id}
-                onFollow=""
-                onUnfollow=""
                 isFriend={current_user ? current_user.following.map((f: any) => f.id).includes(u.id) : null}
                 showBtn={currentUser.id !== u.id ? true : false}
               />
@@ -112,8 +110,6 @@ function ProfileCard(props: ProfileCardInterface) {
                 fullName={`${u.fname} ${u.lname}`}
                 username={u.username}
                 userId={u.id}
-                onFollow=""
-                onUnfollow=""
                 isFriend={current_user ? current_user.following.map((f: any) => f.id).includes(u.id) : null}
                 showBtn={currentUser.id !== u.id ? true : false}
               />
